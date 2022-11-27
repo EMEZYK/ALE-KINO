@@ -1,0 +1,136 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "Pod osłoną nocy",
+      "genres": ["Kryminał", "Dramat"],
+      "year": 2012,
+      "imageUrl": "https://images.pexels.com/photos/7670035/pexels-photo-7670035.jpeg",
+      "description": "film pod osłoną nocy blablabla",
+      "director": "Mathew Mars",
+      "ageRating": "12+",
+      "hallNumber": 2,
+      "rating": "6/10",
+      "actors": ["William Deny", "Kevin Dick", "Maria Hedel"],
+      "duration": "90min",
+      "isPremiere": false
+    },
+    {
+      "id": 2,
+      "title": "Noc Wigilijna",
+      "genres": ["Komedia"],
+      "year": 2022,
+      "imageUrl": "https://img.freepik.com/free-photo/portrait-excited-girl-3d-glasses_171337-11453.jpg?w=900&t=st=1669125913~exp=1669126513~hmac=c45c7db599cd49bba49e67bede37e4e22c9ad88a4625626a9abfe82f6729f747",
+      "description": "Nowa wersja kultowej historii o duchach Charlesa Dickensa autorstwa nominowanego do Oscara Stevena Knighta. Mroczny miniserial prezentuje ciemną stronę duszy Ebenezera Scroogea, w którego postać wciela się Guy Pearce (Memento). ",
+      "director": "Antoni Burak",
+      "ageRating": "6+",
+      "hallNumber": 1,
+      "rating": "8/10",
+      "actors": ["William Deny", "Kevin Dick", "Maria Hedel"],
+      "duration": "120min",
+      "isPremiere": true
+    },
+    {
+      "id": 3,
+      "title": "Rolnik szuka żony",
+      "genres": ["Komedia"],
+      "year": 2022,
+      "imageUrl": "https://img.freepik.com/free-photo/positive-young-cameraman-holds-clapboard-near-face-has-joyful-expression-wears-hat-prepares-making-cutaway-involved-filming-poses-white-studio-wall-cinematography-concept_176532-8930.jpg?w=900&t=st=1669126066~exp=1669126666~hmac=1c3b410ff16cc9738f47daafe9c2c3243cf264cf48eeb7dbb6f409caafa6410d",
+      "description": "film rolnik szuka żony blablabla",
+      "director": "Kamil Wojkowski",
+      "ageRating": "18+",
+      "hallNumber": 3,
+      "rating": "10/10",
+      "actors": ["William Deny", "Kevin Dick", "Maria Hedel"],
+      "duration": "180min",
+      "isPremiere": true
+    }
+  ],
+  "tickets": [
+    {
+      "id": 1,
+      "type": "bilet normalny",
+      "price": 25
+    },
+    {
+      "id": 2,
+      "type": "bilet ulgowy",
+      "price": 16
+    },
+    {
+      "id": 3,
+      "type": "bilet rodzinny",
+      "price": 40
+    },
+    {
+      "id": 4,
+      "type": "voucher",
+      "code": "aleKino"
+    }
+  ],
+  "showings": [
+    {
+      "movieId": 1,
+      "date": "2022-11-27",
+      "times": [
+        { "hour": 12, "minute": 30 },
+        { "hour": 17, "minute": 0 },
+        { "hour": 18, "minute": 30 }
+      ]
+    },
+    {
+      "movieId": 1,
+      "date": "2022-12-01",
+      "times": [
+        { "hour": 12, "minute": 30 },
+        { "hour": 17, "minute": 0 },
+        { "hour": 18, "minute": 30 }
+      ]
+    },
+    {
+      "movieId": 2,
+      "date": "2022-11-29",
+      "times": [
+        { "hour": 13, "minute": 30 },
+        { "hour": 16, "minute": 0 },
+        { "hour": 17, "minute": 30 }
+      ]
+    },
+    {
+      "movieId": 2,
+      "date": "2022-11-30",
+      "times": [
+        { "hour": 12, "minute": 30 },
+        { "hour": 18, "minute": 0 },
+        { "hour": 20, "minute": 30 }
+      ]
+    },
+    {
+      "movieId": 3,
+      "date": "2022-11-27",
+      "times": [
+        { "hour": 12, "minute": 30 },
+        { "hour": 17, "minute": 0 },
+        { "hour": 18, "minute": 30 }
+      ]
+    },
+    {
+      "movieId": 3,
+      "date": "2022-11-31",
+      "times": [
+        { "hour": 12, "minute": 30 },
+        { "hour": 17, "minute": 0 },
+        { "hour": 18, "minute": 30 }
+      ]
+    },
+    {
+      "movieId": 3,
+      "date": "2022-12-02",
+      "times": [
+        { "hour": 13, "minute": 30 },
+        { "hour": 17, "minute": 0 },
+        { "hour": 19, "minute": 30 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-align: center;
+  }
+  
+  body {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+  }
+
