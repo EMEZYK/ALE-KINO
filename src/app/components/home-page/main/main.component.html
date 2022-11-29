@@ -1,12 +1,17 @@
-<main>
+<main *ngIf="!loading; else loadingTmpl">
   <ul class="week-list">
     <li *ngFor="let date of dates" class="week-day">
-      <button (click)="chooseDate(date)" class="current-day-btn">{{ date.format("DD/MM") }} </button>
-    </li>
+    <button
+      (click)="chooseDate(date)"
+      class="current-day-btn"
+    >
+      {{ date.format("DD/MM") }}
+    </button>
+  </li>
   </ul>
 
   <ul class="movie-wrapper">
-    <li class="movie" *ngFor="let movie of allMovies | async">
+    <li *ngFor="let movie of allMovies | async" class="movie">
       <div class="movie-poster">
         <img src="{{ movie.imageUrl }}" />
       </div>
@@ -30,15 +35,16 @@
             </button>
           </div>
         </div>
-        <ul>
-          <li *ngFor="let show of allShowings">
-            <div>{{ show.movieId }}</div>
+        <ul class="hours">
+          <li *ngFor="let time of movie.times" class="hour-item" >
+            <button class="hour-btn"> 
+            {{ time.hour }}:{{ time.minute === 0? time.minute + '0' : time.minute }}
+          </button>
           </li>
         </ul>
       </div>
-
       <div class="rating">{{ movie.rating }}</div>
     </li>
   </ul>
-  <main></main>
 </main>
+<ng-template #loadingTmpl> Loading... </ng-template>

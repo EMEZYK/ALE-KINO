@@ -1,7 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { catchError, map, of, Observable, throwError, mergeMap } from 'rxjs';
+import {
+  catchError,
+  map,
+  Observable,
+  mergeMap,
+  tap,
+  EMPTY,
+} from 'rxjs';
 import { Movie, Showing, MovieWithShowingTime } from '../models/Movie';
 import { Ticket } from '../models/Ticket';
 
@@ -15,40 +22,60 @@ export class RestapiService {
   private showingsUrl = this.baseUrl + '/showings';
   private ticketsUrl = this.baseUrl + '/tickets';
 
+
   constructor(private http: HttpClient) {}
 
   getAllMoviesForDay(date: moment.Moment): Observable<MovieWithShowingTime[]> {
+
     return this.http
-      .get<any>(this.getUrlForShowingsByDate(date.format('YYYY-MM-DD')))
+      .get<Showing[]>(this.getUrlForShowingsByDate(date.format('YYYY-MM-DD')))
       .pipe(
+        tap((value) => {
+          console.log(value);
+        }),
+
         mergeMap((showings: Showing[]) => {
           const movieIds = showings.map((showing) => showing.movieId);
+
           if (movieIds.length === 0) {
             return [];
           }
-          return this.http.get<any>(this.getUrlForMoviesByIds(movieIds)).pipe(
-            map((movies) => {
-              return movies.map((movie) => {
-                return {
-                  times: showings.find(
-                    (showing) => showing.movieId === movie.id
-                  ).times,
-                  ...movie,
-                };
-              });
-            })
-          );
+          return this.http
+            .get<Movie[]>(this.getUrlForMoviesByIds(movieIds))
+            .pipe(
+              map((movies) => {
+                return movies.map((movie: Movie) => {
+                  const matchingShowing: Showing = showings.find(
+                    (showing: Showing) => showing.movieId === movie.id
+                  );
+                  const movieWithShowings = {
+                    date: matchingShowing.date,
+                    times: matchingShowing.times,
+                    ...movie,
+                  };
+                  return movieWithShowings;
+                });
+              })
+            );
         }),
-        catchError((err) => {
-          return throwError(err);
+
+        tap((value) => {
+          console.log(value);
+        }),
+
+        catchError((err: HttpErrorResponse) => {
+          return EMPTY;
         })
       );
   }
 
   getAllTickets(): Observable<Ticket[]> {
     return this.http.get<any>(this.ticketsUrl).pipe(
-      catchError((err) => {
-        return throwError(err);
+      tap((value) => {
+        console.log(value);
+      }),
+      catchError((err: HttpErrorResponse) => {
+        return EMPTY;
       })
     );
   }
@@ -60,8 +87,11 @@ export class RestapiService {
     return this.http
       .get<any>(this.getUrlForShowingsByDateAndMovieId(movieId, date))
       .pipe(
-        catchError((err) => {
-          return throwError(err);
+        tap((value) => {
+          console.log(value);
+        }),
+        catchError((err: HttpErrorResponse) => {
+          return EMPTY;
         })
       );
   }
@@ -71,7 +101,6 @@ export class RestapiService {
   }
 
   private getUrlForShowingsByDate(date: string) {
-    console.log(`${this.showingsUrl}?date=${date}`);
     return `${this.showingsUrl}?date=${date}`;
   }
 

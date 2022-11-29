@@ -1,16 +1,13 @@
 main {
   width: 100%;
+  min-height: 100vh;
   padding: 3rem 0;
   background-color: #172032;
-  /* text-align: center; */
-
-
 }
 
 .week-list {
   display: flex;
   flex-wrap: wrap;
-  height: 8vh;
   width: 50%;
   align-items: center;
   justify-content: center;
@@ -18,22 +15,11 @@ main {
   border: 1px solid #ddd;
   border-radius: 1rem;
   background-color: #fff;
+  padding: 0 1rem 0 1rem;
 }
 
 .week-day {
-
-  display: flex;
-  height: 100%;
-  align-items: center;
-  padding: 0.6rem;
-  border-right: 1px solid #ddd;
-  cursor: pointer;
-}
-
-
-
-.week-day:last-child {
-  border: none;
+  margin: 5px;
 }
 
 .movie-wrapper {
@@ -86,7 +72,6 @@ img {
   justify-content: flex-start;
   width: 100%;
   font-size: 1.2rem;
-  /* margin: 1rem 0; */
 }
 
 .movie-detail {
@@ -142,11 +127,42 @@ img {
 }
 
 .current-day-btn {
-  padding: 1rem;
+  border-right: 1px solid #ddd;
+  padding: 1.2rem;
   width: 100%;
   font-size: 1rem;
   cursor: pointer;
-  background-color: #fff;
+  margin: 0 5px;
   border: none;
   text-align: center;
+}
+
+.current-day-btn:hover {
+  background-color: #ddd;
+}
+
+.hours {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.hour-item {
+  margin: 5px;
+}
+
+.hour-btn {
+  padding: 1rem;
+  cursor: pointer;
+  color: #000;
+  font-size: 1rem;
+}
+
+.hour:hover {
+  background-color: #fff;
+}
+
+.loader {
+  color: #fff;
 }

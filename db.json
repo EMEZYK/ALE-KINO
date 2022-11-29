@@ -71,7 +71,7 @@
   "showings": [
     {
       "movieId": 1,
-      "date": "2022-11-27",
+      "date": "2022-11-28",
       "times": [
         { "hour": 12, "minute": 30 },
         { "hour": 17, "minute": 0 },
@@ -107,7 +107,7 @@
     },
     {
       "movieId": 3,
-      "date": "2022-11-27",
+      "date": "2022-11-28",
       "times": [
         { "hour": 12, "minute": 30 },
         { "hour": 17, "minute": 0 },

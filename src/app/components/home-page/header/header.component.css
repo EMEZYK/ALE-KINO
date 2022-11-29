@@ -27,17 +27,21 @@ button {
   margin: 0 1rem;
   border-radius: 5px;
   cursor: pointer;
-
 }
 
 a {
-    color:#fff;
+  color: #fff;
   text-decoration: none;
-
 }
-button:hover, button:focus {
+button:hover,
+button:focus {
   background-color: #fff;
- 
 }
 
-a:hover {color: #172032;}
+a:hover {
+  color: #172032;
+}
+
+.basket-icon {
+  margin-right: 5px;
+}

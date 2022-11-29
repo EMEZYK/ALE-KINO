@@ -14,17 +14,6 @@ footer {
   width: 100%;
 }
 
-.social-icons {
-  width: 30%;
-  height: 10vh;
-  display: flex;
-}
-
-.social-icons i {
-    color: #fff;
-    width: 20px;
-    height: 20px;
-}
 .bottom-menu {
   display: flex;
   width: 30%;
@@ -48,5 +37,23 @@ a {
 .copyright {
   color: #fff;
   text-align: center;
-  /* background-color: #ddd; */
+}
+
+
+.social-icons {
+  width: 20%;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+}
+
+.social-icons i {
+  color: #fff;
+}
+
+
+.social-icon {
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
 }

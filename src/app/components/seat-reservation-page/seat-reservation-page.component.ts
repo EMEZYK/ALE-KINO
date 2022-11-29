@@ -12,6 +12,7 @@ export class SeatReservationPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllTickets()
+
   }
 
   tickets: any;

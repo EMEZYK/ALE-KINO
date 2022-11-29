@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing-module';
 import { AdminPanelPageComponent } from './components/admin-panel-page/admin-panel-page.component';
 import {HttpClientModule} from "@angular/common/http"
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import {HttpClientModule} from "@angular/common/http"
     MainComponent,
     AdminPanelPageComponent,
   ],
-  imports: [BrowserModule, RouterModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, RouterModule, AppRoutingModule, HttpClientModule, FontAwesomeModule],
   providers: [],
   bootstrap: [AppComponent],
 })

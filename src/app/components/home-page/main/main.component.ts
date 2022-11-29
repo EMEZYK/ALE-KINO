@@ -14,19 +14,19 @@ export class MainComponent implements OnInit {
   @Input() dates: Moment[];
 
   date: Moment;
+  loading = false;
 
   expandedMovieIdDescriptions: Array<number> = [];
 
   allMovies: Observable<MovieWithShowingTime[]>;
-  allShowings: Observable<Showing[]>
+  allShowings: Observable<Showing[]>;
 
   constructor(private movieService: RestapiService) {}
 
   ngOnInit(): void {
     this.date = this.dates[0]; //default day = today
-    this.getMovies(this.date); 
+    this.getMovies(this.date);
   }
-
 
   toggleOpen(movieId: number) {
     let movieIndex = this.expandedMovieIdDescriptions.indexOf(movieId);
@@ -43,10 +43,12 @@ export class MainComponent implements OnInit {
 
   chooseDate(date: Moment) {
     this.date = date;
-    this.getMovies(this.date); 
+    this.getMovies(this.date);
   }
-  
+
   getMovies(date: Moment) {
+    this.loading = true;
     this.allMovies = this.movieService.getAllMoviesForDay(date);
+    this.allMovies.subscribe({ complete: () => (this.loading = false) });
   }
 }
