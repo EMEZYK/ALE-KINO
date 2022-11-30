@@ -34,6 +34,7 @@ export class RestapiService {
           console.log(value);
         }),
 
+
         mergeMap((showings: Showing[]) => {
           const movieIds = showings.map((showing) => showing.movieId);
 
@@ -42,20 +43,24 @@ export class RestapiService {
           }
           return this.http
             .get<Movie[]>(this.getUrlForMoviesByIds(movieIds))
+            
             .pipe(
               map((movies) => {
                 return movies.map((movie: Movie) => {
-                  const matchingShowing: Showing = showings.find(
+                  console.log("showings", showings)
+                  const matchingShowings: Showing[] = showings.filter(
                     (showing: Showing) => showing.movieId === movie.id
                   );
                   const movieWithShowings = {
-                    date: matchingShowing.date,
-                    times: matchingShowing.times,
+                    showings: matchingShowings,
                     ...movie,
                   };
                   return movieWithShowings;
                 });
-              })
+              }),
+              tap((value) => {
+                console.log(value);
+              }),
             );
         }),
 

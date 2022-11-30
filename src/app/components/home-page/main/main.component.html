@@ -36,10 +36,12 @@
           </div>
         </div>
         <ul class="hours">
-          <li *ngFor="let time of movie.times" class="hour-item" >
-            <button class="hour-btn"> 
-            {{ time.hour }}:{{ time.minute === 0? time.minute + '0' : time.minute }}
+          <li *ngFor="let showing of movie.showings" class="hour-item" >
+            <a routerLink="hall">
+            <button (click)="onMovieTimeClick(showing, movie)" class="hour-btn"> 
+            {{ showing.time.hour }}:{{ showing.time.minute === 0? showing.time.minute + '0' : showing.time.minute }}
           </button>
+        </a>
           </li>
         </ul>
       </div>

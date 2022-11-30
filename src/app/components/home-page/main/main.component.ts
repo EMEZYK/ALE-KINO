@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestapiService } from 'src/app/services/restapi.service';
-import { Showing, MovieWithShowingTime } from 'src/app/models/Movie';
+import {
+  Showing,
+  MovieWithShowingTime,
+  Movie,
+  ChoosenMovieShowing,
+} from 'src/app/models/Movie';
 import { Input } from '@angular/core';
 import { Moment } from 'moment';
+import { ChoosenMovieService } from 'src/app/services/choosen-movie.service';
 
 @Component({
   selector: 'app-main',
@@ -21,7 +27,10 @@ export class MainComponent implements OnInit {
   allMovies: Observable<MovieWithShowingTime[]>;
   allShowings: Observable<Showing[]>;
 
-  constructor(private movieService: RestapiService) {}
+  constructor(
+    private movieService: RestapiService,
+    private choosenMovieService: ChoosenMovieService
+  ) {}
 
   ngOnInit(): void {
     this.date = this.dates[0]; //default day = today
@@ -50,5 +59,13 @@ export class MainComponent implements OnInit {
     this.loading = true;
     this.allMovies = this.movieService.getAllMoviesForDay(date);
     this.allMovies.subscribe({ complete: () => (this.loading = false) });
+  }
+
+  onMovieTimeClick(showing: Showing, movie: Movie) {
+    // console.log("klik")
+    this.choosenMovieService.setChoosenMovieShowing({
+      ...showing,
+      ...movie,
+    });
   }
 }

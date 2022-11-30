@@ -7,7 +7,6 @@ export interface Movie {
   director: string;
   duration: string;
   genres: string[];
-  hallBumber: number;
   imageUrl: string;
   isPremiere: boolean;
   rating: string;
@@ -17,15 +16,28 @@ export interface Movie {
 export interface Showing {
   movieId: number;
   date: string;
-  times: Array<Time>;
+  time: Time;
+  hall: Hall;
 }
-
 
 interface Time {
   hour: number;
   minute: number;
 }
 
+interface Hall {
+  number: number;
+  seats: Seat[];
+}
 
-export interface MovieWithShowingTime extends Movie, Showing {}
+interface Seat {
+  row: string;
+  num: number;
+  status: 'FREE' | 'TAKEN';
+}
 
+export interface MovieWithShowingTime extends Movie {
+  showings: Showing[];
+}
+
+export interface ChoosenMovieShowing extends Movie, Showing {}

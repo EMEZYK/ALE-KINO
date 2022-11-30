@@ -4,7 +4,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { AdminPanelPageComponent } from './components/admin-panel-page/admin-panel-page.component';
 import { UserPanelPageComponent } from './user-panel-page/user-panel-page.component';
 import { SummaryPageComponent } from './components/summary-page/summary-page.component';
-import { SeatReservationPageComponent } from './components/seat-reservation-page/seat-reservation-page.component';
+import { HallPage } from './components/hall-page/hall-page.component';
 import { BookingFormPageComponent } from './components/booking-form-page/booking-form-page.component';
 
 const routes: Routes = [
@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminPanelPageComponent },
   { path: 'user', component: UserPanelPageComponent },
   { path: 'form', component: BookingFormPageComponent },
-  { path: 'hall', component: SeatReservationPageComponent },
+  { path: 'hall', component: HallPage },
   { path: 'summary', component: SummaryPageComponent },
 ];
 

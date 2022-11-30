@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app.routing-module';
 import { AdminPanelPageComponent } from './components/admin-panel-page/admin-panel-page.component';
 import {HttpClientModule} from "@angular/common/http"
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HallPage } from './components/hall-page/hall-page.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FooterComponent,
     MainComponent,
     AdminPanelPageComponent,
+    HallPage
   ],
   imports: [BrowserModule, RouterModule, AppRoutingModule, HttpClientModule, FontAwesomeModule],
   providers: [],
