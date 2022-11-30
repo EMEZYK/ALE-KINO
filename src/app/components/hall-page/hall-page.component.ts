@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { RestapiService } from '../../services/restapi.service';
 import { ChoosenMovieService } from 'src/app/services/choosen-movie.service';
 import { ChoosenMovieShowing } from 'src/app/models/Movie';
@@ -18,18 +18,20 @@ export class HallPage implements OnInit {
   chosenMovieShowing: ChoosenMovieShowing;
 
   constructor(
+    private choosenMovieService: ChoosenMovieService,
     private service: RestapiService,
-    private choosenMovieService: ChoosenMovieService
+
   ) {}
 
   ngOnInit(): void {
-    this.getAllTickets();
     this.choosenMovieService
       .getChoosenMovieShowing()
       .subscribe((result: ChoosenMovieShowing) => {
         console.log('wybrany seans o wybranej godz.', result);
         this.chosenMovieShowing = result;
       });
+    this.getAllTickets();
+
   }
 
   getAllTickets() {

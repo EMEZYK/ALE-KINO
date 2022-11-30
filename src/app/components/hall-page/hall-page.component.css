@@ -1,41 +1,49 @@
-:host{
-   margin: 0;
+:host {
+  margin: 0;
 }
 
 .hall-page {
-    width: 100%;
-    min-height: 100vh;
-    padding: 3rem 0;
-    background-color: #172032;
-    color: #fff;
+  width: 100%;
+  min-height: 100vh;
+  padding: 3rem 0;
+  background-color: #172032;
+  color: #fff;
 }
 
- .seats-wrapper {
-    display: grid;
-    width: 80%;
-    height: 60vh;
-    grid-template-rows: repeat(9, 1fr);
-    grid-template-columns: repeat(17, 1fr);
- }
+.seats-wrapper {
+  display: grid;
+  width: 80%;
+  height: 60vh;
+  grid-template-rows: repeat(9, 1fr);
+  grid-template-columns: repeat(17, 1fr);
+}
 
+.choosen-showing-info {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  align-items: center;
+  justify-content: center;
+}
 
- .choosen-showing-info {
-   display: flex;
-   flex-wrap: wrap;
-   width: 50%;
-   align-items: center;
-   justify-content: center;
- }
+.movie-title {
+  width: 100%;
+  text-align: center;
+}
 
- .movie-title {
-   width: 100%;
-   text-align: center;
- }
- 
- .movie-time-info{
-   display: flex;
- }
+.movie-time-info {
+  display: flex;
+}
 
- .movie-date {
-   margin-right: 10px;
- }
+span {
+  border-right: 1px solid #fff;
+  padding: 0 1rem;
+}
+
+span:last-child{
+  border: 0;
+}
+
+.screen {
+  text-align: center;
+}
