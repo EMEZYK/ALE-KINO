@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HallPage } from './hall-page.component';
+import { SeatsPageComponent } from './seats-page.component';
 
-describe('HallPage', () => {
-  let component: HallPage;
-  let fixture: ComponentFixture<HallPage>;
+describe('SeatsPage', () => {
+  let component: SeatsPageComponent;
+  let fixture: ComponentFixture<SeatsPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HallPage ]
+      declarations: [ SeatsPageComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(HallPage);
+    fixture = TestBed.createComponent(SeatsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

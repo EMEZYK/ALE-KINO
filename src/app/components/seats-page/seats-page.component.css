@@ -35,15 +35,39 @@
   display: flex;
 }
 
-span {
+.movie-detail {
   border-right: 1px solid #fff;
   padding: 0 1rem;
 }
 
-span:last-child{
+span:last-child {
   border: 0;
 }
 
 .screen {
   text-align: center;
+}
+
+.choosen-seat-info {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+}
+
+.ticket-type-wrapper {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.ticket-type {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.arrow-icon {
+  align-self:flex-end;
 }

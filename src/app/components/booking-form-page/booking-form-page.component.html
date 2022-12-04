@@ -1,1 +1,106 @@
-<p>booking-form-page works!</p>
+<div class="booking-form-page">
+  <div class="choosen-showing-info">
+    <h1 class="movie-title">tytuł</h1>
+    <div class="movie-time-info">
+      <span class="movie-detail">data: </span>
+      <span class="movie-detail">godz. </span>
+      <span>sala nr:</span>
+    </div>
+<div>
+    <span>Rząd: </span>
+    <span>Miejsce: </span>
+    <span></span>
+</div>
+<div>
+    <p>Razem:</p>
+</div>
+
+  </div>
+
+  <form [formGroup]="bookingForm" (ngSubmit)="onSubmit(bookingForm)">
+    <div>
+      <label>
+        Imię
+        <input formControlName="name" placeholder="Imię*" />
+      </label>
+      <p
+        *ngIf="bookingForm.get('name').touched && message.name.errors?.required"
+      >
+        Podaj imię
+    </p>
+    </div>
+    <div>
+      <label>
+        Nazwisko
+        <input formControlName="surname" placeholder="Nazwisko*" />
+      </label>
+
+
+      <!-- <div
+        *ngIf="
+          bookingForm.get('surname').invalid &&
+          (bookingForm.get('surname').dirty ||
+            bookingForm.get('surname').touched)
+        "
+      >
+        Podaj nazwisko
+      </div> -->
+
+      <p
+        *ngIf="
+          bookingForm.get('surname').touched && message.surname.errors?.required
+        "
+      >
+        Podaj nazwisko
+    </p>
+    </div>
+    <div>
+      <label>
+        Nr tel.
+        <input formControlName="phone" placeholder="Nr telefonu" />
+      </label>
+      <p *ngIf="message.phone.errors?.pattern">
+        Nr tel musi skladac sie z 10 cyfr
+      </p>
+    </div>
+    <div>
+      <label>
+        E-mail
+        <input formControlName="email" placeholder="Adres email*" />
+      </label>
+
+      <p
+        *ngIf="
+          bookingForm.get('email').touched && message.email.errors?.required
+        "
+      >
+        Podaj email
+    </p>
+    </div>
+    <div>
+      <label>
+        Powtórz e-mail
+        <input
+          formControlName="repeatEmail"
+          placeholder="Powtórz adres email*"
+        />
+      </label>
+      <p
+        *ngIf="
+          bookingForm.get('repeatEmail').touched &&
+          message.repeatEmail.errors?.required
+        "
+      >
+        Powtórz email
+    </p>
+    </div>
+    <div>
+      <label>
+        Kod zniżkowy
+        <input formControlName="discount" placeholder="Kod zniżkowy" />
+      </label>
+    </div>
+    <button type="button">Zamawiam</button>
+  </form>
+  <a routerLink="/booking/seats">Wróć do wyboru miejsc</a>
+</div>

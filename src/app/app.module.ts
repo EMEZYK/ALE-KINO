@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/home-page/header/header.component';
-import { FooterComponent } from './components/home-page/footer/footer.component';
-import { MainComponent } from './components/home-page/main/main.component';
+import { HeaderComponent } from './components/header-component/header.component';
+import { FooterComponent } from './components/footer-component/footer.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from './app.routing-module';
+import { AppRoutingModule } from './app.routing.module';
 import { AdminPanelPageComponent } from './components/admin-panel-page/admin-panel-page.component';
-import {HttpClientModule} from "@angular/common/http"
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http"
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HallPage } from './components/hall-page/hall-page.component';
+import { SeatsPageComponent } from './components/seats-page/seats-page.component';
+import { FormsModule } from '@angular/forms';
+import { BookingFormPageComponent } from './components/booking-form-page/booking-form-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpErrorInterceptor } from './interceptors/htttp.interceptor';
 
 @NgModule({
   declarations: [
@@ -18,12 +21,14 @@ import { HallPage } from './components/hall-page/hall-page.component';
     HomePageComponent,
     HeaderComponent,
     FooterComponent,
-    MainComponent,
     AdminPanelPageComponent,
-    HallPage
+    SeatsPageComponent,
+    BookingFormPageComponent
   ],
-  imports: [BrowserModule, RouterModule, AppRoutingModule, HttpClientModule, FontAwesomeModule],
-  providers: [],
+  imports: [BrowserModule, RouterModule, AppRoutingModule, HttpClientModule, FontAwesomeModule, FormsModule, ReactiveFormsModule,  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

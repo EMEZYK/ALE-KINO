@@ -1,4 +1,32 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Ewa",
+      "lastName": "Meksyk",
+      "emailAddress": "ewa@meksyk@gmail.com",
+      "password": "Ewa123!",
+      "role": "user",
+      "phoneNumber": "999444888",
+      "orders": [],
+      "moviesToWatch": [],
+      "ratedMovies": [],
+      "active": true,
+      "cart": {
+        "tickets": [],
+        "price": null
+      }
+    },
+    {
+      "id": 2,
+      "firstName": "Anna",
+      "lastName": "Wojno",
+      "emailAddress": "annawojno@gmail.com",
+      "password": "Anna123!",
+      "role": "admin",
+      "phoneNumber": ""
+    }
+  ],
   "movies": [
     {
       "id": 1,
@@ -6,7 +34,8 @@
       "genres": ["Kryminał", "Dramat"],
       "year": 2012,
       "imageUrl": "https://images.pexels.com/photos/7670035/pexels-photo-7670035.jpeg",
-      "description": "film pod osłoną nocy blablabla",
+      "shortDescription": "Młoda para wybiera się na odległą wyspę, do ekskluzywnej restauracji. Okazuje się jednak, że nie wszystko jest takie jakim się wydaje a w menu czekają zaskakujące niespodzianki.",
+      "longDescription": "długi opis filmu",
       "director": "Mathew Mars",
       "ageRating": "12+",
       "rating": "6/10",
@@ -20,7 +49,8 @@
       "genres": ["Komedia"],
       "year": 2022,
       "imageUrl": "https://img.freepik.com/free-photo/portrait-excited-girl-3d-glasses_171337-11453.jpg?w=900&t=st=1669125913~exp=1669126513~hmac=c45c7db599cd49bba49e67bede37e4e22c9ad88a4625626a9abfe82f6729f747",
-      "description": "Nowa wersja kultowej historii o duchach Charlesa Dickensa autorstwa nominowanego do Oscara Stevena Knighta. Mroczny miniserial prezentuje ciemną stronę duszy Ebenezera Scroogea, w którego postać wciela się Guy Pearce (Memento). ",
+      "shortDescription": "Nowa wersja kultowej historii o duchach Charlesa Dickensa autorstwa nominowanego do Oscara Stevena Knighta. Mroczny miniserial prezentuje ciemną stronę duszy Ebenezera Scroogea, w którego postać wciela się Guy Pearce (Memento). ",
+      "longDescription": "długi opis filmu",
       "director": "Antoni Burak",
       "ageRating": "6+",
       "rating": "8/10",
@@ -34,7 +64,8 @@
       "genres": ["Komedia"],
       "year": 2022,
       "imageUrl": "https://img.freepik.com/free-photo/positive-young-cameraman-holds-clapboard-near-face-has-joyful-expression-wears-hat-prepares-making-cutaway-involved-filming-poses-white-studio-wall-cinematography-concept_176532-8930.jpg?w=900&t=st=1669126066~exp=1669126666~hmac=1c3b410ff16cc9738f47daafe9c2c3243cf264cf48eeb7dbb6f409caafa6410d",
-      "description": "film rolnik szuka żony blablabla",
+      "shortDescription": "film rolnik szuka żony blablabla",
+      "longDescription": "długi opis filmu",
       "director": "Kamil Wojkowski",
       "ageRating": "18+",
       "rating": "10/10",
@@ -47,28 +78,32 @@
     {
       "id": 1,
       "type": "bilet normalny",
-      "price": 25
+      "price": 25,
+      "description": "Bilet normalny przysługuje normalnej osobie"
     },
     {
       "id": 2,
       "type": "bilet ulgowy",
-      "price": 16
+      "price": 16,
+      "description": "Bilet ulgowy przysługuje studenciakowi"
     },
     {
       "id": 3,
       "type": "bilet rodzinny",
-      "price": 40
+      "price": 40,
+      "description": "Bilet rodzinny przysługuje rodzinie, na zasadach 500+"
     },
     {
       "id": 4,
       "type": "voucher",
-      "code": "aleKino"
+      "code": "aleKino",
+      "description": "Voucher jest jak kod znizkowy"
     }
   ],
   "showings": [
     {
       "movieId": 1,
-      "date": "2022-11-29",
+      "date": "2022-12-04",
       "time": { "hour": 12, "minute": 30 },
 
       "hall": {
@@ -3970,7 +4005,7 @@
     },
     {
       "movieId": 2,
-      "date": "2022-11-31",
+      "date": "2022-12-04",
       "time": { "hour": 13, "minute": 30 },
       "hall": {
         "number": 2,
