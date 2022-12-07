@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RestapiService } from 'src/app/services/restapi.service';
+import { MovieService } from 'src/app/services/movie.service';
 import { Showing, MovieWithShowingTime, Movie } from 'src/app/models/Movie';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 
 import { ChoosenMovieService } from 'src/app/services/choosen-movie.service';
+import { ScreeningHall } from 'src/app/models/ScreeningHall';
 
 @Component({
   selector: 'app-home-page',
@@ -25,7 +26,7 @@ export class HomePageComponent implements OnInit {
   allShowings: Observable<Showing[]>;
 
   constructor(
-    private movieService: RestapiService,
+    private movieService: MovieService,
     private choosenMovieService: ChoosenMovieService
   ) {
   }
@@ -77,11 +78,17 @@ export class HomePageComponent implements OnInit {
     this.allMovies.subscribe({ complete: () => (this.loading = false) });
   }
 
-  onMovieTimeClick(showing: Showing, movie: Movie) {
-    this.choosenMovieService.setChoosenMovieShowing({
+  onMovieTimeClick(showing: Showing, movie: Movie, screenignHalls: ScreeningHall) {
+ this.choosenMovieService.setChoosenMovieShowing(
+
+      {
       ...showing,
       ...movie,
-    });
+      ...screenignHalls
+    }
+    
+    
+    )
   }
 }
 

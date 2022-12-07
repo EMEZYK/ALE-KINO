@@ -11,8 +11,8 @@ const routes: Routes = [
   {
     path: 'booking',
     children: [
-      { path: 'seats', component: SeatsPageComponent },
-      { path: 'reservation', component: BookingFormPageComponent },
+      { path: 'seats/:id/:title', component: SeatsPageComponent },
+      { path: 'reservation/:id/:title', component: BookingFormPageComponent },
       { path: 'summary', component: SummaryPageComponent },
     ],
   },

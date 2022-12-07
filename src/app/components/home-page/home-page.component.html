@@ -17,14 +17,14 @@
     <ul class="movie-wrapper">
       <li *ngFor="let movie of allMovies | async" class="movie">
         <div class="movie-poster">
-          <img src="{{ movie.imageUrl }}" />
+          <img src="{{ movie.image }}" />
         </div>
         <div class="movie-information">
           <h2 class="movie-title">{{ movie.title }}</h2>
           <div class="movie-details">
             <div class="movie-detail">{{ movie.genres }}</div>
             <div class="movie-detail vertical">{{ movie.duration }}</div>
-            <div class="movie-detail vertical">{{ movie.ageRating }}</div>
+            <div class="movie-detail vertical">{{ movie.ageRestrictions }}</div>
           </div>
           <div class="description-wrapper">
             <div class="short-description">
@@ -42,9 +42,9 @@
           </div>
           <ul class="hours">
             <li *ngFor="let showing of movie.showings" class="hour-item" >
-              <a routerLink="booking/seats">
+               <a [routerLink]="['booking/seats', movie.id, movie.title]">
               <button (click)="onMovieTimeClick(showing, movie)" class="hour-btn"> 
-              {{ showing.time.hour }}:{{ showing.time.minute === 0? showing.time.minute + '0' : showing.time.minute }}
+                {{showing.timeFrom}}
             </button>
           </a>
             </li>

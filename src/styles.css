@@ -1,3 +1,6 @@
+@import 'material-icons/iconfont/filled.css';
+@import 'material-icons/iconfont/outlined.css';
+
 * {
     margin: 0 auto;
     padding: 0;
@@ -9,5 +12,10 @@
     display: flex;
     min-height: 100%;
     flex-direction: column;
+    background-color: #172032;
+    color: #fff
   }
 
+
+html, body { height: 100%; }
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */

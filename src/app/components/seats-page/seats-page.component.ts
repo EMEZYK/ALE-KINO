@@ -1,8 +1,12 @@
 import { Component,  OnInit } from '@angular/core';
-import { RestapiService } from '../../services/restapi.service';
+import { MovieService } from '../../services/movie.service';
 import { ChoosenMovieService } from 'src/app/services/choosen-movie.service';
 import { ChoosenMovieShowing } from 'src/app/models/Movie';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { TicketService } from 'src/app/services/ticket.service';
+import { Ticket } from 'src/app/models/Ticket';
+import { ScreeningHall } from 'src/app/models/ScreeningHall';
+import { Seat } from 'src/app/models/ScreeningHall';
 
 
 @Component({
@@ -13,17 +17,21 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 export class SeatsPageComponent implements OnInit {
   seatNumbers: number[] = [];
   numberOfColumns: number = 16;
-  numberOfRows: number = 10;
+  numberOfRows: number;
   rowLetter: string;
   columnOfLetters: string[] = [];
-  tickets: any;
+  tickets: Ticket[];
+  screeningHall: ScreeningHall;
   chosenMovieShowing: ChoosenMovieShowing;
   arrowIcon = faArrowDown;
   selectedTicket = null;	
+  seats: Seat[];
+  selected: string[] = [];
 
   constructor(
     private choosenMovieService: ChoosenMovieService,
-    private service: RestapiService,
+    private service: MovieService,
+    private ticketService: TicketService,
 
   ) {}
 
@@ -34,26 +42,25 @@ export class SeatsPageComponent implements OnInit {
         console.log('wybrany seans o wybranej godz.', result);
         this.chosenMovieShowing = result;
       });
-    this.getAllTickets();
+
+
+      this.ticketService.getAllTickets().subscribe((result: Ticket[]) => {
+        console.log(result)
+        this.tickets = result
+      })
+
+
+      this.numberOfRows = this.chosenMovieShowing.screeningHalls[0].rows;
+      this.numberOfColumns = this.chosenMovieShowing.screeningHalls[0].columns;
+this.seats = this.chosenMovieShowing.screeningHalls[0].seats;
   }
 
   getAllTickets() {
     this.service.getAllTickets().subscribe((response) => {
+      console.log("bilety", response)
+
       this.tickets = response;
-      console.log("bilety", this.tickets)
-
-      // this.tickets.forEach((ticket) => {
-      //   for (let key in ticket) {
-      //     console.log(`${key}: ${ticket[key]}`);
-      //   }
-      // });
-
-      // this.tickets.forEach((ticket) => console.log(ticket));
     });
   }
 
-  update(e) {
-    console.log(e.target.value)
-    this.selectedTicket = e.target.value;
-  }
 }

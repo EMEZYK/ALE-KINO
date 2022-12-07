@@ -9,7 +9,7 @@ import { Ticket } from '../models/Ticket';
 @Injectable({
   providedIn: 'root',
 })
-export class RestapiService {
+export class MovieService {
   constructor(private http: HttpClient) {}
 
   getAllMoviesForDay(date: moment.Moment): Observable<MovieWithShowingTime[]> {
@@ -30,6 +30,7 @@ export class RestapiService {
 
             .pipe(
               map((movies) => {
+                console.log("elko",movies)
                 return movies.map((movie: Movie) => {
                   const matchingShowings: Showing[] = showings.filter(
                     (showing: Showing) => showing.movieId === movie.id
@@ -38,6 +39,7 @@ export class RestapiService {
                     showings: matchingShowings,
                     ...movie,
                   };
+                  console.log(movieWithShowings)
                   return movieWithShowings;
                 });
               })
@@ -47,11 +49,13 @@ export class RestapiService {
   }
 
   getAllTickets(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>('tickets');
+    console.log(this.http.get('ticketsTypes'))
+    return this.http.get<Ticket[]>('ticketsTypes');
+    
   }
 
   private getUrlForShowingsByDate(date: string) {
-    return `showings?date=${date}`;
+    return `showings?_embed=screeningHalls&date=${date}`;
   }
 
   private getUrlForMoviesByIds(ids: number[]) {
@@ -64,7 +68,5 @@ export class RestapiService {
     return url;
   }
 
-  private getUser(isAdmin: boolean): Observable<User> {
-    return this.http.get<User>('users' + isAdmin ? '2' : '1');
-  }
+
 }

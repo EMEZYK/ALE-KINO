@@ -1,24 +1,25 @@
+import { ScreeningHall } from "./ScreeningHall";
+
 export interface Movie {
   id: number;
   title: string;
-  actors: string[];
-  ageRating: string;
+  ageRestrictions: string;
   shortDescription: string;
   longDescription: string;
-  director: string;
-  duration: string;
+  duration: number;
   genres: string[];
-  imageUrl: string;
+  image: string;
   isPremiere: boolean;
   rating: string;
-  year: number;
+  timeFrom: string,
+  timeTo: string
 }
 
 export interface Showing {
   movieId: number;
   date: string;
   time: Time;
-  hall: Hall;
+  screeningHalls: ScreeningHall[];
 }
 
 interface Time {

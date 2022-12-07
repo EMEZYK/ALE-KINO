@@ -1,6 +1,7 @@
-export interface Ticket {
+export  interface Ticket {
     id: number;
-    type: string;
+    name: string;
     price: number;
+    active: boolean;
     description: string
 }

@@ -1,11 +1,8 @@
 <div class="header">
-  <h1>{{ cinemaName }}</h1>
+  <a routerLink="">
+    <h1>{{ cinemaName }}</h1>
+  </a>
   <nav>
-    <button class="bin-btn">
-      <a routerLink="booking/summary">
-        <fa-icon [icon]="shoppingBasket" class="basket-icon"></fa-icon>Koszyk</a
-      >
-    </button>
-    <button class="login-btn"><a routerLink="user">Zaloguj</a></button>
+    <button (click)="signInUser()" class="login-btn"><a routerLink="user">Zaloguj</a></button>
   </nav>
 </div>
