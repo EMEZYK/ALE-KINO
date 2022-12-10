@@ -4,6 +4,7 @@ import { ChoosenMovieService } from 'src/app/services/choosen-movie.service';
 import { ChoosenMovieShowing } from 'src/app/models/Movie';
 import { Order } from 'src/app/models/Order';
 import { CustomValidators } from 'src/app/validators/custom-validators';
+import { chosenTicketsData } from 'src/app/models/Ticket';
 
 @Component({
   selector: 'app-booking-form-page',
@@ -47,6 +48,7 @@ export class BookingFormPageComponent implements OnInit {
       acceptNewsletter: [''],
       discountCode: [''],
     });
+    this.handleFormChanges();
   }
 
   get name() {
@@ -56,16 +58,9 @@ export class BookingFormPageComponent implements OnInit {
     return this.bookingForm.get('surname');
   }
   get phone() {
-    let phoneControl = this.bookingForm.get('phone');
-console.log(phoneControl)
-    if (phoneControl.value !== '' ) {
-      phoneControl.setValidators([
-        CustomValidators.phoneNumberValidator,
-        Validators.minLength(9),
-      ]);
-    }
-    return phoneControl;
+    return this.bookingForm.get('phone');
   }
+
   get email() {
     return this.bookingForm.get('emailInfo').get('email');
   }
@@ -73,16 +68,33 @@ console.log(phoneControl)
     return this.bookingForm.get('emailInfo').get('confirmEmail');
   }
   get acceptNewsletter() {
-
-
     return this.bookingForm.get('acceptNewsletter');
   }
   get discountCode() {
-    let discountCodeControl = this.bookingForm.get('discountCode');
-    if (discountCodeControl.value !== '') {
-      discountCodeControl.setValidators([CustomValidators.discountCodeValidator]);
-    }
-    return discountCodeControl;
+    return this.bookingForm.get('discountCode');
+  }
+
+  handleFormChanges() {
+    this.phone.valueChanges.subscribe((value) => {
+      if (value !== '') {
+        this.phone.setValidators([
+          CustomValidators.phoneNumberValidator,
+          Validators.minLength(9),
+        ]);
+        this.phone.updateValueAndValidity({ emitEvent: false });
+      }
+      this.phone.setValidators([]);
+    });
+
+    this.discountCode.valueChanges.subscribe((value) => {
+      if (value !== '') {
+        this.discountCode.setValidators([
+          CustomValidators.discountCodeValidator,
+        ]);
+        this.discountCode.updateValueAndValidity({ emitEvent: false });
+      }
+      this.discountCode.setValidators([]);
+    });
   }
 
   onSubmit() {

@@ -4,7 +4,7 @@
       "id": 1,
       "firstName": "Ewa",
       "lastName": "Meksyk",
-      "emailAddress": "ewa@meksyk@gmail.com",
+      "emailAddress": "ewameksyk@gmail.com",
       "password": "Ewa123!",
       "role": "user",
       "phoneNumber": "999444888",
@@ -118,7 +118,7 @@
     {
       "id": 1,
       "movieId": 1,
-      "date": "2022-12-07",
+      "date": "2022-12-10",
       "break": 15,
       "timeFrom": "12:30",
       "timeTo": "14:00",

@@ -1,3 +1,5 @@
+import { ChoosenMovieShowing } from "./Movie";
+
 export  interface Ticket {
     id: number;
     name: string;
@@ -5,3 +7,5 @@ export  interface Ticket {
     active: boolean;
     description: string
 }
+
+export interface chosenTicketsData extends Ticket, ChoosenMovieShowing {}

@@ -53,7 +53,7 @@
         class="form-control"
       />
       <ng-container *ngIf="phone.errors as errors">
-        <ng-container *ngIf="phone.dirty">
+        <ng-container *ngIf="phone.touched">
           <p *ngIf="errors?.['invalidNumber']">
             Podaj prawidłowy format nr telefonu (tylko cyfry)
           </p>

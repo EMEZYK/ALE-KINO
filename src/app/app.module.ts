@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // import {MatCardModule} from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { LoginPageComponent } from './components/login-page/login-page/login-page.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +29,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminPanelPageComponent,
     SeatsPageComponent,
     BookingFormPageComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

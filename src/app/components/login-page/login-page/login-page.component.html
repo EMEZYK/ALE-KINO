@@ -1,0 +1,29 @@
+<div class="form-wrapper">
+  <h2 class="title">Zaloguj się</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>E-mail</label>
+      <input formControlName="email" type="email" placeholder="E-mail" />
+      <ng-container *ngIf="email.errors as errors">
+        <ng-container *ngIf="email.touched">
+          <p *ngIf="errors?.['required']">Podaj e-mail</p>
+          <p *ngIf="errors?.['email']">Niewłaściwy format adresu email</p>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="form-group">
+      <label>Hasło</label>
+      <input formControlName="password" type="password" placeholder="Hasło" />
+      <ng-container *ngIf="password.errors as errors">
+        <ng-connatiner *ngIf="password.touched">
+          <p *ngIf="errors?.['required']">Podaj hasło</p>
+        </ng-connatiner>
+      </ng-container>
+    </div>
+
+    <ng-container  *ngIf="submitted && loginForm.invalid">
+      <p>Niewłaściwy e-mail lub hasło</p>
+    </ng-container>
+    <button type="submit" class="submit-button">Zaloguj</button>
+  </form>
+</div>

@@ -5,6 +5,8 @@ import { AdminPanelPageComponent } from './components/admin-panel-page/admin-pan
 import { SummaryPageComponent } from './components/summary-page/summary-page.component';
 import { SeatsPageComponent } from './components/seats-page/seats-page.component';
 import { BookingFormPageComponent } from './components/booking-form-page/booking-form-page.component';
+import { LoginPageComponent } from './components/login-page/login-page/login-page.component';
+import { UserHomePageComponent } from './components/user-home-page/user-home-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -16,7 +18,15 @@ const routes: Routes = [
       { path: 'summary', component: SummaryPageComponent },
     ],
   },
+  {
+    path: 'user',
+    children:[
+  {
+    path: 'home', component: UserHomePageComponent}
+]
+},
   { path: 'admin', component: AdminPanelPageComponent },
+  {path: 'login', component: LoginPageComponent}
 ];
 
 @NgModule({

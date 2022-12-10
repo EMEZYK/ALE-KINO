@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { ChoosenMovieService } from 'src/app/services/choosen-movie.service';
 import { ChoosenMovieShowing } from 'src/app/models/Movie';
@@ -7,7 +7,9 @@ import { TicketService } from 'src/app/services/ticket.service';
 import { Ticket } from 'src/app/models/Ticket';
 import { ScreeningHall } from 'src/app/models/ScreeningHall';
 import { Seat } from 'src/app/models/ScreeningHall';
-
+import { combineLatest, Observable } from 'rxjs';
+import { tap } from 'rxjs';
+import { chosenTicketsData } from 'src/app/models/Ticket';
 
 @Component({
   selector: 'app-seats-page',
@@ -15,52 +17,52 @@ import { Seat } from 'src/app/models/ScreeningHall';
   styleUrls: ['./seats-page.component.css'],
 })
 export class SeatsPageComponent implements OnInit {
-  seatNumbers: number[] = [];
-  numberOfColumns: number = 16;
-  numberOfRows: number;
-  rowLetter: string;
-  columnOfLetters: string[] = [];
-  tickets: Ticket[];
-  screeningHall: ScreeningHall;
+  chosenShowing$: Observable<ChoosenMovieShowing>;
+  // tickets$: Observable<Ticket[]>;
+  chosenTicketsData$: Observable<chosenTicketsData>
+  tickets$: Ticket[];
+  chosenTicket: Ticket;
   chosenMovieShowing: ChoosenMovieShowing;
-  arrowIcon = faArrowDown;
-  selectedTicket = null;	
+  screeningHall: ScreeningHall;
   seats: Seat[];
-  selected: string[] = [];
+  numberOfColumns: number;
+  numberOfRows: number;
+
 
   constructor(
     private choosenMovieService: ChoosenMovieService,
-    private service: MovieService,
-    private ticketService: TicketService,
-
+    // private service: MovieService,
+    private ticketService: TicketService
   ) {}
 
   ngOnInit(): void {
-    this.choosenMovieService
+    this.chosenShowing$ = this.choosenMovieService
       .getChoosenMovieShowing()
-      .subscribe((result: ChoosenMovieShowing) => {
-        console.log('wybrany seans o wybranej godz.', result);
-        this.chosenMovieShowing = result;
-      });
+      .pipe(
+        tap((result) => {
+          this.numberOfRows = result.screeningHalls[0].rows;
+          this.numberOfColumns = result.screeningHalls[0].columns;
+          this.seats = result.screeningHalls[0].seats;
+        })
+      );
 
+
+      // this.tickets$ = this.ticketService.getAllTickets();
+
+      // this.chosenTicketsData$ = combineLatest([this.chosenShowing$, this.tickets$])
 
       this.ticketService.getAllTickets().subscribe((result: Ticket[]) => {
-        console.log(result)
-        this.tickets = result
+        this.tickets$ = result
       })
 
-
-      this.numberOfRows = this.chosenMovieShowing.screeningHalls[0].rows;
-      this.numberOfColumns = this.chosenMovieShowing.screeningHalls[0].columns;
-this.seats = this.chosenMovieShowing.screeningHalls[0].seats;
   }
 
-  getAllTickets() {
-    this.service.getAllTickets().subscribe((response) => {
-      console.log("bilety", response)
-
-      this.tickets = response;
-    });
+  get selectedTicket() {
+    return this.chosenTicket;
   }
 
+  set selectedTicket(value: Ticket) {
+    this.chosenTicket = value;
+    this.ticketService.setTicket(this.chosenTicket);
+  }
 }

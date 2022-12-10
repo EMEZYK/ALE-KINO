@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,9 +7,21 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class LoggedUserService {
-  constructor(private http: HttpClient) {}
+  private loggedInUser$$ = new BehaviorSubject<User>(null);
 
-  getUser(isAdmin: boolean): Observable<User> {
-    return this.http.get<User>(`users/${isAdmin ? '2' : '1'}`);
+  constructor(private http: HttpClient) {
+    let storedUser = localStorage.getItem('user');
+    if (storedUser !== '') this.setUser(JSON.parse(storedUser), false);
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>('users');
+  }
+
+  setUser(loggedInUser: User, storedProp = true) {
+    if (storedProp) {
+      localStorage.setItem('user', JSON.stringify(loggedInUser));
+    }
+    this.loggedInUser$$.next(loggedInUser);
   }
 }

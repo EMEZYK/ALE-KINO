@@ -1,6 +1,7 @@
 
-<div class="hall-page">
-    <div class="choosen-showing-info">
+<!-- <ng-container *ngIf="{chosenShowing: chosenShowing$ | async, tickets: tickets$| async}"></ng-container> -->
+<ng-container *ngIf="chosenShowing$ | async as chosenMovieShowing" class="hall-page">
+    <div  class="choosen-showing-info">
       <h1 class="movie-title">{{ chosenMovieShowing.title }}</h1>
       <div class="movie-time-info">
         <span class="movie-detail">data: {{ chosenMovieShowing.date }}</span>
@@ -27,7 +28,8 @@
     <select [(ngModel)]="selectedTicket" class="ticket-type-wrapper">
       <option [value]="null" selected disabled>Wybierz bilet</option>
       <option
-        *ngFor="let ticket of tickets"
+        *ngFor="let ticket of tickets$ "
+        
         [(ngValue)]="ticket.name"
         class="ticket-type"
       >
@@ -43,4 +45,4 @@
     <a [routerLink]="['/booking/reservation', chosenMovieShowing.id, chosenMovieShowing.title ]">Przejdź do zamówienia</a>
   </div>
  
-</div>
+</ng-container >
