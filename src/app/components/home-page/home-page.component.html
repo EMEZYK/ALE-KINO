@@ -3,19 +3,19 @@
   <main *ngIf="!loading; else loadingTmpl">
     <ul class="week-list">
       <li *ngFor="let date of dates" class="week-day">
-      <button *ngIf="date"
-        (click)="chooseDate(date)"
-        class="current-day-btn"
-        [disabled] = "isDisabled(date)"
-      
-      >
-        {{ date.format("DD/MM") }}
-      </button>
-    </li>
+        <button
+          *ngIf="date"
+          (click)="chooseDate(date)"
+          class="current-day-btn"
+          [disabled]="isDisabled(date)"
+        >
+          {{ date.format("DD/MM") }}
+        </button>
+      </li>
     </ul>
-  
+
     <ul class="movie-wrapper">
-      <li *ngFor="let movie of allMovies | async" class="movie">
+      <li *ngFor="let movie of allMovieShowings | async" class="movie">
         <div class="movie-poster">
           <img src="{{ movie.image }}" />
         </div>
@@ -28,25 +28,27 @@
           </div>
           <div class="description-wrapper">
             <div class="short-description">
-              {{ movie.shortDescription}}
+              {{ movie.shortDescription }}
             </div>
-            <div *ngIf="isDescriptionExpanded(movie.id)" class="long-description">{{
-              movie.longDescription
-            }}</div>
-            
+            <div
+              *ngIf="isDescriptionExpanded(movie.id)"
+              class="long-description"
+            >
+              {{ movie.longDescription }}
+            </div>
           </div>
           <div class="btn-wrapper">
             <button (click)="toggleOpen(movie.id)" class="more-button">
-              {{isDescriptionExpanded(movie.id)?  'Mniej' : 'Więcej'}}
+              {{ isDescriptionExpanded(movie.id) ? "Mniej" : "Więcej" }}
             </button>
           </div>
           <ul class="hours">
-            <li *ngFor="let showing of movie.showings" class="hour-item" >
-               <a [routerLink]="['booking/seats', movie.id, movie.title]">
-              <button (click)="onMovieTimeClick(showing, movie)" class="hour-btn"> 
-                {{showing.timeFrom}}
-            </button>
-          </a>
+            <li *ngFor="let showing of movie.showings" class="hour-item">
+              <a [routerLink]="['booking/seats', movie.id, movie.title]">
+                <button (click)="onMovieTimeClick(showing.id)" class="hour-btn">
+                  {{ showing.timeFrom }}
+                </button>
+              </a>
             </li>
           </ul>
         </div>
@@ -55,6 +57,4 @@
     </ul>
   </main>
   <ng-template #loadingTmpl> Loading... </ng-template>
-  
-
 </div>

@@ -98,7 +98,7 @@
     }
   ],
   "tickets": [
-    { "id": 1, "ticketTypeId": "", "showingId": "", "seat": "", "paid": false }
+    { "id": 1, "ticketTypeId": 1, "showingId": 1, "seatId": 16 }
   ],
   "orders": [
     {
@@ -118,7 +118,8 @@
     {
       "id": 1,
       "movieId": 1,
-      "date": "2022-12-10",
+      "hallId": 1,
+      "date": "2022-12-11",
       "break": 15,
       "timeFrom": "12:30",
       "timeTo": "14:00",
@@ -140,107 +141,16 @@
         { "id": 1, "row": "A", "column": 1, "vip": true },
         { "id": 2, "row": "A", "column": 2, "vip": true }
       ]
-    }
-  ],
-  "screeningHalls": [
+    },
     {
       "id": 1,
-      "name": "Wielka sala",
-      "number": 1,
-      "rows": 10,
-      "columns": 5,
-      "showingId": 1,
-      "seats": [
-        {
-          "id": 1,
-          "row": "A",
-          "column": 1,
-          "vip": true
-        },
-        {
-          "id": 2,
-          "row": "A",
-          "column": 2,
-          "vip": true
-        },
-        {
-          "id": 3,
-          "row": "A",
-          "column": 3,
-          "vip": true
-        },
-        {
-          "id": 4,
-          "row": "A",
-          "column": 4,
-          "vip": true
-        },
-        {
-          "id": 5,
-          "row": "A",
-          "column": 5,
-          "vip": true
-        },
-        {
-          "id": 6,
-          "row": "B",
-          "column": 1,
-          "vip": false
-        },
-        {
-          "id": 7,
-          "row": "B",
-          "column": 2,
-          "vip": false
-        },
-        {
-          "id": 8,
-          "row": "B",
-          "column": 3,
-          "vip": false
-        },
-        {
-          "id": 9,
-          "row": "B",
-          "column": 4,
-          "vip": false
-        },
-        {
-          "id": 10,
-          "row": "B",
-          "column": 5,
-          "vip": false
-        },
-        {
-          "id": 11,
-          "row": "C",
-          "column": 1,
-          "vip": false
-        },
-        {
-          "id": 12,
-          "row": "C",
-          "column": 2,
-          "vip": false
-        },
-        {
-          "id": 13,
-          "row": "C",
-          "column": 3,
-          "vip": false
-        },
-        {
-          "id": 14,
-          "row": "C",
-          "column": 4,
-          "vip": false
-        },
-        {
-          "id": 15,
-          "row": "C",
-          "column": 5,
-          "vip": false
-        },
+      "movieId": 1,
+      "hallId": 2,
+      "date": "2022-12-12",
+      "break": 15,
+      "timeFrom": "13:30",
+      "timeTo": "15:00",
+      "paidSeats": [
         {
           "id": 16,
           "row": "D",
@@ -252,215 +162,405 @@
           "row": "D",
           "column": 2,
           "vip": false
-        },
-        {
-          "id": 18,
-          "row": "D",
-          "column": 3,
-          "vip": false
-        },
-        {
-          "id": 19,
-          "row": "D",
-          "column": 4,
-          "vip": false
-        },
-        {
-          "id": 20,
-          "row": "D",
-          "column": 5,
-          "vip": false
-        },
-        {
-          "id": 21,
-          "row": "E",
-          "column": 1,
-          "vip": false
-        },
-        {
-          "id": 22,
-          "row": "E",
-          "column": 2,
-          "vip": false
-        },
-        {
-          "id": 23,
-          "row": "E",
-          "column": 3,
-          "vip": false
-        },
-        {
-          "id": 24,
-          "row": "E",
-          "column": 4,
-          "vip": false
-        },
-        {
-          "id": 25,
-          "row": "E",
-          "column": 5,
-          "vip": false
         }
+      ],
+      "bookedSeats": [
+        { "id": 1, "row": "A", "column": 1, "vip": true },
+        { "id": 2, "row": "A", "column": 2, "vip": true }
       ]
+    }
+  ],
+  "seats": [
+    {
+      "id": 1,
+      "row": "A",
+      "column": 1,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 2,
+      "row": "A",
+      "column": 2,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 3,
+      "row": "A",
+      "column": 3,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 4,
+      "row": "A",
+      "column": 4,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 5,
+      "row": "A",
+      "column": 5,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 6,
+      "row": "B",
+      "column": 1,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 7,
+      "row": "B",
+      "column": 2,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 8,
+      "row": "B",
+      "column": 3,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 9,
+      "row": "B",
+      "column": 4,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 10,
+      "row": "B",
+      "column": 5,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 11,
+      "row": "C",
+      "column": 1,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 12,
+      "row": "C",
+      "column": 2,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 13,
+      "row": "C",
+      "column": 3,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 14,
+      "row": "C",
+      "column": 4,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 15,
+      "row": "C",
+      "column": 5,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 16,
+      "row": "D",
+      "column": 1,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 17,
+      "row": "D",
+      "column": 2,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 18,
+      "row": "D",
+      "column": 3,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 19,
+      "row": "D",
+      "column": 4,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 20,
+      "row": "D",
+      "column": 5,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 21,
+      "row": "E",
+      "column": 1,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 22,
+      "row": "E",
+      "column": 2,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 23,
+      "row": "E",
+      "column": 3,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 24,
+      "row": "E",
+      "column": 4,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 25,
+      "row": "E",
+      "column": 5,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 26,
+      "row": "A",
+      "column": 1,
+      "vip": true,
+      "hallId": 2
+    },
+    {
+      "id": 27,
+      "row": "A",
+      "column": 2,
+      "vip": true,
+      "hallId": 2
+
+    },
+    {
+      "id": 28,
+      "row": "A",
+      "column": 3,
+      "vip": true,
+      "hallId": 2
+
+    },
+    {
+      "id": 29,
+      "row": "A",
+      "column": 4,
+      "vip": true,
+      "hallId": 2
+
+    },
+    {
+      "id": 30,
+      "row": "A",
+      "column": 5,
+      "vip": true,
+      "hallId": 2
+
+    },
+    {
+      "id": 31,
+      "row": "B",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 32,
+      "row": "B",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 33,
+      "row": "B",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 34,
+      "row": "B",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 35,
+      "row": "B",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 36,
+      "row": "C",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 37,
+      "row": "C",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 38,
+      "row": "C",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 39,
+      "row": "C",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 40,
+      "row": "C",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 41,
+      "row": "D",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 42,
+      "row": "D",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 43,
+      "row": "D",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 44,
+      "row": "D",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 45,
+      "row": "D",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 46,
+      "row": "E",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 47,
+      "row": "E",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 48,
+      "row": "E",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 49,
+      "row": "E",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+
+    },
+    {
+      "id": 50,
+      "row": "E",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+
+    }
+
+  ],
+  "halls": [
+    {
+      "id": 1,
+      "name": "Wielka sala",
+      "number": 1,
+      "rows": 10,
+      "columns": 5
     },
     {
       "id": 2,
       "name": "Mała sala",
       "number": 1,
       "rows": 10,
-      "columns": 5,
-      "seats": [
-        {
-          "id": 1,
-          "row": "A",
-          "column": 1,
-          "vip": true
-        },
-        {
-          "id": 2,
-          "row": "A",
-          "column": 2,
-          "vip": true
-        },
-        {
-          "id": 3,
-          "row": "A",
-          "column": 3,
-          "vip": true
-        },
-        {
-          "id": 4,
-          "row": "A",
-          "column": 4,
-          "vip": true
-        },
-        {
-          "id": 5,
-          "row": "A",
-          "column": 5,
-          "vip": true
-        },
-        {
-          "id": 6,
-          "row": "B",
-          "column": 1,
-          "vip": false
-        },
-        {
-          "id": 7,
-          "row": "B",
-          "column": 2,
-          "vip": false
-        },
-        {
-          "id": 8,
-          "row": "B",
-          "column": 3,
-          "vip": false
-        },
-        {
-          "id": 9,
-          "row": "B",
-          "column": 4,
-          "vip": false
-        },
-        {
-          "id": 10,
-          "row": "B",
-          "column": 5,
-          "vip": false
-        },
-        {
-          "id": 11,
-          "row": "C",
-          "column": 1,
-          "vip": false
-        },
-        {
-          "id": 12,
-          "row": "C",
-          "column": 2,
-          "vip": false
-        },
-        {
-          "id": 13,
-          "row": "C",
-          "column": 3,
-          "vip": false
-        },
-        {
-          "id": 14,
-          "row": "C",
-          "column": 4,
-          "vip": false
-        },
-        {
-          "id": 15,
-          "row": "C",
-          "column": 5,
-          "vip": false
-        },
-        {
-          "id": 16,
-          "row": "D",
-          "column": 1,
-          "vip": false
-        },
-        {
-          "id": 17,
-          "row": "D",
-          "column": 2,
-          "vip": false
-        },
-        {
-          "id": 18,
-          "row": "D",
-          "column": 3,
-          "vip": false
-        },
-        {
-          "id": 19,
-          "row": "D",
-          "column": 4,
-          "vip": false
-        },
-        {
-          "id": 20,
-          "row": "D",
-          "column": 5,
-          "vip": false
-        },
-        {
-          "id": 21,
-          "row": "E",
-          "column": 1,
-          "vip": false
-        },
-        {
-          "id": 22,
-          "row": "E",
-          "column": 2,
-          "vip": false
-        },
-        {
-          "id": 23,
-          "row": "E",
-          "column": 3,
-          "vip": false
-        },
-        {
-          "id": 24,
-          "row": "E",
-          "column": 4,
-          "vip": false
-        },
-        {
-          "id": 25,
-          "row": "E",
-          "column": 5,
-          "vip": false
-        }
-      ]
+      "columns": 5
     }
   ],
   "genres": [

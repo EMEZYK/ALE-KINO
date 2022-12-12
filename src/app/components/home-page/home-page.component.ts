@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MovieService } from 'src/app/services/movie.service';
-import { Showing, MovieWithShowingTime, Movie } from 'src/app/models/Movie';
+import {
+  ChoosenMovieShowing,
+  MovieWithShowingTime,
+} from 'src/app/models/Movie';
 import { Moment } from 'moment';
 import * as moment from 'moment';
-
 import { ChoosenMovieService } from 'src/app/services/choosen-movie.service';
-import { ScreeningHall } from 'src/app/models/ScreeningHall';
 
 @Component({
   selector: 'app-home-page',
@@ -22,14 +23,13 @@ export class HomePageComponent implements OnInit {
   date: Moment;
   loading = false;
   expandedMovieIdDescriptions: Array<number> = [];
-  allMovies: Observable<MovieWithShowingTime[]>;
-  allShowings: Observable<Showing[]>;
+  allMovieShowings: Observable<MovieWithShowingTime[]>;
+  chosenShowingWithHall$: Observable<ChoosenMovieShowing>;
 
   constructor(
     private movieService: MovieService,
     private choosenMovieService: ChoosenMovieService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     let startDate = moment().startOf('isoWeek');
@@ -44,7 +44,7 @@ export class HomePageComponent implements OnInit {
     }
 
     this.date = this.dates[0]; //default day = today
-    this.chooseDate(this.date)
+    this.chooseDate(this.date);
   }
 
   isDisabled(date: Moment) {
@@ -74,22 +74,21 @@ export class HomePageComponent implements OnInit {
 
   getMovies(date: Moment) {
     this.loading = true;
-    this.allMovies = this.movieService.getAllMoviesForDay(date);
-    this.allMovies.subscribe({ complete: () => (this.loading = false) });
+    this.allMovieShowings = this.movieService.getAllMoviesForDay(date);
+    this.allMovieShowings.subscribe({ complete: () => (this.loading = false) });
   }
 
-  onMovieTimeClick(showing: Showing, movie: Movie, screenignHalls: ScreeningHall) {
- this.choosenMovieService.setChoosenMovieShowing(
+  onMovieTimeClick(showingId: number) {
+    this.chosenShowingWithHall$ = this.movieService.getShowingWithMovieAndHall(
+      showingId,
+      this.date
+    );
 
-      {
-      ...showing,
-      ...movie,
-      ...screenignHalls
-    }
-    
-    
-    )
+    this.chosenShowingWithHall$.subscribe({
+      complete: () => (this.loading = false),
+      next: (value: ChoosenMovieShowing) => {
+        this.choosenMovieService.setChoosenMovieShowing(value);
+      },
+    });
   }
 }
-
-

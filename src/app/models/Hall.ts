@@ -1,10 +1,9 @@
-export interface ScreeningHall {
+export interface Hall {
   id: number;
   name: string;
   number: number;
   rows: number;
   columns: number;
-  seats: Seat[];
 }
 
 export interface Seat {
@@ -12,4 +11,5 @@ export interface Seat {
   row: string;
   column: number;
   vip: boolean;
+  hallId: number;
 }

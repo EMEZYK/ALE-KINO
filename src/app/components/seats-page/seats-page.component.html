@@ -2,14 +2,14 @@
 <!-- <ng-container *ngIf="{chosenShowing: chosenShowing$ | async, tickets: tickets$| async}"></ng-container> -->
 <ng-container *ngIf="chosenShowing$ | async as chosenMovieShowing" class="hall-page">
     <div  class="choosen-showing-info">
-      <h1 class="movie-title">{{ chosenMovieShowing.title }}</h1>
+      <h1 class="movie-title">{{ chosenMovieShowing.movie.title }}</h1>
       <div class="movie-time-info">
         <span class="movie-detail">data: {{ chosenMovieShowing.date }}</span>
         <span class="movie-detail"
           >
           godz. {{ chosenMovieShowing.timeFrom }}
         </span>
-         <span>sala nr: {{ chosenMovieShowing.screeningHalls[0].number }}</span>
+         <span>sala nr: {{ chosenMovieShowing.hall.number }}</span>
       </div>
     </div>
   <br />

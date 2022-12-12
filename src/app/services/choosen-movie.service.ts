@@ -14,7 +14,6 @@ export class ChoosenMovieService {
   }
 
   getChoosenMovieShowing(): Observable<ChoosenMovieShowing> {
-    console.log("wybrany film", this.choosenMovie$$)
     return this.choosenMovie$$.asObservable();
   }
 
