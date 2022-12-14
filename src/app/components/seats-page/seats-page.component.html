@@ -1,48 +1,78 @@
-
 <!-- <ng-container *ngIf="{chosenShowing: chosenShowing$ | async, tickets: tickets$| async}"></ng-container> -->
-<ng-container *ngIf="chosenShowing$ | async as chosenMovieShowing" class="hall-page">
-    <div  class="choosen-showing-info">
-      <h1 class="movie-title">{{ chosenMovieShowing.movie.title }}</h1>
-      <div class="movie-time-info">
-        <span class="movie-detail">data: {{ chosenMovieShowing.date }}</span>
-        <span class="movie-detail"
-          >
-          godz. {{ chosenMovieShowing.timeFrom }}
-        </span>
-         <span>sala nr: {{ chosenMovieShowing.hall.number }}</span>
-      </div>
+<ng-container
+  *ngIf="chosenShowing$ | async as chosenMovieShowing"
+  class="hall-page"
+>
+  <div class="choosen-showing-info">
+    <h1 class="movie-title">{{ chosenMovieShowing.movie.title }}</h1>
+    <div class="movie-time-info">
+      <span class="movie-detail">data: {{ chosenMovieShowing.date }}</span>
+      <span class="movie-detail">
+        godz. {{ chosenMovieShowing.timeFrom }}
+      </span>
+      <span>sala nr: {{ chosenMovieShowing.hall.number }}</span>
     </div>
+  </div>
   <br />
   <div class="screen">
     <h2>Ekran</h2>
   </div>
   <div class="seats-wrapper">
-    <li *ngFor="let seat of seats " class="seat">
-      <div>{{seat.column}}</div>
-    </li>
-
+    <ng-container *ngIf="rows$ | async as rows">
+      <li *ngFor="let row of rows | keyvalue" class="row">
+        <span>{{ row.key }}</span>
+        <button
+          *ngFor="let column of row.value | keyvalue"
+          [disabled]="checkIfAvailable(column.value)"
+          (click)="chosenSeatClick(column.value)"
+          [ngClass]="isChosen(column.value)? 'selected' : ''"
+          class="seat"
+        >
+        </button>
+      </li>
+    </ng-container>
   </div>
+  <p>Wybierz miejsce, aby dodać bilet</p>
+
   <div class="choosen-seat-info">
-    <span>Rząd:</span>
-    <span>Miejsce:</span>
+    <ul class="chosen-tickets-list"> 
+    <li *ngFor="let chosenSeat of chosenSeatsAndTickets" class="chosen-ticket"> 
+    <span>Rząd: {{chosenSeat.row}}</span>
+    <span>Miejsce: {{chosenSeat.column}}</span>
+
+
+    <ng-container> 
     <select [(ngModel)]="selectedTicket" class="ticket-type-wrapper">
       <option [value]="null" selected disabled>Wybierz bilet</option>
       <option
-        *ngFor="let ticket of tickets$ "
-        
-        [(ngValue)]="ticket.name"
+        *ngFor="let ticket of tickets$ | async; let i = index"
+        [(ngValue)]="ticket[i]"
         class="ticket-type"
+        
       >
         {{ ticket.name }}
-        <fa-icon [icon]="arrowIcon" class="arrow-icon"></fa-icon>
+        <!-- <fa-icon [icon]="arrowIcon" class="arrow-icon"></fa-icon> -->
       </option>
     </select>
+  </ng-container>
 
     <span class="price">Cena: </span>
-  </div>
+    {{chosenSeat | json}}
+    <button (click)="deleteChosenTicket(chosenSeat)" type="button" class="delete-ticket-button">
+      <span>🗑</span>
+    </button>
+  </li>
+</ul>
+</div>
   <div class="">
     <p>Wybrany bilet:{{ selectedTicket }}</p>
-    <a [routerLink]="['/booking/reservation', chosenMovieShowing.id, chosenMovieShowing.title ]">Przejdź do zamówienia</a>
+    <a
+      [routerLink]="[
+        '/booking/reservation',
+        chosenMovieShowing.id,
+        chosenMovieShowing.title
+      ]"
+      >Przejdź do zamówienia</a
+    >
   </div>
- 
-</ng-container >
+</ng-container>

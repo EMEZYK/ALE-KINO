@@ -11,7 +11,7 @@
 }
 
 .seats-wrapper {
-  display: grid;
+  /* display: grid; */
   width: 80%;
   height: 60vh;
   grid-template-rows: repeat(9, 1fr);
@@ -70,4 +70,33 @@ span:last-child {
 
 .arrow-icon {
   align-self:flex-end;
+}
+
+
+.seat { 
+  padding: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.chosen-tickets-list {
+  width: 100%;
+}
+
+.chosen-ticket {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected {
+  background-color: green;
+}
+
+
+.delete-ticket-button {
+  padding: 0 0.4rem;
+  cursor: pointer;
+  font-size: 1.6rem;
 }

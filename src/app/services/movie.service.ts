@@ -44,7 +44,9 @@ export class MovieService {
       this.dateFormat
     )}&_expand=movie&_expand=hall`;
 
-    return this.http.get<ChoosenMovieShowing>(url).pipe(
+    return this.http.get<ChoosenMovieShowing>(url)
+    
+    .pipe(
       map((value: ChoosenMovieShowing | ChoosenMovieShowing[]) => {
         if (Array.isArray(value)) {
           return value[0];

@@ -14,12 +14,11 @@ export class TicketService {
     return this.http.get<Ticket[]>('ticketsTypes');
   }
 
-  private ticketBehavioralSubject = new BehaviorSubject<Ticket | undefined>(
-    undefined
-  );
-  ticket = this.ticketBehavioralSubject.asObservable();
+  private ticketBehavioralSubject = new BehaviorSubject<Ticket[]>([]);
 
-  setTicket(ticket: Ticket) {
-    this.ticketBehavioralSubject.next(ticket);
-  }
+  tickets = this.ticketBehavioralSubject.asObservable();
+
+  // setTicket(tickets: Ticket[]) {
+  //   this.ticketBehavioralSubject.next(tickets);
+  // }
 }
