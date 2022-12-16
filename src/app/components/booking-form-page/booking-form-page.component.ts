@@ -4,7 +4,6 @@ import { ChoosenMovieService } from 'src/app/services/choosen-movie.service';
 import { ChoosenMovieShowing } from 'src/app/models/Movie';
 import { Order } from 'src/app/models/Order';
 import { CustomValidators } from 'src/app/validators/custom-validators';
-import { chosenTicketsData } from 'src/app/models/Ticket';
 
 @Component({
   selector: 'app-booking-form-page',

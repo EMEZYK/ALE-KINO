@@ -43,7 +43,7 @@ export class HomePageComponent implements OnInit {
       this.dates.push(m.clone());
     }
 
-    this.date = this.dates[0]; //default day = today
+    this.date = this.currentDay;
     this.chooseDate(this.date);
   }
 

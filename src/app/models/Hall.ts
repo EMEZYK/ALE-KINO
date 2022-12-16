@@ -1,3 +1,5 @@
+import { Ticket } from "./Ticket";
+
 export interface Hall {
   id: number;
   name: string;
@@ -12,4 +14,10 @@ export interface Seat {
   column: number;
   vip: boolean;
   hallId: number;
+}
+
+
+export interface chosenSeatsAndTickets {
+  seat: Seat,
+  ticket: Ticket
 }

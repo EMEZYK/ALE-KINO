@@ -13,10 +13,7 @@ import { SeatsPageComponent } from './components/seats-page/seats-page.component
 import { FormsModule } from '@angular/forms';
 import { BookingFormPageComponent } from './components/booking-form-page/booking-form-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpErrorInterceptor } from './interceptors/htttp.interceptor';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-// import {MatCardModule} from '@angular/material/card';
+import { HttpErrorInterceptor } from './interceptors/http.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginPageComponent } from './components/login-page/login-page/login-page.component';
 
@@ -39,9 +36,6 @@ import { LoginPageComponent } from './components/login-page/login-page/login-pag
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    // MatCardModule,
     BrowserAnimationsModule
   ],
   providers: [

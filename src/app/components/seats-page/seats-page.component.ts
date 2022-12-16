@@ -3,11 +3,11 @@ import { ChoosenMovieService } from 'src/app/services/choosen-movie.service';
 import { ChoosenMovieShowing } from 'src/app/models/Movie';
 import { TicketService } from 'src/app/services/ticket.service';
 import { Ticket } from 'src/app/models/Ticket';
-import { Observable, pipe } from 'rxjs';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { chosenTicketsData } from 'src/app/models/Ticket';
 import { SeatsService } from 'src/app/services/seats.service';
-import { Seat } from 'src/app/models/Hall';
+import { Seat, chosenSeatsAndTickets } from 'src/app/models/Hall';
+import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-seats-page',
@@ -17,16 +17,17 @@ import { Seat } from 'src/app/models/Hall';
 export class SeatsPageComponent implements OnInit {
   chosenShowing$: Observable<ChoosenMovieShowing>;
   tickets$: Observable<Ticket[]>;
+  chosenTicketsData$: Observable<chosenTicketsData>;
   rows$: Observable<any>;
   unavailableSeats: { column: number; row: string }[];
-  chosenSeatsAndTickets: Seat[] = [];
+  chosenSeatsAndTickets: chosenSeatsAndTickets[] = [];
+  tickets: Ticket[];
+  chosenTicket: Ticket;
   seat: Seat;
   statusOfSeat: boolean = false;
-
-  chosenTicketsData$: Observable<chosenTicketsData>;
-  chosenTicket: Ticket;
-
-
+  selectedTicket: any;
+  arrowIcon = faArrowDown;
+  trashIcon = faTrash
 
   constructor(
     private choosenMovieService: ChoosenMovieService,
@@ -38,63 +39,68 @@ export class SeatsPageComponent implements OnInit {
     this.chosenShowing$ = this.choosenMovieService
       .getChoosenMovieShowing()
       .pipe(
-        tap((result) => {
-          console.log(result);
+        tap((chosenShowing) => {
           this.unavailableSeats = [
-            ...result.bookedSeats,
-            ...result.paidSeats,
-          ].map((el) => {
-            return { column: el.column, row: el.row };
+            ...chosenShowing.bookedSeats,
+            ...chosenShowing.paidSeats,
+          ]
+          .map((unavailableSeat) => {
+            return { column: unavailableSeat.column, row: unavailableSeat.row };
           });
-          console.log(this.unavailableSeats);
-
-          const hallId = result.hallId;
+          const hallId = chosenShowing.hallId;
           this.rows$ = this.fetchSortedSeats(hallId);
         })
       );
 
     this.tickets$ = this.ticketService.getAllTickets();
-  }
-
-  fetchSortedSeats(hallId: number) {
-    return this.seatsService.fetchSeats(hallId).pipe(
-      tap((res) => {
-        console.log(res);
+    this.tickets$.pipe(
+      tap((listOfTickets) => {
+        this.tickets = listOfTickets;
       })
     );
   }
 
-  checkIfAvailable(seat: Seat): boolean {
-    return this.unavailableSeats.find(
+  fetchSortedSeats(hallId: number) {
+    return this.seatsService.fetchSeats(hallId);
+  }
+
+  checkIfSeatIsAvailable(seat: Seat): boolean {
+    return this.unavailableSeats.some(
       (el) => el.column === seat.column && el.row === seat.row
     )
-      ? true
-      : false;
   }
 
-  chosenSeatClick(seat) {
-    const indexOfSeat = this.chosenSeatsAndTickets.indexOf(seat);
-    const foundSeat = this.chosenSeatsAndTickets.find(
-      (el) => el.column === seat.column && el.row === seat.row
+  clickChosenSeat(seat: Seat) {
+    const indexOfSeat = this.chosenSeatsAndTickets.findIndex(
+      (el) => el.seat.column === seat.column && el.seat.row === seat.row
     );
-
-    foundSeat
-      ? this.chosenSeatsAndTickets.splice(indexOfSeat, 1)
-      : this.chosenSeatsAndTickets.push( seat);
+    if (indexOfSeat === -1) {
+      this.chosenSeatsAndTickets.push({
+        seat: seat,
+        ticket: this.tickets ? this.tickets[0] : null,
+      });
+    } else {
+      this.chosenSeatsAndTickets.splice(indexOfSeat, 1);
+    }
   }
 
-  isChosen(seat) {
-    return this.chosenSeatsAndTickets.find((el) => (el === seat ? true : false));
+  checkIfSeatIsChosen(seat: Seat) {
+    return this.chosenSeatsAndTickets.some((el) =>
+      el.seat === seat
+    );
   }
 
-  deleteChosenTicket(ticket) {
+
+  selectTicket(seat: chosenSeatsAndTickets) {
+    const foundSeat = this.chosenSeatsAndTickets.find((el) => {
+      return el.seat === seat.seat;
+    });
+    foundSeat.ticket = this.selectedTicket;
+    // console.log('chosenSeatsAndTickets', this.chosenSeatsAndTickets);
+  }
+
+  deleteChosenTicket(ticket: chosenSeatsAndTickets) {
     const indexOfTicket = this.chosenSeatsAndTickets.indexOf(ticket);
     this.chosenSeatsAndTickets.splice(indexOfTicket, 1);
   }
-
-  chosenTicketClick(ticket) {
-    const indexOfTicket = this.chosenSeatsAndTickets.indexOf(ticket);
-
-  }
-
 }
