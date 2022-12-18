@@ -7,18 +7,16 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class TicketService {
+export class TicketsService {
+  private tickets$$ = new BehaviorSubject<Ticket[]>([]);
+
+  get tickets$() {
+    return this.tickets$$.asObservable();
+  }
+
   constructor(private http: HttpClient) {}
 
   getAllTickets(): Observable<Ticket[]> {
     return this.http.get<Ticket[]>('ticketsTypes');
   }
-
-  private ticketBehavioralSubject = new BehaviorSubject<Ticket[]>([]);
-
-  tickets = this.ticketBehavioralSubject.asObservable();
-
-  // setTicket(tickets: Ticket[]) {
-  //   this.ticketBehavioralSubject.next(tickets);
-  // }
 }

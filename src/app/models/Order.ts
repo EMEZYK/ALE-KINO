@@ -1,5 +1,6 @@
 import {Ticket} from './Ticket';
 import { User } from './User';
+import { Seat } from './Hall';
 
 export interface Order {
   id: number;
@@ -13,3 +14,4 @@ export interface Order {
   qrCode:  string
   cuponCode: string
 }
+

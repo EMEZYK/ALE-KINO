@@ -11,8 +11,6 @@ export interface Movie {
   image: string;
   rating: string;
   isPremiere: boolean;
-  // timeFrom: string;
-  // timeTo: string;
 }
 
 export interface Showing {
@@ -26,9 +24,6 @@ export interface Showing {
   paidSeats: Seat[];
   bookedSeats: Seat[];
 }
-
-
-
 
 
 interface Hall {

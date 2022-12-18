@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/User';
 import { HttpClient } from '@angular/common/http';
@@ -6,10 +6,16 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class LoggedUserService {
+
+export class AuthService {
+  private http = inject(HttpClient);
   private loggedInUser$$ = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) {
+  get auth$() {
+    return this.loggedInUser$$.asObservable();
+  }
+
+  constructor() {
     let storedUser = localStorage.getItem('user');
     if (storedUser !== '') this.setUser(JSON.parse(storedUser), false);
   }

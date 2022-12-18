@@ -1,4 +1,4 @@
-import { Ticket } from "./Ticket";
+import { Ticket } from './Ticket';
 
 export interface Hall {
   id: number;
@@ -16,8 +16,12 @@ export interface Seat {
   hallId: number;
 }
 
+export interface ChosenSeatsAndTickets {
+  seat: Seat;
+  ticket: Ticket;
+}
 
-export interface chosenSeatsAndTickets {
-  seat: Seat,
-  ticket: Ticket
+export interface UnavailableSeats {
+  column: number;
+  row: string;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ChoosenMovieShowing } from '../models/Movie';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,20 +8,21 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ChoosenMovieService {
   private choosenMovie$$ = new BehaviorSubject<ChoosenMovieShowing>(null);
 
-  constructor() {
-    let storedShowing = localStorage.getItem('storedChoosenShowing');
-    if (storedShowing !== "") this.setChoosenMovieShowing(JSON.parse(storedShowing), false);
+  get chosenMovieShowing$() {
+    return this.choosenMovie$$.asObservable();
   }
 
-  getChoosenMovieShowing(): Observable<ChoosenMovieShowing> {
-    return this.choosenMovie$$.asObservable();
+  constructor() {
+    let storedShowing = localStorage.getItem('storedChoosenShowing');
+    if (storedShowing !== '')
+      this.setChoosenMovieShowing(JSON.parse(storedShowing), false);
   }
 
   setChoosenMovieShowing(
     choosenShowing: ChoosenMovieShowing,
-    storedProp: boolean = true
+    showingIsStored: boolean = true
   ) {
-    if (storedProp)
+    if (showingIsStored)
       localStorage.setItem(
         'storedChoosenShowing',
         JSON.stringify(choosenShowing)

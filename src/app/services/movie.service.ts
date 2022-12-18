@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { Observable, mergeMap, tap, map } from 'rxjs';
+import { Observable, mergeMap, map } from 'rxjs';
 import {
   Movie,
   Showing,

@@ -34,13 +34,9 @@
 
   <div class="choosen-seat-info">
     <ul class="chosen-tickets-list">
-      <li
-        *ngFor="let chosenSeat of chosenSeatsAndTickets"
-        class="chosen-seat"
-      >
+      <li *ngFor="let chosenSeat of chosenSeatsAndTickets" class="chosen-seat">
         <span>Rząd: {{ chosenSeat.seat.row }}</span>
         <span>Miejsce: {{ chosenSeat.seat.column }}</span>
-
         <ng-container>
           <select
             [(ngModel)]="selectedTicket"
@@ -58,8 +54,7 @@
             </option>
           </select>
         </ng-container>
-
-        <span class="price">Cena: {{chosenSeat.ticket?.price}}zł </span>
+        <span class="price">Cena: {{ chosenSeat.ticket?.price }}zł </span>
         <button
           (click)="deleteChosenTicket(chosenSeat)"
           type="button"

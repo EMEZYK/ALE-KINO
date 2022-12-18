@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { User } from 'src/app/models/User';
-import { LoggedUserService } from 'src/app/services/logged-user.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
-    private userService: LoggedUserService,
+    private userService: AuthService,
     private router: Router
   ) {}
 

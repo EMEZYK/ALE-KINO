@@ -23,7 +23,7 @@ export class BookingFormPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.choosenMovieService
-      .getChoosenMovieShowing()
+      .chosenMovieShowing$
       .subscribe((result: ChoosenMovieShowing) => {
         this.chosenMovieShowing = result;
       });
