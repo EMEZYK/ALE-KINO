@@ -1,32 +1,34 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header-component/header.component';
-import { FooterComponent } from './components/footer-component/footer.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
+import { HeaderComponent } from './shared/ui/header/header.component';
+import { FooterComponent } from './shared/ui/footer/footer.component';
+import { MovieListComponent } from './domains/movies/movie-list';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing.module';
-import { AdminPanelPageComponent } from './components/admin-panel-page/admin-panel-page.component';
+import { AdminPanelPageComponent } from './domains/users/admin/admin-panel-page/admin-panel-page.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SeatsPageComponent } from './components/seats-page/seats-page.component';
+import { HallComponent } from './domains/booking/hall';
 import { FormsModule } from '@angular/forms';
-import { BookingFormPageComponent } from './components/booking-form-page/booking-form-page.component';
+import { BookingFormComponent } from './domains/booking/booking-form';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpErrorInterceptor } from './interceptors/http.interceptor';
+import { HttpErrorInterceptor } from './shared/interceptors/http.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginPageComponent } from './components/login-page/login-page/login-page.component';
+import { LoginComponent } from './domains/auth/login';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent,
+    MovieListComponent,
     HeaderComponent,
     FooterComponent,
     AdminPanelPageComponent,
-    SeatsPageComponent,
-    BookingFormPageComponent,
-    LoginPageComponent
+    HallComponent,
+    BookingFormComponent,
+    LoginComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

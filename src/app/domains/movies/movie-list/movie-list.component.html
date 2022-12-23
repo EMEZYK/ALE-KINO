@@ -1,0 +1,59 @@
+  <main *ngIf="!loading; else loadingTmpl">
+
+    <app-week-list></app-week-list>
+    <ul class="week-list">
+      <li *ngFor="let date of dates" class="week-day">
+        <button
+          *ngIf="date"
+          (click)="chooseDate(date)"
+          class="current-day-btn"
+          [disabled]="isDisabled(date)"
+        >
+          {{ date.format("DD/MM") }}
+        </button>
+      </li>
+    </ul>
+
+    <ul class="movie-wrapper">
+      <li *ngFor="let movie of allMovieShowings | async" class="movie">
+        <div class="movie-poster">
+          <img src="{{ movie.image }}" />
+        </div>
+        <div class="movie-information">
+          <h2 class="movie-title">{{ movie.title }}</h2>
+          <div class="movie-details">
+            <div class="movie-detail">{{ movie.genres }}</div>
+            <div class="movie-detail vertical">{{ movie.duration }}</div>
+            <div class="movie-detail vertical">{{ movie.ageRestrictions }}</div>
+          </div>
+          <div class="description-wrapper">
+            <div class="short-description">
+              {{ movie.shortDescription }}
+            </div>
+            <div
+              *ngIf="isDescriptionExpanded(movie.id)"
+              class="long-description"
+            >
+              {{ movie.longDescription }}
+            </div>
+          </div>
+          <div class="btn-wrapper">
+            <button (click)="toggleOpen(movie.id)" class="more-button">
+              {{ isDescriptionExpanded(movie.id) ? "Mniej" : "Więcej" }}
+            </button>
+          </div>
+          <ul class="hours">
+            <li *ngFor="let showing of movie.showings" class="hour-item">
+              <a [routerLink]="['booking/seats', movie.id, movie.title]">
+                <button (click)="onMovieTimeClick(showing.id)" class="hour-btn">
+                  {{ showing.timeFrom }}
+                </button>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="rating">{{ movie.rating }}</div>
+      </li>
+    </ul>
+  </main>
+  <ng-template #loadingTmpl> Loading... </ng-template>

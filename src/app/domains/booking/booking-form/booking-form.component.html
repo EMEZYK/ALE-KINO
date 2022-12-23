@@ -1,0 +1,147 @@
+
+<ng-container *ngIf="chosenMovieShowing$ | async as chosenMovieShowing "> 
+<div class="booking-form-wrapper">
+
+  <div class="choosen-showing-info">
+    <h1 class="movie-title">{{ chosenMovieShowing.movie.title }}</h1>
+    <div class="movie-details">
+      <div class="movie-time-info">
+        <span class="movie-date">data: {{ chosenMovieShowing.date }}</span>
+        <span class="movie-time">godz. {{ chosenMovieShowing.timeFrom }} </span>
+        <span class="movie-hall"
+          >sala nr: {{ chosenMovieShowing.hall.number }}</span
+        >
+      </div>
+          <ul class="tickets-list"> 
+            <li *ngFor="let ticket of reservedSeatsAndTickets$ | async" class="ticket-info">
+              <span>Rząd: {{ticket.seat.row}} </span>
+              <span>Miejsce: {{ticket.seat.column}}</span>
+              <span>Cena: {{ticket.ticket.price}} zł</span>
+            </li>
+          </ul>
+      <p class="tickets-sum">Razem: {{sumOfTickets}} zł </p>
+
+      <div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="booking-form">
+    <div class="form-group">
+      <label> Imię </label>
+      <input formControlName="name" placeholder="Imię*" class="form-control" />
+      <ng-container *ngIf="name.errors as errors">
+        <ng-container *ngIf="name.touched">
+          <p *ngIf="errors?.['required']">Podaj imię</p>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="form-group">
+      <label> Nazwisko </label>
+      <input
+        formControlName="surname"
+        placeholder="Nazwisko*"
+        class="form-control"
+      />
+      <ng-container *ngIf="surname.errors as errors">
+        <ng-container *ngIf="surname.touched">
+          <p *ngIf="errors?.['required']">Podaj nazwisko</p>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="form-group">
+      <label> Nr tel. </label>
+      <input
+        formControlName="phone"
+        placeholder="Nr telefonu"
+        class="form-control"
+      />
+      <ng-container *ngIf="phone.errors as errors">
+        <ng-container *ngIf="phone.touched">
+          <p *ngIf="errors?.['invalidNumber']">
+            Podaj prawidłowy format nr telefonu (tylko cyfry)
+          </p>
+          <p *ngIf="errors?.['minlength'] as minlength">
+            Nr tel. powinien zawierać min {{ minlength.requiredLength }} znaków
+          </p>
+        </ng-container>
+      </ng-container>
+    </div>
+    <ng-container formGroupName="emailInfo">
+      <div class="form-group">
+        <label> E-mail </label>
+        <input
+          formControlName="email"
+          placeholder="Adres email*"
+          type="email"
+          class="form-control"
+        />
+        <ng-container *ngIf="email.errors as errors">
+          <ng-container *ngIf="email.touched">
+            <p *ngIf="errors?.['required']">Podaj email</p>
+            <p *ngIf="errors?.['email']">Niewłaściwy format adresu e-mail</p>
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="form-group">
+        <label> Potwierdź e-mail </label>
+        <input
+          formControlName="confirmEmail"
+          placeholder="Potwierdź email*"
+          type="email"
+          class="form-control"
+        />
+        <ng-container *ngIf="confirmEmail.errors as errors">
+          <ng-container *ngIf="confirmEmail.touched">
+            <p *ngIf="errors?.['required']">Potwierdź email</p>
+            <p *ngIf="bookingForm.controls.emailInfo.errors?.['noEmailMatch']">
+              Adres email musi byc zgodny
+            </p>
+          </ng-container>
+        </ng-container>
+      </div>
+    </ng-container>
+    <div class="form-group checkbox-wrapper">
+      <input
+        type="checkbox"
+        formControlName="acceptNewsletter"
+        class="form-control checkbox"
+      />
+      <label for="acceptNewsletter" class="form-check-label">
+        Chcę otrzymywać informację o zniżkach i promocjach
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label> Kod zniżkowy </label>
+      <input
+        formControlName="discountCode"
+        placeholder="Kod zniżkowy"
+        class="form-control"
+      />
+      <ng-container *ngIf="discountCode.errors as errors">
+        <ng-container *ngIf="discountCode.dirty">
+          <p *ngIf="errors?.['invalidDiscountCode']">
+            Niewłaściwy kod zniżkowy
+          </p>
+        </ng-container>
+      </ng-container>
+    </div>
+    <button type="submit" [disabled]="bookingForm.invalid" class="submit-button">
+      Zamawiam!
+    </button>
+  </form>
+</div>
+<div class="back-link">
+  <a
+    [routerLink]="[
+      '/booking/seats',
+      chosenMovieShowing.id,
+      chosenMovieShowing.movie.title
+    ]"
+    >Wróć do wyboru miejsc</a
+  >
+
+</div>
+</ng-container>
+
