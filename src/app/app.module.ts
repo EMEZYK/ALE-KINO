@@ -17,6 +17,8 @@ import { HttpErrorInterceptor } from './shared/interceptors/http.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './domains/auth/login';
 import { HomeComponent } from './home/home.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { SummaryComponent } from './domains/booking/order/summary';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { HomeComponent } from './home/home.component';
     BookingFormComponent,
     LoginComponent,
     HomeComponent,
+    SummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { HomeComponent } from './home/home.component';
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    QRCodeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },

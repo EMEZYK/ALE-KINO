@@ -69,7 +69,6 @@ export class HallComponent implements OnInit {
     this.orderService.setOrderItems(chosenSeatsAndTickets);
 
     this.setSeatTicketPairs(chosenSeatsAndTickets);
-    console.log(chosenSeatsAndTickets);
   }
 
   setSeatTicketPairs(chosenSeatsAndTickets: ChosenSeatsAndTickets[],) {
@@ -79,3 +78,5 @@ export class HallComponent implements OnInit {
     );
   }
 }
+
+

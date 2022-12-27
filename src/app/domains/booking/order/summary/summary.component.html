@@ -1,0 +1,19 @@
+<div class="summary-wrapper">
+  <h1>Dziękujemy za zamówienie</h1>
+  <h3>Twoje bilety zostały wysłane na adres email: {{ userEmail }}</h3>
+  <qrcode
+    elementType="svg"
+    (qrCodeURL)="onChangeUrl($event)"
+    [qrdata]="orderQrCode"
+    [width]="256"
+    [errorCorrectionLevel]="'M'"
+    class="qr-code"
+  ></qrcode>
+  <div class="download-link">
+    <a [href]="qrCodeDownloadLink" download="qrcode"
+      >Pobierz qr code z biletami</a
+    >
+  </div>
+</div>
+<a routerLink="/" class="back-link">Wróć na stronę główną</a>
+

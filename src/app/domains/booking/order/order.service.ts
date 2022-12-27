@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { HallService } from '../hall/hall.service';
 import { ChoosenMovieService } from '../../movies/choosen-movie.service';
 import { LocalStorageService } from '../../../shared/storage/local-storage.service';
 import { TicketsService } from '../tickets/tickets.service';
 import { Ticket } from '../tickets/ticket.interface';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
-import { ChosenSeatsAndTickets, Seat, UnavailableSeats } from '../hall/hall.interface';
+import {
+  ChosenSeatsAndTickets,
+  Seat,
+  UnavailableSeats,
+} from '../hall/hall.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -50,12 +54,20 @@ export class OrderService {
     private choosenMovieService: ChoosenMovieService,
     private localStoreService: LocalStorageService
   ) {
+    
+    const storedSeatTicketPairs =
+      this.localStoreService.getData('seatTicketPairs');
+
+    if (storedSeatTicketPairs !== '') 
+      this.setTicketPairs(JSON.parse(storedSeatTicketPairs));
+    
+
     this.choosenMovieService.chosenMovieShowing$
       .pipe(
         tap((chosenShowing) => {
           this.chosenShowing$$.next(chosenShowing);
-          
-           this.unavailableSeats = [
+
+          this.unavailableSeats = [
             ...chosenShowing.bookedSeats,
             ...chosenShowing.paidSeats,
           ].map((unavailableSeat) => {
@@ -86,13 +98,13 @@ export class OrderService {
         })
       )
       .subscribe();
+  }
 
-    // let storedSeatTicketPairs = localStoreService.getData('seatTicketPairs');
-    // if (storedSeatTicketPairs) {
-    //   // this.setSeatTicketPairs(JSON.parse(storedSeatTicketPairs));
-    //   console.log('Stored', JSON.parse(storedSeatTicketPairs));
-    //   // this.seat = storedSeatTicketPairs;
-    // }
+  setTicketPairs(pair: any, shouldStore = true) {
+    if (shouldStore) {
+      localStorage.setItem('seatTicketPairs', JSON.stringify(pair));
+      this.orderItems$$.next(pair);
+    }
   }
 
   fetchOrderedSeats(hallId: number) {

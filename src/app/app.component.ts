@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import * as moment from 'moment'
 
 @Component({
   selector: 'app-root',
@@ -7,7 +6,5 @@ import * as moment from 'moment'
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor() {
-
-  }
+  constructor() {}
 }

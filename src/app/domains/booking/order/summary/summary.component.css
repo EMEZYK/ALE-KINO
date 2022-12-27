@@ -1,0 +1,33 @@
+:host {
+  margin: 0;
+  padding: 1rem;
+}
+
+.summary-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 30vw;
+  min-height: 80vh;
+  text-align: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.qr-code {
+  width: 100%;
+  margin: 1rem 0 0 0;
+}
+
+a {
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.download-link {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.back-link {
+  margin: 0 0 1rem 0;
+}

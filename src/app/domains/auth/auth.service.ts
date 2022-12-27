@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   constructor() {
-    let storedUser = localStorage.getItem('user');
+    const storedUser = localStorage.getItem('user');
     if (storedUser !== '') this.setUser(JSON.parse(storedUser), false);
   }
 

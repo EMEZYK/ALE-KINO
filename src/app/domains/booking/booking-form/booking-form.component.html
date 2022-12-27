@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="booking-form">
+  <form [formGroup]="bookingForm" (ngSubmit)="onSubmit(chosenMovieShowing)" class="booking-form">
     <div class="form-group">
       <label> Imię </label>
       <input formControlName="name" placeholder="Imię*" class="form-control" />

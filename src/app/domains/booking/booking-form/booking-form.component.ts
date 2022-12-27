@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators';
 import { Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
 import { ChoosenMovieService } from '../../movies';
-import { LocalStorageService } from 'src/app/shared/storage';
 import { ChosenSeatsAndTickets } from '../hall/hall.interface';
 import { Order } from '../order/order.interface';
 import { OrderService } from '../order';
@@ -22,13 +23,15 @@ export class BookingFormComponent implements OnInit {
   order: Order[];
   reservedSeatsAndTickets$: Observable<ChosenSeatsAndTickets[]>;
   ticketPrice: number;
-  sumOfTickets: number = 0;
+  sumOfTickets = 0;
+  setSeatTicketPairs:any;
 
   constructor(
     private builder: NonNullableFormBuilder,
     private choosenMovieService: ChoosenMovieService,
     private orderService: OrderService,
-    private localStoreService: LocalStorageService
+    private emailService: EmailConfirmationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -36,23 +39,15 @@ export class BookingFormComponent implements OnInit {
 
     this.reservedSeatsAndTickets$ = this.orderService.orderItems$.pipe(
       tap((seatTicketPairs) => {
+        console.log(seatTicketPairs)
         this.sumTicketsValues(seatTicketPairs);
       })
     );
 
     this.createForm();
 
-    let storedSeatTicketPairs = this.localStoreService.getData('seatTicketPairs');
-    // if(storedSeatTicketPairs !== '') {
-    // }
-
-//     let storedSeatTicketPairs = localStoreService.getData('seatTicketPairs');
-//     if (storedSeatTicketPairs) {
-//       this.setSeatTicketPairs(JSON.parse(storedSeatTicketPairs));
-// console.log("Stored",JSON.parse(storedSeatTicketPairs))
-//       // this.seat = storedSeatTicketPairs;
-//     }
   }
+
 
   private createForm() {
     this.bookingForm = this.builder.group({
@@ -126,12 +121,15 @@ export class BookingFormComponent implements OnInit {
       .reduce((acc, value) => acc + value, 0);
   }
 
-  onSubmit() {
+  onSubmit(chosenMovieShowing) {
     this.bookingForm.markAllAsTouched();
     if (this.bookingForm.invalid) {
       return;
     }
     console.log(this.bookingForm.value);
+    this.emailService.userEmail = this.bookingForm.value.emailInfo.email;
+    this.router.navigate(['/booking/summary', chosenMovieShowing.id,  chosenMovieShowing.movie.title]);
     this.bookingForm.reset();
   }
 }
+

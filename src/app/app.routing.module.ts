@@ -6,7 +6,7 @@ import { LoginComponent } from './domains/auth/login';
 import { HomeComponent } from './home/home.component';
 import { AdminPanelPageComponent } from './domains/users/admin/admin-panel-page';
 import { UserHomePageComponent } from './domains/users/user/user-home-page';
-import { SummaryPageComponent } from './domains/booking/order/summary/summary-page.component';
+import { SummaryComponent } from './domains/booking/order/summary/summary.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
       { path: 'seats/:id/:title', component: HallComponent },
       { path: 'reservation/:id/:title', component: BookingFormComponent },
-      { path: 'summary', component: SummaryPageComponent },
+      { path: 'summary/:id/:title', component: SummaryComponent },
     ],
   },
   {
