@@ -9,7 +9,7 @@ import { User } from '../users/user.interface';
   providedIn: 'root',
 })
 
-export class AuthService {
+export class AuthStateService {
   private http = inject(HttpClient);
   private loggedInUser$$ = new BehaviorSubject<User>(null);
 

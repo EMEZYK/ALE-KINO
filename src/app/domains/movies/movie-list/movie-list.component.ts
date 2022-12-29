@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { MovieService } from './movie.service';
-import { ChoosenMovieService } from '../choosen-movie.service';
+import { ChoosenMovieStateService } from '../choosen-movie.state.service';
 import { ChoosenMovieShowing, MovieWithShowingTime } from '../movie.interface';
 
 @Component({
@@ -25,12 +25,14 @@ export class MovieListComponent implements OnInit {
 
   constructor(
     private movieService: MovieService,
-    private choosenMovieService: ChoosenMovieService
-  ) {}
+    private choosenMovieService: ChoosenMovieStateService
+  ) {
+
+  }
 
   ngOnInit(): void {
-    let startDate = moment().startOf('isoWeek');
-    let endDate = startDate.clone().add(6, 'days');
+    const startDate = moment().startOf('isoWeek');
+    const endDate = startDate.clone().add(6, 'days');
 
     for (
       let m = moment(startDate);
@@ -52,7 +54,7 @@ export class MovieListComponent implements OnInit {
   }
 
   toggleOpen(movieId: number) {
-    let movieIndex = this.expandedMovieIdDescriptions.indexOf(movieId);
+    const movieIndex = this.expandedMovieIdDescriptions.indexOf(movieId);
     if (movieIndex !== -1) {
       this.expandedMovieIdDescriptions.splice(movieIndex, 1);
     } else {
@@ -87,5 +89,9 @@ export class MovieListComponent implements OnInit {
         this.choosenMovieService.setChoosenMovieShowing(value);
       },
     });
+
+
   }
+
+
 }

@@ -4,10 +4,10 @@ import { CustomValidators } from 'src/app/shared/validators';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
-import { ChoosenMovieService } from '../../movies';
+import { ChoosenMovieStateService } from '../../movies';
 import { ChosenSeatsAndTickets } from '../hall/hall.interface';
 import { Order } from '../order/order.interface';
-import { OrderService } from '../order';
+import { OrderStateService } from '../order';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
 
 
@@ -24,12 +24,12 @@ export class BookingFormComponent implements OnInit {
   reservedSeatsAndTickets$: Observable<ChosenSeatsAndTickets[]>;
   ticketPrice: number;
   sumOfTickets = 0;
-  setSeatTicketPairs:any;
+  setSeatTicketPairs:ChosenSeatsAndTickets[];
 
   constructor(
     private builder: NonNullableFormBuilder,
-    private choosenMovieService: ChoosenMovieService,
-    private orderService: OrderService,
+    private choosenMovieService: ChoosenMovieStateService,
+    private orderService: OrderStateService,
     private emailService: EmailConfirmationService,
     private router: Router
   ) {}
@@ -126,7 +126,7 @@ export class BookingFormComponent implements OnInit {
     if (this.bookingForm.invalid) {
       return;
     }
-    console.log(this.bookingForm.value);
+    // console.log(this.bookingForm.value);
     this.emailService.userEmail = this.bookingForm.value.emailInfo.email;
     this.router.navigate(['/booking/summary', chosenMovieShowing.id,  chosenMovieShowing.movie.title]);
     this.bookingForm.reset();

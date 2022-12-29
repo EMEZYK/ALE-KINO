@@ -6,7 +6,7 @@ import { Ticket } from './ticket.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class TicketsService {
+export class TicketsStateService {
   private tickets$$ = new BehaviorSubject<Ticket[]>([]);
 
   get tickets$() {
@@ -19,3 +19,6 @@ export class TicketsService {
     return this.http.get<Ticket[]>('ticketsTypes');
   }
 }
+
+
+

@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ChoosenMovieService {
+export class ChoosenMovieStateService {
   private choosenMovie$$ = new BehaviorSubject<ChoosenMovieShowing>(null);
 
   get chosenMovieShowing$() {
@@ -13,14 +13,14 @@ export class ChoosenMovieService {
   }
 
   constructor() {
-    let storedShowing = localStorage.getItem('storedChoosenShowing');
+    const storedShowing = localStorage.getItem('storedChoosenShowing');
     if (storedShowing !== '')
       this.setChoosenMovieShowing(JSON.parse(storedShowing), false);
   }
 
   setChoosenMovieShowing(
     choosenShowing: ChoosenMovieShowing,
-    showingIsStored: boolean = true
+    showingIsStored = true
   ) {
     if (showingIsStored)
       localStorage.setItem(

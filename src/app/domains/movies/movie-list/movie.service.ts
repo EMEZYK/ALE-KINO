@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { Observable, mergeMap, map } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { Ticket } from '../../booking/tickets/ticket.interface';
 import {
   Movie,
@@ -24,15 +24,19 @@ export class MovieService {
         this.getUrlForShowingsByDate(date.format(this.dateFormat))
       )
       .pipe(
-        mergeMap((showings: Showing[]) => {
-          const movieIds = showings.map((showing) => showing.movieId);
-          if (movieIds.length === 0) {
-            return [];
-          }
-          return this.http.get<Movie[]>(
-            this.getUrlForMovieWithShowingssByIds(movieIds)
-          );
-        })
+        switchMap((showingsForDay: Showing[]) =>
+          this.http
+            .get<Movie[]>(
+              this.getUrlForMovieWithShowingssByIds(
+                this.extractMovieIds(showingsForDay)
+              )
+            )
+            .pipe(
+              map((movies: Movie[]) =>
+                this.joinMoviesWithShowings(movies, showingsForDay)
+              )
+            )
+        )
       );
   }
 
@@ -40,14 +44,13 @@ export class MovieService {
     showingId: number,
     date: moment.Moment
   ): Observable<ChoosenMovieShowing> {
-    let url: string = `showings?`;
+    let url = `showings?`;
     url = `showings?id=${showingId}&date=${date.format(
       this.dateFormat
     )}&_expand=movie&_expand=hall`;
 
     return this.http
       .get<ChoosenMovieShowing>(url)
-
       .pipe(
         map((value: ChoosenMovieShowing | ChoosenMovieShowing[]) => {
           if (Array.isArray(value)) {
@@ -58,22 +61,31 @@ export class MovieService {
       );
   }
 
-  getAllTickets(): Observable<Ticket[]> {
-    console.log(this.http.get('ticketsTypes'));
-    return this.http.get<Ticket[]>('ticketsTypes');
+  private joinMoviesWithShowings(movies: Movie[], showingsForDay: Showing[]) {
+    return movies.map((movie: Movie) => {
+      const showings = showingsForDay.filter(
+        (showing: Showing) => showing.movieId === movie.id
+      );
+
+      return { ...movie, showings };
+    });
   }
 
   private getUrlForShowingsByDate(date: string) {
     return `showings?&date=${date}`;
   }
 
-  private getUrlForMovieWithShowingssByIds(ids: number[]) {
-    let url: string = `movies?`;
-    if (ids.length > 0) {
-      for (let i = 0; i < ids.length; i++) {
-        url = url + `id=${ids[i]}&_embed=showings`;
-      }
-    }
-    return url;
+  private getUrlForMovieWithShowingssByIds(movieIds: number[]) {
+    const idsAsString = movieIds.map((i) => i.toString()).join('&id=');
+    return `movies?id=${idsAsString}`;
+  }
+
+  private extractMovieIds(showings: Showing[]) {
+    return showings.map((el) => el.movieId);
+  }
+
+  getAllTickets(): Observable<Ticket[]> {
+    console.log(this.http.get('ticketsTypes'));
+    return this.http.get<Ticket[]>('ticketsTypes');
   }
 }

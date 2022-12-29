@@ -1,2 +1,2 @@
-export * from './tickets.service'
+export * from './tickets.state.service'
 export * from './ticket.interface'

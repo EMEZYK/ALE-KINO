@@ -2,11 +2,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LocalStorageService } from 'src/app/shared/storage';
-import { OrderService } from '../order';
 import { Ticket } from '../tickets';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
 import { ChosenSeatsAndTickets, Seat } from './hall.interface';
-
+import { OrderStateService } from '../order';
 
 @Component({
   selector: 'app-seats-page',
@@ -26,7 +25,7 @@ export class HallComponent implements OnInit {
   trashIcon = faTrash;
 
   constructor(
-    private orderService: OrderService,
+    private orderService: OrderStateService,
     private localStoreService: LocalStorageService
   ) {
 

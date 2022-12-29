@@ -6,7 +6,7 @@ import { Seat } from './hall.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class HallService {
+export class HallStateService {
   private seatsBehaviorSubject$$ = new BehaviorSubject<{
     [key: string]: { [key: number]: Seat };
   }>({});

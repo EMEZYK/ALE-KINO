@@ -123,7 +123,7 @@
       "id": 1,
       "movieId": 1,
       "hallId": 1,
-      "date": "2022-12-27",
+      "date": "2022-12-29",
       "break": 15,
       "timeFrom": "12:30",
       "timeTo": "14:00",
@@ -150,7 +150,34 @@
       "id": 2,
       "movieId": 1,
       "hallId": 2,
-      "date": "2022-12-19",
+      "date": "2022-12-29",
+      "break": 15,
+      "timeFrom": "13:30",
+      "timeTo": "15:00",
+      "paidSeats": [
+        {
+          "id": 16,
+          "row": "D",
+          "column": 1,
+          "vip": false
+        },
+        {
+          "id": 17,
+          "row": "D",
+          "column": 2,
+          "vip": false
+        }
+      ],
+      "bookedSeats": [
+        { "id": 1, "row": "B", "column": 3, "vip": true },
+        { "id": 2, "row": "A", "column": 2, "vip": true }
+      ]
+    },
+    {
+      "id": 3,
+      "movieId": 2,
+      "hallId": 2,
+      "date": "2022-12-29",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
-import { HallService } from '../hall/hall.service';
-import { ChoosenMovieService } from '../../movies/choosen-movie.service';
+import { HallStateService } from '../hall';
+import { ChoosenMovieStateService } from '../../movies/choosen-movie.state.service';
 import { LocalStorageService } from '../../../shared/storage/local-storage.service';
-import { TicketsService } from '../tickets/tickets.service';
+import { TicketsStateService } from '../tickets/tickets.state.service';
 import { Ticket } from '../tickets/ticket.interface';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
 import {
@@ -15,7 +15,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class OrderService {
+export class OrderStateService {
   unavailableSeats: UnavailableSeats[];
 
   rows: { [key: string]: { [key: number]: Seat } };
@@ -49,9 +49,9 @@ export class OrderService {
   }
 
   constructor(
-    private ticketsService: TicketsService,
-    private seatsService: HallService,
-    private choosenMovieService: ChoosenMovieService,
+    private ticketsService: TicketsStateService,
+    private seatsService: HallStateService,
+    private choosenMovieService: ChoosenMovieStateService,
     private localStoreService: LocalStorageService
   ) {
     
@@ -82,6 +82,7 @@ export class OrderService {
         }),
 
         tap((rows) => {
+          console.log(rows)
           this.rows$$.next(rows);
         })
       )
@@ -100,7 +101,7 @@ export class OrderService {
       .subscribe();
   }
 
-  setTicketPairs(pair: any, shouldStore = true) {
+  setTicketPairs(pair: ChosenSeatsAndTickets[], shouldStore = true) {
     if (shouldStore) {
       localStorage.setItem('seatTicketPairs', JSON.stringify(pair));
       this.orderItems$$.next(pair);

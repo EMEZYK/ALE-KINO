@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthStateService } from '../auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../users/user.interface';
 
@@ -13,11 +13,11 @@ import { User } from '../../users/user.interface';
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   user: User[];
-  submitted: boolean = false;
+  submitted = false;
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
-    private userService: AuthService,
+    private userService: AuthStateService,
     private router: Router
   ) {}
 
