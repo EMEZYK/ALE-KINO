@@ -4,9 +4,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/ui/header/header.component';
 import { FooterComponent } from './shared/ui/footer/footer.component';
 import { MovieListComponent } from './domains/movies/movie-list';
-import { RouterModule } from '@angular/router';
-import { AppRoutingModule } from './app.routing.module';
-import { AdminPanelPageComponent } from './domains/users/admin/admin-panel-page/admin-panel-page.component';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HallComponent } from './domains/booking/hall';
@@ -19,6 +17,7 @@ import { LoginComponent } from './domains/auth/login';
 import { HomeComponent } from './home/home.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { SummaryComponent } from './domains/booking/order/summary';
+import { APP_ROUTES } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { SummaryComponent } from './domains/booking/order/summary';
     MovieListComponent,
     HeaderComponent,
     FooterComponent,
-    AdminPanelPageComponent,
     HallComponent,
     BookingFormComponent,
     LoginComponent,
@@ -36,13 +34,15 @@ import { SummaryComponent } from './domains/booking/order/summary';
   imports: [
     BrowserModule,
     RouterModule,
-    AppRoutingModule,
     HttpClientModule,
     FontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    QRCodeModule
+    QRCodeModule,
+    RouterModule.forRoot(APP_ROUTES, {
+      preloadingStrategy: PreloadAllModules,
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },

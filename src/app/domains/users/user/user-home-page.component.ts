@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-home-page.component.css']
 })
 export class UserHomePageComponent {
-
+  constructor() {console.log('user page')}
 }
