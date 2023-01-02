@@ -11,13 +11,15 @@ import { HallComponent } from './domains/booking/hall';
 import { FormsModule } from '@angular/forms';
 import { BookingFormComponent } from './domains/booking/booking-form';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpErrorInterceptor } from './shared/interceptors/http.interceptor';
+import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './domains/auth/login';
 import { HomeComponent } from './home/home.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { SummaryComponent } from './domains/booking/order/summary';
 import { APP_ROUTES } from './app.routes';
+import { LoadingSpinnerComponent } from './shared/ui/loader/loader.component';
+import { LoadingInterceptor } from './shared/interceptors';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { APP_ROUTES } from './app.routes';
     BookingFormComponent,
     LoginComponent,
     HomeComponent,
-    SummaryComponent
+    SummaryComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,10 @@ import { APP_ROUTES } from './app.routes';
     }),
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+
+ 
   ],
   bootstrap: [AppComponent],
 })

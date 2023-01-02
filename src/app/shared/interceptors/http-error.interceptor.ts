@@ -12,7 +12,7 @@ import { catchError, EMPTY, Observable, retry } from 'rxjs';
 export class HttpErrorInterceptor implements HttpInterceptor {
 
   readonly baseUrl = "http://localhost:3000/"
-  constructor() {}
+  // constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 

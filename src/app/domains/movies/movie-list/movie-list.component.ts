@@ -18,7 +18,6 @@ export class MovieListComponent implements OnInit {
   disableDay = false;
 
   date: Moment;
-  loading = false;
   expandedMovieIdDescriptions: Array<number> = [];
   allMovieShowings: Observable<MovieWithShowingTime[]>;
   chosenShowingWithHall$: Observable<ChoosenMovieShowing>;
@@ -72,9 +71,8 @@ export class MovieListComponent implements OnInit {
   }
 
   getMovies(date: Moment) {
-    this.loading = true;
     this.allMovieShowings = this.movieService.getAllMoviesForDay(date);
-    this.allMovieShowings.subscribe({ complete: () => (this.loading = false) });
+    this.allMovieShowings.subscribe();
   }
 
   onMovieTimeClick(showingId: number) {
@@ -84,7 +82,6 @@ export class MovieListComponent implements OnInit {
     );
 
     this.chosenShowingWithHall$.subscribe({
-      complete: () => (this.loading = false),
       next: (value: ChoosenMovieShowing) => {
         this.choosenMovieService.setChoosenMovieShowing(value);
       },

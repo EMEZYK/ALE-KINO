@@ -1,4 +1,6 @@
-
 <app-header></app-header>
-<router-outlet ></router-outlet>
+<ng-container *ngIf="loading$ | async as loading">
+  <app-loading-spinner class="spinner"></app-loading-spinner>
+</ng-container>
+<router-outlet> </router-outlet>
 <app-footer></app-footer>

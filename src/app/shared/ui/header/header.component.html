@@ -3,6 +3,13 @@
     <h1>{{ cinemaName }}</h1>
   </a>
   <nav>
-    <button (click)="signInUser()" class="login-btn"><a routerLink="login">Zaloguj</a></button>
+    <button *ngIf="!isAuthenticated" class="login-btn">
+      <a routerLink="login">Zaloguj</a>
+    </button>
+    <button *ngIf="isAuthenticated"  (click)="logout()" class="login-btn">
+      <a routerLink="login">
+      Wyloguj
+    </a>
+    </button>
   </nav>
 </div>
