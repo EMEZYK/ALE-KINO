@@ -1,11 +1,21 @@
 {
   "users": [
     {
-      "id": 1,
+      "email": "annawojno@gmail.com",
+      "password": "$2a$10$2waedfKP/rPPkjBRSexUmO3.FNHM70XbxRudKV91rXf2RyMs3chpK",
+      "haslotest": "Anna123!",
+      "firstName": "Anna",
+      "lastName": "Wojno",
+      "role": "admin",
+      "phoneNumber": "777666555",
+      "id": 4
+    },
+    {
+      "email": "ewameksyk@gmail.com",
+      "password": "$2a$10$DYPYrMsr5/fS5qpShnmtSuc7Hw5.AFsJEtmGf.d1fz.fzjruxB9rG",
       "firstName": "Ewa",
       "lastName": "Meksyk",
-      "emailAddress": "ewameksyk@gmail.com",
-      "password": "Ewa123!",
+      "haslotest": "Ewa123!",
       "role": "user",
       "phoneNumber": "999444888",
       "orders": [],
@@ -15,16 +25,14 @@
       "cart": {
         "tickets": [],
         "price": null
-      }
+      },
+      "id": 5
     },
     {
-      "id": 2,
-      "firstName": "Anna",
-      "lastName": "Wojno",
-      "emailAddress": "annawojno@gmail.com",
-      "password": "Anna123!",
+      "email": "ewa@gmail.com",
+      "password": "$2a$10$hIOkcnAqAlJezaHrxLjVd.kGe0XqFGLK0PODmqAWSD6tRJl83wC7S",
       "role": "admin",
-      "phoneNumber": ""
+      "id": 6
     }
   ],
   "movies": [
@@ -33,7 +41,10 @@
       "title": "Pod osłoną nocy",
       "duration": 90,
       "ageRestrictions": "12+",
-      "genres": ["Kryminał", "Dramat"],
+      "genres": [
+        "Kryminał",
+        "Dramat"
+      ],
       "shortDescription": "Młoda para wybiera się na odległą wyspę, do ekskluzywnej restauracji. Okazuje się jednak, że nie wszystko jest takie jakim się wydaje a w menu czekają zaskakujące niespodzianki.",
       "longDescription": "długi opis filmu",
       "image": "https://images.pexels.com/photos/7670035/pexels-photo-7670035.jpeg",
@@ -45,7 +56,9 @@
       "title": "Noc Wigilijna",
       "duration": 120,
       "ageRestrictions": "12+",
-      "genres": ["Komedia"],
+      "genres": [
+        "Komedia"
+      ],
       "shortDescription": "Nowa wersja kultowej historii o duchach Charlesa Dickensa autorstwa nominowanego do Oscara Stevena Knighta. Mroczny miniserial prezentuje ciemną stronę duszy Ebenezera Scroogea, w którego postać wciela się Guy Pearce (Memento).",
       "longDescription": "długi opis filmu",
       "image": "https://img.freepik.com/free-photo/portrait-excited-girl-3d-glasses_171337-11453.jpg?w=900&t=st=1669125913~exp=1669126513~hmac=c45c7db599cd49bba49e67bede37e4e22c9ad88a4625626a9abfe82f6729f747",
@@ -55,7 +68,9 @@
     {
       "id": 3,
       "title": "Rolnik szuka żony",
-      "genres": ["Komedia"],
+      "genres": [
+        "Komedia"
+      ],
       "image": "https://img.freepik.com/free-photo/positive-young-cameraman-holds-clapboard-near-face-has-joyful-expression-wears-hat-prepares-making-cutaway-involved-filming-poses-white-studio-wall-cinematography-concept_176532-8930.jpg?w=900&t=st=1669126066~exp=1669126666~hmac=1c3b410ff16cc9738f47daafe9c2c3243cf264cf48eeb7dbb6f409caafa6410d",
       "shortDescription": "Nowa wersja kultowej historii o duchach Charlesa Dickensa autorstwa nominowanego do Oscara Stevena Knighta. Mroczny miniserial prezentuje ciemną stronę duszy Ebenezera Scroogea, w którego postać wciela się Guy Pearce (Memento). ",
       "longDescription": "długi opis filmu",
@@ -98,19 +113,26 @@
     }
   ],
   "tickets": [
-    { "id": 1, "ticketTypeId": 1, "showingId": 1, "seatId": 16 }
+    {
+      "id": 1,
+      "ticketTypeId": 1,
+      "showingId": 1,
+      "seatId": 16
+    }
   ],
   "orders": [
     {
       "id": 1,
-      "items": [{ 
-        "ticketId": 1,
-        "showingId": 1,
-        "seatId": 1
-        }],
+      "items": [
+        {
+          "ticketId": 1,
+          "showingId": 1,
+          "seatId": 1
+        }
+      ],
       "firstName": "Ewa",
       "lastName": "Karas",
-      "emailAddress": "aniela@gmail.com",
+      "email": "aniela@gmail.com",
       "phoneNumber": "697189394",
       "userId": "1",
       "status": "paid",
@@ -123,7 +145,7 @@
       "id": 1,
       "movieId": 1,
       "hallId": 1,
-      "date": "2023-01-02",
+      "date": "2023-01-11",
       "break": 15,
       "timeFrom": "12:30",
       "timeTo": "14:00",
@@ -142,15 +164,25 @@
         }
       ],
       "bookedSeats": [
-        { "id": 1, "row": "A", "column": 1, "vip": true },
-        { "id": 2, "row": "A", "column": 2, "vip": true }
+        {
+          "id": 1,
+          "row": "A",
+          "column": 1,
+          "vip": true
+        },
+        {
+          "id": 2,
+          "row": "A",
+          "column": 2,
+          "vip": true
+        }
       ]
     },
     {
       "id": 2,
       "movieId": 1,
       "hallId": 2,
-      "date": "2022-12-31",
+      "date": "2023-01-04",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",
@@ -169,8 +201,18 @@
         }
       ],
       "bookedSeats": [
-        { "id": 1, "row": "B", "column": 3, "vip": true },
-        { "id": 2, "row": "A", "column": 2, "vip": true }
+        {
+          "id": 1,
+          "row": "B",
+          "column": 3,
+          "vip": true
+        },
+        {
+          "id": 2,
+          "row": "A",
+          "column": 2,
+          "vip": true
+        }
       ]
     },
     {
@@ -196,8 +238,18 @@
         }
       ],
       "bookedSeats": [
-        { "id": 1, "row": "B", "column": 3, "vip": true },
-        { "id": 2, "row": "A", "column": 2, "vip": true }
+        {
+          "id": 1,
+          "row": "B",
+          "column": 3,
+          "vip": true
+        },
+        {
+          "id": 2,
+          "row": "A",
+          "column": 2,
+          "vip": true
+        }
       ]
     }
   ],
@@ -390,7 +442,6 @@
       "column": 2,
       "vip": true,
       "hallId": 2
-
     },
     {
       "id": 28,
@@ -398,7 +449,6 @@
       "column": 3,
       "vip": true,
       "hallId": 2
-
     },
     {
       "id": 29,
@@ -406,7 +456,6 @@
       "column": 4,
       "vip": true,
       "hallId": 2
-
     },
     {
       "id": 30,
@@ -414,7 +463,6 @@
       "column": 5,
       "vip": true,
       "hallId": 2
-
     },
     {
       "id": 31,
@@ -422,7 +470,6 @@
       "column": 1,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 32,
@@ -430,7 +477,6 @@
       "column": 2,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 33,
@@ -438,7 +484,6 @@
       "column": 3,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 34,
@@ -446,7 +491,6 @@
       "column": 4,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 35,
@@ -454,7 +498,6 @@
       "column": 5,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 36,
@@ -462,7 +505,6 @@
       "column": 1,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 37,
@@ -470,7 +512,6 @@
       "column": 2,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 38,
@@ -478,7 +519,6 @@
       "column": 3,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 39,
@@ -486,7 +526,6 @@
       "column": 4,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 40,
@@ -494,7 +533,6 @@
       "column": 5,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 41,
@@ -502,7 +540,6 @@
       "column": 1,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 42,
@@ -510,7 +547,6 @@
       "column": 2,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 43,
@@ -518,7 +554,6 @@
       "column": 3,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 44,
@@ -526,7 +561,6 @@
       "column": 4,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 45,
@@ -534,7 +568,6 @@
       "column": 5,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 46,
@@ -542,7 +575,6 @@
       "column": 1,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 47,
@@ -550,7 +582,6 @@
       "column": 2,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 48,
@@ -558,7 +589,6 @@
       "column": 3,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 49,
@@ -566,7 +596,6 @@
       "column": 4,
       "vip": false,
       "hallId": 2
-
     },
     {
       "id": 50,
@@ -574,9 +603,7 @@
       "column": 5,
       "vip": false,
       "hallId": 2
-
     }
-
   ],
   "halls": [
     {

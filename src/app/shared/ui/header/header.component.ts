@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { tap } from 'rxjs';
-import { AuthStateService } from 'src/app/domains/auth';
+
+import { AuthLoginService } from 'src/app/domains/auth/auth-login.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { AuthStateService } from 'src/app/domains/auth';
 export class HeaderComponent implements OnInit {
   cinemaName = 'Ale kino!';
   isAuthenticated = false;
-  authService = inject(AuthStateService);
+  authService = inject(AuthLoginService);
 
   ngOnInit(): void {
     this.hasAuth().subscribe();
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit {
   hasAuth = () => {
     return this.authService.auth$.pipe(
       tap((value) => {
-        if (value) {
+        console.log(value)
+        if (value.hasAuth === true) {
           this.isAuthenticated = true
         } 
       })
@@ -28,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
 logout() {
   this.isAuthenticated = false;
-  localStorage.removeItem('user');
+  this.authService.logout()
 }
 
 

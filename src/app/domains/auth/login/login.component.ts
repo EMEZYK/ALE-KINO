@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { AuthStateService } from '../auth.service';
+// import { AuthStateService } from '../auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../users/user.interface';
-
+import { AuthLoginService } from '../auth-login.service';
 
 @Component({
   selector: 'app-login-page',
@@ -17,8 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
-    private userService: AuthStateService,
-    private router: Router
+    private authService: AuthLoginService,
   ) {}
 
   ngOnInit(): void {
@@ -47,22 +46,13 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.userService.getUsers().subscribe((users: User[]) => {
-      const user = users.find(
-        (user) =>
-          user.emailAddress === this.loginForm.value.email &&
-          user.password === this.loginForm.value.password
-      );
 
-      if (user && user.role === 'admin') {
-        this.userService.setUser(user);
-        this.router.navigate(['/', 'admin']);
-      } else if (user && user.role === 'user') {
-        this.userService.setUser(user);
-        this.router.navigate(['user/home']);
-      } else {
-        return;
-      }
-    });
+    this.authService
+      .login(
+        this.loginForm.get('email')?.value,
+        this.loginForm.get('password')?.value
+      )
+      .subscribe()
+      
   }
 }

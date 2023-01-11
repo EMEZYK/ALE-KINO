@@ -6,7 +6,7 @@ export interface Order {
   tickets: Ticket[];
   firstName: string;
   lastName: string;
-  emailAddress: string;
+  email: string;
   phoneNumber: number;
   user: User;
   status: string

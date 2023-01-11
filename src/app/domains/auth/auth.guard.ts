@@ -1,18 +1,23 @@
-import { inject } from "@angular/core";
-import { CanActivateFn, Router } from "@angular/router";
-import { of, tap } from "rxjs";
-import { AuthStateService } from "./auth.service";
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { AuthLoginService } from './auth-login.service';
+import { Injectable } from '@angular/core';
 
-export const AuthGuard: CanActivateFn = () => {
-    const router = inject (Router);
-
-
-    return of(true).pipe(
-        tap((canActivate) => {
-            if (!canActivate)
-            console.log('przekierowało')
-            router.navigate([''])
-        })
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard implements CanActivate {
+  constructor(private router: Router, private auth: AuthLoginService) {}
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    if (
+      localStorage.getItem('token') !== null &&
+      this.auth.auth$ &&
+      localStorage.getItem('role') === route.data.role
     )
+      return true;
+    else {
+      this.auth.logout();
+      this.router.navigate(['login']);
+      return false;
+    }
+  }
 }
-

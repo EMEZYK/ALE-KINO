@@ -9,9 +9,7 @@ import { RouterModule } from '@angular/router';
   declarations: [AdminPanelPageComponent],
   imports: [
     CommonModule, RouterModule.forChild(ADMIN_ROUTES)
-  ]
+  ],
 })
 export class AdminModule {
-
-
  }
