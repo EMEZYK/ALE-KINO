@@ -4,9 +4,9 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import {  Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { finalize, Observable } from 'rxjs';
-import { LoadingService } from '../ui/loader/loader.state.service';
+import { LoadingService } from '../components/loader/loader.state.service';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
@@ -29,10 +29,7 @@ export class LoadingInterceptor implements HttpInterceptor {
         if (this.totalRequests == 0) {
           this.loadingService.setLoading(false);
         }
-      }),
+      })
     );
-    
-
   }
 }
-

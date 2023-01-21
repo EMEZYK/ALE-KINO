@@ -133,14 +133,17 @@
   </form>
 </div>
 <div class="back-link">
-  <a
+  <button (click)="navigateToHall(chosenMovieShowing)">
+Wróć do wyboru miejsc
+  </button>
+  <!-- <a
     [routerLink]="[
       '/booking/seats',
       chosenMovieShowing.id,
       chosenMovieShowing.movie.title
     ]"
     >Wróć do wyboru miejsc</a
-  >
+  > -->
 
 </div>
 </ng-container>

@@ -1,0 +1,9 @@
+<button
+  [type]="type"
+  (click)="(emitEvent)"
+  [disabled]="isDisabled"
+  [class]="btnClass"
+>
+  <fa-icon *ngIf="icon" [icon]="icon"></fa-icon>
+  {{ text }}
+</button>

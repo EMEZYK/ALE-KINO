@@ -10,7 +10,6 @@ import { Order } from '../order/order.interface';
 import { OrderStateService } from '../order';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
 
-
 @Component({
   selector: 'app-booking-form-page',
   templateUrl: './booking-form.component.html',
@@ -24,7 +23,7 @@ export class BookingFormComponent implements OnInit {
   reservedSeatsAndTickets$: Observable<ChosenSeatsAndTickets[]>;
   ticketPrice: number;
   sumOfTickets = 0;
-  setSeatTicketPairs:ChosenSeatsAndTickets[];
+  setSeatTicketPairs: ChosenSeatsAndTickets[];
 
   constructor(
     private builder: NonNullableFormBuilder,
@@ -39,15 +38,12 @@ export class BookingFormComponent implements OnInit {
 
     this.reservedSeatsAndTickets$ = this.orderService.orderItems$.pipe(
       tap((seatTicketPairs) => {
-        console.log(seatTicketPairs)
         this.sumTicketsValues(seatTicketPairs);
       })
     );
 
     this.createForm();
-
   }
-
 
   private createForm() {
     this.bookingForm = this.builder.group({
@@ -126,10 +122,16 @@ export class BookingFormComponent implements OnInit {
     if (this.bookingForm.invalid) {
       return;
     }
-    // console.log(this.bookingForm.value);
     this.emailService.userEmail = this.bookingForm.value.emailInfo.email;
-    this.router.navigate(['/booking/summary', chosenMovieShowing.id,  chosenMovieShowing.movie.title]);
+    this.router.navigate([
+      '/booking/summary',
+      chosenMovieShowing.id,
+      chosenMovieShowing.movie.title,
+    ]);
     this.bookingForm.reset();
   }
-}
 
+  navigateToHall(movie) {
+    this.router.navigate([`booking/seats/${movie.id}/${movie.title}`]);
+  }
+}

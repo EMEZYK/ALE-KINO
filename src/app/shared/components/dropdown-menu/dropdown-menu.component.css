@@ -1,0 +1,40 @@
+.dropdown-list {
+  position: absolute;
+  /* margin: 20px 0 0 0; */
+  width: 150px;
+  background-color: #fff;
+  z-index: 2;
+  border-radius: 8px;
+  margin: 15px 0 0 0;
+}
+.list-item {
+  margin: 0.2rem 0;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: #000;
+  display: block;
+  text-align: left;
+  padding: 10px 20px;
+}
+
+.list-item :hover {
+  background-color: #f0f0f0;
+}
+
+ul:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 35%;
+  margin-left: -15px;
+  margin-top: -15px;
+  width: 0;
+  z-index: 1;
+  height: 0;
+  border-bottom: solid 15px #fff;
+  border-left: solid 15px transparent;
+  border-right: solid 15px transparent;
+}

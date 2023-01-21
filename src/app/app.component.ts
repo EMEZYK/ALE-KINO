@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoadingService } from './shared/ui/loader/loader.state.service';
+import { LoadingService } from './shared/components/loader/loader.state.service';
 
 @Component({
   selector: 'app-root',

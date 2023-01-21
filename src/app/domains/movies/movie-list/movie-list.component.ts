@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { MovieService } from './movie.service';
 import { ChoosenMovieStateService } from '../choosen-movie.state.service';
 import { ChoosenMovieShowing, MovieWithShowingTime } from '../movie.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
@@ -18,16 +19,15 @@ export class MovieListComponent implements OnInit {
   disableDay = false;
 
   date: Moment;
-  expandedMovieIdDescriptions: Array<number> = [];
+  expandedMovieIdDescriptions: number[] = [];
   allMovieShowings: Observable<MovieWithShowingTime[]>;
   chosenShowingWithHall$: Observable<ChoosenMovieShowing>;
 
   constructor(
     private movieService: MovieService,
-    private choosenMovieService: ChoosenMovieStateService
-  ) {
-
-  }
+    private choosenMovieService: ChoosenMovieStateService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const startDate = moment().startOf('isoWeek');
@@ -75,7 +75,7 @@ export class MovieListComponent implements OnInit {
     this.allMovieShowings.subscribe();
   }
 
-  onMovieTimeClick(showingId: number) {
+  onMovieTimeClick(showingId: number, movie) {
     this.chosenShowingWithHall$ = this.movieService.getShowingWithMovieAndHall(
       showingId,
       this.date
@@ -87,8 +87,10 @@ export class MovieListComponent implements OnInit {
       },
     });
 
-
+    this.navigateToHall(movie);
   }
 
-
+  navigateToHall(movie) {
+    this.router.navigate([`booking/seats/${movie.id}/${movie.title}`]);
+  }
 }

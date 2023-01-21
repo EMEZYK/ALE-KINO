@@ -54,13 +54,11 @@ export class OrderStateService {
     private choosenMovieService: ChoosenMovieStateService,
     private localStoreService: LocalStorageService
   ) {
-    
     const storedSeatTicketPairs =
       this.localStoreService.getData('seatTicketPairs');
 
-    if (storedSeatTicketPairs !== '') 
+    if (storedSeatTicketPairs !== '')
       this.setTicketPairs(JSON.parse(storedSeatTicketPairs));
-    
 
     this.choosenMovieService.chosenMovieShowing$
       .pipe(
@@ -82,7 +80,6 @@ export class OrderStateService {
         }),
 
         tap((rows) => {
-          console.log(rows)
           this.rows$$.next(rows);
         })
       )

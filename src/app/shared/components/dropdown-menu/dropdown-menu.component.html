@@ -1,0 +1,13 @@
+<ng-container *ngIf="isDropdownOpen">
+  <ul class="dropdown-list">
+    <li
+      *ngFor="let option of dropdownOptions"
+      (click)="onClick(option)"
+      class="list-item"
+    >
+      <a routerLink="/{{ option.parentPath }}/{{ option.routerlink }}">
+        {{ option.text }}</a
+      >
+    </li>
+  </ul>
+</ng-container>

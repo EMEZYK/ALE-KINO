@@ -39,16 +39,18 @@
         </div>
         <ul class="hours">
           <li *ngFor="let showing of movie.showings" class="hour-item">
-            <a [routerLink]="['booking/seats', movie.id, movie.title]">
-              <button (click)="onMovieTimeClick(showing.id)" class="hour-btn">
-                {{ showing.timeFrom }}
-              </button>
-            </a>
+            <!-- <a [routerLink]="['booking/seats', movie.id, movie.title]"> -->
+
+            <button
+              (click)="onMovieTimeClick(showing.id, movie)"
+              class="hour-btn"
+            >
+              {{ showing.timeFrom }}
+            </button>
           </li>
         </ul>
       </div>
-      <div class="rating">{{ movie.rating }}</div>
+      <app-manage-movie-panel [movie]="movie"></app-manage-movie-panel>
     </li>
   </ul>
 </main>
-

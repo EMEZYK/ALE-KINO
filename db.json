@@ -41,10 +41,7 @@
       "title": "Pod osłoną nocy",
       "duration": 90,
       "ageRestrictions": "12+",
-      "genres": [
-        "Kryminał",
-        "Dramat"
-      ],
+      "genres": ["Kryminał", "Dramat"],
       "shortDescription": "Młoda para wybiera się na odległą wyspę, do ekskluzywnej restauracji. Okazuje się jednak, że nie wszystko jest takie jakim się wydaje a w menu czekają zaskakujące niespodzianki.",
       "longDescription": "długi opis filmu",
       "image": "https://images.pexels.com/photos/7670035/pexels-photo-7670035.jpeg",
@@ -56,9 +53,7 @@
       "title": "Noc Wigilijna",
       "duration": 120,
       "ageRestrictions": "12+",
-      "genres": [
-        "Komedia"
-      ],
+      "genres": ["Komedia"],
       "shortDescription": "Nowa wersja kultowej historii o duchach Charlesa Dickensa autorstwa nominowanego do Oscara Stevena Knighta. Mroczny miniserial prezentuje ciemną stronę duszy Ebenezera Scroogea, w którego postać wciela się Guy Pearce (Memento).",
       "longDescription": "długi opis filmu",
       "image": "https://img.freepik.com/free-photo/portrait-excited-girl-3d-glasses_171337-11453.jpg?w=900&t=st=1669125913~exp=1669126513~hmac=c45c7db599cd49bba49e67bede37e4e22c9ad88a4625626a9abfe82f6729f747",
@@ -68,9 +63,7 @@
     {
       "id": 3,
       "title": "Rolnik szuka żony",
-      "genres": [
-        "Komedia"
-      ],
+      "genres": ["Komedia"],
       "image": "https://img.freepik.com/free-photo/positive-young-cameraman-holds-clapboard-near-face-has-joyful-expression-wears-hat-prepares-making-cutaway-involved-filming-poses-white-studio-wall-cinematography-concept_176532-8930.jpg?w=900&t=st=1669126066~exp=1669126666~hmac=1c3b410ff16cc9738f47daafe9c2c3243cf264cf48eeb7dbb6f409caafa6410d",
       "shortDescription": "Nowa wersja kultowej historii o duchach Charlesa Dickensa autorstwa nominowanego do Oscara Stevena Knighta. Mroczny miniserial prezentuje ciemną stronę duszy Ebenezera Scroogea, w którego postać wciela się Guy Pearce (Memento). ",
       "longDescription": "długi opis filmu",
@@ -145,7 +138,7 @@
       "id": 1,
       "movieId": 1,
       "hallId": 1,
-      "date": "2023-01-11",
+      "date": "2023-01-21",
       "break": 15,
       "timeFrom": "12:30",
       "timeTo": "14:00",
@@ -182,7 +175,7 @@
       "id": 2,
       "movieId": 1,
       "hallId": 2,
-      "date": "2023-01-04",
+      "date": "2023-01-21",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",
@@ -219,7 +212,7 @@
       "id": 3,
       "movieId": 2,
       "hallId": 2,
-      "date": "2022-12-29",
+      "date": "2023-01-21",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",

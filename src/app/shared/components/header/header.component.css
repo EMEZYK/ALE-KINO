@@ -1,4 +1,4 @@
-:host { 
+:host {
   width: 100%;
 }
 
@@ -9,18 +9,25 @@
   height: 20vh;
   background-color: #14171f;
   box-shadow: 0 8px 6px -6px black;
+  justify-content: space-between;
+  padding: 0 3rem;
 }
 
 h1 {
   color: #ddd;
   font-size: 3rem;
+  cursor: pointer;
+  margin: 0;
 }
 
 nav {
   display: flex;
-  justify-content: flex-end;
-  /* background-color: azure; */
-  width: 50%;
+  align-items: center;
+  margin: 0;
+}
+
+.dropdown {
+  position: relative;
 }
 
 button {
@@ -48,4 +55,8 @@ a:hover {
 
 .basket-icon {
   margin-right: 5px;
+}
+
+.btn-icon {
+  margin: 0 10px 0 0;
 }

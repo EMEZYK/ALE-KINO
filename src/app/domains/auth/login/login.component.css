@@ -25,7 +25,7 @@
   line-height: 3rem;
   text-align: center;
   font-size: 2rem;
-  box-shadow: rgb(0 0 0 / 50%) 20px 2px 20px 10px;
+  /* box-shadow: rgb(0 0 0 / 50%) 20px 2px 20px 10px; */
 }
 
 form {
@@ -60,5 +60,6 @@ button {
   margin: 1rem 0 0 0;
 }
 
-
-input.ng-touched.ng-invalid {border: 1px solid red};
+input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}

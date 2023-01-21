@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
     if (
       localStorage.getItem('token') !== null &&
       this.auth.auth$ &&
-      localStorage.getItem('role') === route.data.role
+      this.auth.userRole === route.data.role
     )
       return true;
     else {

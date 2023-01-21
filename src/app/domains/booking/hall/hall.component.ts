@@ -22,14 +22,11 @@ export class HallComponent implements OnInit {
   seat: Seat;
   selectedTicket: Ticket;
   arrowIcon = faArrowDown;
-  trashIcon = faTrash;
 
   constructor(
     private orderService: OrderStateService,
     private localStoreService: LocalStorageService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.tickets$ = this.orderService.tickets$;
@@ -70,12 +67,10 @@ export class HallComponent implements OnInit {
     this.setSeatTicketPairs(chosenSeatsAndTickets);
   }
 
-  setSeatTicketPairs(chosenSeatsAndTickets: ChosenSeatsAndTickets[],) {
+  setSeatTicketPairs(chosenSeatsAndTickets: ChosenSeatsAndTickets[]) {
     this.localStoreService.saveData(
       'seatTicketPairs',
       JSON.stringify(chosenSeatsAndTickets)
     );
   }
 }
-
-
