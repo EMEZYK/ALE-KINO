@@ -3,7 +3,7 @@ import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 // import { AuthStateService } from '../auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../users/user.interface';
-import { AuthLoginService } from '../auth-login.service';
+import { AuthLoginStateService } from '../auth-login.service';
 
 @Component({
   selector: 'app-login-page',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
-    private authService: AuthLoginService,
+    private authService: AuthLoginStateService
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
         this.loginForm.get('email')?.value,
         this.loginForm.get('password')?.value
       )
-      .subscribe()
-      
+      .subscribe();
   }
 }

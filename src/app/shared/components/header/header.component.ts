@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { tap } from 'rxjs';
 
-import { AuthLoginService } from 'src/app/domains/auth/auth-login.service';
+import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 
 @Component({
   selector: 'app-header',
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   public dropdownAdminOptions = [{ routerlink: 'login', text: 'Wyloguj' }];
 
-  authService = inject(AuthLoginService);
+  authService = inject(AuthLoginStateService);
   router = inject(Router);
 
   ngOnInit(): void {

@@ -3,15 +3,14 @@ import { ReplaySubject } from 'rxjs';
 import { User } from '../domains/users/user.interface';
 
 @Injectable({ providedIn: 'root' })
-
 export class UserStateService {
-  private user$$ = new ReplaySubject(1); 
+  private user$$ = new ReplaySubject<User>(1);
 
-  private get user$() {
+  get user$() {
     return this.user$$.asObservable();
   }
 
-  setUser(user: User) {  
+  setUser(user: User) {
     this.user$$.next(user);
   }
 }

@@ -1,4 +1,4 @@
-:host { 
+:host {
   width: 100%;
 }
 
@@ -43,7 +43,6 @@ a {
   text-align: center;
 }
 
-
 .social-icons {
   width: 20%;
   height: 10vh;
@@ -54,7 +53,6 @@ a {
 .social-icons i {
   color: #fff;
 }
-
 
 .social-icon {
   color: #fff;

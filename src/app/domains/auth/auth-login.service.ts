@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
-import { Router } from '@angular/router';
+import { BehaviorSubject, filter, skip, tap } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 import { UserStateService } from 'src/app/core/user.state.service';
 
 @Injectable({ providedIn: 'root' })
-export class AuthLoginService {
-  private htttp = inject(HttpClient);
+export class AuthLoginStateService {
+  private http = inject(HttpClient);
   private router = inject(Router);
   private userStateService = inject(UserStateService);
 
@@ -25,7 +25,7 @@ export class AuthLoginService {
   }
 
   login(email: string, password: string) {
-    return this.htttp
+    return this.http
       .post<any>('login', {
         email,
         password,
@@ -34,19 +34,18 @@ export class AuthLoginService {
         tap({
           next: (response) => {
             const { accessToken, user } = response;
-
+            this.userStateService.setUser(user);
             this.auth$$.next({ hasAuth: true });
             localStorage.setItem('token', JSON.stringify(accessToken));
             localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('role', response.user.role);
 
-            this.userRole = response.user.role;
+            // this.userRole = response.user.role;
 
             if (response.user.role === 'admin') {
               this.router.navigate(['/', 'admin']);
             } else if (response.user.role === 'user') {
               this.router.navigate(['/', 'user']);
-            } else {
-              return;
             }
           },
         })
@@ -54,21 +53,22 @@ export class AuthLoginService {
   }
 
   logout() {
+    console.log('logout');
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+
     this.auth$$.next({
       ...this.auth$$.value,
       hasAuth: false,
     });
-
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
   }
 
   private manageLocalStorage() {
     if (localStorage.getItem('token')) {
       this.auth$$.next({ hasAuth: true });
     }
-    const storedUser = localStorage.getItem('token');
+    const storedUser = localStorage.getItem('user');
 
     if (storedUser) {
       this.userStateService.setUser(JSON.parse(storedUser));
@@ -79,3 +79,11 @@ export class AuthLoginService {
     this.router.navigate['login'];
   }
 }
+
+// export interface AuthResponse {
+//   accessToken: string;
+//   user: {
+//     email: string;
+//     id: number;
+//   };
+// }
