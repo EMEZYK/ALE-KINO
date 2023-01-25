@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, filter, skip, tap } from 'rxjs';
-import { NavigationEnd, Router } from '@angular/router';
+import { BehaviorSubject, tap } from 'rxjs';
+import { Router } from '@angular/router';
 import { UserStateService } from 'src/app/core/user.state.service';
 
 @Injectable({ providedIn: 'root' })
@@ -40,11 +40,11 @@ export class AuthLoginStateService {
             localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('role', response.user.role);
 
-            // this.userRole = response.user.role;
+            this.userRole = response.user.role;
 
-            if (response.user.role === 'admin') {
+            if (this.userRole === 'admin') {
               this.router.navigate(['/', 'admin']);
-            } else if (response.user.role === 'user') {
+            } else if (this.userRole === 'user') {
               this.router.navigate(['/', 'user']);
             }
           },
@@ -53,7 +53,6 @@ export class AuthLoginStateService {
   }
 
   logout() {
-    console.log('logout');
     localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('role');

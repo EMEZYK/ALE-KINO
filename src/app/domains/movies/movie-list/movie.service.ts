@@ -18,6 +18,15 @@ export class MovieService {
 
   constructor(private http: HttpClient) {}
 
+  getAllMovies() {
+    return this.http.get<Movie[]>('movies');
+  }
+
+  getAllMoviesByIds(movieIds: number[]) {
+    console.log(movieIds);
+    return this.http.get<Movie[]>(`movies?id=${movieIds.join('&id=')}`);
+  }
+
   getAllMoviesForDay(date: moment.Moment): Observable<MovieWithShowingTime[]> {
     return this.http
       .get<Showing[]>(
@@ -49,16 +58,14 @@ export class MovieService {
       this.dateFormat
     )}&_expand=movie&_expand=hall`;
 
-    return this.http
-      .get<ChoosenMovieShowing>(url)
-      .pipe(
-        map((value: ChoosenMovieShowing | ChoosenMovieShowing[]) => {
-          if (Array.isArray(value)) {
-            return value[0];
-          }
-          return value;
-        })
-      );
+    return this.http.get<ChoosenMovieShowing>(url).pipe(
+      map((value: ChoosenMovieShowing | ChoosenMovieShowing[]) => {
+        if (Array.isArray(value)) {
+          return value[0];
+        }
+        return value;
+      })
+    );
   }
 
   private joinMoviesWithShowings(movies: Movie[], showingsForDay: Showing[]) {

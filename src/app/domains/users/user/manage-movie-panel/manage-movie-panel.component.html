@@ -1,20 +1,22 @@
 <div class="side-panel">
   <div class="rating">{{ movie.rating }}</div>
   <ng-container *ngIf="isLoggedInUser">
-    <app-button text="Oceń ten film!" class="rate-button"></app-button>
-    <app-button
-      *ngIf="addedToWatchlist"
-      (click)="removeFromWatchList(movie.id)"
-      text="Chcę zobaczyć"
-      [icon]="eyeIcon"
-      class="no-watchlist"
-    ></app-button>
-    <app-button
-      *ngIf="!addedToWatchlist"
-      (click)="addToWatchList(movie)"
-      text="Chcę zobaczyć"
-      [icon]="eyeIcon"
-      class="watchlist"
-    ></app-button>
+    <ng-container *ngIf="watchlistWithMovies$ | async as watchlistWithMovies">
+      <app-button text="Oceń ten film!" class="rate-button"></app-button>
+      <app-button
+        *ngIf="addedToWatchlist"
+        (click)="removeFromWatchList(movie, watchlistWithMovies.watchlist)"
+        text="Chcę zobaczyć"
+        [icon]="eyeIcon"
+        class="no-watchlist"
+      ></app-button>
+      <app-button
+        *ngIf="!addedToWatchlist"
+        (click)="addToWatchList(movie, watchlistWithMovies.watchlist)"
+        text="Chcę zobaczyć"
+        [icon]="eyeIcon"
+        class="watchlist"
+      ></app-button>
+    </ng-container>
   </ng-container>
 </div>

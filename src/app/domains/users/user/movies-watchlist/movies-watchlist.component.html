@@ -1,19 +1,27 @@
 <main>
   <h1>Lista filmów, które chcę obejrzeć</h1>
-  <ul class="movie-list">
-    <li *ngFor="let movie of watchlist | async" class="movie-wrapper">
-      <div class="movie-poster">
-        <img src="{{ movie.image }}" />
-      </div>
-      <div class="movie-details">
-        <div class="title-rating-wrapper">
-          <h2 class="movie-title">{{ movie.title }}</h2>
-          <p class="rating">{{ movie.rating }}</p>
+  <ng-container *ngIf="watchlistWithMovies$ | async as watchlistWithMovies">
+    <ul class="movie-list">
+      <li
+        *ngFor="let movies of watchlistWithMovies.movies"
+        class="movie-wrapper"
+      >
+        {{ movies | json }}
+        <!-- 
+        <div class="movie-poster">
+          <img src="{{ movie.image }}" />
         </div>
-        <h4>{{ movie.genres }}</h4>
+        <div class="movie-details">
+          <div class="title-rating-wrapper">
+            <h2 class="movie-title">{{ movie.title }}</h2>
+            <p class="rating">{{ movie.rating }}</p>
+          </div>
+          <h4>{{ movie.genres }}</h4> -->
+
         <!-- <h4>{{ movie.shortDescription }}</h4> -->
         <!-- <button>Nie chce ogladac</button> -->
-      </div>
-    </li>
-  </ul>
+        <!-- </div> -->
+      </li>
+    </ul>
+  </ng-container>
 </main>

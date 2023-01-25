@@ -1,7 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Movie } from 'src/app/domains/movies/movie.interface';
-import { MoviesWatchlistStateService } from './movies-watchlist.service';
+import {
+  MoviesWatchlistStateService,
+  WatchlistWithMovies,
+} from './movies-watchlist.service';
 
 @Component({
   selector: 'app-movies-to-watch',
@@ -9,16 +11,15 @@ import { MoviesWatchlistStateService } from './movies-watchlist.service';
   styleUrls: ['./movies-watchlist.component.css'],
 })
 export class MoviesToWatchComponent implements OnInit {
-  watchlist: Observable<Movie[]>;
+  watchlistWithMovies$: Observable<WatchlistWithMovies>;
 
   private watchlistService = inject(MoviesWatchlistStateService);
 
   ngOnInit() {
     this.getMoviesFromWatchlist();
-    console.log(this.watchlist);
   }
 
   getMoviesFromWatchlist() {
-    this.watchlist = this.watchlistService.watchlist$;
+    this.watchlistWithMovies$ = this.watchlistService.watchlist$;
   }
 }

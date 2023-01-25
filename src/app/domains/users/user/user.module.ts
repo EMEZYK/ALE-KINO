@@ -9,5 +9,6 @@ import { MoviesToWatchComponent } from './movies-watchlist/movies-watchlist.comp
 @NgModule({
   declarations: [UserHomePageComponent, MoviesToWatchComponent],
   imports: [CommonModule, RouterModule.forChild(USER_ROUTES), SharedModule],
+  providers: [],
 })
 export class UserModule {}
