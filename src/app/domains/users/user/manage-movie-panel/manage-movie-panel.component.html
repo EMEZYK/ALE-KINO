@@ -4,18 +4,12 @@
     <ng-container *ngIf="watchlistWithMovies$ | async as watchlistWithMovies">
       <app-button text="Oceń ten film!" class="rate-button"></app-button>
       <app-button
-        *ngIf="addedToWatchlist"
-        (click)="removeFromWatchList(movie, watchlistWithMovies.watchlist)"
-        text="Chcę zobaczyć"
+        (click)="toggleWatchlist(movie, watchlistWithMovies)"
+        text="Chcę obejrzeć"
         [icon]="eyeIcon"
-        class="no-watchlist"
-      ></app-button>
-      <app-button
-        *ngIf="!addedToWatchlist"
-        (click)="addToWatchList(movie, watchlistWithMovies.watchlist)"
-        text="Chcę zobaczyć"
-        [icon]="eyeIcon"
-        class="watchlist"
+        [ngClass]="{
+          'on-watchlist': checkIfMovieIsOnWatchlist(movie, watchlistWithMovies)
+        }"
       ></app-button>
     </ng-container>
   </ng-container>

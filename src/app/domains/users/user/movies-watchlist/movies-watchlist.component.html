@@ -3,11 +3,9 @@
   <ng-container *ngIf="watchlistWithMovies$ | async as watchlistWithMovies">
     <ul class="movie-list">
       <li
-        *ngFor="let movies of watchlistWithMovies.movies"
+        *ngFor="let movie of watchlistWithMovies.movies"
         class="movie-wrapper"
       >
-        {{ movies | json }}
-        <!-- 
         <div class="movie-poster">
           <img src="{{ movie.image }}" />
         </div>
@@ -16,11 +14,18 @@
             <h2 class="movie-title">{{ movie.title }}</h2>
             <p class="rating">{{ movie.rating }}</p>
           </div>
-          <h4>{{ movie.genres }}</h4> -->
+          <h4>{{ movie.genres }}</h4>
 
-        <!-- <h4>{{ movie.shortDescription }}</h4> -->
-        <!-- <button>Nie chce ogladac</button> -->
-        <!-- </div> -->
+          <p class="movie-description">{{ movie.shortDescription }}</p>
+          <app-button
+            (click)="
+              removeMovieFromWatchList(movie, watchlistWithMovies.watchlist)
+            "
+            text="Chcę obejrzeć "
+            [icon]="eyeIcon"
+            class="on-watchlist"
+          ></app-button>
+        </div>
       </li>
     </ul>
   </ng-container>

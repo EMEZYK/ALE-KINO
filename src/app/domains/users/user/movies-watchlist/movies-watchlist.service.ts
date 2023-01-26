@@ -1,21 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
+
 import { UserStateService } from 'src/app/core/user.state.service';
 import { MovieService } from 'src/app/domains/movies/movie-list';
 import { Movie } from 'src/app/domains/movies/movie.interface';
 import { User } from '../../user.interface';
-
-export interface Watchlist {
-  id: number;
-  moviesIds: number[];
-  userId: number;
-}
-
-export interface WatchlistWithMovies {
-  watchlist: Watchlist;
-  movies: Movie[];
-}
+import { Watchlist, WatchlistWithMovies } from './watchlist.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -25,13 +16,12 @@ export class MoviesWatchlistStateService {
   private user$ = inject(UserStateService).user$;
   private movieService = inject(MovieService);
 
+  private user: User;
   private watchlist$$ = new BehaviorSubject<WatchlistWithMovies>(null);
 
   get watchlist$() {
     return this.watchlist$$.asObservable();
   }
-
-  private user: User;
 
   constructor() {
     this.getUserWatchlist();

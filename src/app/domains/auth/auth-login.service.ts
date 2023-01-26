@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
 import { Router } from '@angular/router';
+
 import { UserStateService } from 'src/app/core/user.state.service';
+import { AuthResponse } from './auth.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AuthLoginStateService {
@@ -26,7 +28,7 @@ export class AuthLoginStateService {
 
   login(email: string, password: string) {
     return this.http
-      .post<any>('login', {
+      .post<AuthResponse>('login', {
         email,
         password,
       })
@@ -34,6 +36,7 @@ export class AuthLoginStateService {
         tap({
           next: (response) => {
             const { accessToken, user } = response;
+
             this.userStateService.setUser(user);
             this.auth$$.next({ hasAuth: true });
             localStorage.setItem('token', JSON.stringify(accessToken));
@@ -78,11 +81,3 @@ export class AuthLoginStateService {
     this.router.navigate['login'];
   }
 }
-
-// export interface AuthResponse {
-//   accessToken: string;
-//   user: {
-//     email: string;
-//     id: number;
-//   };
-// }

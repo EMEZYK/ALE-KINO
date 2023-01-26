@@ -38,8 +38,8 @@
     {
       "userId": 5,
       "moviesIds": [
-        2,
-        1
+        1,
+        2
       ],
       "id": 1
     }
@@ -172,7 +172,7 @@
       "id": 2,
       "movieId": 1,
       "hallId": 2,
-      "date": "2023-01-25",
+      "date": "2023-01-26",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",
@@ -209,7 +209,7 @@
       "id": 3,
       "movieId": 2,
       "hallId": 2,
-      "date": "2023-01-25",
+      "date": "2023-01-26",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",

@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  MoviesWatchlistStateService,
-  WatchlistWithMovies,
-} from './movies-watchlist.service';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+
+import { MoviesWatchlistStateService } from './movies-watchlist.service';
+import { Watchlist, WatchlistWithMovies } from './watchlist.interface';
+import { Movie } from 'src/app/domains/movies/movie.interface';
 
 @Component({
   selector: 'app-movies-to-watch',
@@ -11,9 +12,11 @@ import {
   styleUrls: ['./movies-watchlist.component.css'],
 })
 export class MoviesToWatchComponent implements OnInit {
+  private watchlistService = inject(MoviesWatchlistStateService);
+
   watchlistWithMovies$: Observable<WatchlistWithMovies>;
 
-  private watchlistService = inject(MoviesWatchlistStateService);
+  eyeIcon = faEye;
 
   ngOnInit() {
     this.getMoviesFromWatchlist();
@@ -21,5 +24,9 @@ export class MoviesToWatchComponent implements OnInit {
 
   getMoviesFromWatchlist() {
     this.watchlistWithMovies$ = this.watchlistService.watchlist$;
+  }
+
+  removeMovieFromWatchList(movie: Movie, watchlist: Watchlist) {
+    this.watchlistService.removeMovieFromWatchlist(movie, watchlist);
   }
 }

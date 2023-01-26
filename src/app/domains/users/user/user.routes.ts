@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { BookingFormComponent } from '../../booking/booking-form';
 import { HallComponent } from '../../booking/hall';
 import { SummaryComponent } from '../../booking/order/summary';

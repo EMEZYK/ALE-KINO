@@ -23,7 +23,7 @@
   margin: 1rem 0 0.5rem 0;
 }
 
-::ng-deep .no-watchlist button {
+::ng-deep .on-watchlist button {
   background-color: #fff;
   color: #000;
 }

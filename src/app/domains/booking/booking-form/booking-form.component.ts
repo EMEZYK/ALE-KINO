@@ -16,11 +16,12 @@ import { ChoosenMovieShowing } from '../../movies/movie.interface';
   styleUrls: ['./booking-form.component.css'],
 })
 export class BookingFormComponent implements OnInit {
+  chosenMovieShowing$: Observable<ChoosenMovieShowing>;
+  reservedSeatsAndTickets$: Observable<ChosenSeatsAndTickets[]>;
+
   public bookingForm: FormGroup;
   submitted = false;
-  chosenMovieShowing$: Observable<ChoosenMovieShowing>;
   order: Order[];
-  reservedSeatsAndTickets$: Observable<ChosenSeatsAndTickets[]>;
   ticketPrice: number;
   sumOfTickets = 0;
   setSeatTicketPairs: ChosenSeatsAndTickets[];

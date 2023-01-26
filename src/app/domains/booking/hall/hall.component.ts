@@ -15,13 +15,14 @@ import { OrderStateService } from '../order';
 })
 export class HallComponent implements OnInit {
   tickets$: Observable<Ticket[]>;
-  rows$: Observable<any>;
+  rows$: Observable<{ [key: string]: { [key: number]: Seat } }>;
   chosenShowing$: Observable<ChoosenMovieShowing>;
 
   chosenSeatsAndTickets: ChosenSeatsAndTickets[] = [];
   seat: Seat;
   selectedTicket: Ticket;
   arrowIcon = faArrowDown;
+  trashIcon = faTrash;
 
   constructor(
     private orderService: OrderStateService,
