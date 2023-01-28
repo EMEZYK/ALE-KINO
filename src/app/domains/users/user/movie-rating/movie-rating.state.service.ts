@@ -40,8 +40,7 @@ export class MovieRatingStateService {
         const sum = filteredRatings
           .map((el) => el.userRating)
           .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-
-        return sum / count;
+        return Math.round((sum / count) * 2) / 2;
       })
     );
   }

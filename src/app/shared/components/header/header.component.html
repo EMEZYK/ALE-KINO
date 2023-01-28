@@ -1,28 +1,25 @@
-<div class="header">
-  <h1 (click)="navigateHome()">{{ cinemaName }}</h1>
-  <nav>
-    <button *ngIf="!isAuthenticated" class="login-btn">
-      <a routerLink="login">Zaloguj</a>
-    </button>
-    <!-- 
-    <app-button *ngIf="!isAuthenticated" text="Zaloguj" class="login-btn">
-      <a routerLink="login"></a
-    ></app-button> -->
-
-    <ng-container *ngIf="isAuthenticated">
-      <app-button [icon]="shoppingCartIcon" class="btn-icon"></app-button>
-      <div class="dropdown">
-        <app-button
-          text="Cześć{{ userName }}"
-          (click)="toggleDropdown($event)"
-          class="dropdown-btn"
-        ></app-button>
-        <app-dropdown-menu
-          [isDropdownOpen]="isDropdownVisible"
-          (buttonClick)="logout($event)"
-          [dropdownOptions]="dropdownUserOptions"
-        ></app-dropdown-menu>
-      </div>
-    </ng-container>
-  </nav>
-</div>
+<ng-container *ngIf="user$ | async as user">
+  <div class="header">
+    <h1 (click)="navigateHome()">{{ cinemaName }}</h1>
+    <nav>
+      <button *ngIf="!isAuthenticated" class="login-btn">
+        <a routerLink="login">Zaloguj</a>
+      </button>
+      <ng-container *ngIf="isAuthenticated">
+        <app-button [icon]="shoppingCartIcon" class="btn-icon"></app-button>
+        <div class="dropdown">
+          <app-button
+            text="Cześć, {{ user.firstName }} !"
+            (click)="toggleDropdown($event)"
+            class="dropdown-btn"
+          ></app-button>
+          <app-dropdown-menu
+            [isDropdownOpen]="isDropdownVisible"
+            (buttonClick)="logout($event)"
+            [dropdownOptions]="dropdownUserOptions"
+          ></app-dropdown-menu>
+        </div>
+      </ng-container>
+    </nav>
+  </div>
+</ng-container>

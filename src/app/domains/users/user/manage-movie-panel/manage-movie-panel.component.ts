@@ -44,6 +44,7 @@ export class ManageMoviePanelComponent {
     this.rating = newRating;
 
     this.ratingService.addRating(movieId, newRating);
+    this.showRating = false;
   }
 
   checkIfMovieIsOnWatchlist(

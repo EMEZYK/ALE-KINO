@@ -1,9 +1,11 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
+import { UserStateService } from 'src/app/core/user.state.service';
+import { User } from 'src/app/domains/users/user.interface';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +13,12 @@ import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  authService = inject(AuthLoginStateService);
+  userService = inject(UserStateService);
+  router = inject(Router);
+
+  user$: Observable<User>;
+
   cinemaName = 'Ale kino!';
   isAuthenticated = false;
   isDropdownVisible = false;
@@ -30,11 +38,10 @@ export class HeaderComponent implements OnInit {
 
   public dropdownAdminOptions = [{ routerlink: 'login', text: 'Wyloguj' }];
 
-  authService = inject(AuthLoginStateService);
-  router = inject(Router);
-
   ngOnInit(): void {
     this.hasAuth().subscribe();
+
+    this.user$ = this.userService.user$;
   }
 
   hasAuth = () => {

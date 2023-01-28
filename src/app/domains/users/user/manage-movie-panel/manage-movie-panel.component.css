@@ -37,7 +37,6 @@
   cursor: pointer;
 }
 
-.rating-star-list li:hover,
 .selected,
 .selected:hover {
   color: #ffc107;

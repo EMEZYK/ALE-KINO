@@ -12,7 +12,7 @@
         <div class="movie-details">
           <div class="title-rating-wrapper">
             <h2 class="movie-title">{{ movie.title }}</h2>
-            <p class="rating">{{ movie.rating }}</p>
+            <p class="rating">{{ displayOverallRating(movie.id) | async }}</p>
           </div>
           <h4>{{ movie.genres }}</h4>
 

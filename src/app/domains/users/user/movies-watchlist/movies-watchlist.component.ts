@@ -5,6 +5,7 @@ import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { MoviesWatchlistStateService } from './movies-watchlist.service';
 import { Watchlist, WatchlistWithMovies } from './watchlist.interface';
 import { Movie } from 'src/app/domains/movies/movie.interface';
+import { MovieRatingStateService } from '../movie-rating/movie-rating.state.service';
 
 @Component({
   selector: 'app-movies-to-watch',
@@ -13,6 +14,7 @@ import { Movie } from 'src/app/domains/movies/movie.interface';
 })
 export class MoviesToWatchComponent implements OnInit {
   private watchlistService = inject(MoviesWatchlistStateService);
+  private movieRatingService = inject(MovieRatingStateService);
 
   watchlistWithMovies$: Observable<WatchlistWithMovies>;
 
@@ -28,5 +30,9 @@ export class MoviesToWatchComponent implements OnInit {
 
   removeMovieFromWatchList(movie: Movie, watchlist: Watchlist) {
     this.watchlistService.removeMovieFromWatchlist(movie, watchlist);
+  }
+
+  displayOverallRating(movieId: number): Observable<number> {
+    return this.movieRatingService.getOverallRatingForMovie(movieId);
   }
 }
