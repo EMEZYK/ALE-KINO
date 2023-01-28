@@ -20,7 +20,6 @@
       "role": "user",
       "phoneNumber": "999444888",
       "orders": [],
-      "ratedmovies": [],
       "active": true,
       "cart": {
         "tickets": [],
@@ -38,10 +37,73 @@
     {
       "userId": 5,
       "moviesIds": [
-        1,
-        2
+        2,
+        1
       ],
       "id": 1
+    },
+    {
+      "userId": 5,
+      "moviesIds": [
+        2
+      ],
+      "id": 2
+    }
+  ],
+  "ratings": [
+    {
+      "userId": 5,
+      "movieId": 1,
+      "userRating": 5,
+      "id": 1
+    },
+    {
+      "userId": 2,
+      "movieId": 1,
+      "userRating": 3,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "movieId": 1,
+      "userRating": 4,
+      "id": 3
+    },
+    {
+      "userId": 7,
+      "movieId": 1,
+      "userRating": 5,
+      "id": 4
+    },
+    {
+      "userId": 8,
+      "movieId": 2,
+      "userRating": 3,
+      "id": 5
+    },
+    {
+      "userId": 2,
+      "movieId": 2,
+      "userRating": 5,
+      "id": 6
+    },
+    {
+      "userId": 3,
+      "movieId": 2,
+      "userRating": 2,
+      "id": 7
+    },
+    {
+      "userId": 8,
+      "movieId": 2,
+      "userRating": 4,
+      "id": 8
+    },
+    {
+      "userId": 5,
+      "movieId": 2,
+      "userRating": 3,
+      "id": 9
     }
   ],
   "movies": [
@@ -57,7 +119,7 @@
       "shortDescription": "Młoda para wybiera się na odległą wyspę, do ekskluzywnej restauracji. Okazuje się jednak, że nie wszystko jest takie jakim się wydaje a w menu czekają zaskakujące niespodzianki.",
       "longDescription": "długi opis filmu",
       "image": "https://images.pexels.com/photos/7670035/pexels-photo-7670035.jpeg",
-      "rating": "6/10",
+      "rating": "4/5",
       "isPremiere": false
     },
     {
@@ -71,7 +133,7 @@
       "shortDescription": "Nowa wersja kultowej historii o duchach Charlesa Dickensa autorstwa nominowanego do Oscara Stevena Knighta. Mroczny miniserial prezentuje ciemną stronę duszy Ebenezera Scroogea, w którego postać wciela się Guy Pearce (Memento).",
       "longDescription": "długi opis filmu",
       "image": "https://img.freepik.com/free-photo/portrait-excited-girl-3d-glasses_171337-11453.jpg?w=900&t=st=1669125913~exp=1669126513~hmac=c45c7db599cd49bba49e67bede37e4e22c9ad88a4625626a9abfe82f6729f747",
-      "rating": "6/10",
+      "rating": "5/5",
       "isPremiere": false
     },
     {
@@ -135,7 +197,7 @@
       "id": 1,
       "movieId": 1,
       "hallId": 1,
-      "date": "2023-01-25",
+      "date": "2023-01-28",
       "break": 15,
       "timeFrom": "12:30",
       "timeTo": "14:00",
@@ -172,7 +234,7 @@
       "id": 2,
       "movieId": 1,
       "hallId": 2,
-      "date": "2023-01-26",
+      "date": "2023-01-28",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",
@@ -209,7 +271,7 @@
       "id": 3,
       "movieId": 2,
       "hallId": 2,
-      "date": "2023-01-26",
+      "date": "2023-01-28",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",

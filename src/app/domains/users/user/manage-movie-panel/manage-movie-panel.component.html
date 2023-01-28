@@ -1,16 +1,55 @@
 <div class="side-panel">
-  <div class="rating">{{ movie.rating }}</div>
-  <ng-container *ngIf="isLoggedInUser">
-    <ng-container *ngIf="watchlistWithMovies$ | async as watchlistWithMovies">
-      <app-button text="Oceń ten film!" class="rate-button"></app-button>
-      <app-button
-        (click)="toggleWatchlist(movie, watchlistWithMovies)"
-        text="Chcę obejrzeć"
-        [icon]="eyeIcon"
-        [ngClass]="{
-          'on-watchlist': checkIfMovieIsOnWatchlist(movie, watchlistWithMovies)
-        }"
-      ></app-button>
+  <ng-container *ngIf="getOveralRating(movie.id) | async as overalRating">
+    <div class="rating">{{ overalRating }}/5</div>
+    <ng-container *ngIf="isLoggedInUser">
+      <ng-container *ngIf="watchlistWithMovies$ | async as watchlistWithMovies">
+        <ng-container
+          *ngIf="getUserRating(movie.id) | async as userRating; else myRating"
+        >
+          <ng-container *ngIf="userRating">
+            <ul class="rating-star-list">
+              <li
+                *ngFor="let star of stars; index as i"
+                [class.selected]="i < userRating"
+              >
+                <fa-icon [icon]="starIcon"></fa-icon>
+              </li>
+            </ul>
+            <p class="user-rating">Twoja ocena: {{ userRating }}</p>
+          </ng-container>
+        </ng-container>
+
+        <ng-template #myRating>
+          <app-button
+            text="Oceń ten film!"
+            class="rate-button"
+            (click)="showRating = !showRating"
+          ></app-button>
+        </ng-template>
+
+        <ng-container *ngIf="showRating">
+          <ul class="rating-star-list-to-rate">
+            <li
+              *ngFor="let star of stars; index as i"
+              (click)="setRating(movie.id, i + 1)"
+            >
+              <fa-icon [icon]="starIcon"></fa-icon>
+            </li>
+          </ul>
+        </ng-container>
+
+        <app-button
+          (click)="toggleWatchlist(movie, watchlistWithMovies)"
+          text="Chcę obejrzeć"
+          [icon]="eyeIcon"
+          [ngClass]="{
+            'on-watchlist': checkIfMovieIsOnWatchlist(
+              movie,
+              watchlistWithMovies
+            )
+          }"
+        ></app-button>
+      </ng-container>
     </ng-container>
   </ng-container>
 </div>
