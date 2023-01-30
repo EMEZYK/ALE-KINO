@@ -173,13 +173,13 @@
       "seatId": 16
     }
   ],
-  "orders": [],
+
   "showings": [
     {
       "id": 1,
       "movieId": 1,
       "hallId": 1,
-      "date": "2023-01-28",
+      "date": "2023-01-30",
       "break": 15,
       "timeFrom": "12:30",
       "timeTo": "14:00",
@@ -216,7 +216,7 @@
       "id": 2,
       "movieId": 1,
       "hallId": 2,
-      "date": "2023-01-28",
+      "date": "2023-01-30",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",
@@ -253,7 +253,7 @@
       "id": 3,
       "movieId": 2,
       "hallId": 2,
-      "date": "2023-01-28",
+      "date": "2023-01-30",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",
@@ -325,318 +325,441 @@
     },
     {
       "id": 6,
-      "row": "B",
-      "column": 1,
-      "vip": false,
+      "row": "A",
+      "column": 6,
+      "vip": true,
       "hallId": 1
     },
     {
       "id": 7,
-      "row": "B",
-      "column": 2,
-      "vip": false,
+      "row": "A",
+      "column": 7,
+      "vip": true,
       "hallId": 1
     },
     {
       "id": 8,
-      "row": "B",
-      "column": 3,
-      "vip": false,
+      "row": "A",
+      "column": 8,
+      "vip": true,
       "hallId": 1
     },
     {
       "id": 9,
       "row": "B",
-      "column": 4,
+      "column": 1,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 10,
       "row": "B",
-      "column": 5,
+      "column": 2,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 11,
-      "row": "C",
-      "column": 1,
+      "row": "B",
+      "column": 3,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 12,
-      "row": "C",
-      "column": 2,
+      "row": "B",
+      "column": 4,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 13,
-      "row": "C",
-      "column": 3,
+      "row": "B",
+      "column": 5,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 14,
-      "row": "C",
-      "column": 4,
+      "row": "B",
+      "column": 6,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 15,
-      "row": "C",
-      "column": 5,
+      "row": "B",
+      "column": 7,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 16,
-      "row": "D",
-      "column": 1,
+      "row": "B",
+      "column": 8,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 17,
-      "row": "D",
-      "column": 2,
+      "row": "C",
+      "column": 1,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 18,
-      "row": "D",
-      "column": 3,
+      "row": "C",
+      "column": 2,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 19,
-      "row": "D",
-      "column": 4,
+      "row": "C",
+      "column": 3,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 20,
-      "row": "D",
-      "column": 5,
+      "row": "C",
+      "column": 4,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 21,
-      "row": "E",
-      "column": 1,
+      "row": "C",
+      "column": 5,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 22,
-      "row": "E",
-      "column": 2,
+      "row": "C",
+      "column": 6,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 23,
-      "row": "E",
-      "column": 3,
+      "row": "C",
+      "column": 7,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 24,
-      "row": "E",
-      "column": 4,
+      "row": "C",
+      "column": 8,
       "vip": false,
       "hallId": 1
     },
     {
       "id": 25,
+      "row": "D",
+      "column": 1,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 26,
+      "row": "D",
+      "column": 2,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 27,
+      "row": "D",
+      "column": 3,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 28,
+      "row": "D",
+      "column": 4,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 29,
+      "row": "D",
+      "column": 5,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 30,
+      "row": "D",
+      "column": 6,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 31,
+      "row": "D",
+      "column": 7,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 32,
+      "row": "D",
+      "column": 8,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 33,
+      "row": "E",
+      "column": 1,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 34,
+      "row": "E",
+      "column": 2,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 35,
+      "row": "E",
+      "column": 3,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 36,
+      "row": "E",
+      "column": 4,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 37,
       "row": "E",
       "column": 5,
       "vip": false,
       "hallId": 1
     },
     {
-      "id": 26,
-      "row": "A",
-      "column": 1,
-      "vip": true,
-      "hallId": 2
-    },
-    {
-      "id": 27,
-      "row": "A",
-      "column": 2,
-      "vip": true,
-      "hallId": 2
-    },
-    {
-      "id": 28,
-      "row": "A",
-      "column": 3,
-      "vip": true,
-      "hallId": 2
-    },
-    {
-      "id": 29,
-      "row": "A",
-      "column": 4,
-      "vip": true,
-      "hallId": 2
-    },
-    {
-      "id": 30,
-      "row": "A",
-      "column": 5,
-      "vip": true,
-      "hallId": 2
-    },
-    {
-      "id": 31,
-      "row": "B",
-      "column": 1,
-      "vip": false,
-      "hallId": 2
-    },
-    {
-      "id": 32,
-      "row": "B",
-      "column": 2,
-      "vip": false,
-      "hallId": 2
-    },
-    {
-      "id": 33,
-      "row": "B",
-      "column": 3,
-      "vip": false,
-      "hallId": 2
-    },
-    {
-      "id": 34,
-      "row": "B",
-      "column": 4,
-      "vip": false,
-      "hallId": 2
-    },
-    {
-      "id": 35,
-      "row": "B",
-      "column": 5,
-      "vip": false,
-      "hallId": 2
-    },
-    {
-      "id": 36,
-      "row": "C",
-      "column": 1,
-      "vip": false,
-      "hallId": 2
-    },
-    {
-      "id": 37,
-      "row": "C",
-      "column": 2,
-      "vip": false,
-      "hallId": 2
-    },
-    {
       "id": 38,
-      "row": "C",
-      "column": 3,
+      "row": "E",
+      "column": 6,
       "vip": false,
-      "hallId": 2
+      "hallId": 1
     },
     {
       "id": 39,
-      "row": "C",
-      "column": 4,
+      "row": "E",
+      "column": 7,
       "vip": false,
-      "hallId": 2
+      "hallId": 1
     },
     {
       "id": 40,
-      "row": "C",
-      "column": 5,
+      "row": "E",
+      "column": 8,
       "vip": false,
-      "hallId": 2
+      "hallId": 1
     },
     {
       "id": 41,
-      "row": "D",
+      "row": "A",
       "column": 1,
-      "vip": false,
+      "vip": true,
       "hallId": 2
     },
     {
       "id": 42,
-      "row": "D",
+      "row": "A",
       "column": 2,
-      "vip": false,
+      "vip": true,
       "hallId": 2
     },
     {
       "id": 43,
-      "row": "D",
+      "row": "A",
       "column": 3,
-      "vip": false,
+      "vip": true,
       "hallId": 2
     },
     {
       "id": 44,
-      "row": "D",
+      "row": "A",
       "column": 4,
-      "vip": false,
+      "vip": true,
       "hallId": 2
     },
     {
       "id": 45,
-      "row": "D",
+      "row": "A",
       "column": 5,
-      "vip": false,
+      "vip": true,
       "hallId": 2
     },
     {
       "id": 46,
-      "row": "E",
+      "row": "B",
       "column": 1,
       "vip": false,
       "hallId": 2
     },
     {
       "id": 47,
-      "row": "E",
+      "row": "B",
       "column": 2,
       "vip": false,
       "hallId": 2
     },
     {
       "id": 48,
-      "row": "E",
+      "row": "B",
       "column": 3,
       "vip": false,
       "hallId": 2
     },
     {
       "id": 49,
-      "row": "E",
+      "row": "B",
       "column": 4,
       "vip": false,
       "hallId": 2
     },
     {
       "id": 50,
+      "row": "B",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 51,
+      "row": "C",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 52,
+      "row": "C",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 53,
+      "row": "C",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 54,
+      "row": "C",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 55,
+      "row": "C",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 56,
+      "row": "D",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 57,
+      "row": "D",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 58,
+      "row": "D",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 59,
+      "row": "D",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 60,
+      "row": "D",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 61,
+      "row": "E",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 62,
+      "row": "E",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 63,
+      "row": "E",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 64,
+      "row": "E",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 65,
       "row": "E",
       "column": 5,
       "vip": false,
       "hallId": 2
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "userId": 5,
+      "seatsId": [1, 2],
+      "status": "paid",
+      "showingId": 1,
+      "ttl": 1674990965661
+    },
+    {
+      "id": 2,
+      "userId": 5,
+      "seatsId": [3, 4],
+      "status": "reserved",
+      "showingId": 2,
+      "ttl": 1674990965661
     }
   ],
   "halls": [

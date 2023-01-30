@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { MovieService } from './movie.service';
-import { ChoosenMovieStateService } from '../choosen-movie.state.service';
+import { ChoosenMovieShowingStateService } from '../choosen-movie.state.service';
 import { ChoosenMovieShowing, MovieWithShowingTime } from '../movie.interface';
 import { Router } from '@angular/router';
 
@@ -25,7 +25,7 @@ export class MovieListComponent implements OnInit {
 
   constructor(
     private movieService: MovieService,
-    private choosenMovieService: ChoosenMovieStateService,
+    private choosenMovieService: ChoosenMovieShowingStateService,
     private router: Router
   ) {}
 

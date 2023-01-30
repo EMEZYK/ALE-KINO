@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-// import { AuthStateService } from '../auth.service';
-import { Router } from '@angular/router';
 import { User } from '../../users/user.interface';
 import { AuthLoginStateService } from '../auth-login.service';
+import { OrderStateService } from '../../booking/order';
 
 @Component({
   selector: 'app-login-page',
@@ -11,6 +10,8 @@ import { AuthLoginStateService } from '../auth-login.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  orderService = inject(OrderStateService);
+
   public loginForm: FormGroup;
   user: User[];
   submitted = false;

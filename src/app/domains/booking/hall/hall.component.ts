@@ -4,8 +4,10 @@ import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LocalStorageService } from 'src/app/shared/storage';
 import { Ticket } from '../tickets';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
-import { ChosenSeatsAndTickets, Seat } from './hall.interface';
+import { OrderItem, Seat } from './hall.interface';
 import { OrderStateService } from '../order';
+import { TicketsStateService } from '../tickets';
+import { ChoosenMovieShowingStateService } from '../../movies';
 
 @Component({
   selector: 'app-seats-page',
@@ -18,7 +20,7 @@ export class HallComponent implements OnInit {
   rows$: Observable<{ [key: string]: { [key: number]: Seat } }>;
   chosenShowing$: Observable<ChoosenMovieShowing>;
 
-  chosenSeatsAndTickets: ChosenSeatsAndTickets[] = [];
+  chosenSeatsAndTickets: OrderItem[] = [];
   seat: Seat;
   selectedTicket: Ticket;
   arrowIcon = faArrowDown;
@@ -26,13 +28,15 @@ export class HallComponent implements OnInit {
 
   constructor(
     private orderService: OrderStateService,
-    private localStoreService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private ticketsService: TicketsStateService,
+    private chosenShowingService: ChoosenMovieShowingStateService
   ) {}
 
   ngOnInit(): void {
-    this.tickets$ = this.orderService.tickets$;
+    this.tickets$ = this.ticketsService.tickets$;
     this.rows$ = this.orderService.rows$;
-    this.chosenShowing$ = this.orderService.chosenShowing$;
+    this.chosenShowing$ = this.chosenShowingService.chosenMovieShowing$;
   }
 
   checkIfSeatIsAvailable(seat: Seat): boolean {
@@ -40,6 +44,7 @@ export class HallComponent implements OnInit {
   }
 
   clickChosenSeat(seat: Seat) {
+    // console.log(this.chosenSeatsAndTickets);
     this.orderService.clickChosenSeat(seat, this.chosenSeatsAndTickets);
   }
 
@@ -50,26 +55,21 @@ export class HallComponent implements OnInit {
     );
   }
 
-  selectTicket(seat: ChosenSeatsAndTickets): void {
+  selectTicket(orderItem: OrderItem): void {
     this.orderService.selectTicket(
-      seat,
+      orderItem,
       this.chosenSeatsAndTickets,
       this.selectedTicket
     );
+    this.orderService.setOrderItems(this.chosenSeatsAndTickets);
   }
 
-  deleteChosenTicket(ticket: ChosenSeatsAndTickets) {
-    this.orderService.deleteChosenTicket(ticket, this.chosenSeatsAndTickets);
+  deleteChosenTicket(chosenItem: OrderItem) {
+    this.orderService.deleteChosenSeatAndTicket(chosenItem);
   }
 
-  saveChosenSeatsAndTickets(chosenSeatsAndTickets: ChosenSeatsAndTickets[]) {
-    this.orderService.setOrderItems(chosenSeatsAndTickets);
-
-    this.setSeatTicketPairs(chosenSeatsAndTickets);
-  }
-
-  setSeatTicketPairs(chosenSeatsAndTickets: ChosenSeatsAndTickets[]) {
-    this.localStoreService.saveData(
+  saveChosenSeatsAndTicketsInLocalStorage(chosenSeatsAndTickets: OrderItem[]) {
+    this.localStorageService.saveData(
       'seatTicketPairs',
       JSON.stringify(chosenSeatsAndTickets)
     );

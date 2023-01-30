@@ -1,49 +1,79 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
-import { ChoosenMovieStateService } from '../../movies';
-import { ChosenSeatsAndTickets } from '../hall/hall.interface';
+import { ChoosenMovieShowingStateService } from '../../movies';
+import { OrderItem } from '../hall/hall.interface';
 import { Order } from '../order/order.interface';
 import { OrderStateService } from '../order';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
+import { UserStateService } from 'src/app/core/user.state.service';
+import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
+import { User } from '../../users/user.interface';
 
 @Component({
   selector: 'app-booking-form-page',
   templateUrl: './booking-form.component.html',
   styleUrls: ['./booking-form.component.css'],
 })
-export class BookingFormComponent implements OnInit {
-  chosenMovieShowing$: Observable<ChoosenMovieShowing>;
-  reservedSeatsAndTickets$: Observable<ChosenSeatsAndTickets[]>;
+export class BookingFormComponent implements OnInit, OnDestroy {
+  private authService = inject(AuthLoginStateService);
+  private builder = inject(NonNullableFormBuilder);
+  private choosenMovieService = inject(ChoosenMovieShowingStateService);
+  private orderService = inject(OrderStateService);
+  private emailService = inject(EmailConfirmationService);
+  private router = inject(Router);
 
-  public bookingForm: FormGroup;
+  user$ = inject(UserStateService).user$.subscribe((user) => {
+    if (user) {
+      this.user = user;
+    } else {
+      this.user = null;
+    }
+  });
+
+  isLoggedInUser =
+    this.authService.auth$ && localStorage.getItem('role') === 'user';
+
+  chosenMovieShowing$: Observable<ChoosenMovieShowing>;
+  reservedSeatsAndTickets$: Observable<OrderItem[]>;
+  user: User;
+  bookingForm: FormGroup;
   submitted = false;
   order: Order[];
   ticketPrice: number;
   sumOfTickets = 0;
-  setSeatTicketPairs: ChosenSeatsAndTickets[];
-
-  constructor(
-    private builder: NonNullableFormBuilder,
-    private choosenMovieService: ChoosenMovieStateService,
-    private orderService: OrderStateService,
-    private emailService: EmailConfirmationService,
-    private router: Router
-  ) {}
+  setSeatTicketPairs: OrderItem[];
 
   ngOnInit(): void {
     this.chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
 
     this.reservedSeatsAndTickets$ = this.orderService.orderItems$.pipe(
       tap((seatTicketPairs) => {
+        console.log('tu', seatTicketPairs);
         this.sumTicketsValues(seatTicketPairs);
       })
     );
 
     this.createForm();
+
+    if (this.isLoggedInUser) {
+      this.bookingForm.patchValue({
+        name: this.user.firstName,
+        surname: this.user.lastName,
+        phone: this.user.phoneNumber,
+        emailInfo: {
+          email: this.user.email,
+          confirmEmail: this.user.email,
+        },
+      });
+    }
+  }
+
+  ngOnDestroy() {
+    this.user$.unsubscribe();
   }
 
   private createForm() {
@@ -112,7 +142,7 @@ export class BookingFormComponent implements OnInit {
     });
   }
 
-  sumTicketsValues(seatTicketPairs: ChosenSeatsAndTickets[]) {
+  sumTicketsValues(seatTicketPairs: OrderItem[]) {
     this.sumOfTickets = seatTicketPairs
       .map((pair) => pair.ticket.price)
       .reduce((acc, value) => acc + value, 0);

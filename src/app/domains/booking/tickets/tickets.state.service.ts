@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Ticket } from './ticket.interface';
 
 @Injectable({
@@ -13,12 +13,17 @@ export class TicketsStateService {
     return this.tickets$$.asObservable();
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.fetchTickets();
+  }
 
-  getAllTickets(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>('ticketsTypes');
+  fetchTickets() {
+    return this.http
+      .get<Ticket[]>('ticketsTypes')
+      .subscribe((tickets: Ticket[]) => this.tickets$$.next(tickets));
+  }
+
+  setTicket(ticket) {
+    this.tickets$$.next({ ...this.tickets$$.value, ...ticket });
   }
 }
-
-
-

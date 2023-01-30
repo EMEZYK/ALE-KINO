@@ -1,11 +1,12 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User } from 'src/app/domains/users/user.interface';
+import { OrderStateService } from 'src/app/domains/booking/order';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,11 @@ export class HeaderComponent implements OnInit {
   authService = inject(AuthLoginStateService);
   userService = inject(UserStateService);
   router = inject(Router);
+  order$ = inject(OrderStateService).orderItems$.pipe(
+    map((orderItems) => {
+      return orderItems.length;
+    })
+  );
 
   user$: Observable<User>;
 

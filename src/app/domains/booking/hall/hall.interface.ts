@@ -16,7 +16,7 @@ export interface Seat {
   hallId: number;
 }
 
-export interface ChosenSeatsAndTickets {
+export interface OrderItem {
   seat: Seat;
   ticket: Ticket;
 }

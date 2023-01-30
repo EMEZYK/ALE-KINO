@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ChoosenMovieStateService {
+export class ChoosenMovieShowingStateService {
   private choosenMovie$$ = new BehaviorSubject<ChoosenMovieShowing>(null);
 
   get chosenMovieShowing$() {
