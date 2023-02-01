@@ -1,9 +1,8 @@
-import { inject, Injectable, OnDestroy } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { HallStateService } from '../hall';
 import { ChoosenMovieShowingStateService } from '../../movies/choosen-movie.state.service';
 import { LocalStorageService } from '../../../shared/storage/local-storage.service';
-import { Ticket } from '../tickets/ticket.interface';
 import { OrderItem, Seat, UnavailableSeats } from '../hall/hall.interface';
 
 @Injectable({
@@ -95,12 +94,16 @@ export class OrderStateService {
     return seatchosen;
   }
 
-  selectTicket(seat: OrderItem, ticket: Ticket) {
+  selectTicket(seat: OrderItem) {
     const currentOrderItems = this.orderItems$$.getValue();
-    const foundSeat = currentOrderItems.find((el) => {
-      return el.seat === seat.seat;
+
+    const updated = currentOrderItems.map((el) => {
+      if (el.seat === seat.seat) {
+        el.seat === seat.seat;
+      }
+      return el;
     });
-    foundSeat.ticket = ticket;
+    this.orderItems$$.next(updated);
   }
 
   deleteChosenSeatAndTicket(orderItem: OrderItem) {

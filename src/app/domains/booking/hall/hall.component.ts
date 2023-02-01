@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   inject,
 } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LocalStorageService } from 'src/app/shared/storage';
 import { Ticket } from '../tickets';
@@ -34,7 +34,6 @@ export class HallComponent implements OnInit {
   orderItems$: Observable<OrderItem[]> = this.orderService.orderItems$;
 
   seat: Seat;
-  selectedTicket: Ticket;
   arrowIcon = faArrowDown;
   trashIcon = faTrash;
 
@@ -57,7 +56,7 @@ export class HallComponent implements OnInit {
   }
 
   selectTicket(orderItem: OrderItem): void {
-    this.orderService.selectTicket(orderItem, this.selectedTicket);
+    this.orderService.selectTicket(orderItem);
   }
 
   deleteChosenTicket(chosenItem: OrderItem) {

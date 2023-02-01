@@ -40,13 +40,11 @@
           <ng-container>
             <select
               value="selectedTicket"
-              [(ngModel)]="selectedTicket"
-              (ngModelChange)="selectedTicket = selectTicket(chosenSeat)"
+              [(ngModel)]="chosenSeat.ticket"
+              (ngModelChange)="selectTicket(chosenSeat)"
               class="ticket-type-wrapper"
             >
-              <option [ngValue]="selectedTicket" selected disabled>
-                Wybierz bilet
-              </option>
+              <option [ngValue]="null" selected disabled>Wybierz bilet</option>
               <option
                 *ngFor="let ticket of tickets$ | async; let i = index"
                 [ngValue]="ticket"
@@ -76,7 +74,8 @@
           chosenMovieShowing.movie.title
         ]"
         (click)="saveChosenSeatsAndTicketsInLocalStorage(orderItem)"
-        >Przejdź do zamówienia</a
+      >
+        Przejdź do zamówienia</a
       >
     </div>
   </ng-container>
