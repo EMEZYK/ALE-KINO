@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { map, Observable, tap } from 'rxjs';
@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   router = inject(Router);
   order$ = inject(OrderStateService).orderItems$.pipe(
     map((orderItems) => {
-      return orderItems.length;
+      return orderItems ? orderItems.length : 0;
     })
   );
 

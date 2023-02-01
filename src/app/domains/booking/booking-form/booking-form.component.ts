@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
 import { ChoosenMovieShowingStateService } from '../../movies';
@@ -52,7 +52,6 @@ export class BookingFormComponent implements OnInit, OnDestroy {
 
     this.reservedSeatsAndTickets$ = this.orderService.orderItems$.pipe(
       tap((seatTicketPairs) => {
-        console.log('tu', seatTicketPairs);
         this.sumTicketsValues(seatTicketPairs);
       })
     );
@@ -162,7 +161,9 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     this.bookingForm.reset();
   }
 
-  navigateToHall(movie) {
-    this.router.navigate([`booking/seats/${movie.id}/${movie.title}`]);
+  navigateToHall(chosenShowing) {
+    this.router.navigate([
+      `booking/seats/${chosenShowing.movie.id}/${chosenShowing.movie.title}`,
+    ]);
   }
 }

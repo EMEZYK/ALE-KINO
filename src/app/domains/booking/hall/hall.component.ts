@@ -1,5 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  inject,
+} from '@angular/core';
+import { Observable, tap } from 'rxjs';
 import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LocalStorageService } from 'src/app/shared/storage';
 import { Ticket } from '../tickets';
@@ -8,6 +13,7 @@ import { OrderItem, Seat } from './hall.interface';
 import { OrderStateService } from '../order';
 import { TicketsStateService } from '../tickets';
 import { ChoosenMovieShowingStateService } from '../../movies';
+import { HallStateService } from './hall.state.service';
 
 @Component({
   selector: 'app-seats-page',
@@ -16,27 +22,26 @@ import { ChoosenMovieShowingStateService } from '../../movies';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HallComponent implements OnInit {
+  private orderService = inject(OrderStateService);
+  private localStorageService = inject(LocalStorageService);
+  private ticketsService = inject(TicketsStateService);
+  private chosenShowingService = inject(ChoosenMovieShowingStateService);
+  private hallService = inject(HallStateService);
+
   tickets$: Observable<Ticket[]>;
   rows$: Observable<{ [key: string]: { [key: number]: Seat } }>;
   chosenShowing$: Observable<ChoosenMovieShowing>;
+  orderItems$: Observable<OrderItem[]> = this.orderService.orderItems$;
 
-  chosenSeatsAndTickets: OrderItem[] = [];
   seat: Seat;
   selectedTicket: Ticket;
   arrowIcon = faArrowDown;
   trashIcon = faTrash;
 
-  constructor(
-    private orderService: OrderStateService,
-    private localStorageService: LocalStorageService,
-    private ticketsService: TicketsStateService,
-    private chosenShowingService: ChoosenMovieShowingStateService
-  ) {}
-
   ngOnInit(): void {
     this.tickets$ = this.ticketsService.tickets$;
-    this.rows$ = this.orderService.rows$;
     this.chosenShowing$ = this.chosenShowingService.chosenMovieShowing$;
+    this.rows$ = this.hallService.rows$;
   }
 
   checkIfSeatIsAvailable(seat: Seat): boolean {
@@ -44,34 +49,25 @@ export class HallComponent implements OnInit {
   }
 
   clickChosenSeat(seat: Seat) {
-    // console.log(this.chosenSeatsAndTickets);
-    this.orderService.clickChosenSeat(seat, this.chosenSeatsAndTickets);
+    this.orderService.clickChosenSeat(seat);
   }
 
   checkIfSeatIsChosen(seat: Seat): boolean {
-    return this.orderService.checkIfSeatIsChosen(
-      seat,
-      this.chosenSeatsAndTickets
-    );
+    return this.orderService.checkIfSeatIsChosen(seat);
   }
 
   selectTicket(orderItem: OrderItem): void {
-    this.orderService.selectTicket(
-      orderItem,
-      this.chosenSeatsAndTickets,
-      this.selectedTicket
-    );
-    this.orderService.setOrderItems(this.chosenSeatsAndTickets);
+    this.orderService.selectTicket(orderItem, this.selectedTicket);
   }
 
   deleteChosenTicket(chosenItem: OrderItem) {
     this.orderService.deleteChosenSeatAndTicket(chosenItem);
   }
 
-  saveChosenSeatsAndTicketsInLocalStorage(chosenSeatsAndTickets: OrderItem[]) {
+  saveChosenSeatsAndTicketsInLocalStorage(orderItems: OrderItem[]) {
     this.localStorageService.saveData(
       'seatTicketPairs',
-      JSON.stringify(chosenSeatsAndTickets)
+      JSON.stringify(orderItems)
     );
   }
 }

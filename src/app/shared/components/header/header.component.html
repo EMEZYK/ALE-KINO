@@ -9,6 +9,7 @@
         class="btn-icon"
         [text]="order$ | async"
         [icon]="shoppingCartIcon"
+        (click)="scrollToLastInteracted()"
       ></app-button>
       <div class="dropdown">
         <ng-container *ngIf="user$ | async as user">

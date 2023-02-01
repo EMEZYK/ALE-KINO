@@ -23,7 +23,7 @@ export class MovieService {
   }
 
   getAllMoviesByIds(movieIds: number[]) {
-    console.log(movieIds);
+    // console.log(movieIds);
     return this.http.get<Movie[]>(`movies?id=${movieIds.join('&id=')}`);
   }
 
@@ -92,7 +92,6 @@ export class MovieService {
   }
 
   getAllTickets(): Observable<Ticket[]> {
-    console.log(this.http.get('ticketsTypes'));
     return this.http.get<Ticket[]>('ticketsTypes');
   }
 }

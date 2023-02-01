@@ -11,7 +11,7 @@ export class HallStateService {
     [key: string]: { [key: number]: Seat };
   }>({});
 
-  get seats$() {
+  get rows$() {
     return this.seatsBehaviorSubject$$.asObservable();
   }
 
