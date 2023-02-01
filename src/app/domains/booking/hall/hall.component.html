@@ -24,20 +24,22 @@
           <button
             *ngFor="let column of row.value | keyvalue"
             [disabled]="checkIfSeatIsAvailable(column.value)"
-            (click)="clickChosenSeat(column.value)"
+            (click)="clickChosenSeat(column.value, chosenMovieShowing.id)"
             [ngClass]="checkIfSeatIsChosen(column.value) ? 'selected' : ''"
             class="seat"
           ></button>
         </li>
       </ng-container>
     </div>
+
     <p class="select-seat-info">Wybierz miejsce, aby dodać bilet</p>
     <div class="choosen-seat-info">
       <ul class="chosen-tickets-list">
         <li *ngFor="let chosenSeat of orderItem" class="chosen-seat">
-          <span>Rząd: {{ chosenSeat.seat.row }}</span>
-          <span>Miejsce: {{ chosenSeat.seat.column }}</span>
-          <ng-container>
+          <ng-container *ngIf="chosenSeat.showingId === chosenMovieShowing.id">
+            <span>Rząd: {{ chosenSeat.seat.row }}</span>
+            <span>Miejsce: {{ chosenSeat.seat.column }}</span>
+
             <select
               value="selectedTicket"
               [(ngModel)]="chosenSeat.ticket"
@@ -54,15 +56,15 @@
                 <fa-icon [icon]="arrowIcon" class="arrow-icon"></fa-icon>
               </option>
             </select>
+            <span class="price">Cena: {{ chosenSeat.ticket?.price }}zł </span>
+            <button
+              (click)="deleteChosenTicket(chosenSeat)"
+              type="button"
+              class="delete-ticket-button"
+            >
+              <fa-icon [icon]="trashIcon" class="trash"></fa-icon>
+            </button>
           </ng-container>
-          <span class="price">Cena: {{ chosenSeat.ticket?.price }}zł </span>
-          <button
-            (click)="deleteChosenTicket(chosenSeat)"
-            type="button"
-            class="delete-ticket-button"
-          >
-            <fa-icon [icon]="trashIcon" class="trash"></fa-icon>
-          </button>
         </li>
       </ul>
     </div>

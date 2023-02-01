@@ -47,8 +47,8 @@ export class HallComponent implements OnInit {
     return this.orderService.checkIfSeatIsAvailable(seat);
   }
 
-  clickChosenSeat(seat: Seat) {
-    this.orderService.clickChosenSeat(seat);
+  clickChosenSeat(seat: Seat, showingId: number) {
+    this.orderService.clickChosenSeat(seat, showingId);
   }
 
   checkIfSeatIsChosen(seat: Seat): boolean {

@@ -66,7 +66,7 @@ export class OrderStateService {
     }
   }
 
-  clickChosenSeat(seat: Seat) {
+  clickChosenSeat(seat: Seat, showingId: number) {
     const currentOrderItems = this.orderItems$$.getValue();
 
     const indexOfSeat = currentOrderItems.findIndex(
@@ -76,7 +76,7 @@ export class OrderStateService {
     if (indexOfSeat === -1) {
       this.orderItems$$.next([
         ...this.orderItems$$.value,
-        { seat, ticket: null },
+        { seat, ticket: null, showingId },
       ]);
     } else {
       currentOrderItems.splice(indexOfSeat, 1);
@@ -87,11 +87,7 @@ export class OrderStateService {
   checkIfSeatIsChosen(seat: Seat) {
     const currentOrderItems = this.orderItems$$.getValue();
 
-    const seatchosen = currentOrderItems.some((el) => {
-      return el.seat === seat;
-    });
-
-    return seatchosen;
+    return currentOrderItems.some((el) => el.seat.id === seat.id);
   }
 
   selectTicket(seat: OrderItem) {

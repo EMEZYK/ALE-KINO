@@ -19,6 +19,7 @@ export interface Seat {
 export interface OrderItem {
   seat: Seat;
   ticket: Ticket;
+  showingId: number;
 }
 
 export interface UnavailableSeats {

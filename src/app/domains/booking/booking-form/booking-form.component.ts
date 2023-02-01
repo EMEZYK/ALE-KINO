@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators';
-import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
 import { ChoosenMovieShowingStateService } from '../../movies';
