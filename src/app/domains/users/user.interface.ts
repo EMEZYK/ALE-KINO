@@ -13,10 +13,4 @@ export interface User extends Guest {
   moviesToWatch?: [];
   ratedMovies?: [];
   active?: boolean;
-  cart?: Cart;
-}
-
-interface Cart {
-  tickets: [];
-  price: number;
 }

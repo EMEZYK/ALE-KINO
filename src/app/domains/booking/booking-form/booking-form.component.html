@@ -61,6 +61,8 @@
           <input
             formControlName="phone"
             placeholder="Nr telefonu"
+            appNumbersOnly
+            maxlength="9"
             class="form-control"
           />
           <ng-container *ngIf="phone.errors as errors">

@@ -15,7 +15,7 @@ import { Guest, User } from '../../users/user.interface';
 // import { DiscountCodesStateService } from 'src/app/domains/booking/order/discountCodes/discount.-codes.state.service';
 // import { Discount } from '../order/discountCodes/discount-codes.interface';
 import { GuestApiService } from '../../users/guest/guest-api.service';
-import { OrderService } from '../order/order.service';
+import { OrderStateService } from '../order/order.service';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 
 @Component({
@@ -33,7 +33,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   // private discounts$: Observable<Discount[]> = inject(DiscountCodesStateService)
   //   .discounts$;
   private guestApiService = inject(GuestApiService);
-  private orderService = inject(OrderService);
+  private orderService = inject(OrderStateService);
 
   user$ = inject(UserStateService).user$.subscribe((user) => {
     if (user) {
@@ -129,6 +129,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
         this.phone.setValidators([
           CustomValidators.phoneNumberValidator,
           Validators.minLength(9),
+          Validators.maxLength(9),
         ]);
         this.phone.updateValueAndValidity({ emitEvent: false });
       }

@@ -1,30 +1,32 @@
-<div
-  class="payment-wrapper"
-  *ngIf="chosenMovieShowing$ | async as chosenShowing"
->
-  <div class="heading-wrapper">
-    <h2>Płacę z</h2>
-    <img src="../../../../assets/blik.png" />
+<ng-container *ngIf="order$ | async as order">
+  <div
+    class="payment-wrapper"
+    *ngIf="chosenMovieShowing$ | async as chosenShowing"
+  >
+    <div class="heading-wrapper">
+      <h2>Płacę z</h2>
+      <img src="../../../../assets/blik.png" />
+    </div>
+    <p class="sum">Kwota: 15zł</p>
+    <div class="input-wrapper">
+      <label>Kod blik</label>
+      <input type="text" pattern="[0-9]*" appNumbersOnly maxlength="6" />
+    </div>
+    <div class="btn-wrapper">
+      <app-button
+        class="cancel"
+        text="Anuluj"
+        type="button"
+        (click)="cancelPayment(chosenShowing)"
+      >
+      </app-button>
+      <app-button
+        class="approve"
+        text="Wykonaj"
+        type="button"
+        (click)="approvePayment(chosenShowing, order.id)"
+        >Wykonaj</app-button
+      >
+    </div>
   </div>
-  <p class="sum">Kwota: 15zł</p>
-  <div class="input-wrapper">
-    <label>Kod blik</label>
-    <input type="text" pattern="[0-9]*" appNumbersOnly maxlength="6" />
-  </div>
-  <div class="btn-wrapper">
-    <app-button
-      class="cancel"
-      text="Anuluj"
-      type="button"
-      (click)="cancelPayment(chosenShowing)"
-    >
-    </app-button>
-    <app-button
-      class="approve"
-      text="Wykonaj"
-      type="button"
-      (click)="approvePayment(chosenShowing)"
-      >Wykonaj</app-button
-    >
-  </div>
-</div>
+</ng-container>
