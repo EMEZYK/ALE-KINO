@@ -2,13 +2,13 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { HallStateService } from '../hall';
 import { ChoosenMovieShowingStateService } from '../../movies/choosen-movie.state.service';
-import { LocalStorageService } from '../../../shared/storage/local-storage.service';
+import { LocalStorageService } from '../../../shared/local-storage/local-storage.service';
 import { OrderItem, Seat, UnavailableSeats } from '../hall/hall.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class OrderStateService {
+export class OrderItemsStateService {
   private hallService = inject(HallStateService);
   private choosenMovieShowingService = inject(ChoosenMovieShowingStateService);
   private localStorageService = inject(LocalStorageService);

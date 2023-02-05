@@ -9,14 +9,13 @@
         class="btn-icon"
         [text]="order$ | async"
         [icon]="shoppingCartIcon"
-        (click)="scrollToLastInteracted()"
+        (click)="navigateToPreviousPage($event)"
       ></app-button>
       <div class="dropdown">
         <ng-container *ngIf="user$ | async as user">
           <app-button
             text="Cześć, {{ user.firstName }}!"
             (click)="toggleDropdown($event)"
-            class="dropdown-btn"
           ></app-button>
         </ng-container>
 

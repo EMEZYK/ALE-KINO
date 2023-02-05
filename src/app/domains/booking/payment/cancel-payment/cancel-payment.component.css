@@ -1,0 +1,34 @@
+::ng-deep button {
+  border: 0;
+}
+
+.cancel-transaction-wrapper {
+  color: #000;
+  display: flex;
+  width: 700px;
+  aspect-ratio: 3/1;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 30%);
+}
+
+.cancel-icon {
+  font-size: clamp(2rem, 4rem, 5rem);
+  color: rgb(231, 34, 7);
+}
+
+.announcement-wrapper {
+  padding: 30px;
+  width: 80%;
+}
+
+.info {
+  margin: 20px 0 30px 0;
+  font-size: 1.2rem;
+}
+
+:host {
+  height: 60vh;
+  display: flex;
+  align-items: center;
+}

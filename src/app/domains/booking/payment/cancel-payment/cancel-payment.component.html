@@ -1,0 +1,8 @@
+<div class="cancel-transaction-wrapper">
+  <fa-icon [icon]="cancelIcon" class="cancel-icon"></fa-icon>
+  <div class="announcement-wrapper">
+    <h1 class="heading">Transakcja anulowana</h1>
+    <p class="info">Kliknij "wróć" i ponownie dokonaj transakcji</p>
+    <app-button text="Wróć" (click)="navigateToPreviousPage()"></app-button>
+  </div>
+</div>

@@ -6,11 +6,11 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { LocalStorageService } from 'src/app/shared/storage';
+import { LocalStorageService } from 'src/app/shared/local-storage';
 import { Ticket } from '../tickets';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
 import { OrderItem, Seat } from './hall.interface';
-import { OrderStateService } from '../order';
+import { OrderItemsStateService } from '../order';
 import { TicketsStateService } from '../tickets';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { HallStateService } from './hall.state.service';
@@ -22,7 +22,7 @@ import { HallStateService } from './hall.state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HallComponent implements OnInit {
-  private orderService = inject(OrderStateService);
+  private orderService = inject(OrderItemsStateService);
   private localStorageService = inject(LocalStorageService);
   private ticketsService = inject(TicketsStateService);
   private chosenShowingService = inject(ChoosenMovieShowingStateService);

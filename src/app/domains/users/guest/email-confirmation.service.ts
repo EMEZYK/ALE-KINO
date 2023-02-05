@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmailConfirmationService {
-  public userEmail: string;
+  private userEmail$$ = new BehaviorSubject<string>('');
 
-  set email(confirmedEmail: string) {
-    this.userEmail = confirmedEmail
+  get email$() {
+    return this.userEmail$$.asObservable();
   }
 
-  get email() {
-    return this.userEmail
+  setEmail(confirmedEmail: string) {
+    this.userEmail$$.next(confirmedEmail);
   }
 }

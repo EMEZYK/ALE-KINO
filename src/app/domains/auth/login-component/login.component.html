@@ -13,17 +13,26 @@
     </div>
     <div class="form-group">
       <label>Hasło</label>
-      <input formControlName="password" type="password" placeholder="Hasło" />
+      <div class="password-input">
+        <input
+          formControlName="password"
+          [type]="fieldTextType ? 'text' : 'password'"
+          placeholder="Hasło"
+        />
+        <span class="input-group-text">
+          <fa-icon
+            [icon]="eyeIcon"
+            class="eye-icon"
+            (click)="toggleFieldTextType()"
+          ></fa-icon>
+        </span>
+      </div>
       <ng-container *ngIf="password.errors as errors">
         <ng-connatiner *ngIf="password.touched">
           <p *ngIf="errors?.['required']">Podaj hasło</p>
         </ng-connatiner>
       </ng-container>
     </div>
-
-    <ng-container  *ngIf="submitted && loginForm.invalid">
-      <p>Niewłaściwy e-mail lub hasło</p>
-    </ng-container>
-    <button type="submit" class="submit-button">Zaloguj</button>
+    <button class="submit-button" type="submit">Zaloguj</button>
   </form>
 </div>

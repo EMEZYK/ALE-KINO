@@ -1,8 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
-import { User } from '../../users/user.interface';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { AuthLoginStateService } from '../auth-login.service';
-import { OrderStateService } from '../../booking/order';
 
 @Component({
   selector: 'app-login-page',
@@ -10,16 +9,12 @@ import { OrderStateService } from '../../booking/order';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  orderService = inject(OrderStateService);
+  private formBuilder = inject(NonNullableFormBuilder);
+  private authService = inject(AuthLoginStateService);
 
-  public loginForm: FormGroup;
-  user: User[];
-  submitted = false;
-
-  constructor(
-    private formBuilder: NonNullableFormBuilder,
-    private authService: AuthLoginStateService
-  ) {}
+  loginForm: FormGroup;
+  fieldTextType: boolean;
+  eyeIcon = faEye;
 
   ngOnInit(): void {
     this.createForm();
@@ -40,8 +35,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  onSubmit() {
-    this.submitted = true;
+  onSubmit(): void {
     this.loginForm.markAllAsTouched();
 
     if (this.loginForm.invalid) {
@@ -54,5 +48,9 @@ export class LoginComponent implements OnInit {
         this.loginForm.get('password')?.value
       )
       .subscribe();
+  }
+
+  toggleFieldTextType() {
+    this.fieldTextType = !this.fieldTextType;
   }
 }

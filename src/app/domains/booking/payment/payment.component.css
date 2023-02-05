@@ -1,0 +1,75 @@
+:host {
+  padding: 4rem;
+}
+
+::ng-deep button {
+  border: 0;
+}
+
+::ng-deep .approve button {
+  background-color: rgb(231, 34, 7) !important;
+}
+
+::ng-deep .approve button:hover {
+  color: #fff !important;
+  background-color: rgb(177, 27, 27) !important;
+}
+
+::ng-deep .cancel button {
+  background-color: #ddd !important;
+  color: #000 !important;
+}
+
+::ng-deep .cancel button:hover {
+  background-color: rgb(209, 207, 207) !important;
+}
+
+.payment-wrapper {
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  aspect-ratio: 1/1;
+  background-color: #fff;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 30%);
+}
+
+img {
+  width: 150px;
+  margin: 0;
+}
+
+input {
+  width: 200px;
+  height: 80px;
+  margin: 0 0 0 20px;
+  font-size: 1.6rem;
+  padding: 10px;
+}
+
+.heading-wrapper,
+.input-wrapper {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  margin: 0;
+  justify-content: flex-end;
+}
+
+.heading-wrapper {
+  width: 60%;
+}
+
+label,
+.sum {
+  font-size: clamp(1.5rem, 10px, 2.2rem);
+  margin: 0;
+}
+
+.btn-wrapper {
+  display: flex;
+  width: 70%;
+}

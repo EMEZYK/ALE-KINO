@@ -62,3 +62,19 @@ button {
 input.ng-touched.ng-invalid {
   border: 1px solid red;
 }
+
+.password-input {
+  position: relative;
+}
+
+.password-input input {
+  padding-right: 40px;
+}
+
+.password-input .input-group-text {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

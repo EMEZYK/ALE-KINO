@@ -11,14 +11,17 @@ import { BookingFormComponent } from './domains/booking/booking-form';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './domains/auth/login';
-import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './domains/auth/login-component';
+import { HomeComponent } from './domains/home/home.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { SummaryComponent } from './domains/booking/order/summary';
 import { APP_ROUTES } from './app.routes';
 import { LoadingSpinnerComponent } from './shared/components/loader/loader.component';
 import { LoadingInterceptor } from './shared/interceptors';
 import { SharedModule } from './shared/shared.module';
+import { PaymentComponent } from './domains/booking/payment';
+import { NumberDirective } from './shared/directives/numbers-only.directive';
+import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment/cancel-payment.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { SharedModule } from './shared/shared.module';
     HomeComponent,
     SummaryComponent,
     LoadingSpinnerComponent,
+    PaymentComponent,
+    NumberDirective,
+    CancelPaymentComponent,
   ],
   imports: [
     BrowserModule,

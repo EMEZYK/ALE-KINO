@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './domains/auth';
-import { LoginComponent } from './domains/auth/login';
+import { LoginComponent } from './domains/auth/login-component';
 import { BookingFormComponent } from './domains/booking/booking-form';
 import { HallComponent } from './domains/booking/hall';
 import { SummaryComponent } from './domains/booking/order/summary';
-import { HomeComponent } from './home/home.component';
+import { PaymentComponent } from './domains/booking/payment';
+import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment/cancel-payment.component';
+import { HomeComponent } from './domains/home/home.component';
 
 export const APP_ROUTES: Routes = [
   { path: 'home', component: HomeComponent },
@@ -13,6 +15,8 @@ export const APP_ROUTES: Routes = [
     children: [
       { path: 'seats/:id/:title', component: HallComponent },
       { path: 'reservation/:id/:title', component: BookingFormComponent },
+      { path: 'payment/:id/:title', component: PaymentComponent },
+      { path: 'payment/:id/:title/cancel', component: CancelPaymentComponent },
       { path: 'summary/:id/:title', component: SummaryComponent },
     ],
   },
@@ -36,4 +40,5 @@ export const APP_ROUTES: Routes = [
   },
 
   { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: 'home' },
 ];

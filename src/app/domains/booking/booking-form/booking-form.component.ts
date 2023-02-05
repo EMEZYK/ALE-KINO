@@ -1,17 +1,22 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { OrderItem } from '../hall/hall.interface';
 import { Order } from '../order/order.interface';
-import { OrderStateService } from '../order';
+import { OrderItemsStateService } from '../order';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
-import { User } from '../../users/user.interface';
+import { Guest, User } from '../../users/user.interface';
+// import { DiscountCodesStateService } from 'src/app/domains/booking/order/discountCodes/discount.-codes.state.service';
+// import { Discount } from '../order/discountCodes/discount-codes.interface';
+import { GuestApiService } from '../../users/guest/guest-api.service';
+import { OrderService } from '../order/order.service';
+import { ShowingWithMovie } from '../../movies/movie.interface';
 
 @Component({
   selector: 'app-booking-form-page',
@@ -22,9 +27,13 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   private authService = inject(AuthLoginStateService);
   private builder = inject(NonNullableFormBuilder);
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
-  private orderService = inject(OrderStateService);
+  private orderItemsService = inject(OrderItemsStateService);
   private emailService = inject(EmailConfirmationService);
   private router = inject(Router);
+  // private discounts$: Observable<Discount[]> = inject(DiscountCodesStateService)
+  //   .discounts$;
+  private guestApiService = inject(GuestApiService);
+  private orderService = inject(OrderService);
 
   user$ = inject(UserStateService).user$.subscribe((user) => {
     if (user) {
@@ -38,7 +47,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     this.authService.auth$ && localStorage.getItem('role') === 'user';
 
   chosenMovieShowing$: Observable<ChoosenMovieShowing>;
-  reservedSeatsAndTickets$: Observable<OrderItem[]>;
+  orderItems$: Observable<OrderItem[]>;
   user: User;
   bookingForm: FormGroup;
   submitted = false;
@@ -50,7 +59,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
 
-    this.reservedSeatsAndTickets$ = this.orderService.orderItems$.pipe(
+    this.orderItems$ = this.orderItemsService.orderItems$.pipe(
       tap((seatTicketPairs) => {
         this.sumTicketsValues(seatTicketPairs);
       })
@@ -69,10 +78,6 @@ export class BookingFormComponent implements OnInit, OnDestroy {
         },
       });
     }
-  }
-
-  ngOnDestroy() {
-    this.user$.unsubscribe();
   }
 
   private createForm() {
@@ -147,23 +152,58 @@ export class BookingFormComponent implements OnInit, OnDestroy {
       .reduce((acc, value) => acc + value, 0);
   }
 
-  onSubmit(chosenMovieShowing) {
+  onSubmit(chosenShowing: ShowingWithMovie, orderItems: OrderItem[]) {
     this.bookingForm.markAllAsTouched();
+
     if (this.bookingForm.invalid) {
       return;
     }
-    this.emailService.userEmail = this.bookingForm.value.emailInfo.email;
+
+    const formValue = this.bookingForm.value;
+
+    const guest: Guest = {
+      id: null,
+      firstName: formValue.name,
+      lastName: formValue.surname,
+      phoneNumber: formValue.phone,
+      email: formValue.emailInfo.email,
+    };
+
+    this.guestApiService
+      .createGuestAccount(guest)
+      .pipe(
+        switchMap((guest) =>
+          this.orderService.addOrder({
+            userId: guest.id,
+            orderItems: orderItems.map((orderItem: OrderItem) => {
+              return {
+                seatId: orderItem.seat.id,
+                ticketId: orderItem.ticket.id,
+              };
+            }),
+            showingId: chosenShowing.id,
+            status: 'reserved',
+          })
+        )
+      )
+      .subscribe();
+
+    this.emailService.setEmail(this.bookingForm.value.emailInfo.email);
     this.router.navigate([
-      '/booking/summary',
-      chosenMovieShowing.id,
-      chosenMovieShowing.movie.title,
+      '/booking/payment',
+      chosenShowing.id,
+      chosenShowing.movie.title,
     ]);
     this.bookingForm.reset();
   }
 
-  navigateToHall(chosenShowing) {
+  navigateToHall(chosenShowing: ShowingWithMovie) {
     this.router.navigate([
       `booking/seats/${chosenShowing.movie.id}/${chosenShowing.movie.title}`,
     ]);
+  }
+
+  ngOnDestroy() {
+    this.user$.unsubscribe();
   }
 }

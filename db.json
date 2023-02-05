@@ -33,10 +33,26 @@
       "role": "admin"
     }
   ],
+  "guests": [
+    {
+      "id": 11,
+      "firstName": "ewelka",
+      "lastName": "rewelka",
+      "phoneNumber": "",
+      "email": "rewela@dd"
+    },
+    {
+      "id": 12,
+      "firstName": "aniela",
+      "lastName": "mela",
+      "phoneNumber": "",
+      "email": "aniela@ss"
+    }
+  ],
   "watchlists": [
     {
       "userId": 5,
-      "moviesIds": [2],
+      "moviesIds": [],
       "id": 1
     },
     {
@@ -53,12 +69,6 @@
       "id": 2
     },
     {
-      "userId": 1,
-      "movieId": 1,
-      "userRating": 4,
-      "id": 3
-    },
-    {
       "userId": 7,
       "movieId": 1,
       "userRating": 5,
@@ -71,34 +81,10 @@
       "id": 5
     },
     {
-      "userId": 2,
-      "movieId": 2,
-      "userRating": 5,
-      "id": 6
-    },
-    {
-      "userId": 3,
-      "movieId": 2,
-      "userRating": 2,
-      "id": 7
-    },
-    {
-      "userId": 8,
-      "movieId": 2,
-      "userRating": 4,
-      "id": 8
-    },
-    {
       "userId": 5,
       "movieId": 1,
       "userRating": 5,
       "id": 9
-    },
-    {
-      "userId": 5,
-      "movieId": 2,
-      "userRating": 1,
-      "id": 10
     }
   ],
   "movies": [
@@ -184,7 +170,7 @@
       "id": 1,
       "movieId": 1,
       "hallId": 1,
-      "date": "2023-02-01",
+      "date": "2023-02-05",
       "break": 15,
       "timeFrom": "12:30",
       "timeTo": "14:00",
@@ -221,7 +207,7 @@
       "id": 2,
       "movieId": 1,
       "hallId": 2,
-      "date": "2023-02-01",
+      "date": "2023-02-05",
       "break": 15,
       "timeFrom": "16:30",
       "timeTo": "15:00",
@@ -258,7 +244,7 @@
       "id": 3,
       "movieId": 2,
       "hallId": 2,
-      "date": "2023-02-01",
+      "date": "2023-02-05",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",
@@ -753,10 +739,14 @@
     {
       "id": 1,
       "userId": 5,
-      "seatsId": [1, 2],
+      "tickets": [
+        {
+          "seatId": 1,
+          "ticketId": 2
+        }
+      ],
       "status": "paid",
-      "showingId": 1,
-      "ttl": 1674990965661
+      "showingId": 1
     },
     {
       "id": 2,
@@ -765,6 +755,46 @@
       "status": "reserved",
       "showingId": 2,
       "ttl": 1674990965661
+    },
+    {
+      "userId": 11,
+      "orderItems": [
+        {
+          "seatId": 30,
+          "ticketId": 2
+        },
+        {
+          "seatId": 38,
+          "ticketId": 2
+        },
+        {
+          "seatId": 28,
+          "ticketId": 2
+        },
+        {
+          "seatId": 32,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 3
+    },
+    {
+      "userId": 12,
+      "orderItems": [
+        {
+          "seatId": 12,
+          "ticketId": 2
+        },
+        {
+          "seatId": 38,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 4
     }
   ],
   "halls": [
@@ -787,6 +817,20 @@
     {
       "id": 1,
       "name": "Komedia"
+    }
+  ],
+  "discountCodes": [
+    {
+      "id": 1,
+      "name": "Filmoteka2020"
+    },
+    {
+      "id": 2,
+      "name": "SuperFilm"
+    },
+    {
+      "id": 3,
+      "name": "AleżKino"
     }
   ]
 }

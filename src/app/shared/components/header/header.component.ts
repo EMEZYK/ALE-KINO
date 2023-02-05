@@ -2,11 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { map, Observable, tap } from 'rxjs';
+import { Location } from '@angular/common';
 
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User } from 'src/app/domains/users/user.interface';
-import { OrderStateService } from 'src/app/domains/booking/order';
+import { OrderItemsStateService } from 'src/app/domains/booking/order';
 
 @Component({
   selector: 'app-header',
@@ -14,10 +15,11 @@ import { OrderStateService } from 'src/app/domains/booking/order';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  authService = inject(AuthLoginStateService);
-  userService = inject(UserStateService);
-  router = inject(Router);
-  order$ = inject(OrderStateService).orderItems$.pipe(
+  private authService = inject(AuthLoginStateService);
+  private userService = inject(UserStateService);
+  private router = inject(Router);
+  private location = inject(Location);
+  order$ = inject(OrderItemsStateService).orderItems$.pipe(
     map((orderItems) => {
       return orderItems ? orderItems.length : 0;
     })
@@ -78,5 +80,9 @@ export class HeaderComponent implements OnInit {
 
   toggleDropdown() {
     this.isDropdownVisible = !this.isDropdownVisible;
+  }
+
+  navigateToPreviousPage(): void {
+    this.location.back();
   }
 }
