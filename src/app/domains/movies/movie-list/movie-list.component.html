@@ -1,16 +1,8 @@
 <main>
-  <ul class="week-list">
-    <li *ngFor="let date of dates" class="week-day">
-      <button
-        *ngIf="date"
-        (click)="chooseDate(date)"
-        class="current-day-btn"
-        [disabled]="isDisabled(date)"
-      >
-        {{ date.format('DD/MM') }}
-      </button>
-    </li>
-  </ul>
+  <app-date-picker
+    [dates]="dates"
+    (dateClick)="handleDateSelection($event)"
+  ></app-date-picker>
 
   <ul class="movie-wrapper">
     <li *ngFor="let movie of allMovieShowings | async" class="movie">
@@ -39,8 +31,6 @@
         </div>
         <ul class="hours">
           <li *ngFor="let showing of movie.showings" class="hour-item">
-            <!-- <a [routerLink]="['booking/seats', movie.id, movie.title]"> -->
-
             <button
               (click)="onMovieTimeClick(showing.id, movie)"
               class="hour-btn"

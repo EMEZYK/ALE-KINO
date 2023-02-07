@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   template: `
     <div class="home-wrapper">
-      <app-movie-list></app-movie-list>
+      <app-movie-list [selectedDate]="selectedDate"></app-movie-list>
     </div>
   `,
   styles: [
@@ -20,4 +21,12 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  selectedDate: string;
+
+  ngOnInit() {
+    this.selectedDate = this.route.snapshot.paramMap.get('date');
+    console.log(this.selectedDate);
+  }
+}

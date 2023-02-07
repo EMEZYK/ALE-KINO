@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit {
     } else if (this.authService.userRole === 'user') {
       this.router.navigate([`user`]);
     } else {
-      this.router.navigate(['home']);
+      this.router.navigate([`home`]);
     }
   }
 

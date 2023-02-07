@@ -1,0 +1,12 @@
+<ul class="week-list">
+  <li *ngFor="let date of dates" class="week-day">
+    <button
+      *ngIf="date"
+      (click)="chooseDate(date)"
+      class="current-day-btn"
+      [disabled]="isDisabled(date)"
+    >
+      {{ date.format('DD/MM') }}
+    </button>
+  </li>
+</ul>

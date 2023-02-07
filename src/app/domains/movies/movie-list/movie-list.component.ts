@@ -1,10 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { MovieService } from './movie.service';
 import { ChoosenMovieShowingStateService } from '../choosen-movie.state.service';
-import { ChoosenMovieShowing, MovieWithShowingTime } from '../movie.interface';
+import {
+  ChoosenMovieShowing,
+  Movie,
+  MovieWithShowingTime,
+} from '../movie.interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,12 +21,10 @@ export class MovieListComponent implements OnInit {
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
   private router = inject(Router);
 
+  @Input() selectedDate;
+  date: Moment;
   dates: moment.Moment[] = [];
 
-  currentDay = moment();
-  disableDay = false;
-
-  date: Moment;
   expandedMovieIdDescriptions: number[] = [];
   allMovieShowings: Observable<MovieWithShowingTime[]>;
   chosenShowingWithHall$: Observable<ChoosenMovieShowing>;
@@ -39,15 +41,7 @@ export class MovieListComponent implements OnInit {
       this.dates.push(m.clone());
     }
 
-    this.date = this.currentDay;
-    this.chooseDate(this.date);
-  }
-
-  isDisabled(date: Moment) {
-    if (date.isBefore(moment(), 'day')) {
-      return true;
-    }
-    return false;
+    this.date = moment();
   }
 
   toggleOpen(movieId: number) {
@@ -61,16 +55,6 @@ export class MovieListComponent implements OnInit {
 
   isDescriptionExpanded(movieId: number): boolean {
     return this.expandedMovieIdDescriptions.indexOf(movieId) !== -1;
-  }
-
-  chooseDate(date: Moment) {
-    this.date = date;
-    this.getMovies(this.date);
-  }
-
-  getMovies(date: Moment) {
-    this.allMovieShowings = this.movieService.getAllMoviesForDay(date);
-    this.allMovieShowings.subscribe();
   }
 
   onMovieTimeClick(showingId: number, movie) {
@@ -88,7 +72,16 @@ export class MovieListComponent implements OnInit {
     this.navigateToHall(movie);
   }
 
-  navigateToHall(movie) {
+  navigateToHall(movie: Movie) {
     this.router.navigate([`booking/seats/${movie.id}/${movie.title}`]);
+  }
+
+  handleDateSelection(selectedDate: Moment) {
+    this.date = selectedDate;
+    this.getMovies(this.date);
+  }
+  getMovies(date: Moment) {
+    this.allMovieShowings = this.movieService.getAllMoviesForDay(date);
+    this.allMovieShowings.subscribe();
   }
 }

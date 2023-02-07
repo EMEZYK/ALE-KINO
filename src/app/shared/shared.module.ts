@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { ButtonComponent } from './components/button/button.component';
 import { ManageMoviePanelComponent } from '../domains/users/user/manage-movie-panel/manage-movie-panel.component';
+import { DatePickerComponent } from './components/date-picker/date-picker.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ManageMoviePanelComponent } from '../domains/users/user/manage-movie-pa
     DropdownMenuComponent,
     ButtonComponent,
     ManageMoviePanelComponent,
+    DatePickerComponent,
   ],
   imports: [
     CommonModule,

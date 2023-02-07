@@ -7,9 +7,12 @@ import { SummaryComponent } from './domains/booking/order/summary';
 import { PaymentComponent } from './domains/booking/payment';
 import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment/cancel-payment.component';
 import { HomeComponent } from './domains/home/home.component';
+import * as moment from 'moment';
+
+const date = moment().format('YYYY-MM-DD');
 
 export const APP_ROUTES: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home/:day', component: HomeComponent },
   {
     path: 'booking',
     children: [
@@ -40,5 +43,8 @@ export const APP_ROUTES: Routes = [
   },
 
   { path: 'login', component: LoginComponent },
-  { path: '**', redirectTo: 'home' },
+  {
+    path: '**',
+    redirectTo: `home/${date}`,
+  },
 ];
