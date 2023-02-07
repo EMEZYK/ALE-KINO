@@ -7,11 +7,11 @@ import {
 import { Observable } from 'rxjs';
 import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LocalStorageService } from 'src/app/shared/local-storage';
-import { Ticket } from '../tickets';
+import { TicketType } from '../tickets';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
 import { OrderItem, Seat } from './hall.interface';
 import { OrderItemsStateService } from '../order';
-import { TicketsStateService } from '../tickets';
+import { TicketTypesStateService } from '../tickets';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { HallStateService } from './hall.state.service';
 
@@ -24,11 +24,11 @@ import { HallStateService } from './hall.state.service';
 export class HallComponent implements OnInit {
   private orderService = inject(OrderItemsStateService);
   private localStorageService = inject(LocalStorageService);
-  private ticketsService = inject(TicketsStateService);
+  private ticketsService = inject(TicketTypesStateService);
   private chosenShowingService = inject(ChoosenMovieShowingStateService);
   private hallService = inject(HallStateService);
 
-  tickets$: Observable<Ticket[]>;
+  tickets$: Observable<TicketType[]>;
   rows$: Observable<{ [key: string]: { [key: number]: Seat } }>;
   chosenShowing$: Observable<ChoosenMovieShowing>;
   orderItems$: Observable<OrderItem[]> = this.orderService.orderItems$;
@@ -38,7 +38,7 @@ export class HallComponent implements OnInit {
   trashIcon = faTrash;
 
   ngOnInit(): void {
-    this.tickets$ = this.ticketsService.tickets$;
+    this.tickets$ = this.ticketsService.ticketTypes$;
     this.chosenShowing$ = this.chosenShowingService.chosenMovieShowing$;
     this.rows$ = this.hallService.rows$;
   }

@@ -4,15 +4,14 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { finalize, Observable } from 'rxjs';
 import { LoadingService } from '../components/loader/loader.state.service';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
+  private loadingService = inject(LoadingService);
   private totalRequests = 0;
-
-  constructor(private loadingService: LoadingService) {}
 
   intercept(
     req: HttpRequest<unknown>,

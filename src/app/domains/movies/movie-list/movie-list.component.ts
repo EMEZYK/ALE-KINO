@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Moment } from 'moment';
 import * as moment from 'moment';
@@ -13,6 +13,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./movie-list.component.css'],
 })
 export class MovieListComponent implements OnInit {
+  private movieService = inject(MovieService);
+  private choosenMovieService = inject(ChoosenMovieShowingStateService);
+  private router = inject(Router);
+
   dates: moment.Moment[] = [];
 
   currentDay = moment();
@@ -22,12 +26,6 @@ export class MovieListComponent implements OnInit {
   expandedMovieIdDescriptions: number[] = [];
   allMovieShowings: Observable<MovieWithShowingTime[]>;
   chosenShowingWithHall$: Observable<ChoosenMovieShowing>;
-
-  constructor(
-    private movieService: MovieService,
-    private choosenMovieService: ChoosenMovieShowingStateService,
-    private router: Router
-  ) {}
 
   ngOnInit(): void {
     const startDate = moment().startOf('isoWeek');

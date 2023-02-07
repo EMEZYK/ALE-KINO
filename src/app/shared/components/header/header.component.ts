@@ -66,6 +66,7 @@ export class HeaderComponent implements OnInit {
     this.isAuthenticated = false;
     this.authService.logout();
     this.isDropdownVisible = false;
+    window.location.reload();
   }
 
   navigateHome() {

@@ -1,4 +1,4 @@
-import { Ticket } from '../tickets/ticket.interface';
+import { TicketType } from '../tickets/ticket.interface';
 
 export interface Hall {
   id: number;
@@ -18,7 +18,7 @@ export interface Seat {
 
 export interface OrderItem {
   seat: Seat;
-  ticket: Ticket;
+  ticket: TicketType;
   showingId: number;
 }
 

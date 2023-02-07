@@ -68,6 +68,27 @@
       "lastName": "ktos",
       "phoneNumber": "",
       "email": "ania@ss"
+    },
+    {
+      "id": 16,
+      "firstName": "ania",
+      "lastName": "byczek",
+      "phoneNumber": "333444222",
+      "email": "aniaby@ff"
+    },
+    {
+      "id": 17,
+      "firstName": "ula",
+      "lastName": "kabula",
+      "phoneNumber": "",
+      "email": "ula@ss"
+    },
+    {
+      "id": 18,
+      "firstName": "alina",
+      "lastName": "balba",
+      "phoneNumber": "",
+      "email": "aajaj@ss"
     }
   ],
   "watchlists": [
@@ -178,20 +199,12 @@
       "description": "Voucher jest jak kod znizkowy"
     }
   ],
-  "tickets": [
-    {
-      "id": 1,
-      "ticketTypeId": 1,
-      "showingId": 1,
-      "seatId": 16
-    }
-  ],
   "showings": [
     {
       "id": 1,
       "movieId": 1,
       "hallId": 1,
-      "date": "2023-02-05",
+      "date": "2023-02-07",
       "break": 15,
       "timeFrom": "12:30",
       "timeTo": "14:00",
@@ -228,7 +241,7 @@
       "id": 2,
       "movieId": 1,
       "hallId": 2,
-      "date": "2023-02-05",
+      "date": "2023-02-07",
       "break": 15,
       "timeFrom": "16:30",
       "timeTo": "15:00",
@@ -265,7 +278,7 @@
       "id": 3,
       "movieId": 2,
       "hallId": 2,
-      "date": "2023-02-05",
+      "date": "2023-02-07",
       "break": 15,
       "timeFrom": "13:30",
       "timeTo": "15:00",

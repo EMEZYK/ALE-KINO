@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Observable, map, switchMap } from 'rxjs';
-import { Ticket } from '../../booking/tickets/ticket.interface';
+import { TicketType } from '../../booking/tickets/ticket.interface';
 import {
   Movie,
   Showing,
@@ -14,9 +14,8 @@ import {
   providedIn: 'root',
 })
 export class MovieService {
+  private http = inject(HttpClient);
   dateFormat = 'YYYY-MM-DD';
-
-  constructor(private http: HttpClient) {}
 
   getAllMovies() {
     return this.http.get<Movie[]>('movies');
@@ -91,7 +90,7 @@ export class MovieService {
     return showings.map((el) => el.movieId);
   }
 
-  getAllTickets(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>('ticketsTypes');
+  getAllTickets(): Observable<TicketType[]> {
+    return this.http.get<TicketType[]>('ticketsTypes');
   }
 }

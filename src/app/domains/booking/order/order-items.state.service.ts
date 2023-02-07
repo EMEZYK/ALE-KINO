@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, map, switchMap, tap } from 'rxjs';
 import { HallStateService } from '../hall';
 import { ChoosenMovieShowingStateService } from '../../movies/choosen-movie.state.service';
 import { LocalStorageService } from '../../../shared/local-storage/local-storage.service';
@@ -115,6 +115,16 @@ export class OrderItemsStateService {
     this.localStorageService.saveData(
       'seatTicketPairs',
       JSON.stringify(currentOrderItems)
+    );
+  }
+
+  sumTicketsValues() {
+    return this.orderItems$.pipe(
+      map((pair) =>
+        pair
+          .map((pair) => pair.ticket.price)
+          .reduce((acc, value) => acc + value, 0)
+      )
     );
   }
 }

@@ -15,8 +15,6 @@ export class FooterComponent implements OnInit {
   igIcon = faInstagramSquare;
   youtubeIcon = faYoutubeSquare;
 
-  // constructor() { }
-
   ngOnInit(): void {
     console.log('init');
   }

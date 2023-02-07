@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoadingService } from './shared/components/loader/loader.state.service';
 
@@ -8,9 +8,9 @@ import { LoadingService } from './shared/components/loader/loader.state.service'
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  loading$: Observable<boolean>;
+  private loadingService = inject(LoadingService);
 
-  constructor(private loadingService: LoadingService) {}
+  loading$: Observable<boolean>;
 
   ngOnInit(): void {
     this.loading$ = this.loadingService.loading$;

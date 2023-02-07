@@ -40,7 +40,6 @@ export class AuthLoginStateService {
             this.userStateService.setUser(user);
             this.auth$$.next({ hasAuth: true });
             localStorage.setItem('token', JSON.stringify(accessToken));
-            localStorage.setItem('user', JSON.stringify(user));
             localStorage.setItem('role', response.user.role);
 
             this.userRole = response.user.role;
@@ -56,7 +55,6 @@ export class AuthLoginStateService {
   }
 
   logout() {
-    localStorage.removeItem('user');
     localStorage.removeItem('token');
     localStorage.removeItem('role');
 
@@ -69,11 +67,6 @@ export class AuthLoginStateService {
   private manageLocalStorage() {
     if (localStorage.getItem('token')) {
       this.auth$$.next({ hasAuth: true });
-    }
-    const storedUser = localStorage.getItem('user');
-
-    if (storedUser) {
-      this.userStateService.setUser(JSON.parse(storedUser));
     }
   }
 

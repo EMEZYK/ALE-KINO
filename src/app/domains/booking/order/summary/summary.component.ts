@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { EmailConfirmationService } from 'src/app/domains/users/guest/email-confirmation.service';
@@ -9,11 +9,12 @@ import { EmailConfirmationService } from 'src/app/domains/users/guest/email-conf
   styleUrls: ['./summary.component.css'],
 })
 export class SummaryComponent {
+  private emailService = inject(EmailConfirmationService);
   public orderQrCode: string;
   public qrCodeDownloadLink: SafeUrl = '';
   userEmail$: Observable<string>;
 
-  constructor(private emailService: EmailConfirmationService) {
+  constructor() {
     this.orderQrCode = 'twojebilety.com';
     this.userEmail$ = this.emailService.email$;
   }

@@ -1,11 +1,11 @@
-import { ChoosenMovieShowing } from "../../movies/movie.interface";
+import { ChoosenMovieShowing } from '../../movies/movie.interface';
 
-export  interface Ticket {
-    id: number;
-    name: string;
-    price: number;
-    active: boolean;
-    description: string
+export interface TicketType {
+  id: number;
+  name: string;
+  price: number;
+  active: boolean;
+  description: string;
 }
 
-export interface chosenTicketsData extends Ticket, ChoosenMovieShowing {}
+export interface chosenTicketsData extends TicketType, ChoosenMovieShowing {}

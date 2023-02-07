@@ -58,12 +58,16 @@ export class BookingFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
+    this.orderItems$ = this.orderItemsService.orderItems$;
 
-    this.orderItems$ = this.orderItemsService.orderItems$.pipe(
-      tap((seatTicketPairs) => {
-        this.sumTicketsValues(seatTicketPairs);
-      })
-    );
+    this.orderItemsService
+      .sumTicketsValues()
+      .pipe(
+        tap((value) => {
+          this.sumOfTickets = value;
+        })
+      )
+      .subscribe();
 
     this.createForm();
 
@@ -145,12 +149,6 @@ export class BookingFormComponent implements OnInit, OnDestroy {
       }
       this.discountCode.setValidators([]);
     });
-  }
-
-  sumTicketsValues(seatTicketPairs: OrderItem[]) {
-    this.sumOfTickets = seatTicketPairs
-      .map((pair) => pair.ticket.price)
-      .reduce((acc, value) => acc + value, 0);
   }
 
   onSubmit(chosenShowing: ShowingWithMovie, orderItems: OrderItem[]) {

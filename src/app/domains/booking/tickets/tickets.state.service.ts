@@ -1,29 +1,30 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Ticket } from './ticket.interface';
+import { TicketType } from './ticket.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TicketsStateService {
-  private tickets$$ = new BehaviorSubject<Ticket[]>([]);
+export class TicketTypesStateService {
+  private http = inject(HttpClient);
+  private ticketTypes$$ = new BehaviorSubject<TicketType[]>([]);
 
-  get tickets$() {
-    return this.tickets$$.asObservable();
+  get ticketTypes$() {
+    return this.ticketTypes$$.asObservable();
   }
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.fetchTickets();
   }
 
   fetchTickets() {
     return this.http
-      .get<Ticket[]>('ticketsTypes')
-      .subscribe((tickets: Ticket[]) => this.tickets$$.next(tickets));
+      .get<TicketType[]>('ticketsTypes')
+      .subscribe((tickets: TicketType[]) => this.ticketTypes$$.next(tickets));
   }
 
-  setTicket(ticket) {
-    this.tickets$$.next({ ...this.tickets$$.value, ...ticket });
+  setTicket(ticket: TicketType) {
+    this.ticketTypes$$.next({ ...this.ticketTypes$$.value, ...ticket });
   }
 }
