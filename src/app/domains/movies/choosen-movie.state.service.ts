@@ -1,11 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ChoosenMovieShowing } from './movie.interface';
 import { BehaviorSubject } from 'rxjs';
+import { LocalStorageService } from 'src/app/shared/local-storage';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChoosenMovieShowingStateService {
+  private localStorageService = inject(LocalStorageService);
+
   private choosenMovie$$ = new BehaviorSubject<ChoosenMovieShowing>(null);
 
   get chosenMovieShowing$() {
@@ -13,7 +16,9 @@ export class ChoosenMovieShowingStateService {
   }
 
   constructor() {
-    const storedShowing = localStorage.getItem('storedChoosenShowing');
+    const storedShowing = this.localStorageService.getData(
+      'storedChoosenShowing'
+    );
     if (storedShowing !== '')
       this.setChoosenMovieShowing(JSON.parse(storedShowing), false);
   }
@@ -23,7 +28,7 @@ export class ChoosenMovieShowingStateService {
     showingIsStored = true
   ) {
     if (showingIsStored)
-      localStorage.setItem(
+      this.localStorageService.saveData(
         'storedChoosenShowing',
         JSON.stringify(choosenShowing)
       );

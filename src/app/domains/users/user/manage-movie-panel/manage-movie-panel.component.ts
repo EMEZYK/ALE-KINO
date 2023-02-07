@@ -7,6 +7,7 @@ import { MoviesWatchlistStateService } from '../movies-watchlist/movies-watchlis
 import { Movie } from 'src/app/domains/movies/movie.interface';
 import { WatchlistWithMovies } from '../movies-watchlist/watchlist.interface';
 import { MovieRatingStateService } from '../movie-rating/movie-rating.state.service';
+import { LocalStorageService } from 'src/app/shared/local-storage';
 
 @Component({
   selector: 'app-manage-movie-panel[movie]',
@@ -19,12 +20,14 @@ export class ManageMoviePanelComponent {
   private authService = inject(AuthLoginStateService);
   private watchlistService = inject(MoviesWatchlistStateService);
   private ratingService = inject(MovieRatingStateService);
+  private localStorageService = inject(LocalStorageService);
 
   watchlistWithMovies$: Observable<WatchlistWithMovies> =
     this.watchlistService.watchlist$;
 
   isLoggedInUser =
-    this.authService.auth$ && localStorage.getItem('role') === 'user';
+    this.authService.auth$ &&
+    this.localStorageService.getData('role') === 'user';
 
   rating: number;
   showRating = false;

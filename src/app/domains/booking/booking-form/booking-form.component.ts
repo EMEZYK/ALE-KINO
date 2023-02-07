@@ -17,6 +17,7 @@ import { Guest, User } from '../../users/user.interface';
 import { GuestApiService } from '../../users/guest/guest-api.service';
 import { OrderStateService } from '../order/order.service';
 import { ShowingWithMovie } from '../../movies/movie.interface';
+import { LocalStorageService } from 'src/app/shared/local-storage';
 
 @Component({
   selector: 'app-booking-form-page',
@@ -30,6 +31,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   private orderItemsService = inject(OrderItemsStateService);
   private emailService = inject(EmailConfirmationService);
   private router = inject(Router);
+  private localStorageService = inject(LocalStorageService);
   // private discounts$: Observable<Discount[]> = inject(DiscountCodesStateService)
   //   .discounts$;
   private guestApiService = inject(GuestApiService);
@@ -44,7 +46,8 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   });
 
   isLoggedInUser =
-    this.authService.auth$ && localStorage.getItem('role') === 'user';
+    this.authService.auth$ &&
+    this.localStorageService.getData('role') === 'user';
 
   chosenMovieShowing$: Observable<ChoosenMovieShowing>;
   orderItems$: Observable<OrderItem[]>;

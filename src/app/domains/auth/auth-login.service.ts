@@ -5,12 +5,14 @@ import { Router } from '@angular/router';
 
 import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthResponse } from './auth.interface';
+import { LocalStorageService } from 'src/app/shared/local-storage';
 
 @Injectable({ providedIn: 'root' })
 export class AuthLoginStateService {
   private http = inject(HttpClient);
   private router = inject(Router);
   private userStateService = inject(UserStateService);
+  private localStorageService = inject(LocalStorageService);
 
   private auth$$ = new BehaviorSubject<{ hasAuth: boolean }>({
     hasAuth: false,
@@ -39,8 +41,12 @@ export class AuthLoginStateService {
 
             this.userStateService.setUser(user);
             this.auth$$.next({ hasAuth: true });
-            localStorage.setItem('token', JSON.stringify(accessToken));
-            localStorage.setItem('role', response.user.role);
+            this.localStorageService.saveData(
+              'token',
+              JSON.stringify(accessToken)
+            );
+            localStorage.setItem('user', JSON.stringify(user));
+            this.localStorageService.saveData('role', response.user.role);
 
             this.userRole = response.user.role;
 
@@ -55,8 +61,9 @@ export class AuthLoginStateService {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    localStorage.removeItem('user');
+    this.localStorageService.removeData('token');
+    this.localStorageService.removeData('role');
 
     this.auth$$.next({
       ...this.auth$$.value,
@@ -65,8 +72,13 @@ export class AuthLoginStateService {
   }
 
   private manageLocalStorage() {
-    if (localStorage.getItem('token')) {
+    if (this.localStorageService.getData('token')) {
       this.auth$$.next({ hasAuth: true });
+    }
+    const storedUser = localStorage.getItem('user');
+
+    if (storedUser) {
+      this.userStateService.setUser(JSON.parse(storedUser));
     }
   }
 
