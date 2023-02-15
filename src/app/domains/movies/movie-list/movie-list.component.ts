@@ -10,9 +10,20 @@ import {
   MovieWithShowingTime,
 } from '../movie.interface';
 import { Router } from '@angular/router';
+import { DatePickerComponent } from 'src/app/shared/components/date-picker/date-picker.component';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { ManageMoviePanelComponent } from '../manage-movie-panel/manage-movie-panel.component';
 
 @Component({
   selector: 'app-movie-list',
+  standalone: true,
+  imports: [
+    DatePickerComponent,
+    AsyncPipe,
+    NgFor,
+    NgIf,
+    ManageMoviePanelComponent,
+  ],
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.css'],
 })

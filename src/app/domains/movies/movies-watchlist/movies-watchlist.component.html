@@ -1,6 +1,9 @@
 <main>
   <h1>Lista filmów, które chcę obejrzeć</h1>
   <ng-container *ngIf="watchlistWithMovies$ | async as watchlistWithMovies">
+    <ng-container *ngIf="watchlistWithMovies.movies.length === 0">
+      <p class="no-movies">Twoja lista jest jeszcze pusta :(</p>
+    </ng-container>
     <ul class="movie-list">
       <li
         *ngFor="let movie of watchlistWithMovies.movies"
@@ -21,7 +24,7 @@
             (click)="
               removeMovieFromWatchList(movie, watchlistWithMovies.watchlist)
             "
-            text="Chcę obejrzeć "
+            text="Nie chcę obejrzeć "
             [icon]="eyeIcon"
             class="on-watchlist"
           ></app-button>

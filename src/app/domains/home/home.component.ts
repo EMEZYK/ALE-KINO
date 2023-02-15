@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   styles: [
     `
       .home-wrapper {
-        width: 100vw;
+        width: 100%;
         height: auto;
         margin: 0 auto;
         align-items: center;
@@ -27,6 +27,5 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.selectedDate = this.route.snapshot.paramMap.get('date');
-    console.log(this.selectedDate);
   }
 }

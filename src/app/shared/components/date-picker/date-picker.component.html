@@ -3,8 +3,9 @@
     <button
       *ngIf="date"
       (click)="chooseDate(date)"
-      class="current-day-btn"
       [disabled]="isDisabled(date)"
+      class="current-day-btn"
+      [ngClass]="{ active: date === selectedDate }"
     >
       {{ date.format('DD/MM') }}
     </button>

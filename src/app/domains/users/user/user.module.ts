@@ -3,12 +3,17 @@ import { CommonModule } from '@angular/common';
 import { USER_ROUTES } from './user.routes';
 import { UserHomePageComponent } from './user-home-page.component';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { MoviesToWatchComponent } from './movies-watchlist/movies-watchlist.component';
+import { MoviesToWatchComponent } from '../../movies/movies-watchlist/movies-watchlist.component';
+import { MovieListComponent } from '../../movies/movie-list';
 
 @NgModule({
-  declarations: [UserHomePageComponent, MoviesToWatchComponent],
-  imports: [CommonModule, RouterModule.forChild(USER_ROUTES), SharedModule],
+  declarations: [UserHomePageComponent],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(USER_ROUTES),
+    MoviesToWatchComponent,
+    MovieListComponent,
+  ],
   providers: [],
 })
 export class UserModule {}

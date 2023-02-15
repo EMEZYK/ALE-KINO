@@ -1,6 +1,6 @@
 <div class="side-panel">
   <ng-container *ngIf="getOveralRating(movie.id) | async as overalRating">
-    <div class="rating">{{ overalRating }}/5</div>
+    <div class="rating">{{ overalRating }}/10</div>
     <ng-container *ngIf="isLoggedInUser">
       <ng-container *ngIf="watchlistWithMovies$ | async as watchlistWithMovies">
         <ng-container
@@ -40,14 +40,13 @@
 
         <app-button
           (click)="toggleWatchlist(movie, watchlistWithMovies)"
-          text="Chcę obejrzeć"
+          [text]="
+            checkIfMovieIsOnWatchlist(movie, watchlistWithMovies)
+              ? 'Nie chcę obejrzeć'
+              : 'Chcę obejrzeć'
+          "
+          class="on-watchlist"
           [icon]="eyeIcon"
-          [ngClass]="{
-            'on-watchlist': checkIfMovieIsOnWatchlist(
-              movie,
-              watchlistWithMovies
-            )
-          }"
         ></app-button>
       </ng-container>
     </ng-container>

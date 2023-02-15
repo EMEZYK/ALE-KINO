@@ -44,9 +44,12 @@ a {
   color: #fff;
   text-decoration: none;
 }
-button:hover,
-button:focus {
+button:hover {
   background-color: #fff;
+}
+
+button:hover {
+  color: #172032 !important;
 }
 
 a:hover {

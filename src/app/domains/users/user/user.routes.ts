@@ -3,8 +3,8 @@ import { Routes } from '@angular/router';
 import { BookingFormComponent } from '../../booking/booking-form';
 import { HallComponent } from '../../booking/hall';
 import { SummaryComponent } from '../../booking/order/summary';
-import { MoviesToWatchComponent } from './movies-watchlist/movies-watchlist.component';
 import { UserHomePageComponent } from './user-home-page.component';
+import { MoviesToWatchComponent } from '../../movies/movies-watchlist/movies-watchlist.component';
 
 export const USER_ROUTES: Routes = [
   {

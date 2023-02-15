@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, switchMap, tap } from 'rxjs';
-import { HallStateService } from '../hall';
+import { BehaviorSubject, map, tap } from 'rxjs';
 import { ChoosenMovieShowingStateService } from '../../movies/choosen-movie.state.service';
 import { LocalStorageService } from '../../../shared/local-storage/local-storage.service';
 import { OrderItem, Seat, UnavailableSeats } from '../hall/hall.interface';
@@ -9,7 +8,6 @@ import { OrderItem, Seat, UnavailableSeats } from '../hall/hall.interface';
   providedIn: 'root',
 })
 export class OrderItemsStateService {
-  private hallService = inject(HallStateService);
   private choosenMovieShowingService = inject(ChoosenMovieShowingStateService);
   private localStorageService = inject(LocalStorageService);
 
@@ -41,9 +39,6 @@ export class OrderItemsStateService {
               row: unavailableSeat.row,
             };
           });
-        }),
-        switchMap((chosenShowing) => {
-          return this.hallService.fetchSeats(chosenShowing.hallId);
         })
       )
       .subscribe();
@@ -80,6 +75,7 @@ export class OrderItemsStateService {
       ]);
     } else {
       currentOrderItems.splice(indexOfSeat, 1);
+      this.deleteChosenSeatAndTicket({ seat, ticket: null, showingId });
       this.orderItems$$.next(currentOrderItems);
     }
   }

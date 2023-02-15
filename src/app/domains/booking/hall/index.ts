@@ -1,3 +1,3 @@
-export * from './hall.component'
-export * from './hall.state.service'
-export * from './hall.interface'
+export * from './hall.component';
+export * from './hall.api.service';
+export * from './hall.interface';

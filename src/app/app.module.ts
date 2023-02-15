@@ -18,29 +18,32 @@ import { SummaryComponent } from './domains/booking/order/summary';
 import { APP_ROUTES } from './app.routes';
 import { LoadingSpinnerComponent } from './shared/components/loader/loader.component';
 import { LoadingInterceptor } from './shared/interceptors';
-import { SharedModule } from './shared/shared.module';
 import { PaymentComponent } from './domains/booking/payment';
 import { NumberDirective } from './shared/directives/numbers-only.directive';
 import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment/cancel-payment.component';
+import { DatePickerComponent } from './shared/components/date-picker/date-picker.component';
+import { MovieListComponent } from './domains/movies/movie-list';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
     BookingFormComponent,
     LoginComponent,
     HomeComponent,
     SummaryComponent,
-    LoadingSpinnerComponent,
-    PaymentComponent,
-    NumberDirective,
-    CancelPaymentComponent,
   ],
   imports: [
     BrowserModule,
+    NumberDirective,
+    CancelPaymentComponent,
+    PaymentComponent,
+    HeaderComponent,
+    MovieListComponent,
+    FooterComponent,
+    LoadingSpinnerComponent,
     HttpClientModule,
     FontAwesomeModule,
+    DatePickerComponent,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
@@ -48,7 +51,6 @@ import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment
     RouterModule.forRoot(APP_ROUTES, {
       preloadingStrategy: PreloadAllModules,
     }),
-    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },

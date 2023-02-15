@@ -6,11 +6,16 @@ import { ShowingWithMovie } from '../../movies/movie.interface';
 import { Order } from '../order';
 import { OrderStateService } from '../order/order.service';
 import { OrderItemsStateService } from '../order';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
 
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css'],
+  standalone: true,
+  imports: [NgIf, ButtonComponent, AsyncPipe, NumberDirective],
 })
 export class PaymentComponent {
   private router = inject(Router);

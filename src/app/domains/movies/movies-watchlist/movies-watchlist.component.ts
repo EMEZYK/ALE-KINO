@@ -1,6 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 
 import { MoviesWatchlistStateService } from './movies-watchlist.service';
 import { Watchlist, WatchlistWithMovies } from './watchlist.interface';
@@ -11,6 +13,8 @@ import { MovieRatingStateService } from '../movie-rating/movie-rating.state.serv
   selector: 'app-movies-to-watch',
   templateUrl: './movies-watchlist.component.html',
   styleUrls: ['./movies-watchlist.component.css'],
+  standalone: true,
+  imports: [ButtonComponent, NgIf, NgFor, AsyncPipe],
 })
 export class MoviesToWatchComponent implements OnInit {
   private watchlistService = inject(MoviesWatchlistStateService);

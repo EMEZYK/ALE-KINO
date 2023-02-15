@@ -29,3 +29,7 @@
 .current-day-btn:hover {
   background-color: #ddd;
 }
+
+.current-day-btn.active {
+  border: 3px solid #ffb300;
+}

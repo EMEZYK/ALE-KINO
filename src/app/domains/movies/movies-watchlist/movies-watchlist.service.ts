@@ -5,8 +5,8 @@ import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { MovieService } from 'src/app/domains/movies/movie-list';
 import { Movie } from 'src/app/domains/movies/movie.interface';
-import { User } from '../../user.interface';
 import { Watchlist, WatchlistWithMovies } from './watchlist.interface';
+import { User } from '../../users/user.interface';
 
 @Injectable({
   providedIn: 'root',
