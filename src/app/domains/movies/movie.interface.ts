@@ -1,4 +1,4 @@
-import { Seat } from "../booking/hall/hall.interface";
+import { Seat } from '../booking/hall/hall.interface';
 
 export interface Movie {
   id: number;
@@ -16,6 +16,7 @@ export interface Movie {
 export interface Showing {
   id: number;
   movieId: number;
+  movie?: Movie;
   hallId: number;
   date: string;
   break: number;
@@ -24,7 +25,6 @@ export interface Showing {
   paidSeats: Seat[];
   bookedSeats: Seat[];
 }
-
 
 interface Hall {
   id: number;
@@ -35,10 +35,9 @@ interface Hall {
 }
 
 interface Genre {
-  id: number,
-  name: string
+  id: number;
+  name: string;
 }
-
 
 export interface ChoosenMovieShowing extends Movie, Showing, Hall {}
 
@@ -49,4 +48,3 @@ export interface ShowingWithMovie extends Showing {
 export interface MovieWithShowingTime extends Movie {
   showings: Showing[];
 }
-

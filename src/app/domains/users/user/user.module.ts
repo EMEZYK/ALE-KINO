@@ -5,6 +5,7 @@ import { UserHomePageComponent } from './user-home-page.component';
 import { RouterModule } from '@angular/router';
 import { MoviesToWatchComponent } from '../../movies/movies-watchlist/movies-watchlist.component';
 import { MovieListComponent } from '../../movies/movie-list';
+import { OrderListComponent } from '../../booking/order/order-list/order-list.component';
 
 @NgModule({
   declarations: [UserHomePageComponent],
@@ -13,6 +14,7 @@ import { MovieListComponent } from '../../movies/movie-list';
     RouterModule.forChild(USER_ROUTES),
     MoviesToWatchComponent,
     MovieListComponent,
+    OrderListComponent,
   ],
   providers: [],
 })

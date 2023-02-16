@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { Seat } from './hall.interface';
 
@@ -29,5 +29,8 @@ export class HallApiService {
         return seatsMap;
       })
     );
+  }
+  fetchAllSeats(): Observable<Seat[]> {
+    return this.http.get<Seat[]>(`seats`);
   }
 }

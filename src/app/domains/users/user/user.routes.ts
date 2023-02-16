@@ -5,6 +5,7 @@ import { HallComponent } from '../../booking/hall';
 import { SummaryComponent } from '../../booking/order/summary';
 import { UserHomePageComponent } from './user-home-page.component';
 import { MoviesToWatchComponent } from '../../movies/movies-watchlist/movies-watchlist.component';
+import { OrderListComponent } from '../../booking/order/order-list/order-list.component';
 
 export const USER_ROUTES: Routes = [
   {
@@ -16,7 +17,7 @@ export const USER_ROUTES: Routes = [
     children: [
       {
         path: 'orders',
-        component: UserHomePageComponent,
+        component: OrderListComponent,
       },
       {
         path: 'wishlist',
