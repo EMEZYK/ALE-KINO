@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { MoviesToWatchComponent } from '../../movies/movies-watchlist/movies-watchlist.component';
 import { MovieListComponent } from '../../movies/movie-list';
 import { OrderListComponent } from '../../booking/order/order-list/order-list.component';
+import { OrderDetailsComponent } from '../../booking/order/order-details/order-details.component';
+import { HomeComponent } from '../../home/home.component';
 
 @NgModule({
   declarations: [UserHomePageComponent],
@@ -15,7 +17,9 @@ import { OrderListComponent } from '../../booking/order/order-list/order-list.co
     MoviesToWatchComponent,
     MovieListComponent,
     OrderListComponent,
+    OrderDetailsComponent,
   ],
-  providers: [],
+
+  providers: [HomeComponent],
 })
 export class UserModule {}

@@ -3,6 +3,7 @@
   <ng-container *ngIf="userEmail$ | async as userEmail">
     <h3>Twoje bilety zostały wysłane na adres email: {{ userEmail }}</h3>
   </ng-container>
+
   <qrcode
     elementType="svg"
     (qrCodeURL)="onChangeUrl($event)"
@@ -11,10 +12,27 @@
     [errorCorrectionLevel]="'M'"
     class="qr-code"
   ></qrcode>
+
   <div class="download-link">
     <a [href]="qrCodeDownloadLink" download="qrcode"
       >Pobierz qr code z biletami</a
     >
   </div>
+
+  <p>Link do Twoich biletów:</p>
+  <a routerLink="/booking/orders/12">Link</a>
 </div>
-<a routerLink="/home" class="back-link">Wróć na stronę główną</a>
+
+<a routerLink="/home" class="back-link"> Wróć na stronę główną</a>
+
+<!-- <img
+    [src]="
+      'https://barcodeapi.org/api/qr/http%3A%2F%2Flocalhost%3A4200%2Fuser%2Forders%2F' +
+      12
+    "
+  /> -->
+
+<!-- <img
+    src="https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Flocalhost%3A4200%2Fbooking%2Fsummary%2F1%2FPod%2520os%25C5%2582on%25C4%2585%2520nocy&chs=180x180&choe=UTF-8&chld=L|2"
+    alt=""
+  /> -->

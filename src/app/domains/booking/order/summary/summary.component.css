@@ -31,3 +31,11 @@ a {
 .back-link {
   margin: 0 0 1rem 0;
 }
+
+img {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
+  margin: 1rem 0 0 0;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+}

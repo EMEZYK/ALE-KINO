@@ -23,6 +23,7 @@ import { NumberDirective } from './shared/directives/numbers-only.directive';
 import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment/cancel-payment.component';
 import { DatePickerComponent } from './shared/components/date-picker/date-picker.component';
 import { MovieListComponent } from './domains/movies/movie-list';
+import { OrderDetailsComponent } from './domains/booking/order/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MovieListComponent } from './domains/movies/movie-list';
   ],
   imports: [
     BrowserModule,
+    OrderDetailsComponent,
     NumberDirective,
     CancelPaymentComponent,
     PaymentComponent,

@@ -1,12 +1,11 @@
 import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { NgFor, NgIf } from '@angular/common';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { tap } from 'rxjs';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { OrderStateService } from '../order.service';
-import { NgFor, NgIf } from '@angular/common';
 import { OrderDisplay, UserOrder } from '../order.interface';
-import { RouterModule } from '@angular/router';
-import { Router } from '@angular/router';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-order-list',
@@ -18,6 +17,7 @@ import { tap } from 'rxjs';
 export class OrderListComponent implements OnInit {
   private orderService = inject(OrderStateService);
   private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
 
   userOrders: UserOrder[] = [];
   dataSource = new MatTableDataSource<OrderDisplay>([]);
@@ -30,7 +30,7 @@ export class OrderListComponent implements OnInit {
   columnHeaders: { [key: string]: string } = {
     orderDate: 'Data zamówienia',
     movieTitle: 'Nazwa filmu',
-    numberOfTickets: 'Liczba biletów',
+    numberOfTickets: 'Ilość biletów',
     details: 'Szczegóły',
   };
 
@@ -46,8 +46,7 @@ export class OrderListComponent implements OnInit {
             orderDate: order.showingWithMovie.date,
             movieTitle: order.showingWithMovie.movie.title,
             numberOfTickets: order.seatTickets.length,
-            details: { id: 1, text: 'Zobacz szczegóły' },
-            // details: { id: order.id, text: 'Zobacz szczegóły' },
+            details: { id: order.orderId, text: 'Zobacz szczegóły' },
           }));
           this.dataSource.data = orders;
           this.dataSource.paginator = this.paginator;
@@ -57,6 +56,8 @@ export class OrderListComponent implements OnInit {
   }
 
   viewOrderDetails(orderId: string): void {
-    this.router.navigate(['/order', orderId]);
+    this.router.navigate(['../orders', orderId], {
+      relativeTo: this.activatedRoute,
+    });
   }
 }

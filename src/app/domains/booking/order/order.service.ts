@@ -62,7 +62,7 @@ export class OrderStateService {
           this.hallService.fetchAllSeats(),
         ]);
       }),
-      tap((val) => console.log(val)),
+      // tap((val) => console.log(val)),
       map(([userOrders, tickets, showings, seats]): UserOrder[] => {
         return userOrders.map((order: Order) => {
           const showing: Showing = showings.find(
@@ -81,10 +81,11 @@ export class OrderStateService {
           return {
             showingWithMovie: { ...showing, movie: showing.movie },
             seatTickets: seatTickets,
+            orderId: order.id,
           };
         });
-      }),
-      tap((val) => console.log('wynik', val))
+      })
+      // tap((val) => console.log('wynik', val))
     );
   }
 

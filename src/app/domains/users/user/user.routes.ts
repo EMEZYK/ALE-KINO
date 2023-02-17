@@ -6,6 +6,8 @@ import { SummaryComponent } from '../../booking/order/summary';
 import { UserHomePageComponent } from './user-home-page.component';
 import { MoviesToWatchComponent } from '../../movies/movies-watchlist/movies-watchlist.component';
 import { OrderListComponent } from '../../booking/order/order-list/order-list.component';
+import { OrderDetailsComponent } from '../../booking/order/order-details/order-details.component';
+import { HomeComponent } from '../../home/home.component';
 
 export const USER_ROUTES: Routes = [
   {
@@ -18,6 +20,10 @@ export const USER_ROUTES: Routes = [
       {
         path: 'orders',
         component: OrderListComponent,
+      },
+      {
+        path: 'orders/:id',
+        component: OrderDetailsComponent,
       },
       {
         path: 'wishlist',

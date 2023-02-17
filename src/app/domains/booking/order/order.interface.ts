@@ -3,6 +3,7 @@ import { TicketType } from '../tickets';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 
 export interface Order {
+  id?: number;
   userId: number;
   orderItems: {
     seatId: number;
@@ -20,6 +21,7 @@ interface SeatTicket {
 export interface UserOrder {
   showingWithMovie: ShowingWithMovie;
   seatTickets: SeatTicket[];
+  orderId: number;
 }
 
 export interface OrderDisplay {

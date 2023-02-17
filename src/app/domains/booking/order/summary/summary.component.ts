@@ -10,13 +10,15 @@ import { EmailConfirmationService } from 'src/app/domains/users/guest/email-conf
 })
 export class SummaryComponent {
   private emailService = inject(EmailConfirmationService);
+  userEmail$: Observable<string>;
   public orderQrCode: string;
   public qrCodeDownloadLink: SafeUrl = '';
-  userEmail$: Observable<string>;
+
+  // BASE_QRCODE_URL = `https://barcodeapi.org/api/qr/`;
 
   constructor() {
-    this.orderQrCode = 'twojebilety.com';
     this.userEmail$ = this.emailService.email$;
+    this.orderQrCode = 'http://localhost:4200/user/orders/12';
   }
 
   onChangeUrl(url: SafeUrl) {

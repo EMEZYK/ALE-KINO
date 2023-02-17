@@ -8,6 +8,7 @@ import { PaymentComponent } from './domains/booking/payment';
 import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment/cancel-payment.component';
 import { HomeComponent } from './domains/home/home.component';
 import * as moment from 'moment';
+import { OrderDetailsComponent } from './domains/booking/order/order-details/order-details.component';
 
 const date = moment().format('YYYY-MM-DD');
 
@@ -21,6 +22,7 @@ export const APP_ROUTES: Routes = [
       { path: 'payment/:id/:title', component: PaymentComponent },
       { path: 'payment/:id/:title/cancel', component: CancelPaymentComponent },
       { path: 'summary/:id/:title', component: SummaryComponent },
+      { path: 'orders/:id', component: OrderDetailsComponent },
     ],
   },
   {
