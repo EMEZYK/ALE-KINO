@@ -52,7 +52,7 @@ export class PaymentComponent {
 
     this.router.navigate([
       '/booking/summary',
-      chosenMoving.id,
+      orderId,
       chosenMoving.movie.title,
     ]);
   }

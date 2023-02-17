@@ -50,7 +50,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     this.localStorageService.getData('role') === 'user';
 
   chosenMovieShowing$: Observable<ChoosenMovieShowing>;
-  orderItems$: Observable<SeatTicket[]>;
+  seatTickets$: Observable<SeatTicket[]>;
   user: User;
   bookingForm: FormGroup;
   submitted = false;
@@ -61,7 +61,8 @@ export class BookingFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
-    this.orderItems$ = this.orderItemsService.seatTickets$;
+    this.seatTickets$ = this.orderItemsService.seatTickets$;
+    this.order;
 
     this.orderItemsService
       .sumTicketsValues()

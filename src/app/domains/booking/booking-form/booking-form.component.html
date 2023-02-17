@@ -1,5 +1,5 @@
 <ng-container *ngIf="chosenMovieShowing$ | async as chosenMovieShowing">
-  <ng-container *ngIf="orderItems$ | async as orderItems">
+  <ng-container *ngIf="seatTickets$ | async as orderItems">
     <div class="booking-form-wrapper">
       <div class="choosen-showing-info">
         <h1 class="movie-title">{{ chosenMovieShowing.movie.title }}</h1>
@@ -25,10 +25,10 @@
           <div></div>
         </div>
       </div>
-
+      <!-- <ng-container *ngIf="order$ | async as order"> -->
       <form
         [formGroup]="bookingForm"
-        (ngSubmit)="onSubmit(chosenMovieShowing, orderItems)"
+        (ngSubmit)="onSubmit(chosenMovieShowing, orderItems, order)"
         class="booking-form"
       >
         <div class="form-group">
@@ -150,6 +150,7 @@
           Zamawiam!
         </button>
       </form>
+      <!-- </ng-container> -->
     </div>
     <div class="back-link">
       <button (click)="navigateToHall(chosenMovieShowing)">

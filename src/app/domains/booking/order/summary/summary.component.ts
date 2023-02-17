@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { EmailConfirmationService } from 'src/app/domains/users/guest/email-confirmation.service';
+import { OrderStateService } from '../order.service';
 
 @Component({
   selector: 'app-summary-page',
@@ -10,15 +11,22 @@ import { EmailConfirmationService } from 'src/app/domains/users/guest/email-conf
 })
 export class SummaryComponent {
   private emailService = inject(EmailConfirmationService);
+  private orderService = inject(OrderStateService);
   userEmail$: Observable<string>;
   public orderQrCode: string;
   public qrCodeDownloadLink: SafeUrl = '';
-
-  // BASE_QRCODE_URL = `https://barcodeapi.org/api/qr/`;
+  orderId: number;
 
   constructor() {
     this.userEmail$ = this.emailService.email$;
-    this.orderQrCode = 'http://localhost:4200/user/orders/12';
+    this.orderService.order$
+      .pipe(
+        tap((order) => {
+          this.orderId = order.id;
+        })
+      )
+      .subscribe();
+    this.orderQrCode = `http://localhost:4200/user/orders/${this.orderId}`;
   }
 
   onChangeUrl(url: SafeUrl) {
