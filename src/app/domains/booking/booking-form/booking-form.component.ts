@@ -5,9 +5,9 @@ import { Observable, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
 import { ChoosenMovieShowingStateService } from '../../movies';
-import { OrderItem } from '../hall/hall.interface';
+import { SeatTicket } from '../hall/hall.interface';
 import { Order } from '../order/order.interface';
-import { OrderItemsStateService } from '../order';
+import { SeatTicketsStateService } from '../order';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
@@ -28,7 +28,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   private authService = inject(AuthLoginStateService);
   private builder = inject(NonNullableFormBuilder);
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
-  private orderItemsService = inject(OrderItemsStateService);
+  private orderItemsService = inject(SeatTicketsStateService);
   private emailService = inject(EmailConfirmationService);
   private router = inject(Router);
   private localStorageService = inject(LocalStorageService);
@@ -50,18 +50,18 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     this.localStorageService.getData('role') === 'user';
 
   chosenMovieShowing$: Observable<ChoosenMovieShowing>;
-  orderItems$: Observable<OrderItem[]>;
+  orderItems$: Observable<SeatTicket[]>;
   user: User;
   bookingForm: FormGroup;
   submitted = false;
   order: Order[];
   ticketPrice: number;
   sumOfTickets = 0;
-  setSeatTicketPairs: OrderItem[];
+  setSeatTicketPairs: SeatTicket[];
 
   ngOnInit(): void {
     this.chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
-    this.orderItems$ = this.orderItemsService.orderItems$;
+    this.orderItems$ = this.orderItemsService.seatTickets$;
 
     this.orderItemsService
       .sumTicketsValues()
@@ -154,7 +154,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSubmit(chosenShowing: ShowingWithMovie, orderItems: OrderItem[]) {
+  onSubmit(chosenShowing: ShowingWithMovie, orderItems: SeatTicket[]) {
     this.bookingForm.markAllAsTouched();
 
     if (this.bookingForm.invalid) {
@@ -177,7 +177,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
         switchMap((guest) =>
           this.orderService.addOrder({
             userId: guest.id,
-            orderItems: orderItems.map((orderItem: OrderItem) => {
+            orderItems: orderItems.map((orderItem: SeatTicket) => {
               return {
                 seatId: orderItem.seat.id,
                 ticketId: orderItem.ticket.id,

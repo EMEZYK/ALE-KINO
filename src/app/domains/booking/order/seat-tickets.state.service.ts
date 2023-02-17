@@ -2,19 +2,19 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, tap } from 'rxjs';
 import { ChoosenMovieShowingStateService } from '../../movies/choosen-movie.state.service';
 import { LocalStorageService } from '../../../shared/local-storage/local-storage.service';
-import { OrderItem, Seat, UnavailableSeats } from '../hall/hall.interface';
+import { SeatTicket, Seat, UnavailableSeats } from '../hall/hall.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class OrderItemsStateService {
+export class SeatTicketsStateService {
   private choosenMovieShowingService = inject(ChoosenMovieShowingStateService);
   private localStorageService = inject(LocalStorageService);
 
-  private orderItems$$ = new BehaviorSubject<OrderItem[]>([]);
+  private seatTickets$$ = new BehaviorSubject<SeatTicket[]>([]);
 
-  get orderItems$() {
-    return this.orderItems$$.asObservable();
+  get seatTickets$() {
+    return this.seatTickets$$.asObservable();
   }
 
   unavailableSeats: UnavailableSeats[];
@@ -50,44 +50,44 @@ export class OrderItemsStateService {
     );
   }
 
-  setOrderItems(pair: OrderItem[], shouldStore = true) {
+  setOrderItems(pair: SeatTicket[], shouldStore = true) {
     if (shouldStore) {
       this,
         this.localStorageService.saveData(
           'seatTicketPairs',
           JSON.stringify(pair)
         );
-      this.orderItems$$.next(pair);
+      this.seatTickets$$.next(pair);
     }
   }
 
   clickChosenSeat(seat: Seat, showingId: number) {
-    const currentOrderItems = this.orderItems$$.getValue();
+    const currentOrderItems = this.seatTickets$$.getValue();
 
     const indexOfSeat = currentOrderItems.findIndex(
       (el) => el.seat.column === seat.column && el.seat.row === seat.row
     );
 
     if (indexOfSeat === -1) {
-      this.orderItems$$.next([
-        ...this.orderItems$$.value,
+      this.seatTickets$$.next([
+        ...this.seatTickets$$.value,
         { seat, ticket: null, showingId },
       ]);
     } else {
       currentOrderItems.splice(indexOfSeat, 1);
       this.deleteChosenSeatAndTicket({ seat, ticket: null, showingId });
-      this.orderItems$$.next(currentOrderItems);
+      this.seatTickets$$.next(currentOrderItems);
     }
   }
 
   checkIfSeatIsChosen(seat: Seat) {
-    const currentOrderItems = this.orderItems$$.getValue();
+    const currentOrderItems = this.seatTickets$$.getValue();
 
     return currentOrderItems.some((el) => el.seat.id === seat.id);
   }
 
-  selectTicket(seat: OrderItem) {
-    const currentOrderItems = this.orderItems$$.getValue();
+  selectTicket(seat: SeatTicket) {
+    const currentOrderItems = this.seatTickets$$.getValue();
 
     const updated = currentOrderItems.map((el) => {
       if (el.seat === seat.seat) {
@@ -95,11 +95,11 @@ export class OrderItemsStateService {
       }
       return el;
     });
-    this.orderItems$$.next(updated);
+    this.seatTickets$$.next(updated);
   }
 
-  deleteChosenSeatAndTicket(orderItem: OrderItem) {
-    const currentOrderItems = this.orderItems$$.getValue();
+  deleteChosenSeatAndTicket(orderItem: SeatTicket) {
+    const currentOrderItems = this.seatTickets$$.getValue();
 
     currentOrderItems.forEach((item, index) => {
       if (item === orderItem) {
@@ -107,7 +107,7 @@ export class OrderItemsStateService {
       }
     });
 
-    this.orderItems$$.next(currentOrderItems);
+    this.seatTickets$$.next(currentOrderItems);
     this.localStorageService.saveData(
       'seatTicketPairs',
       JSON.stringify(currentOrderItems)
@@ -115,7 +115,7 @@ export class OrderItemsStateService {
   }
 
   sumTicketsValues() {
-    return this.orderItems$.pipe(
+    return this.seatTickets$.pipe(
       map((pair) =>
         pair
           .map((pair) => pair.ticket.price)

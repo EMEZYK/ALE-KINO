@@ -7,7 +7,7 @@ import { Location, NgIf, AsyncPipe } from '@angular/common';
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User } from 'src/app/domains/users/user.interface';
-import { OrderItemsStateService } from 'src/app/domains/booking/order';
+import { SeatTicketsStateService } from 'src/app/domains/booking/order';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 import { ButtonComponent } from '../button/button.component';
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   private userService = inject(UserStateService);
   private router = inject(Router);
   private location = inject(Location);
-  order$ = inject(OrderItemsStateService).orderItems$.pipe(
+  order$ = inject(SeatTicketsStateService).seatTickets$.pipe(
     map((orderItems) => {
       return orderItems ? orderItems.length : 0;
     })

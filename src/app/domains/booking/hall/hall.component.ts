@@ -12,8 +12,8 @@ import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { TicketType } from '../tickets';
 import { ChoosenMovieShowing } from '../../movies/movie.interface';
-import { OrderItem, Seat } from './hall.interface';
-import { OrderItemsStateService } from '../order';
+import { SeatTicket, Seat } from './hall.interface';
+import { SeatTicketsStateService } from '../order';
 import { TicketTypesStateService } from '../tickets';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { HallApiService } from './hall.api.service';
@@ -40,7 +40,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   providers: [HallApiService],
 })
 export class HallComponent implements OnInit {
-  private orderService = inject(OrderItemsStateService);
+  private orderService = inject(SeatTicketsStateService);
   private localStorageService = inject(LocalStorageService);
   private ticketsService = inject(TicketTypesStateService);
   private chosenShowingService = inject(ChoosenMovieShowingStateService);
@@ -49,7 +49,7 @@ export class HallComponent implements OnInit {
   tickets$: Observable<TicketType[]>;
   rows$: Observable<{ [key: string]: { [key: number]: Seat } }>;
   chosenShowing$: Observable<ChoosenMovieShowing>;
-  orderItems$: Observable<OrderItem[]> = this.orderService.orderItems$;
+  orderItems$: Observable<SeatTicket[]> = this.orderService.seatTickets$;
   seat: Seat;
   arrowIcon = faArrowDown;
   trashIcon = faTrash;
@@ -60,7 +60,7 @@ export class HallComponent implements OnInit {
 
     this.rows$ = this.chosenShowing$.pipe(
       switchMap((chosenShowing) => {
-        return this.hallService.fetchSeats(chosenShowing.hallId);
+        return this.hallService.fetchHallSeats(chosenShowing.hallId);
       })
     );
   }
@@ -77,15 +77,15 @@ export class HallComponent implements OnInit {
     return this.orderService.checkIfSeatIsChosen(seat);
   }
 
-  selectTicket(orderItem: OrderItem): void {
+  selectTicket(orderItem: SeatTicket): void {
     this.orderService.selectTicket(orderItem);
   }
 
-  deleteChosenTicket(chosenItem: OrderItem) {
+  deleteChosenTicket(chosenItem: SeatTicket) {
     this.orderService.deleteChosenSeatAndTicket(chosenItem);
   }
 
-  saveChosenSeatsAndTicketsInLocalStorage(orderItems: OrderItem[]) {
+  saveChosenSeatsAndTicketsInLocalStorage(orderItems: SeatTicket[]) {
     this.localStorageService.saveData(
       'seatTicketPairs',
       JSON.stringify(orderItems)

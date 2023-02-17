@@ -50,7 +50,11 @@ export class OrderStateService {
       .subscribe();
   }
 
-  getOrdersByUser(): Observable<UserOrder[]> {
+  getOrder(orderId: number) {
+    return this.http.get<Order>(`orders/${orderId}`);
+  }
+
+  getUserOrders(): Observable<UserOrder[]> {
     return this.userService.user$.pipe(
       switchMap((user: User) => {
         const orders$ = this.http.get<Order[]>(`orders?userId=${user.id}`);

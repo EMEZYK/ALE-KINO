@@ -1,2 +1,2 @@
-export * from './order-items.state.service';
+export * from './seat-tickets.state.service';
 export * from './order.interface';

@@ -38,7 +38,7 @@ export class OrderListComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderService
-      .getOrdersByUser()
+      .getUserOrders()
       .pipe(
         tap((userOrders) => {
           this.userOrders = userOrders;

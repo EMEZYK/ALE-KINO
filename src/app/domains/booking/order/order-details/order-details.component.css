@@ -1,0 +1,57 @@
+:host {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.mat-card {
+  color: #000;
+  width: 50%;
+  height: auto;
+  padding: 20px;
+}
+
+.ticket-info {
+  width: 80%;
+  font-size: 1.6rem;
+  display: flex;
+  margin: 10px;
+}
+
+mat-card-content {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card-header {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 0;
+}
+
+mat-card-title {
+  display: block;
+  width: 100%;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+.tickets-sum {
+  margin: 0;
+  text-align: right;
+  font-size: 1.8rem;
+  margin: 20px 0 0 0;
+}
+
+mat-card-subtitle {
+  width: 100%;
+  display: flex;
+  font-size: 20px;
+  margin-bottom: 20px;
+}

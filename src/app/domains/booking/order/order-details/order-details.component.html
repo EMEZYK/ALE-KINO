@@ -1,1 +1,48 @@
-<p>order-details works!</p>
+<ng-container *ngIf="isLoggedInUser; else guest">
+  <ng-container>
+    <mat-card class="mat-card">
+      <mat-card-header>
+        <mat-card-title>{{
+          userOrder.showingWithMovie.movie.title
+        }}</mat-card-title>
+        <mat-card-subtitle>
+          <span>data: {{ userOrder.showingWithMovie.date }}</span>
+          <span>godz. {{ userOrder.showingWithMovie.timeFrom }}</span>
+          <span>sala nr: {{ userOrder.showingWithMovie.hallId }}</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <li *ngFor="let ticket of userOrder.seatTickets" class="ticket-info">
+          <span>Rząd: {{ ticket.seat.row }} </span>
+          <span>Miejsce: {{ ticket.seat.column }}</span>
+          <span>Cena: {{ ticket.ticket.price }} zł</span>
+        </li>
+      </mat-card-content>
+      <!-- <p class="tickets-sum">Razem: {{ sumOfTickets }} zł</p> -->
+    </mat-card>
+  </ng-container>
+</ng-container>
+<ng-template #guest>
+  <ng-container *ngIf="chosenMovieShowing$ | async as chosenShowing">
+    <ng-container *ngIf="seatTickets$ | async as seatTickets">
+      <mat-card class="mat-card">
+        <mat-card-header>
+          <mat-card-title>{{ chosenShowing.movie.title }}</mat-card-title>
+          <mat-card-subtitle>
+            <span>data: {{ chosenShowing.date }}</span>
+            <span>godz. {{ chosenShowing.timeFrom }}</span>
+            <span>sala nr: {{ chosenShowing.hall.number }}</span>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <li *ngFor="let ticket of orderItems" class="ticket-info">
+            <span>Rząd: {{ ticket.seat.row }} </span>
+            <span>Miejsce: {{ ticket.seat.column }}</span>
+            <span>Cena: {{ ticket.ticket.price }} zł</span>
+          </li>
+        </mat-card-content>
+        <p class="tickets-sum">Razem: {{ sumOfTickets }} zł</p>
+      </mat-card>
+    </ng-container>
+  </ng-container>
+</ng-template>

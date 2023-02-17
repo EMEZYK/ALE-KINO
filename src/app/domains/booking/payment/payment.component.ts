@@ -5,7 +5,7 @@ import { ChoosenMovieShowingStateService } from '../../movies';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 import { Order } from '../order';
 import { OrderStateService } from '../order/order.service';
-import { OrderItemsStateService } from '../order';
+import { SeatTicketsStateService } from '../order';
 import { NgIf, AsyncPipe } from '@angular/common';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
@@ -22,7 +22,7 @@ export class PaymentComponent {
   private orderService = inject(OrderStateService);
   chosenMovieShowing$ = inject(ChoosenMovieShowingStateService)
     .chosenMovieShowing$;
-  private orderItemService = inject(OrderItemsStateService);
+  private orderItemService = inject(SeatTicketsStateService);
 
   order$: Observable<Order> = this.orderService.order$;
   sumOfTickets: number;

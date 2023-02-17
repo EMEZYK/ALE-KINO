@@ -16,7 +16,7 @@ export interface Seat {
   hallId: number;
 }
 
-export interface OrderItem {
+export interface SeatTicket {
   seat: Seat;
   ticket: TicketType;
   showingId: number;

@@ -10,7 +10,7 @@ import { Seat } from './hall.interface';
 export class HallApiService {
   private http = inject(HttpClient);
 
-  fetchSeats(hallId: number) {
+  fetchHallSeats(hallId: number) {
     return this.http.get<Seat[]>(`seats?hallId=${hallId}`).pipe(
       map((seats) => {
         const seatsMap = {} as {
@@ -30,6 +30,7 @@ export class HallApiService {
       })
     );
   }
+
   fetchAllSeats(): Observable<Seat[]> {
     return this.http.get<Seat[]>(`seats`);
   }
