@@ -7,6 +7,7 @@ import {
   switchMap,
   map,
   Observable,
+  of,
 } from 'rxjs';
 import { Order, UserOrder } from './order.interface';
 import { UserStateService } from 'src/app/core/user.state.service';
@@ -50,23 +51,22 @@ export class OrderStateService {
       .subscribe();
   }
 
-  getOrder(orderId: number) {
-    return this.http.get<Order>(`orders/${orderId}`);
-  }
+  getOrdersByIds(orderIds: number[]): Observable<UserOrder[]> {
+    const idsPath = orderIds
+      .map((el) => el.toString())
+      .reduce((prev, curr) => {
+        return prev + `&id=` + curr;
+      });
 
-  getUserOrders(): Observable<UserOrder[]> {
-    return this.userService.user$.pipe(
-      switchMap((user: User) => {
-        const orders$ = this.http.get<Order[]>(`orders?userId=${user.id}`);
-
+    return this.http.get<Order[]>(`orders?id=${idsPath}`).pipe(
+      switchMap((order: Order[]) => {
         return combineLatest([
-          orders$,
+          of(order),
           this.tickets$,
           this.showings$,
           this.hallService.fetchAllSeats(),
         ]);
       }),
-      // tap((val) => console.log(val)),
       map(([userOrders, tickets, showings, seats]): UserOrder[] => {
         return userOrders.map((order: Order) => {
           const showing: Showing = showings.find(
@@ -88,8 +88,19 @@ export class OrderStateService {
             orderId: order.id,
           };
         });
-      })
-      // tap((val) => console.log('wynik', val))
+      }),
+      tap((val) => console.log(val))
+    );
+  }
+
+  getUserOrders(): Observable<UserOrder[]> {
+    return this.userService.user$.pipe(
+      switchMap((user: User) =>
+        this.http.get<Order[]>(`orders?userId=${user.id}`)
+      ),
+      switchMap((orders: Order[]) =>
+        this.getOrdersByIds(orders.map((order) => order.id))
+      )
     );
   }
 
