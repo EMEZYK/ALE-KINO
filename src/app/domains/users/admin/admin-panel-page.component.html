@@ -1,6 +1,7 @@
-<div> 
-
-<p>admin-panel-page works!</p>
-
-
+<div>
+  <ng-container *ngIf="allMovies$ | async as movies">
+    <ng-container *ngFor="let movie of movies">
+      <p>{{ movie.title }}</p>
+    </ng-container>
+  </ng-container>
 </div>

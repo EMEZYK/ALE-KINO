@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QRCodeModule } from 'angularx-qrcode';
+import { PreloadAllModules, RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header';
 import { FooterComponent } from './shared/components/footer/footer.component';
-import { PreloadAllModules, RouterModule } from '@angular/router';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
 import { BookingFormComponent } from './domains/booking/booking-form';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HttpErrorInterceptor } from './shared/interceptors/http-error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './domains/auth/login-component';
 import { HomeComponent } from './domains/home/home.component';
-import { QRCodeModule } from 'angularx-qrcode';
 import { SummaryComponent } from './domains/booking/order/summary';
 import { APP_ROUTES } from './app.routes';
 import { LoadingSpinnerComponent } from './shared/components/loader/loader.component';
@@ -24,6 +26,8 @@ import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment
 import { DatePickerComponent } from './shared/components/date-picker/date-picker.component';
 import { MovieListComponent } from './domains/movies/movie-list';
 import { OrderDetailsComponent } from './domains/booking/order/order-details/order-details.component';
+import { MovieEffects } from './domains/movies/store/movie.effects';
+import { MovieReducer } from './domains/movies/store/movie.reducers';
 
 @NgModule({
   declarations: [
@@ -34,6 +38,8 @@ import { OrderDetailsComponent } from './domains/booking/order/order-details/ord
     SummaryComponent,
   ],
   imports: [
+    EffectsModule.forRoot([MovieEffects]),
+    StoreModule.forRoot({ movies: MovieReducer }),
     BrowserModule,
     OrderDetailsComponent,
     NumberDirective,

@@ -27,6 +27,8 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-brands-svg-icons": "^6.2.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@ngrx/effects": "^15.3.0",
+    "@ngrx/store": "^15.3.0",
     "angularx-qrcode": "^14.0.0",
     "moment": "^2.29.4",
     "rxjs": "~7.5.0",

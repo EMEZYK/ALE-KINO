@@ -14,3 +14,5 @@ export interface User extends Guest {
   ratedMovies?: [];
   active?: boolean;
 }
+
+export type UserRole = 'admin' | 'user';

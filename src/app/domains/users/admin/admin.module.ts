@@ -1,11 +1,22 @@
 import { NgModule } from '@angular/core';
-import { ADMIN_ROUTES } from './admin.routes';
-import { AdminPanelPageComponent } from './admin-panel-page.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { ADMIN_ROUTES } from './admin.routes';
+import { AdminPanelPageComponent } from './admin-panel-page.component';
+import { MovieReducer } from '../../movies/store/movie.reducers';
+import { MovieEffects } from '../../movies/store/movie.effects';
 
 @NgModule({
-  declarations: [AdminPanelPageComponent],
-  imports: [CommonModule,  RouterModule.forChild(ADMIN_ROUTES), ],
+  declarations: [],
+  imports: [
+    CommonModule,
+    AdminPanelPageComponent,
+    RouterModule.forChild(ADMIN_ROUTES),
+    StoreModule.forFeature('movies', MovieReducer),
+    EffectsModule.forFeature([MovieEffects]),
+  ],
 })
 export class AdminModule {}

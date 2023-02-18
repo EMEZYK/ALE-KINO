@@ -13,7 +13,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class MovieService {
+export class MovieApiService {
   private http = inject(HttpClient);
   dateFormat = 'YYYY-MM-DD';
 
@@ -90,7 +90,7 @@ export class MovieService {
     return showings.map((el) => el.movieId);
   }
 
-  getAllTickets(): Observable<TicketType[]> {
-    return this.http.get<TicketType[]>('ticketsTypes');
-  }
+  // getAllTickets(): Observable<TicketType[]> {
+  //   return this.http.get<TicketType[]>('ticketsTypes');
+  // }
 }

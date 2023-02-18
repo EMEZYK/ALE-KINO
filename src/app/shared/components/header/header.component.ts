@@ -1,17 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { map, Observable, tap } from 'rxjs';
 import { Location, NgIf, AsyncPipe } from '@angular/common';
 
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { UserStateService } from 'src/app/core/user.state.service';
-import { User } from 'src/app/domains/users/user.interface';
+import { User, UserRole } from 'src/app/domains/users/user.interface';
 import { SeatTicketsStateService } from 'src/app/domains/booking/order';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 import { ButtonComponent } from '../button/button.component';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -32,6 +31,7 @@ export class HeaderComponent implements OnInit {
   private userService = inject(UserStateService);
   private router = inject(Router);
   private location = inject(Location);
+
   order$ = inject(SeatTicketsStateService).seatTickets$.pipe(
     map((orderItems) => {
       return orderItems ? orderItems.length : 0;
@@ -39,13 +39,14 @@ export class HeaderComponent implements OnInit {
   );
 
   user$: Observable<User>;
+  userRole: UserRole;
 
   cinemaName = 'Ale kino!';
   isAuthenticated = false;
   isDropdownVisible = false;
   shoppingCartIcon = faShoppingCart;
 
-  public dropdownUserOptions = [
+  dropdownUserOptions = [
     { routerlink: 'orders', text: 'Moje bilety', parentPath: 'user' },
     { routerlink: 'wishlist', text: 'Chcę obejrzeć', parentPath: 'user' },
     { routerlink: 'settings', text: 'Ustawienia', parentPath: 'user' },
@@ -57,23 +58,20 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
-  public dropdownAdminOptions = [{ routerlink: 'login', text: 'Wyloguj' }];
+  dropdownAdminOptions = [
+    {
+      routerlink: 'login',
+      text: 'Wyloguj',
+      shouldLogOut: true,
+      parentPath: '',
+    },
+  ];
 
   ngOnInit(): void {
-    this.hasAuth().subscribe();
-
-    this.user$ = this.userService.user$;
-  }
-
-  hasAuth = () => {
-    return this.authService.auth$.pipe(
-      tap((value) => {
-        if (value.hasAuth === true) {
-          this.isAuthenticated = true;
-        }
-      })
+    this.user$ = this.userService.user$.pipe(
+      tap((user) => (this.userRole = user.role))
     );
-  };
+  }
 
   logout() {
     this.isAuthenticated = false;
@@ -84,9 +82,9 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateHome() {
-    if (this.authService.userRole === 'admin') {
+    if (this.userRole === 'admin') {
       this.router.navigate([`admin`]);
-    } else if (this.authService.userRole === 'user') {
+    } else if (this.userRole === 'user') {
       this.router.navigate([`user`]);
     } else {
       this.router.navigate([`home`]);

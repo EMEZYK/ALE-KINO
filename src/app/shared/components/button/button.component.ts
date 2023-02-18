@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -14,7 +8,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [NgIf, FontAwesomeModule],
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
   @Input() type: string;

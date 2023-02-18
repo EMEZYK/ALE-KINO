@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
 
 import { UserStateService } from 'src/app/core/user.state.service';
-import { MovieService } from 'src/app/domains/movies/movie-list';
+import { MovieApiService } from 'src/app/domains/movies/movie-list';
 import { Movie } from 'src/app/domains/movies/movie.interface';
 import { Watchlist, WatchlistWithMovies } from './watchlist.interface';
 import { User } from '../../users/user.interface';
@@ -14,7 +14,7 @@ import { User } from '../../users/user.interface';
 export class MoviesWatchlistStateService {
   private http = inject(HttpClient);
   private user$ = inject(UserStateService).user$;
-  private movieService = inject(MovieService);
+  private movieService = inject(MovieApiService);
 
   private user: User;
   private watchlist$$ = new BehaviorSubject<WatchlistWithMovies>(null);

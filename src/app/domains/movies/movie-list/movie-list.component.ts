@@ -2,7 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Moment } from 'moment';
 import * as moment from 'moment';
-import { MovieService } from './movie.service';
+import { MovieApiService } from './movie.api.service';
 import { ChoosenMovieShowingStateService } from '../choosen-movie.state.service';
 import {
   ChoosenMovieShowing,
@@ -28,7 +28,7 @@ import { ManageMoviePanelComponent } from '../manage-movie-panel/manage-movie-pa
   styleUrls: ['./movie-list.component.css'],
 })
 export class MovieListComponent implements OnInit {
-  private movieService = inject(MovieService);
+  private movieService = inject(MovieApiService);
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
   private router = inject(Router);
 

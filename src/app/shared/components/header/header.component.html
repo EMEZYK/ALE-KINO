@@ -1,30 +1,42 @@
 <div class="header">
   <h1 (click)="navigateHome()">{{ cinemaName }}</h1>
   <nav>
-    <button *ngIf="!isAuthenticated" class="login-btn">
+    <button *ngIf="!userRole" class="login-btn">
       <a routerLink="login">Zaloguj</a>
     </button>
-    <ng-container *ngIf="isAuthenticated">
-      <app-button
-        class="btn-icon"
-        [text]="order$ | async"
-        [icon]="shoppingCartIcon"
-        (click)="navigateToPreviousPage($event)"
-      ></app-button>
-      <div class="dropdown">
-        <ng-container *ngIf="user$ | async as user">
+    <ng-container *ngIf="user$ | async as user">
+      <ng-container *ngIf="userRole === 'user'; else admin">
+        <app-button
+          class="btn-icon"
+          [text]="order$ | async"
+          [icon]="shoppingCartIcon"
+          (click)="navigateToPreviousPage($event)"
+        ></app-button>
+        <div class="dropdown">
           <app-button
             text="Cześć, {{ user.firstName }}!"
             (click)="toggleDropdown($event)"
           ></app-button>
-        </ng-container>
-
-        <app-dropdown-menu
-          [isDropdownOpen]="isDropdownVisible"
-          (buttonClick)="logout($event)"
-          [dropdownOptions]="dropdownUserOptions"
-        ></app-dropdown-menu>
-      </div>
+          <app-dropdown-menu
+            [isDropdownOpen]="isDropdownVisible"
+            (buttonClick)="logout($event)"
+            [dropdownOptions]="dropdownUserOptions"
+          ></app-dropdown-menu>
+        </div>
+      </ng-container>
+      <ng-template #admin>
+        <div class="dropdown">
+          <app-button
+            text="Cześć, Admin!"
+            (click)="toggleDropdown($event)"
+          ></app-button>
+          <app-dropdown-menu
+            [isDropdownOpen]="isDropdownVisible"
+            (buttonClick)="logout($event)"
+            [dropdownOptions]="dropdownAdminOptions"
+          ></app-dropdown-menu>
+        </div>
+      </ng-template>
     </ng-container>
   </nav>
 </div>

@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  inject,
-} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AsyncPipe, NgIf, NgFor, KeyValuePipe, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -36,7 +31,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   ],
   templateUrl: './hall.component.html',
   styleUrls: ['./hall.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [HallApiService],
 })
 export class HallComponent implements OnInit {
