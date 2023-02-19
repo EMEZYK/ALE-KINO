@@ -26,8 +26,8 @@ import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment
 import { DatePickerComponent } from './shared/components/date-picker/date-picker.component';
 import { MovieListComponent } from './domains/movies/movie-list';
 import { OrderDetailsComponent } from './domains/booking/order/order-details/order-details.component';
-import { MovieEffects } from './domains/movies/store/movie.effects';
-import { MovieReducer } from './domains/movies/store/movie.reducers';
+import { MovieEffects } from './domains/movies/store/repertoire.effects';
+import { MovieReducer } from './domains/movies/store/repertoire.reducers';
 
 @NgModule({
   declarations: [

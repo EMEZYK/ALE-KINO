@@ -1,0 +1,67 @@
+* {
+  color: #000;
+}
+
+:host {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: 50px;
+}
+
+.movie-img {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+  margin: 10px 0 0 0;
+}
+
+.form-container {
+  width: 60%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 70%;
+}
+
+.movie-details {
+  width: 100%;
+  display: flex;
+  padding: 20px;
+}
+
+.movie-info {
+  display: flex;
+  margin: 10px 0;
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+p,
+mat-card-title,
+h4 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  margin: 0 30px 0 0;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.img-wrapper {
+  width: 85%;
+  word-wrap: break-word;
+  margin: 0;
+}

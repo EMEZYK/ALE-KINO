@@ -1,7 +1,79 @@
-<div>
-  <ng-container *ngIf="allMovies$ | async as movies">
-    <ng-container *ngFor="let movie of movies">
-      <p>{{ movie.title }}</p>
-    </ng-container>
+<ng-container *ngIf="allMovies$ | async as movies">
+  <ng-container *ngIf="movies.length !== 0">
+    <mat-card class="form-container">
+      <form class="form">
+        <h2 class="form-title">Wybierz film</h2>
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Film</mat-label>
+          <mat-select [(ngModel)]="selectedValue" name="movie">
+            <mat-option *ngFor="let movie of movies" [value]="movie">
+              {{ movie.title }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="selectedValue">
+          <mat-card class="movie-details">
+            <div class="movie-info">
+              <h4 class="movie-info-title">Tytuł</h4>
+              <mat-card-title>{{ selectedValue?.title }}</mat-card-title>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Plakat</h4>
+              <div class="img-wrapper">
+                <p class="img-src">{{ selectedValue?.image }}</p>
+                <img
+                  mat-card-image
+                  src="{{ selectedValue?.image }}"
+                  alt=""
+                  class="movie-img"
+                />
+              </div>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Krótki opis</h4>
+              <p>
+                {{ selectedValue?.shortDescription }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Długi opis</h4>
+              <p>
+                {{ selectedValue?.longDescription }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Kategoria wiekowa</h4>
+              <p>
+                {{ selectedValue?.ageRestrictions }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Czas trwania</h4>
+              <p>
+                {{ selectedValue?.duration }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Kategoria</h4>
+              <p>
+                {{ selectedValue?.genres }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Premiera</h4>
+              <p>
+                {{ selectedValue?.isPremiere ? 'Tak' : 'Nie' }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Ranking</h4>
+              <p>
+                {{ selectedValue?.rating }}
+              </p>
+            </div>
+          </mat-card>
+        </ng-container>
+      </form>
+    </mat-card>
   </ng-container>
-</div>
+</ng-container>

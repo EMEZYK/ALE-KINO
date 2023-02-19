@@ -6,8 +6,8 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { ADMIN_ROUTES } from './admin.routes';
 import { AdminPanelPageComponent } from './admin-panel-page.component';
-import { MovieReducer } from '../../movies/store/movie.reducers';
-import { MovieEffects } from '../../movies/store/movie.effects';
+import { MovieReducer } from '../../movies/store/repertoire.reducers';
+import { MovieEffects } from '../../movies/store/repertoire.effects';
 
 @NgModule({
   declarations: [],
