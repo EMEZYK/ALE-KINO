@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   padding: 50px;
+  flex-direction: column;
 }
 
 .movie-img {
@@ -20,6 +21,7 @@
 
 .form-container {
   width: 60%;
+  margin: 50px 0;
 }
 
 .form {
@@ -30,7 +32,7 @@
 }
 
 mat-form-field {
-  width: 70%;
+  width: 90%;
 }
 
 .movie-details {
@@ -64,4 +66,10 @@ h2 {
   width: 85%;
   word-wrap: break-word;
   margin: 0;
+}
+
+button {
+  position: absolute;
+  right: 50px;
+  /* margin: 20px 0; */
 }

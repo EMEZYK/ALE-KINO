@@ -8,6 +8,7 @@ import { ADMIN_ROUTES } from './admin.routes';
 import { AdminPanelPageComponent } from './admin-panel-page.component';
 import { MovieReducer } from '../../movies/store/repertoire.reducers';
 import { MovieEffects } from '../../movies/store/repertoire.effects';
+import { MovieFormComponent } from '../../movies/movie-form/movie-form.component';
 
 @NgModule({
   declarations: [],
@@ -17,6 +18,7 @@ import { MovieEffects } from '../../movies/store/repertoire.effects';
     RouterModule.forChild(ADMIN_ROUTES),
     StoreModule.forFeature('movies', MovieReducer),
     EffectsModule.forFeature([MovieEffects]),
+    MovieFormComponent,
   ],
 })
 export class AdminModule {}

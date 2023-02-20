@@ -1,3 +1,4 @@
+<button mat-raised-button (click)="openDialog()">Dodaj film</button>
 <ng-container *ngIf="allMovies$ | async as movies">
   <ng-container *ngIf="movies.length !== 0">
     <mat-card class="form-container">
@@ -15,7 +16,8 @@
           <mat-card class="movie-details">
             <div class="movie-info">
               <h4 class="movie-info-title">Tytuł</h4>
-              <mat-card-title>{{ selectedValue?.title }}</mat-card-title>
+              <!-- <mat-card-title>{{ selectedValue?.title }}</mat-card-title> -->
+              <p>{{ selectedValue?.title }}</p>
             </div>
             <div class="movie-info">
               <h4 class="movie-info-title">Plakat</h4>

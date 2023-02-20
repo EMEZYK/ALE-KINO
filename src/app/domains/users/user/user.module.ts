@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { USER_ROUTES } from './user.routes';
 import { UserHomePageComponent } from './user-home-page.component';
 import { RouterModule } from '@angular/router';
-import { MoviesToWatchComponent } from '../../movies/movies-watchlist/movies-watchlist.component';
+import { MoviesToWatchComponent } from '../../movies/movie-watchlist/movies-watchlist.component';
 import { MovieListComponent } from '../../movies/movie-list';
 import { OrderListComponent } from '../../booking/order/order-list/order-list.component';
 import { OrderDetailsComponent } from '../../booking/order/order-details/order-details.component';

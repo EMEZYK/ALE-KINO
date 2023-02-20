@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Dodaj film</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="movieForm" (ngSubmit)="submit()">
+    <mat-form-field appearance="outline" floatLabel="always" required>
+      <mat-label>Tytuł</mat-label>
+      <input matInput formControlName="title" />
+      <mat-error></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Krótki opis</mat-label>
+      <input matInput formControlName="shortDescription" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Długi opis</mat-label>
+      <input matInput formControlName="longDescription" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Ograniczenie wiekowe</mat-label>
+      <span matTextPrefix>+</span>
+      <!-- <span matTextSuffix>lat</span> -->
+      <input
+        matInput
+        appNumbersOnly
+        formControlName="ageRestrictions"
+        minlength="1"
+        maxlength="3"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Czas trwania</mat-label>
+      <input matInput formControlName="duration" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Gatunek</mat-label>
+      <input matInput formControlName="genres" />
+    </mat-form-field>
+    <div class="premiere-wrapper">
+      <mat-label class="premiere-label">Premiera</mat-label>
+      <mat-radio-group formControlName="isPremiere">
+        <mat-radio-button value="true">Tak</mat-radio-button>
+        <mat-radio-button value="false">Nie</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <mat-form-field appearance="outline" floatLabel="always">
+      <mat-label>Link do plakatu</mat-label>
+      <input matInput formControlName="image" />
+    </mat-form-field>
+
+    <mat-dialog-actions>
+      <button mat-button mat-dialog-close>Anuluj</button>
+      <button
+        mat-button
+        type="submit"
+        cdkFocusInitial
+        [mat-dialog-close]="true"
+      >
+        Zapisz
+      </button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>

@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { faEye, faStar } from '@fortawesome/free-solid-svg-icons';
 
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
-import { MoviesWatchlistStateService } from '../movies-watchlist/movies-watchlist.service';
+import { MoviesWatchlistStateService } from '../movie-watchlist/movies-watchlist.service';
 import { Movie } from 'src/app/domains/movies/movie.interface';
-import { WatchlistWithMovies } from '../movies-watchlist/watchlist.interface';
+import { WatchlistWithMovies } from '../movie-watchlist/watchlist.interface';
 import { MovieRatingStateService } from '../movie-rating/movie-rating.state.service';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
