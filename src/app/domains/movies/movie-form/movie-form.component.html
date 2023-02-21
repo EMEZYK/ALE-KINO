@@ -4,15 +4,17 @@
     <mat-form-field appearance="outline" floatLabel="always" required>
       <mat-label>Tytuł</mat-label>
       <input matInput formControlName="title" />
-      <mat-error></mat-error>
+      <mat-error>{{ errors.title }}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Krótki opis</mat-label>
       <input matInput formControlName="shortDescription" />
+      <mat-error>{{ errors.shortDescription }}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Długi opis</mat-label>
       <input matInput formControlName="longDescription" />
+      <mat-error>{{ errors.longDescription }}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Ograniczenie wiekowe</mat-label>
@@ -24,6 +26,7 @@
         minlength="1"
         maxlength="2"
       />
+      <mat-error>{{ errors.ageRestrictions }}</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Czas trwania</mat-label>
@@ -35,6 +38,7 @@
         minlength="2"
         maxlength="3"
       />
+      <mat-error>{{ errors.duration }}</mat-error>
     </mat-form-field>
 
     <div formArrayName="genres" class="genres-wrapper">
@@ -55,6 +59,7 @@
             [formControlName]="i"
             class="genre-input"
           />
+          <mat-error>{{ errors?.genres }}</mat-error>
         </mat-form-field>
         <button mat-icon-button (click)="removeGenre(i)">
           <mat-icon>delete</mat-icon>
@@ -73,13 +78,15 @@
     <div class="premiere-wrapper">
       <mat-label class="premiere-label">Premiera</mat-label>
       <mat-radio-group formControlName="isPremiere">
-        <mat-radio-button value="true">Tak</mat-radio-button>
-        <mat-radio-button value="false">Nie</mat-radio-button>
+        <mat-radio-button [value]="true">Tak</mat-radio-button>
+        <mat-radio-button [value]="false">Nie</mat-radio-button>
       </mat-radio-group>
+      <mat-error>{{ errors.isPremiere }}</mat-error>
     </div>
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Link do plakatu</mat-label>
       <input matInput formControlName="image" appNoWhitespace />
+      <mat-error>{{ errors.image }}</mat-error>
     </mat-form-field>
 
     <mat-dialog-actions>

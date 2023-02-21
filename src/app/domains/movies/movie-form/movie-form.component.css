@@ -10,6 +10,10 @@ mat-form-field,
   width: 90%;
 }
 
+mat-form-field {
+  margin-bottom: 15px;
+}
+
 mat-dialog-content,
 form {
   padding: 30px;

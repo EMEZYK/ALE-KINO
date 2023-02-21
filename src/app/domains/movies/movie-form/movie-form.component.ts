@@ -19,6 +19,12 @@ import { NumberDirective } from 'src/app/shared/directives/numbers-only.directiv
 import { Store } from '@ngrx/store';
 import { MovieActions } from '../store/repertoire.actions';
 import { MatIconModule } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
+import {
+  ErrorHandler,
+  FormErrors,
+} from 'src/app/shared/validators/error-handler';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-movie-form',
@@ -37,17 +43,23 @@ import { MatIconModule } from '@angular/material/icon';
     MatRadioModule,
     NoWhiteSpaceDirective,
     MatIconModule,
+    JsonPipe,
+    NgIf,
   ],
 })
 export class MovieFormComponent implements OnInit {
   private formBuilder = inject(NonNullableFormBuilder);
   private store = inject(Store);
+  private errorHandler = inject(ErrorHandler);
 
   movieForm: FormGroup;
   isPremiere: boolean;
+  errors: any = {}; // zmien na jakis typ!
 
   ngOnInit(): void {
     this.createForm();
+
+    this.errorHandler.handleErrors(this.movieForm, this.errors);
   }
 
   private createForm() {
@@ -81,9 +93,20 @@ export class MovieFormComponent implements OnInit {
         '',
         [Validators.required, Validators.minLength(2), Validators.maxLength(3)],
       ],
-      genres: this.formBuilder.array([this.formBuilder.control('')]),
-      isPremiere: this.formBuilder.control(false),
-      image: ['', Validators.required],
+      genres: this.formBuilder.array([
+        this.formBuilder.control('', [
+          Validators.required,
+          Validators.minLength(2),
+        ]),
+      ]),
+      isPremiere: this.formBuilder.control(false, Validators.required),
+      image: [
+        '',
+        Validators.required,
+        // Validators.pattern(
+        //   '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
+        // ),
+      ],
     });
   }
 
@@ -106,19 +129,15 @@ export class MovieFormComponent implements OnInit {
       return;
     }
 
-    // console.log(this.movieForm.value);
-    // console.log(this.movieForm.getRawValue());
+    console.log(this.movieForm.value);
+    console.log(this.movieForm.getRawValue());
 
-    this.store.dispatch(
-      MovieActions.addMovie({
-        movie: this.movieForm.getRawValue(),
-      })
-    );
+    // this.store.dispatch(
+    //   MovieActions.addMovie({
+    //     movie: this.movieForm.getRawValue(),
+    //   })
+    // );
 
     this.movieForm.reset();
   }
 }
-
-// this.movieForm.controls.title.setValue(
-//   this.movieForm.controls.title.value.charAt(0).toUpperCase() + this.movieForm.controls.title.value.slice(1)
-// );
