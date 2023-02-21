@@ -24,9 +24,7 @@ export class MovieEffects {
   addMovie$ = createEffect(() => {
     return this.movieActions$.pipe(
       ofType(MovieActions.addMovie),
-      switchMap(({ movie, isActive }) =>
-        this.movieService.addMovie(movie, isActive)
-      ),
+      switchMap(({ movie }) => this.movieService.addMovie(movie)),
       map((movie) => MovieApiActions.movieAddedSuccess({ movie })),
       catchError(() => {
         return of(MovieApiActions.movieAddedFailure);

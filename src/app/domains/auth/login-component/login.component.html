@@ -3,7 +3,12 @@
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label>E-mail</label>
-      <input formControlName="email" type="email" placeholder="E-mail" />
+      <input
+        formControlName="email"
+        type="email"
+        placeholder="E-mail"
+        appNoWhitespace
+      />
       <ng-container *ngIf="email.errors as errors">
         <ng-container *ngIf="email.touched">
           <p *ngIf="errors?.['required']">Podaj e-mail</p>
@@ -18,6 +23,7 @@
           formControlName="password"
           [type]="fieldTextType ? 'text' : 'password'"
           placeholder="Hasło"
+          appNoWhitespace
         />
         <span class="input-group-text">
           <fa-icon

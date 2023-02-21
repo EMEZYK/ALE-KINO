@@ -1,4 +1,7 @@
-<button mat-raised-button (click)="openDialog()">Dodaj film</button>
+<button mat-raised-button (click)="openDialog()" color="primary">
+  <mat-icon>add</mat-icon>
+  Dodaj film
+</button>
 <ng-container *ngIf="allMovies$ | async as movies">
   <ng-container *ngIf="movies.length !== 0">
     <mat-card class="form-container">
@@ -45,9 +48,7 @@
             </div>
             <div class="movie-info">
               <h4 class="movie-info-title">Kategoria wiekowa</h4>
-              <p>
-                {{ selectedValue?.ageRestrictions }}
-              </p>
+              <p>{{ selectedValue?.ageRestrictions }}+</p>
             </div>
             <div class="movie-info">
               <h4 class="movie-info-title">Czas trwania</h4>
@@ -56,7 +57,7 @@
               </p>
             </div>
             <div class="movie-info">
-              <h4 class="movie-info-title">Kategoria</h4>
+              <h4 class="movie-info-title">Gatunek</h4>
               <p>
                 {{ selectedValue?.genres }}
               </p>

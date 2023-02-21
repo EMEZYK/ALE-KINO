@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AsyncPipe, NgIf, NgFor } from '@angular/common';
-import { finalize, Observable, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -11,6 +11,7 @@ import {
   MatDialogModule,
   MatDialogConfig,
 } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 import { Movie } from '../../movies/movie.interface';
 import { MovieActions } from '../../movies/store/repertoire.actions';
@@ -34,6 +35,7 @@ import { MovieFormComponent } from '../../movies/movie-form/movie-form.component
     MatButtonModule,
     MatDialogModule,
     MovieFormComponent,
+    MatIconModule,
   ],
 })
 export class AdminPanelPageComponent implements OnInit {
@@ -63,9 +65,6 @@ export class AdminPanelPageComponent implements OnInit {
 
     const dialogRef = this.dialog.open(MovieFormComponent, dialogConfig);
 
-    dialogRef
-      .afterClosed()
-      .pipe(finalize(() => console.log('completed')))
-      .subscribe();
+    dialogRef.afterClosed().subscribe();
   }
 }

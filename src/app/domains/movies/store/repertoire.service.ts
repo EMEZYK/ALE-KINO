@@ -12,10 +12,9 @@ export class MovieService {
     return this.http.get<Movie[]>('movies');
   }
 
-  addMovie(movie: Movie, isActive: boolean) {
+  addMovie(movie: Movie) {
     return this.http.post<Movie>('movies', {
       ...movie,
-      isActive,
     });
   }
 }

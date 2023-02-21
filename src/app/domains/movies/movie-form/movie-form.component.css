@@ -1,11 +1,12 @@
 form {
   display: flex;
   flex-direction: column;
-  width: 500px;
+  width: 600px;
 }
 
 mat-form-field,
-.premiere-wrapper {
+.premiere-wrapper,
+.genres-wrapper {
   width: 90%;
 }
 
@@ -21,6 +22,31 @@ form {
   margin-bottom: 20px;
 }
 
+.genre-container,
 .premiere-label {
   margin: 0;
+}
+
+.genres-wrapper {
+  margin: 0 auto 10px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.genre-field {
+  width: 50%;
+  padding: 0;
+}
+
+.add-genre-btn {
+  margin: 20px 0 10px 0;
+}
+
+.mdc-text-field--outlined .mdc-notched-outline {
+  height: 20px;
+}
+
+.genre-label {
+  margin-right: 30px;
 }

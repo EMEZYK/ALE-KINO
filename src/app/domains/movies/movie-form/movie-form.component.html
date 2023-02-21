@@ -17,23 +17,59 @@
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Ograniczenie wiekowe</mat-label>
       <span matTextPrefix>+</span>
-      <!-- <span matTextSuffix>lat</span> -->
       <input
         matInput
         appNumbersOnly
         formControlName="ageRestrictions"
         minlength="1"
-        maxlength="3"
+        maxlength="2"
       />
     </mat-form-field>
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Czas trwania</mat-label>
-      <input matInput formControlName="duration" />
+      <span matTextSuffix>min</span>
+      <input
+        matInput
+        formControlName="duration"
+        appNumbersOnly
+        minlength="2"
+        maxlength="3"
+      />
     </mat-form-field>
-    <mat-form-field appearance="outline" floatLabel="always">
-      <mat-label>Gatunek</mat-label>
-      <input matInput formControlName="genres" />
-    </mat-form-field>
+
+    <div formArrayName="genres" class="genres-wrapper">
+      <mat-label class="genre-label">Gatunki filmowe</mat-label>
+      <div
+        *ngFor="let genre of genres.controls; let i = index"
+        class="genre-container"
+      >
+        {{ i.value }}
+        <mat-form-field
+          class="genre-field"
+          appearance="outline"
+          floatLabel="always"
+        >
+          <input
+            matInput
+            value="{{ formControlName }}"
+            [formControlName]="i"
+            class="genre-input"
+          />
+        </mat-form-field>
+        <button mat-icon-button (click)="removeGenre(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <button
+        mat-raised-button
+        type="button"
+        (click)="addGenre()"
+        class="add-genre-btn"
+      >
+        <mat-icon>add</mat-icon> Dodaj gatunek
+      </button>
+    </div>
+
     <div class="premiere-wrapper">
       <mat-label class="premiere-label">Premiera</mat-label>
       <mat-radio-group formControlName="isPremiere">
@@ -43,16 +79,17 @@
     </div>
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Link do plakatu</mat-label>
-      <input matInput formControlName="image" />
+      <input matInput formControlName="image" appNoWhitespace />
     </mat-form-field>
 
     <mat-dialog-actions>
-      <button mat-button mat-dialog-close>Anuluj</button>
+      <button mat-raised-button mat-dialog-close color="primary">Anuluj</button>
       <button
-        mat-button
+        mat-raised-button
         type="submit"
-        cdkFocusInitial
         [mat-dialog-close]="true"
+        [disabled]="movieForm.invalid"
+        color="primary"
       >
         Zapisz
       </button>

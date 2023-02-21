@@ -5,7 +5,7 @@ export const MovieActions = createActionGroup({
   source: 'Movie',
   events: {
     'get movies': emptyProps(),
-    'add movie': props<{ movie: Movie; isActive: boolean }>(),
+    'add movie': props<{ movie: Movie }>(),
   },
 });
 

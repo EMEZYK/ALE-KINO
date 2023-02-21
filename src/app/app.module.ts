@@ -28,6 +28,7 @@ import { MovieListComponent } from './domains/movies/movie-list';
 import { OrderDetailsComponent } from './domains/booking/order/order-details/order-details.component';
 import { MovieEffects } from './domains/movies/store/repertoire.effects';
 import { MovieReducer } from './domains/movies/store/repertoire.reducers';
+import { NoWhiteSpaceDirective } from './shared/directives/no-white-space.directive';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MovieReducer } from './domains/movies/store/repertoire.reducers';
     BrowserModule,
     OrderDetailsComponent,
     NumberDirective,
+    NoWhiteSpaceDirective,
     CancelPaymentComponent,
     PaymentComponent,
     HeaderComponent,
