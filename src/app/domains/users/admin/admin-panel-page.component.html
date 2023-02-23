@@ -85,7 +85,10 @@
               <app-showings-list
                 [showings]="filterShowings()"
               ></app-showings-list>
-              <app-add-showing-form *ngIf="showForm"></app-add-showing-form>
+              <app-add-showing-form
+                *ngIf="showForm"
+                (addShowing)="addShowing($event)"
+              ></app-add-showing-form>
             </mat-card>
           </ng-container>
         </ng-container>

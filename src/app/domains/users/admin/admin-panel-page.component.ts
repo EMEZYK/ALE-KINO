@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AsyncPipe, NgIf, NgFor } from '@angular/common';
-import { map, Observable, of, switchMap, take, tap } from 'rxjs';
+import { Observable, of, switchMap, take, tap } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -13,7 +13,7 @@ import {
 } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
-import { Movie, Showing, ShowingWithMovie } from '../../movies/movie.interface';
+import { Movie, Showing } from '../../movies/movie.interface';
 import { MovieActions } from '../../movies/store/movie.actions';
 import * as movieSelectors from '../../movies/store/movie.selectors';
 import { FormsModule } from '@angular/forms';
@@ -92,5 +92,10 @@ export class AdminPanelPageComponent implements OnInit {
         return of(filteredShowings);
       })
     );
+  }
+
+  addShowing(res: Showing) {
+    console.log(res);
+    // this.showingsStore.addShowing(res);
   }
 }

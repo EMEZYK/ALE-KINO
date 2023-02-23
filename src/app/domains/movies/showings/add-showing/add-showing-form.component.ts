@@ -78,7 +78,10 @@ export class AddShowingFormComponent implements OnInit {
       return;
     }
 
-    // console.log(this.addShowingForm.value);
+    this.addShowing.emit(this.addShowingForm.getRawValue());
+
+    console.log(this.addShowingForm.value);
+
     this.addShowingForm.reset();
   }
 }

@@ -2,7 +2,7 @@
   <div *ngFor="let showing of showings | async" class="showings-list">
     <mat-list-item>data: {{ showing.date }}</mat-list-item>
     <mat-list-item>godz. {{ showing.timeFrom }}</mat-list-item>
-    <mat-list-item>sala. {{ showing.hall.number }}</mat-list-item>
+    <mat-list-item>sala nr. {{ showing.hall.number }}</mat-list-item>
     <mat-divider></mat-divider>
   </div>
 </mat-list>
