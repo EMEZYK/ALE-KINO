@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AsyncPipe, NgIf, NgFor } from '@angular/common';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, of, switchMap, take, tap } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -13,11 +13,18 @@ import {
 } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
-import { Movie } from '../../movies/movie.interface';
-import { MovieActions } from '../../movies/store/repertoire.actions';
-import * as movieSelectors from '../../movies/store/repertoire.selectors';
+import { Movie, Showing, ShowingWithMovie } from '../../movies/movie.interface';
+import { MovieActions } from '../../movies/store/movie.actions';
+import * as movieSelectors from '../../movies/store/movie.selectors';
 import { FormsModule } from '@angular/forms';
 import { MovieFormComponent } from '../../movies/movie-form/movie-form.component';
+import { AddShowingFormComponent } from '../../movies/showings/add-showing/add-showing-form.component';
+import { ShowingsListComponent } from '../../movies/showings/showings-list/showings-list.component';
+import {
+  ShowingsState,
+  ShowingsStore,
+} from '../../movies/showings/store/showing.store';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-admin-panel-page',
@@ -36,18 +43,24 @@ import { MovieFormComponent } from '../../movies/movie-form/movie-form.component
     MatDialogModule,
     MovieFormComponent,
     MatIconModule,
+    AddShowingFormComponent,
+    ShowingsListComponent,
   ],
+  providers: [ShowingsStore],
 })
 export class AdminPanelPageComponent implements OnInit {
   private store = inject(Store);
   public dialog = inject(MatDialog);
+  private showingsStore = inject(ShowingsStore);
 
   selectedValue: Movie;
   allMovies$: Observable<Movie[]>;
+  state$ = this.showingsStore.state$;
+  showForm = false;
+  showingsForMovie: Showing[];
 
   ngOnInit(): void {
     this.allMovies$ = this.store.select(movieSelectors.selectAllMovies);
-
     this.loadMovies();
 
     this.allMovies$
@@ -66,5 +79,18 @@ export class AdminPanelPageComponent implements OnInit {
     const dialogRef = this.dialog.open(MovieFormComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe();
+  }
+
+  filterShowings(): Observable<Showing[]> {
+    return this.state$.pipe(
+      take(1),
+      switchMap((showingsState: ShowingsState) => {
+        const filteredShowings = showingsState.showings.filter(
+          (s) => s.movieId === this.selectedValue.id
+        );
+
+        return of(filteredShowings);
+      })
+    );
   }
 }

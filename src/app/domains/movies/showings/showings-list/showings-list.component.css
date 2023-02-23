@@ -1,0 +1,10 @@
+.showings-list {
+  display: flex;
+}
+mat-list {
+  margin: 20px 0;
+}
+
+mat-list-item {
+  text-align: center;
+}

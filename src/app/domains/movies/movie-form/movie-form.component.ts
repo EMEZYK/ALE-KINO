@@ -17,14 +17,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { NoWhiteSpaceDirective } from 'src/app/shared/directives/no-white-space.directive';
 import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
 import { Store } from '@ngrx/store';
-import { MovieActions } from '../store/repertoire.actions';
+import { MovieActions } from '../store/movie.actions';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
-import {
-  ErrorHandler,
-  FormErrors,
-} from 'src/app/shared/validators/error-handler';
+import { ErrorHandler } from 'src/app/shared/validators/error-handler';
 import { JsonPipe } from '@angular/common';
+import { ShowingsListComponent } from '../showings/showings-list/showings-list.component';
 
 @Component({
   selector: 'app-movie-form',
@@ -45,6 +43,7 @@ import { JsonPipe } from '@angular/common';
     MatIconModule,
     JsonPipe,
     NgIf,
+    ShowingsListComponent,
   ],
 })
 export class MovieFormComponent implements OnInit {
@@ -129,15 +128,17 @@ export class MovieFormComponent implements OnInit {
       return;
     }
 
-    console.log(this.movieForm.value);
-    console.log(this.movieForm.getRawValue());
+    // console.log(this.movieForm.value);
+    // console.log(this.movieForm.getRawValue());
 
-    // this.store.dispatch(
-    //   MovieActions.addMovie({
-    //     movie: this.movieForm.getRawValue(),
-    //   })
-    // );
+    this.store.dispatch(
+      MovieActions.addMovie({
+        movie: this.movieForm.getRawValue(),
+      })
+    );
 
     this.movieForm.reset();
+
+    window.location.reload();
   }
 }

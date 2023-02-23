@@ -1,0 +1,39 @@
+<form [formGroup]="addShowingForm" (ngSubmit)="submit()">
+  <fieldset>
+    <legend>Nowy seans</legend>
+    <div class="form-fields-wrapper">
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Wybierz datę</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>{{ errors.date }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Godzina</mat-label>
+        <input matInput type="time" formControlName="hour" />
+        <mat-error>{{ errors.hour }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" floatLabel="always">
+        <mat-label>Sala</mat-label>
+        <ng-container *ngIf="state$ | async as state">
+          <mat-select name="hall" formControlName="hall">
+            <mat-option *ngFor="let hall of state.halls" [value]="hall">
+              {{ hall.number }}
+            </mat-option>
+          </mat-select>
+        </ng-container>
+        <mat-error>{{ errors.hall }}</mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-button mat-raised-button type="submit" color="primary">
+      <mat-icon>add</mat-icon>
+      Dodaj
+    </button>
+  </fieldset>
+</form>

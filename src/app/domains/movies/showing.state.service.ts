@@ -18,6 +18,7 @@ export class ShowingStateService {
   constructor() {
     this.fetchShowings();
   }
+
   fetchShowings() {
     return this.http
       .get<Showing[]>(`showings?_expand=movie`)
@@ -28,4 +29,10 @@ export class ShowingStateService {
       )
       .subscribe();
   }
+
+  // addShowing(showing: Showing) {
+  //   this.showings$$.next([...this.showings$$.value, showing]);
+
+  //   return this.http.post<Showing>('showings', { showing });
+  // }
 }

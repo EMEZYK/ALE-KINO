@@ -1,8 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import { MovieApiActions } from './repertoire.actions';
-import { initialMovieState } from './repertoire.state';
+import { MovieApiActions } from './movie.actions';
+import { initialMovieState } from './movie.state';
 
-import { MovieState } from './repertoire.state';
+import { MovieState } from './movie.state';
 
 export const MovieReducer = createReducer(
   initialMovieState,
