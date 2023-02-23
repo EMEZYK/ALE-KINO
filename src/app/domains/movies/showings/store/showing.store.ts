@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { map, Observable, of, switchMap } from 'rxjs';
 import { catchError } from 'rxjs';
 
-import { Showing } from '../../movie.interface';
+import { NewShowing, Showing } from '../../movie.interface';
 import { ShowingApiService } from './showing.api.service';
 
 export interface ShowingsState {
@@ -27,7 +27,7 @@ export class ShowingsStore extends ComponentStore<ShowingsState> {
       .pipe(map((showings) => this.patchState({ showings })));
   });
 
-  readonly addShowing = this.effect((showing$: Observable<Showing>) => {
+  readonly addShowing = this.effect((showing$: Observable<NewShowing>) => {
     return showing$.pipe(
       switchMap((showing) => this.showingsService.addShowing(showing)),
       tapResponse(

@@ -18,7 +18,10 @@ import { MovieActions } from '../../movies/store/movie.actions';
 import * as movieSelectors from '../../movies/store/movie.selectors';
 import { FormsModule } from '@angular/forms';
 import { MovieFormComponent } from '../../movies/movie-form/movie-form.component';
-import { AddShowingFormComponent } from '../../movies/showings/add-showing/add-showing-form.component';
+import {
+  AddShowingFormComponent,
+  ShowingFormValue,
+} from '../../movies/showings/add-showing/add-showing-form.component';
 import { ShowingsListComponent } from '../../movies/showings/showings-list/showings-list.component';
 import {
   ShowingsState,
@@ -94,8 +97,15 @@ export class AdminPanelPageComponent implements OnInit {
     );
   }
 
-  addShowing(res: Showing) {
-    console.log(res);
-    // this.showingsStore.addShowing(res);
+  addShowing(res: ShowingFormValue) {
+    this.showingsStore.addShowing({
+      movieId: this.selectedValue.id,
+      hallId: res.hall.id,
+      date: res.date,
+      movieBreak: res.break,
+      timeFrom: res.hour,
+      timeTo: res.hour,
+    });
+    window.location.reload();
   }
 }

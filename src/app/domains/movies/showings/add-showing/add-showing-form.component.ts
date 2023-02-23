@@ -18,12 +18,13 @@ import { HallStore } from 'src/app/domains/booking/hall/store/hall.store';
 import { AsyncPipe } from '@angular/common';
 import { ErrorHandler } from 'src/app/shared/validators/error-handler';
 import { MatIconModule } from '@angular/material/icon';
+import { Hall } from 'src/app/domains/booking/hall';
 
 export interface ShowingFormValue {
   date: string;
-  timeFrom: string;
-  hallId: number;
-  movieId: number;
+  hour: string;
+  hall: Hall;
+  break: number;
 }
 
 @Component({
@@ -68,6 +69,7 @@ export class AddShowingFormComponent implements OnInit {
       date: ['', Validators.required],
       hour: ['', Validators.required],
       hall: ['', Validators.required],
+      break: [15],
     });
   }
 

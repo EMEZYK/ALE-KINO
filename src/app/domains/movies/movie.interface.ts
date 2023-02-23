@@ -19,11 +19,20 @@ export interface Showing {
   movie?: Movie;
   hallId: number;
   date: string;
-  break: number;
+  movieBreak: number;
   timeFrom: string;
-  timetTo: string;
-  paidSeats: Seat[];
-  bookedSeats: Seat[];
+  timeTo: string;
+  paidSeats?: Seat[];
+  bookedSeats?: Seat[];
+}
+
+export interface NewShowing {
+  movieId: number;
+  hallId: number;
+  date: string;
+  movieBreak: number;
+  timeFrom: string;
+  timeTo: string;
 }
 
 interface Hall {
