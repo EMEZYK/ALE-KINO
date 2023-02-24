@@ -28,6 +28,7 @@ import {
   ShowingsStore,
 } from '../../movies/showings/store/showing.store';
 import { state } from '@angular/animations';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-admin-panel-page',
@@ -98,13 +99,24 @@ export class AdminPanelPageComponent implements OnInit {
   }
 
   addShowing(res: ShowingFormValue) {
+    const timeToInMinutes =
+      moment.duration(res.hour).asMinutes() + this.selectedValue.duration;
+
+    const timeToInHours = moment
+      .utc()
+      .startOf('day')
+      .add(timeToInMinutes, 'minutes')
+      .format('HH:mm');
+
+    const formattedDate = new Date(res.date).toISOString().substr(0, 10);
+
     this.showingsStore.addShowing({
       movieId: this.selectedValue.id,
       hallId: res.hall.id,
-      date: res.date,
+      date: formattedDate,
       movieBreak: res.break,
       timeFrom: res.hour,
-      timeTo: res.hour,
+      timeTo: timeToInHours,
     });
     window.location.reload();
   }

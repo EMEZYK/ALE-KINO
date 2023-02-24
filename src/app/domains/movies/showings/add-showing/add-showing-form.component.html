@@ -4,13 +4,18 @@
     <div class="form-fields-wrapper">
       <mat-form-field appearance="outline" floatLabel="always">
         <mat-label>Wybierz datę</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="date" />
-        <mat-hint>MM/DD/YYY</mat-hint>
+        <input
+          matInput
+          [matDatepicker]="basicDatepicker"
+          formControlName="date"
+          min="{{ today | date: 'yyyy-MM-dd' }}"
+        />
+        <mat-hint>YYYY/MM/DD</mat-hint>
         <mat-datepicker-toggle
           matIconSuffix
-          [for]="picker"
+          [for]="basicDatepicker"
         ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        <mat-datepicker #basicDatepicker></mat-datepicker>
         <mat-error>{{ errors.date }}</mat-error>
       </mat-form-field>
 

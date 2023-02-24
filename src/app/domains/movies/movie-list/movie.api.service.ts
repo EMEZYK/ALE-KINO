@@ -22,7 +22,6 @@ export class MovieApiService {
   }
 
   getAllMoviesByIds(movieIds: number[]) {
-    // console.log(movieIds);
     return this.http.get<Movie[]>(`movies?id=${movieIds.join('&id=')}`);
   }
 
