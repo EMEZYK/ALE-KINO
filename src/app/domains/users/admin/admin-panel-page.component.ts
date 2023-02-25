@@ -12,6 +12,7 @@ import {
   MatDialogConfig,
 } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import * as moment from 'moment';
 
 import { Movie, Showing } from '../../movies/movie.interface';
 import { MovieActions } from '../../movies/store/movie.actions';
@@ -27,8 +28,6 @@ import {
   ShowingsState,
   ShowingsStore,
 } from '../../movies/showings/store/showing.store';
-import { state } from '@angular/animations';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-admin-panel-page',
@@ -61,7 +60,10 @@ export class AdminPanelPageComponent implements OnInit {
   allMovies$: Observable<Movie[]>;
   state$ = this.showingsStore.state$;
   showForm = false;
-  showingsForMovie: Showing[];
+  overlappingShowings: Showing[];
+  showingSt: ShowingsState;
+  oldTimeFromInMinutes;
+  oldTimeToInMinutes;
 
   ngOnInit(): void {
     this.allMovies$ = this.store.select(movieSelectors.selectAllMovies);
@@ -89,10 +91,12 @@ export class AdminPanelPageComponent implements OnInit {
     return this.state$.pipe(
       take(1),
       switchMap((showingsState: ShowingsState) => {
+        if (showingsState !== undefined) {
+          this.showingSt = showingsState;
+        }
         const filteredShowings = showingsState.showings.filter(
           (s) => s.movieId === this.selectedValue.id
         );
-
         return of(filteredShowings);
       })
     );
@@ -108,16 +112,42 @@ export class AdminPanelPageComponent implements OnInit {
       .add(timeToInMinutes, 'minutes')
       .format('HH:mm');
 
-    const formattedDate = new Date(res.date).toISOString().substr(0, 10);
+    const formattedDate = moment(res.date).format('YYYY-MM-DD');
 
-    this.showingsStore.addShowing({
-      movieId: this.selectedValue.id,
-      hallId: res.hall.id,
-      date: formattedDate,
-      movieBreak: res.break,
-      timeFrom: res.hour,
-      timeTo: timeToInHours,
-    });
+    function canAddShowing() {
+      return !this.showingSt.showings.some((showing: Showing) => {
+        if (
+          res.hall.id === showing.hallId &&
+          formattedDate === showing.date &&
+          ((moment.duration(res.hour).asMinutes() >=
+            moment.duration(showing.timeFrom).asMinutes() &&
+            moment.duration(res.hour).asMinutes() <
+              moment.duration(showing.timeTo).asMinutes() +
+                showing.movieBreak) ||
+            (timeToInMinutes >
+              moment.duration(showing.timeFrom).asMinutes() - res.break &&
+              timeToInMinutes <= moment.duration(showing.timeTo).asMinutes()))
+        ) {
+          console.log('Nie mogę dodać, sala zajęta');
+          return true;
+        }
+        return false;
+      });
+    }
+
+    if (!canAddShowing.bind(this)()) {
+      console.log('Nie mogę dodać, sala zajęta');
+    } else {
+      this.showingsStore.addShowing({
+        movieId: this.selectedValue.id,
+        hallId: res.hall.id,
+        date: formattedDate,
+        movieBreak: res.break,
+        timeFrom: res.hour,
+        timeTo: timeToInHours,
+      });
+      this.showForm = false;
+    }
     window.location.reload();
   }
 }
