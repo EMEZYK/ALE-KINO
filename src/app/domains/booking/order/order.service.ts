@@ -8,6 +8,7 @@ import {
   map,
   Observable,
   of,
+  take,
 } from 'rxjs';
 import { Order, UserOrder } from './order.interface';
 import { UserStateService } from 'src/app/core/user.state.service';
@@ -43,12 +44,23 @@ export class OrderStateService {
       .pipe(tap((order) => this.order$$.next(order)));
   }
 
-  changeOrderStatus(orderId: number) {
+  changeOrderPaidStatus(orderId: number) {
     this.http
       .patch<Order>(`orders/${orderId}`, {
         status: 'paid',
       })
       .subscribe();
+  }
+
+  updateOrder(newOrder: Order) {
+    return this.order$.pipe(
+      take(1),
+      switchMap((order: Order) =>
+        this.http
+          .put<Order>(`orders/${order.id}`, newOrder)
+          .pipe(tap((order) => this.order$$.next(order)))
+      )
+    );
   }
 
   getOrdersByIds(orderIds: number[]): Observable<UserOrder[]> {

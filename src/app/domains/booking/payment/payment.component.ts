@@ -48,7 +48,7 @@ export class PaymentComponent {
   }
 
   approvePayment(chosenMoving: ShowingWithMovie, orderId: number) {
-    this.orderService.changeOrderStatus(orderId);
+    this.orderService.changeOrderPaidStatus(orderId);
 
     this.router.navigate([
       '/booking/summary',

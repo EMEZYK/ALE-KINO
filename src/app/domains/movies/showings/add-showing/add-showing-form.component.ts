@@ -114,8 +114,6 @@ export class AddShowingFormComponent implements OnInit {
 
     this.addShowing.emit(this.addShowingForm.getRawValue());
 
-    console.log(this.addShowingForm.value);
-
     this.addShowingForm.reset();
   }
 }

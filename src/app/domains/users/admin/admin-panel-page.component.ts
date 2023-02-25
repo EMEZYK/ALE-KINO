@@ -28,6 +28,7 @@ import {
   ShowingsState,
   ShowingsStore,
 } from '../../movies/showings/store/showing.store';
+import { ShowingTimeValidationService } from '../../movies/showings/showing-time-validation.service';
 
 @Component({
   selector: 'app-admin-panel-page',
@@ -55,6 +56,7 @@ export class AdminPanelPageComponent implements OnInit {
   private store = inject(Store);
   public dialog = inject(MatDialog);
   private showingsStore = inject(ShowingsStore);
+  private showingTimeValidationService = inject(ShowingTimeValidationService);
 
   selectedValue: Movie;
   allMovies$: Observable<Movie[]>;
@@ -62,8 +64,6 @@ export class AdminPanelPageComponent implements OnInit {
   showForm = false;
   overlappingShowings: Showing[];
   showingSt: ShowingsState;
-  oldTimeFromInMinutes;
-  oldTimeToInMinutes;
 
   ngOnInit(): void {
     this.allMovies$ = this.store.select(movieSelectors.selectAllMovies);
@@ -114,40 +114,23 @@ export class AdminPanelPageComponent implements OnInit {
 
     const formattedDate = moment(res.date).format('YYYY-MM-DD');
 
-    function canAddShowing() {
-      return !this.showingSt.showings.some((showing: Showing) => {
-        if (
-          res.hall.id === showing.hallId &&
-          formattedDate === showing.date &&
-          ((moment.duration(res.hour).asMinutes() >=
-            moment.duration(showing.timeFrom).asMinutes() &&
-            moment.duration(res.hour).asMinutes() <
-              moment.duration(showing.timeTo).asMinutes() +
-                showing.movieBreak) ||
-            (timeToInMinutes >
-              moment.duration(showing.timeFrom).asMinutes() - res.break &&
-              timeToInMinutes <= moment.duration(showing.timeTo).asMinutes()))
-        ) {
+    this.showingTimeValidationService
+      .canAddShowing(res, this.showingSt, this.selectedValue)
+      .subscribe((canAdd) => {
+        if (canAdd) {
+          this.showingsStore.addShowing({
+            movieId: this.selectedValue.id,
+            hallId: res.hall.id,
+            date: formattedDate,
+            movieBreak: res.break,
+            timeFrom: res.hour,
+            timeTo: timeToInHours,
+          });
+          this.showForm = false;
+          window.location.reload();
+        } else {
           console.log('Nie mogę dodać, sala zajęta');
-          return true;
         }
-        return false;
       });
-    }
-
-    if (!canAddShowing.bind(this)()) {
-      console.log('Nie mogę dodać, sala zajęta');
-    } else {
-      this.showingsStore.addShowing({
-        movieId: this.selectedValue.id,
-        hallId: res.hall.id,
-        date: formattedDate,
-        movieBreak: res.break,
-        timeFrom: res.hour,
-        timeTo: timeToInHours,
-      });
-      this.showForm = false;
-    }
-    window.location.reload();
   }
 }

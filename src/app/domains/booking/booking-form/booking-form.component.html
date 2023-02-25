@@ -85,6 +85,7 @@
               formControlName="email"
               placeholder="Adres email"
               type="email"
+              appNoWhitespace
               class="form-control"
             />
             <ng-container *ngIf="email.errors as errors">
@@ -102,6 +103,7 @@
               formControlName="confirmEmail"
               placeholder="Potwierdź email"
               type="email"
+              appNoWhitespace
               class="form-control"
             />
             <ng-container *ngIf="confirmEmail.errors as errors">

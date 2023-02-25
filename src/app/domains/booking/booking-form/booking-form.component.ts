@@ -176,7 +176,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
       .createGuestAccount(guest)
       .pipe(
         switchMap((guest) =>
-          this.orderService.addOrder({
+          this.orderService.updateOrder({
             userId: guest.id,
             orderItems: orderItems.map((orderItem: SeatTicket) => {
               return {

@@ -4,12 +4,12 @@ import { ShowingWithMovie } from '../../movies/movie.interface';
 
 export interface Order {
   id?: number;
-  userId: number;
+  userId?: number;
   orderItems: {
     seatId: number;
-    ticketId: number;
+    ticketId?: number;
   }[];
-  showingId: number;
+  showingId?: number;
   status: 'reserved' | 'paid';
 }
 
