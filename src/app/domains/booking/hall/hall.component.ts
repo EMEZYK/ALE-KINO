@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AsyncPipe, NgIf, NgFor, KeyValuePipe, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { TicketType } from '../tickets';
@@ -15,7 +15,6 @@ import { HallApiService } from './hall.api.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { OrderStateService } from '../order/order.service';
-import { Order } from '../order';
 import { JsonPipe } from '@angular/common';
 
 @Component({
@@ -44,29 +43,38 @@ export class HallComponent implements OnInit {
   private ticketsService = inject(TicketTypesStateService);
   private chosenShowingService = inject(ChoosenMovieShowingStateService);
   private hallService = inject(HallApiService);
+  chosenShowinId: number;
 
   tickets$: Observable<TicketType[]>;
   rows$: Observable<{ [key: string]: { [key: number]: Seat } }>;
   chosenShowing$: Observable<ChoosenMovieShowing>;
   orderItems$: Observable<SeatTicket[]> = this.seatTicketService.seatTickets$;
+  occupiedSeatIds$: Observable<number[]>;
   arrowIcon = faArrowDown;
   trashIcon = faTrash;
-  // showing: Showing;
 
   ngOnInit(): void {
     this.tickets$ = this.ticketsService.ticketTypes$;
     this.chosenShowing$ = this.chosenShowingService.chosenMovieShowing$;
 
+    this.occupiedSeatIds$ = this.chosenShowing$.pipe(
+      switchMap((showing: Showing) =>
+        this.seatTicketService.getOccupiedSeats(showing.id)
+      )
+    );
+
     this.rows$ = this.chosenShowing$.pipe(
-      // tap((showing) => (this.showing = showing)),
       switchMap((chosenShowing) => {
         return this.hallService.fetchHallSeats(chosenShowing.hallId);
       })
     );
   }
 
-  checkIfSeatIsAvailable(seat: Seat): boolean {
-    return this.seatTicketService.checkIfSeatIsAvailable(seat);
+  checkIfSeatIsAvailable(
+    showingId: number,
+    seatId: number
+  ): Observable<boolean> {
+    return this.seatTicketService.checkIfSeatIsAvailable(showingId, seatId);
   }
 
   clickChosenSeat(seat: Seat, showingId: number) {
@@ -85,8 +93,8 @@ export class HallComponent implements OnInit {
     this.seatTicketService.clickChosenSeat(seat, showingId);
   }
 
-  checkIfSeatIsChosen(seat: Seat): boolean {
-    return this.seatTicketService.checkIfSeatIsChosen(seat);
+  checkIfSeatIsChosen(showingId: Seat) {
+    return this.seatTicketService.checkIfSeatIsChosen(showingId);
   }
 
   selectTicket(orderItem: SeatTicket): void {

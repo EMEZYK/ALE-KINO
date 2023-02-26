@@ -63,6 +63,11 @@ export class OrderStateService {
     );
   }
 
+  getOrdersByShowingId(showingId: number) {
+    return this.http.get<Order[]>(`orders?showingId=${showingId}`);
+    // .pipe(tap((orders) => console.log(orders)));
+  }
+
   getOrdersByIds(orderIds: number[]): Observable<UserOrder[]> {
     const idsPath = orderIds
       .map((el) => el.toString())
@@ -100,8 +105,8 @@ export class OrderStateService {
             orderId: order.id,
           };
         });
-      }),
-      tap((val) => console.log(val))
+      })
+      // tap((val) => console.log(val))
     );
   }
 
@@ -114,9 +119,5 @@ export class OrderStateService {
         this.getOrdersByIds(orders.map((order) => order.id))
       )
     );
-  }
-
-  fetchOrders() {
-    return this.http.get<Order[]>('orders');
   }
 }

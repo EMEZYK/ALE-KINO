@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { MovieApiService } from './movie.api.service';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { DatePickerComponent } from 'src/app/shared/components/date-picker/date-picker.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ManageMoviePanelComponent } from '../manage-movie-panel/manage-movie-panel.component';
+import { SeatTicketsStateService } from '../../booking/order';
 
 @Component({
   selector: 'app-movie-list',
@@ -31,6 +32,7 @@ export class MovieListComponent implements OnInit {
   private movieService = inject(MovieApiService);
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
   private router = inject(Router);
+  private seatTicketService = inject(SeatTicketsStateService);
 
   @Input() selectedDate;
   date: Moment;
@@ -79,6 +81,8 @@ export class MovieListComponent implements OnInit {
         this.choosenMovieService.setChoosenMovieShowing(value);
       },
     });
+
+    this.seatTicketService.removeUnrelatedReservations(showingId);
 
     this.navigateToHall(movie);
   }

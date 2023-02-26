@@ -1,8 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
 import { ChoosenMovieShowingStateService } from '../../movies/choosen-movie.state.service';
 import { LocalStorageService } from '../../../shared/local-storage/local-storage.service';
 import { SeatTicket, Seat, UnavailableSeats } from '../hall/hall.interface';
+import { HttpClient } from '@angular/common/http';
+import { Order } from './order.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +12,7 @@ import { SeatTicket, Seat, UnavailableSeats } from '../hall/hall.interface';
 export class SeatTicketsStateService {
   private choosenMovieShowingService = inject(ChoosenMovieShowingStateService);
   private localStorageService = inject(LocalStorageService);
+  private http = inject(HttpClient);
 
   private seatTickets$$ = new BehaviorSubject<SeatTicket[]>([]);
 
@@ -44,10 +47,17 @@ export class SeatTicketsStateService {
       .subscribe();
   }
 
-  checkIfSeatIsAvailable(seat: Seat): boolean {
-    return this.unavailableSeats.some(
-      (el) => el.column === seat.column && el.row === seat.row
-    );
+  removeUnrelatedReservations(showingId: number) {
+    this.seatTickets$
+      .pipe(
+        take(1),
+        tap((res: SeatTicket[]) => {
+          const result = res.filter((el) => el.showingId === showingId);
+          this.seatTickets$$.next(result);
+          return result;
+        })
+      )
+      .subscribe();
   }
 
   setOrderItems(pair: SeatTicket[], shouldStore = true) {
@@ -78,6 +88,33 @@ export class SeatTicketsStateService {
       this.deleteChosenSeatAndTicket({ seat, ticket: null, showingId });
       this.seatTickets$$.next(currentOrderItems);
     }
+  }
+
+  checkIfSeatIsAvailable(
+    showingId: number,
+    seatId: number
+  ): Observable<boolean> {
+    return this.http.get<Order[]>(`orders?showingId=${showingId}`).pipe(
+      map((orders) => {
+        const occupiedSeats = orders.flatMap(({ orderItems }) =>
+          orderItems.map(({ seatId }) => seatId)
+        );
+
+        return occupiedSeats.some(
+          (occupiedSeatId) => occupiedSeatId === seatId
+        );
+      })
+    );
+  }
+
+  getOccupiedSeats(showingId: number) {
+    return this.http.get<Order[]>(`orders?showingId=${showingId}`).pipe(
+      map((orders) => {
+        return orders.flatMap(({ orderItems }) =>
+          orderItems.map(({ seatId }) => seatId)
+        );
+      })
+    );
   }
 
   checkIfSeatIsChosen(seat: Seat) {

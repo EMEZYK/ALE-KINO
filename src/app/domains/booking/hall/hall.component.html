@@ -17,20 +17,24 @@
     <div class="screen">
       <h2>Ekran</h2>
     </div>
-    <div class="seats-wrapper">
-      <ng-container *ngIf="rows$ | async as rows">
-        <li *ngFor="let row of rows | keyvalue" class="row">
-          <span>{{ row.key }}</span>
-          <button
-            *ngFor="let column of row.value | keyvalue"
-            [disabled]="checkIfSeatIsAvailable(column.value)"
-            (click)="clickChosenSeat(column.value, chosenMovieShowing.id)"
-            [ngClass]="checkIfSeatIsChosen(column.value) ? 'selected' : ''"
-            class="seat"
-          ></button>
-        </li>
-      </ng-container>
-    </div>
+
+    <ng-container *ngIf="occupiedSeatIds$ | async as occupiedSeatIds">
+      <div class="seats-wrapper">
+        <ng-container *ngIf="rows$ | async as rows">
+          <li *ngFor="let row of rows | keyvalue" class="row">
+            <span>{{ row.key }}</span>
+            <ng-container *ngFor="let column of row.value | keyvalue">
+              <button
+                (click)="clickChosenSeat(column.value, chosenMovieShowing.id)"
+                [ngClass]="checkIfSeatIsChosen(column.value) ? 'selected' : ''"
+                class="seat"
+                [disabled]="occupiedSeatIds.includes(column.value.id)"
+              ></button>
+            </ng-container>
+          </li>
+        </ng-container>
+      </div>
+    </ng-container>
 
     <p class="select-seat-info">Wybierz miejsce, aby dodać bilet</p>
     <div class="choosen-seat-info">
