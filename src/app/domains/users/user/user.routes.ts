@@ -11,11 +11,11 @@ import { OrderDetailsComponent } from '../../booking/order/order-details/order-d
 export const USER_ROUTES: Routes = [
   {
     path: '',
-    component: UserHomePageComponent,
-  },
-  {
-    path: '',
     children: [
+      {
+        path: 'home',
+        component: UserHomePageComponent,
+      },
       {
         path: 'orders',
         component: OrderListComponent,
@@ -32,14 +32,14 @@ export const USER_ROUTES: Routes = [
         path: 'settings',
         component: UserHomePageComponent,
       },
-    ],
-  },
-  {
-    path: 'booking',
-    children: [
-      { path: 'seats/:id/:title', component: HallComponent },
-      { path: 'reservation/:id/:title', component: BookingFormComponent },
-      { path: 'summary/:id/:title', component: SummaryComponent },
+      {
+        path: 'booking',
+        children: [
+          { path: 'seats/:id/:title', component: HallComponent },
+          { path: 'reservation/:id/:title', component: BookingFormComponent },
+          { path: 'summary/:id/:title', component: SummaryComponent },
+        ],
+      },
     ],
   },
 ];

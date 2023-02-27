@@ -1,5 +1,5 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { MovieApiService } from './movie.api.service';
@@ -70,7 +70,7 @@ export class MovieListComponent implements OnInit {
     return this.expandedMovieIdDescriptions.indexOf(movieId) !== -1;
   }
 
-  onMovieTimeClick(showingId: number, movie) {
+  onMovieTimeClick(showingId: number, movie: Movie) {
     this.chosenShowingWithHall$ = this.movieService.getShowingWithMovieAndHall(
       showingId,
       this.date

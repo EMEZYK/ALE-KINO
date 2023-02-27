@@ -29,6 +29,7 @@ import { OrderDetailsComponent } from './domains/booking/order/order-details/ord
 import { MovieEffects } from './domains/movies/store/movie.effects';
 import { MovieReducer } from './domains/movies/store/movie.reducers';
 import { NoWhiteSpaceDirective } from './shared/directives/no-white-space.directive';
+import { SeatTicketsStateService } from './domains/booking/order';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { NoWhiteSpaceDirective } from './shared/directives/no-white-space.direct
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    SeatTicketsStateService,
   ],
   bootstrap: [AppComponent],
 })

@@ -27,6 +27,7 @@
               <button
                 (click)="clickChosenSeat(column.value, chosenMovieShowing.id)"
                 [ngClass]="checkIfSeatIsChosen(column.value) ? 'selected' : ''"
+                [ngDisabled]="clickCount > maxClickCount"
                 class="seat"
                 [disabled]="occupiedSeatIds.includes(column.value.id)"
               ></button>
@@ -35,6 +36,9 @@
         </ng-container>
       </div>
     </ng-container>
+    <p *ngIf="clickCount > maxClickCount">
+      Możesz wybrać maksymalnie 10 biletów.
+    </p>
 
     <p class="select-seat-info">Wybierz miejsce, aby dodać bilet</p>
     <div class="choosen-seat-info">

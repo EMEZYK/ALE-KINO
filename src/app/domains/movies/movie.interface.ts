@@ -22,8 +22,6 @@ export interface Showing {
   movieBreak: number;
   timeFrom: string;
   timeTo: string;
-  paidSeats?: Seat[];
-  bookedSeats?: Seat[];
 }
 
 export interface NewShowing {

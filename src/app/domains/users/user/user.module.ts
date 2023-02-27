@@ -8,6 +8,7 @@ import { MovieListComponent } from '../../movies/movie-list';
 import { OrderListComponent } from '../../booking/order/order-list/order-list.component';
 import { OrderDetailsComponent } from '../../booking/order/order-details/order-details.component';
 import { HomeComponent } from '../../home/home.component';
+import { SeatTicketsStateService } from '../../booking/order';
 
 @NgModule({
   declarations: [UserHomePageComponent],
@@ -20,6 +21,6 @@ import { HomeComponent } from '../../home/home.component';
     OrderDetailsComponent,
   ],
 
-  providers: [HomeComponent],
+  providers: [HomeComponent, SeatTicketsStateService],
 })
 export class UserModule {}

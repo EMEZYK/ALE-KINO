@@ -44,6 +44,8 @@ export class HallComponent implements OnInit {
   private chosenShowingService = inject(ChoosenMovieShowingStateService);
   private hallService = inject(HallApiService);
   chosenShowinId: number;
+  clickCount = 0;
+  maxClickCount = 10;
 
   tickets$: Observable<TicketType[]>;
   rows$: Observable<{ [key: string]: { [key: number]: Seat } }>;
@@ -78,6 +80,12 @@ export class HallComponent implements OnInit {
   }
 
   clickChosenSeat(seat: Seat, showingId: number) {
+    this.clickCount++;
+
+    if (this.clickCount > this.maxClickCount) {
+      alert('za duzo razy');
+      return;
+    }
     this.orderService
       .addOrder({
         orderItems: [

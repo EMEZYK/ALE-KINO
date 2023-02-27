@@ -25,7 +25,6 @@
           <div></div>
         </div>
       </div>
-      <!-- <ng-container *ngIf="order$ | async as order"> -->
       <form
         [formGroup]="bookingForm"
         (ngSubmit)="onSubmit(chosenMovieShowing, orderItems, order)"
@@ -137,9 +136,12 @@
             class="form-control"
           />
           <ng-container *ngIf="discountCode.errors as errors">
-            <ng-container *ngIf="discountCode.dirty">
+            <ng-container *ngIf="discountCode.touched">
               <p *ngIf="errors?.['invalidDiscountCode']">
                 Niewłaściwy kod zniżkowy
+              </p>
+              <p *ngIf="errors?.['usedDiscountCode']">
+                Kod zniżkowy został już zużyty
               </p>
             </ng-container>
           </ng-container>
@@ -152,7 +154,6 @@
           Zamawiam!
         </button>
       </form>
-      <!-- </ng-container> -->
     </div>
     <div class="back-link">
       <button (click)="navigateToHall(chosenMovieShowing)">

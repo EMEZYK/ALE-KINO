@@ -1,18 +1,41 @@
-import { FormControl, ValidatorFn, ValidationErrors } from '@angular/forms';
+import { inject, Injectable } from '@angular/core';
+import {
+  ValidatorFn,
+  ValidationErrors,
+  AbstractControl,
+  AsyncValidatorFn,
+  FormControl,
+} from '@angular/forms';
+import {
+  catchError,
+  debounceTime,
+  delay,
+  distinctUntilChanged,
+  map,
+  of,
+} from 'rxjs';
+import { DiscountCode } from 'src/app/domains/booking/order/discountCodes/discount-codes.interface';
+import { DiscountCodesApiService } from 'src/app/domains/booking/order/discountCodes/discount-codes.service';
 
-const discountCodes = ['Filmoteka2020', 'SuperFilm', 'AleżKino!'];
-
+@Injectable({
+  providedIn: 'root',
+})
 export class CustomValidators {
-  static emailMatchValidator: ValidatorFn = (
-    FormGroup: ValidationErrors | null
-  ) => {
-    const email = FormGroup.get('email').value;
-    const confirmEmail = FormGroup.get('confirmEmail').value;
+  // private static discountCodesService = inject(DiscountCodesApiService);
 
-    if (email !== confirmEmail) {
-      return { noEmailMatch: true };
-    }
-    return null;
+  private discountCodesService: DiscountCodesApiService;
+
+  constructor(discountCodesService: DiscountCodesApiService) {
+    this.discountCodesService = discountCodesService;
+  }
+
+  static emailMatchValidator: ValidatorFn = (
+    formGroup: AbstractControl
+  ): ValidationErrors | null => {
+    const email = formGroup.get('email').value;
+    const confirmEmail = formGroup.get('confirmEmail').value;
+
+    return email === confirmEmail ? null : { noEmailMatch: true };
   };
 
   static phoneNumberValidator: ValidatorFn = (
@@ -24,10 +47,24 @@ export class CustomValidators {
       : null;
   };
 
-  static discountCodeValidator(control: FormControl): { [s: string]: boolean } {
-    if (discountCodes.indexOf(control.value) === -1) {
-      return { invalidDiscountCode: true };
-    }
-    return null;
-  }
+  discountCodeValidator: AsyncValidatorFn = (control: AbstractControl) => {
+    const discountCode = (control as FormControl).value;
+
+    return this.discountCodesService.getDiscountCodes().pipe(
+      map((discountCodes: DiscountCode[]) => {
+        const matchingDiscountCode = discountCodes.find(
+          (code) => code.name === discountCode
+        );
+
+        if (!matchingDiscountCode) {
+          return { invalidDiscountCode: true };
+        } else if (matchingDiscountCode.active === false) {
+          return { usedDiscountCode: true };
+        } else {
+          return null;
+        }
+      }),
+      catchError(() => of({ invalidDiscountCode: true }))
+    );
+  };
 }

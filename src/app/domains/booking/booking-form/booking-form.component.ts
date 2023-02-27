@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators';
-import { Observable, switchMap, tap } from 'rxjs';
+import { distinctUntilChanged, Observable, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
 import { ChoosenMovieShowingStateService } from '../../movies';
@@ -12,12 +12,12 @@ import { ChoosenMovieShowing } from '../../movies/movie.interface';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { Guest, User } from '../../users/user.interface';
-// import { DiscountCodesStateService } from 'src/app/domains/booking/order/discountCodes/discount.-codes.state.service';
-// import { Discount } from '../order/discountCodes/discount-codes.interface';
 import { GuestApiService } from '../../users/guest/guest-api.service';
 import { OrderStateService } from '../order/order.service';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 import { LocalStorageService } from 'src/app/shared/local-storage';
+import { debounceInput } from 'src/app/shared/facades/debounce-input.facade';
+import { DiscountCodesApiService } from '../order/discountCodes/discount-codes.service';
 
 @Component({
   selector: 'app-booking-form-page',
@@ -32,10 +32,10 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   private emailService = inject(EmailConfirmationService);
   private router = inject(Router);
   private localStorageService = inject(LocalStorageService);
-  // private discounts$: Observable<Discount[]> = inject(DiscountCodesStateService)
-  //   .discounts$;
   private guestApiService = inject(GuestApiService);
   private orderService = inject(OrderStateService);
+  private customValidators = inject(CustomValidators);
+  private discountCodeService = inject(DiscountCodesApiService);
 
   user$ = inject(UserStateService).user$.subscribe((user) => {
     if (user) {
@@ -103,7 +103,14 @@ export class BookingFormComponent implements OnInit, OnDestroy {
         }
       ),
       acceptNewsletter: [''],
-      discountCode: [''],
+      discountCode: [
+        '',
+        [
+          this.customValidators.discountCodeValidator.bind(
+            this.customValidators
+          ),
+        ],
+      ],
     });
     this.handleFormChanges();
   }
@@ -144,15 +151,23 @@ export class BookingFormComponent implements OnInit, OnDestroy {
       this.phone.setValidators([]);
     });
 
-    this.discountCode.valueChanges.subscribe((value) => {
-      if (value !== '') {
-        this.discountCode.setValidators([
-          CustomValidators.discountCodeValidator,
-        ]);
-        this.discountCode.updateValueAndValidity({ emitEvent: false });
-      }
-      this.discountCode.setValidators([]);
-    });
+    this.discountCode.valueChanges
+      .pipe(
+        debounceInput(),
+        distinctUntilChanged(),
+        tap((value) => {
+          if (value !== '') {
+            this.discountCode.setAsyncValidators(
+              this.customValidators.discountCodeValidator.bind(
+                this.customValidators
+              )
+            );
+            this.discountCode.updateValueAndValidity({ emitEvent: false });
+          }
+          this.discountCode.setValidators([]);
+        })
+      )
+      .subscribe();
   }
 
   onSubmit(chosenShowing: ShowingWithMovie, orderItems: SeatTicket[]) {
@@ -177,7 +192,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
       .pipe(
         switchMap((guest) =>
           this.orderService.updateOrder({
-            userId: guest.id,
+            userId: this.user ? this.user.id : guest.id,
             orderItems: orderItems.map((orderItem: SeatTicket) => {
               return {
                 seatId: orderItem.seat.id,
@@ -190,6 +205,10 @@ export class BookingFormComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe();
+
+    this.discountCodeService.markDiscountCodeAsUsed(
+      this.bookingForm.value.discountCode
+    );
 
     this.emailService.setEmail(this.bookingForm.value.emailInfo.email);
     this.router.navigate([

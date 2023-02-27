@@ -21,8 +21,3 @@ export interface SeatTicket {
   ticket: TicketType;
   showingId: number;
 }
-
-export interface UnavailableSeats {
-  column: number;
-  row: string;
-}

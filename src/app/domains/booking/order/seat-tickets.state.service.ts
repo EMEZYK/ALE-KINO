@@ -1,16 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
-import { ChoosenMovieShowingStateService } from '../../movies/choosen-movie.state.service';
 import { LocalStorageService } from '../../../shared/local-storage/local-storage.service';
-import { SeatTicket, Seat, UnavailableSeats } from '../hall/hall.interface';
+import { SeatTicket, Seat } from '../hall/hall.interface';
 import { HttpClient } from '@angular/common/http';
 import { Order } from './order.interface';
 
-@Injectable({
-  providedIn: 'root',
-})
+// @Injectable({
+//   providedIn: 'root',
+// })
+@Injectable()
 export class SeatTicketsStateService {
-  private choosenMovieShowingService = inject(ChoosenMovieShowingStateService);
   private localStorageService = inject(LocalStorageService);
   private http = inject(HttpClient);
 
@@ -20,31 +19,12 @@ export class SeatTicketsStateService {
     return this.seatTickets$$.asObservable();
   }
 
-  unavailableSeats: UnavailableSeats[];
-
   constructor() {
     const storedSeatTicketPairs =
       this.localStorageService.getData('seatTicketPairs');
-
     if (storedSeatTicketPairs !== '') {
       this.setOrderItems(JSON.parse(storedSeatTicketPairs));
     }
-
-    this.choosenMovieShowingService.chosenMovieShowing$
-      .pipe(
-        tap((chosenShowing) => {
-          this.unavailableSeats = [
-            ...chosenShowing.bookedSeats,
-            ...chosenShowing.paidSeats,
-          ].map((unavailableSeat) => {
-            return {
-              column: unavailableSeat.column,
-              row: unavailableSeat.row,
-            };
-          });
-        })
-      )
-      .subscribe();
   }
 
   removeUnrelatedReservations(showingId: number) {
