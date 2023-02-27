@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
       :host {
         width: 100%;
       }
+
       .home-wrapper {
         width: 100%;
         height: auto;

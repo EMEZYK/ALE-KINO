@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { combineLatest, Observable, map } from 'rxjs';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 import { Order } from '../order';
@@ -9,6 +9,8 @@ import { SeatTicketsStateService } from '../order';
 import { NgIf, AsyncPipe } from '@angular/common';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
+import { DiscountCodesApiService } from '../order/discountCodes/discount-codes.service';
+import { DiscountCode } from '../order/discountCodes/discount-codes.interface';
 
 @Component({
   selector: 'app-payment',
@@ -23,19 +25,32 @@ export class PaymentComponent {
   chosenMovieShowing$ = inject(ChoosenMovieShowingStateService)
     .chosenMovieShowing$;
   private orderItemService = inject(SeatTicketsStateService);
+  private discountCodeService = inject(DiscountCodesApiService);
 
   order$: Observable<Order> = this.orderService.order$;
-  sumOfTickets: number;
+  regularPrice$: Observable<string>;
+  discountedPrice$: Observable<string>;
+
+  discountCode$: Observable<DiscountCode> =
+    this.discountCodeService.discountCode$;
 
   constructor() {
-    this.orderItemService
+    this.regularPrice$ = this.orderItemService
       .sumTicketsValues()
-      .pipe(
-        tap((sum) => {
-          this.sumOfTickets = sum;
-        })
-      )
-      .subscribe();
+      .pipe(map((price) => price.toFixed(2)));
+
+    this.discountedPrice$ = combineLatest([
+      this.orderItemService.sumTicketsValues(),
+      this.discountCodeService.discountCode$,
+    ]).pipe(
+      map(([regularPrice, discountCode]) => {
+        if (!discountCode) {
+          return null;
+        }
+        return (regularPrice * (100 - discountCode.discount)) / 100;
+      }),
+      map((price) => price?.toFixed(2))
+    );
   }
 
   cancelPayment(chosenMoving: ShowingWithMovie) {

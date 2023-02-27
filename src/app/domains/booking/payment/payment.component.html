@@ -7,11 +7,24 @@
       <h2>Płacę z</h2>
       <img src="../../../../assets/blik.png" />
     </div>
-    <p class="sum">Kwota: {{ sumOfTickets }} zł</p>
+    <ng-container
+      *ngIf="discountedPrice$ | async as discountedPrice; else noDiscount"
+    >
+      <p class="sum">Kwota po zastosowaniu zniżki: {{ discountedPrice }} zł</p>
+      <p>
+        {{ discountCode | json }}
+      </p>
+    </ng-container>
+    <ng-template #noDiscount>
+      <ng-container *ngIf="regularPrice$ | async as regularPrice">
+        <p class="sum">Kwota: {{ regularPrice }} zł</p>
+      </ng-container>
+    </ng-template>
     <div class="input-wrapper">
       <label>Kod blik</label>
       <input type="text" pattern="[0-9]*" appNumbersOnly maxlength="6" />
     </div>
+
     <div class="btn-wrapper">
       <app-button
         class="cancel"

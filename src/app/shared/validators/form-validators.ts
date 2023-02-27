@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   ValidatorFn,
   ValidationErrors,
@@ -6,14 +6,7 @@ import {
   AsyncValidatorFn,
   FormControl,
 } from '@angular/forms';
-import {
-  catchError,
-  debounceTime,
-  delay,
-  distinctUntilChanged,
-  map,
-  of,
-} from 'rxjs';
+import { catchError, map, of } from 'rxjs';
 import { DiscountCode } from 'src/app/domains/booking/order/discountCodes/discount-codes.interface';
 import { DiscountCodesApiService } from 'src/app/domains/booking/order/discountCodes/discount-codes.service';
 
@@ -21,8 +14,6 @@ import { DiscountCodesApiService } from 'src/app/domains/booking/order/discountC
   providedIn: 'root',
 })
 export class CustomValidators {
-  // private static discountCodesService = inject(DiscountCodesApiService);
-
   private discountCodesService: DiscountCodesApiService;
 
   constructor(discountCodesService: DiscountCodesApiService) {
@@ -47,8 +38,13 @@ export class CustomValidators {
       : null;
   };
 
-  discountCodeValidator: AsyncValidatorFn = (control: AbstractControl) => {
+  discountCodeValidator: AsyncValidatorFn = (
+    control: AbstractControl | null
+  ) => {
     const discountCode = (control as FormControl).value;
+    if (!discountCode || discountCode === '') {
+      return null;
+    }
 
     return this.discountCodesService.getDiscountCodes().pipe(
       map((discountCodes: DiscountCode[]) => {

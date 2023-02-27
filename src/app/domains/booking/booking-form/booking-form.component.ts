@@ -153,8 +153,8 @@ export class BookingFormComponent implements OnInit, OnDestroy {
 
     this.discountCode.valueChanges
       .pipe(
-        debounceInput(),
-        distinctUntilChanged(),
+        // debounceInput(),
+        // distinctUntilChanged(),
         tap((value) => {
           if (value !== '') {
             this.discountCode.setAsyncValidators(
@@ -172,6 +172,8 @@ export class BookingFormComponent implements OnInit, OnDestroy {
 
   onSubmit(chosenShowing: ShowingWithMovie, orderItems: SeatTicket[]) {
     this.bookingForm.markAllAsTouched();
+
+    this.discountCodeService.setDiscountCode(this.discountCode.value);
 
     if (this.bookingForm.invalid) {
       return;
