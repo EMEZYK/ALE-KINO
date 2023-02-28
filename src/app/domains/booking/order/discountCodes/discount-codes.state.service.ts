@@ -6,7 +6,7 @@ import { DiscountCode } from './discount-codes.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class DiscountCodesApiService {
+export class DiscountCodesStateService {
   private http = inject(HttpClient);
 
   private discountCode$$ = new BehaviorSubject<DiscountCode>(null);

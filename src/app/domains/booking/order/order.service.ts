@@ -13,10 +13,10 @@ import {
 import { Order, UserOrder } from './order.interface';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User } from '../../users/user.interface';
-import { TicketType, TicketTypesStateService } from '../tickets';
+import { TicketType, TicketsStateService } from '../tickets';
 import { ShowingStateService } from '../../movies/showing.state.service';
 import { Showing } from '../../movies/movie.interface';
-import { HallApiService } from '../hall/hall.api.service';
+import { SeatsApiService } from '../hall/seats.api.service';
 import { Seat } from '../hall/hall.interface';
 
 @Injectable({
@@ -25,9 +25,9 @@ import { Seat } from '../hall/hall.interface';
 export class OrderStateService {
   private http = inject(HttpClient);
   private userService = inject(UserStateService);
-  private ticketService = inject(TicketTypesStateService);
+  private ticketService = inject(TicketsStateService);
   private showingService = inject(ShowingStateService);
-  private hallService = inject(HallApiService);
+  private hallService = inject(SeatsApiService);
 
   private order$$ = new BehaviorSubject<Order>(null);
 
@@ -65,7 +65,6 @@ export class OrderStateService {
 
   getOrdersByShowingId(showingId: number) {
     return this.http.get<Order[]>(`orders?showingId=${showingId}`);
-    // .pipe(tap((orders) => console.log(orders)));
   }
 
   getOrdersByIds(orderIds: number[]): Observable<UserOrder[]> {
@@ -106,7 +105,6 @@ export class OrderStateService {
           };
         });
       })
-      // tap((val) => console.log(val))
     );
   }
 

@@ -29,10 +29,4 @@ export class ShowingStateService {
       )
       .subscribe();
   }
-
-  // addShowing(showing: Showing) {
-  //   this.showings$$.next([...this.showings$$.value, showing]);
-
-  //   return this.http.post<Showing>('showings', { showing });
-  // }
 }

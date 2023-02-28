@@ -6,11 +6,11 @@ import {
 } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { finalize, Observable } from 'rxjs';
-import { LoadingService } from '../components/loader/loader.state.service';
+import { LoadingStateService } from '../../shared/components/loader/loader.state.service';
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
-  private loadingService = inject(LoadingService);
+  private loadingService = inject(LoadingStateService);
   private totalRequests = 0;
 
   intercept(

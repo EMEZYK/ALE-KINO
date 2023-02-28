@@ -4,7 +4,7 @@ export interface Movie {
   id: number;
   title: string;
   duration: number;
-  ageRestrictions: string;
+  ageRestrictions: number;
   genres: Genre[];
   shortDescription: string;
   longDescription: string;

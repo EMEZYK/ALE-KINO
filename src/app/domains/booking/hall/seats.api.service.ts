@@ -7,7 +7,7 @@ import { Seat } from './hall.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class HallApiService {
+export class SeatsApiService {
   private http = inject(HttpClient);
 
   fetchHallSeats(hallId: number) {

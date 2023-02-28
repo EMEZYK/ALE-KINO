@@ -76,7 +76,7 @@ export class MovieFormComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(20),
-          Validators.maxLength(50),
+          Validators.maxLength(100),
         ],
       ],
       longDescription: [
@@ -99,13 +99,7 @@ export class MovieFormComponent implements OnInit {
         ]),
       ]),
       isPremiere: this.formBuilder.control(false, Validators.required),
-      image: [
-        '',
-        Validators.required,
-        // Validators.pattern(
-        //   '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
-        // ),
-      ],
+      image: ['', Validators.required],
     });
   }
 
@@ -127,9 +121,6 @@ export class MovieFormComponent implements OnInit {
     if (this.movieForm.invalid) {
       return;
     }
-
-    // console.log(this.movieForm.value);
-    // console.log(this.movieForm.getRawValue());
 
     this.store.dispatch(
       MovieActions.addMovie({

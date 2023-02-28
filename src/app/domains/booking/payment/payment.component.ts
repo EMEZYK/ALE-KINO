@@ -9,7 +9,7 @@ import { SeatTicketsStateService } from '../order';
 import { NgIf, AsyncPipe } from '@angular/common';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
-import { DiscountCodesApiService } from '../order/discountCodes/discount-codes.service';
+import { DiscountCodesStateService } from '../order/discountCodes/discount-codes.state.service';
 import { DiscountCode } from '../order/discountCodes/discount-codes.interface';
 
 @Component({
@@ -25,7 +25,7 @@ export class PaymentComponent {
   chosenMovieShowing$ = inject(ChoosenMovieShowingStateService)
     .chosenMovieShowing$;
   private orderItemService = inject(SeatTicketsStateService);
-  private discountCodeService = inject(DiscountCodesApiService);
+  private discountCodeService = inject(DiscountCodesStateService);
 
   order$: Observable<Order> = this.orderService.order$;
   regularPrice$: Observable<string>;

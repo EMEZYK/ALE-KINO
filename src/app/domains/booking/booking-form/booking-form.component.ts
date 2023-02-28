@@ -17,7 +17,7 @@ import { OrderStateService } from '../order/order.service';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { debounceInput } from 'src/app/shared/facades/debounce-input.facade';
-import { DiscountCodesApiService } from '../order/discountCodes/discount-codes.service';
+import { DiscountCodesStateService } from '../order/discountCodes/discount-codes.state.service';
 
 @Component({
   selector: 'app-booking-form-page',
@@ -35,7 +35,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   private guestApiService = inject(GuestApiService);
   private orderService = inject(OrderStateService);
   private customValidators = inject(CustomValidators);
-  private discountCodeService = inject(DiscountCodesApiService);
+  private discountCodeService = inject(DiscountCodesStateService);
 
   user$ = inject(UserStateService).user$.subscribe((user) => {
     if (user) {

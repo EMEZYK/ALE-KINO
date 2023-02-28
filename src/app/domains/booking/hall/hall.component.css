@@ -17,8 +17,6 @@
   align-items: center;
   justify-content: center;
   width: 80%;
-
-
 }
 
 .choosen-showing-info {
@@ -73,15 +71,14 @@ span:last-child {
 }
 
 .arrow-icon {
-  align-self:flex-end;
+  align-self: flex-end;
 }
 
-
-.seat { 
+.seat {
   padding: 1.4rem;
   font-size: 1rem;
   cursor: pointer;
-  margin: 0.2rem
+  margin: 0.2rem;
 }
 
 .chosen-tickets-list {
@@ -101,7 +98,6 @@ span:last-child {
   background-color: green;
 }
 
-
 .delete-ticket-button {
   padding: 0 0.4rem;
   cursor: pointer;
@@ -112,7 +108,7 @@ span:last-child {
   text-align: center;
 
   font-size: clamp(1rem, 1.2rem, 2rem);
-  margin: 2rem 0 ;
+  margin: 2rem 0;
 }
 
 .redirection-to-form {
@@ -121,10 +117,9 @@ span:last-child {
   justify-content: center;
   flex-direction: column;
   font-size: 1.2rem;
-  margin:  1rem 0 0 0;
+  margin: 1rem 0 0 0;
 }
 
 a {
   color: #ddd;
-
 }

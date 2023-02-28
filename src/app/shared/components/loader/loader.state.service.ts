@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-    providedIn: 'root'
-  })
-export class LoadingService {
+  providedIn: 'root',
+})
+export class LoadingStateService {
   private isLoading$$ = new BehaviorSubject<boolean>(false);
 
   get loading$() {
@@ -15,4 +15,3 @@ export class LoadingService {
     this.isLoading$$.next(isLoading);
   }
 }
-

@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Observable, map, switchMap } from 'rxjs';
-import { TicketType } from '../../booking/tickets/ticket.interface';
 import {
   Movie,
   Showing,
@@ -88,8 +87,4 @@ export class MovieApiService {
   private extractMovieIds(showings: Showing[]) {
     return showings.map((el) => el.movieId);
   }
-
-  // getAllTickets(): Observable<TicketType[]> {
-  //   return this.http.get<TicketType[]>('ticketsTypes');
-  // }
 }

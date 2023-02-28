@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { faEye, faStar } from '@fortawesome/free-solid-svg-icons';
 
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
@@ -27,8 +27,8 @@ export class ManageMoviePanelComponent {
   private ratingService = inject(MovieRatingStateService);
   private localStorageService = inject(LocalStorageService);
 
-  watchlistWithMovies$: Observable<WatchlistWithMovies> =
-    this.watchlistService.watchlist$;
+  // watchlistWithMovies$: Observable<WatchlistWithMovies> =
+  //   this.watchlistService.watchlist$.pipe(tap((val) => console.log(val)));
 
   isLoggedInUser =
     this.authService.auth$ &&
@@ -41,10 +41,14 @@ export class ManageMoviePanelComponent {
   stars: number[] = Array(10);
 
   getOveralRating(movieId: number): Observable<number> {
-    return this.ratingService.getOverallRatingForMovie(movieId);
+    // console.log(movieId);
+    return this.ratingService
+      .getOverallRatingForMovie(movieId)
+      .pipe(tap((val) => console.log(val)));
   }
 
   getUserRating(movieId: number): Observable<number> {
+    // console.log(movieId);
     return this.ratingService.getUserMovieRating(movieId);
   }
 

@@ -6,7 +6,7 @@ import { TicketType } from './ticket.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class TicketTypesStateService {
+export class TicketsStateService {
   private http = inject(HttpClient);
   private ticketTypes$$ = new BehaviorSubject<TicketType[]>([]);
 
@@ -15,16 +15,17 @@ export class TicketTypesStateService {
   }
 
   constructor() {
-    this.fetchTickets();
+    this.fetchTickets().subscribe((tickets: TicketType[]) =>
+      this.ticketTypes$$.next(tickets)
+    );
   }
 
   fetchTickets() {
-    return this.http
-      .get<TicketType[]>('ticketsTypes')
-      .subscribe((tickets: TicketType[]) => this.ticketTypes$$.next(tickets));
+    return this.http.get<TicketType[]>('ticketsTypes');
   }
 
   setTicket(ticket: TicketType) {
     this.ticketTypes$$.next({ ...this.ticketTypes$$.value, ...ticket });
+    return ticket;
   }
 }

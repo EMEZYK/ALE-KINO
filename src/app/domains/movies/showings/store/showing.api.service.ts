@@ -23,8 +23,6 @@ export class ShowingApiService {
       timeTo,
       hallId,
       movieBreak,
-      bookedSeats: [],
-      paidSeats: [],
     });
   }
 }

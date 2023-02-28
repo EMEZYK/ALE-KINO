@@ -85,7 +85,7 @@ export class HeaderComponent implements OnInit {
     if (this.userRole === 'admin') {
       this.router.navigate([`admin`]);
     } else if (this.userRole === 'user') {
-      this.router.navigate([`user/home`]);
+      this.router.navigate([`user/home/`]);
     } else {
       this.router.navigate([`home`]);
     }

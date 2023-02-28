@@ -8,15 +8,15 @@ import {
 } from '@angular/forms';
 import { catchError, map, of } from 'rxjs';
 import { DiscountCode } from 'src/app/domains/booking/order/discountCodes/discount-codes.interface';
-import { DiscountCodesApiService } from 'src/app/domains/booking/order/discountCodes/discount-codes.service';
+import { DiscountCodesStateService } from 'src/app/domains/booking/order/discountCodes/discount-codes.state.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomValidators {
-  private discountCodesService: DiscountCodesApiService;
+  private discountCodesService: DiscountCodesStateService;
 
-  constructor(discountCodesService: DiscountCodesApiService) {
+  constructor(discountCodesService: DiscountCodesStateService) {
     this.discountCodesService = discountCodesService;
   }
 
