@@ -1,24 +1,37 @@
 <ng-container *ngIf="userOrder$ | async as userOrder">
   <ng-container *ngFor="let order of userOrder">
-    <mat-card class="mat-card">
-      <mat-card-header>
-        <mat-card-title>{{
-          order.showingWithMovie.movie.title
-        }}</mat-card-title>
-        <mat-card-subtitle>
-          <span>data: {{ order.showingWithMovie.date }}</span>
-          <span>godz. {{ order.showingWithMovie.timeFrom }}</span>
-          <span>sala nr: {{ order.showingWithMovie.hallId }}</span>
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <li *ngFor="let ticket of order.seatTickets" class="ticket-info">
-          <span>Rząd: {{ ticket.seat.row }} </span>
-          <span>Miejsce: {{ ticket.seat.column }}</span>
-          <span>Cena: {{ ticket.ticket.price }} zł</span>
-        </li>
-      </mat-card-content>
-      <!-- <p class="tickets-sum">Razem: {{ sumOfTickets }} zł</p> -->
-    </mat-card>
+    <ng-container *ngFor="let ticket of order.seatTickets" class="ticket-info">
+      <div class="cardWrap">
+        <div class="card cardLeft">
+          <h1>Ale kino!</h1>
+          <div class="title">
+            <h2>{{ order.showingWithMovie.movie.title }}</h2>
+            <span>film</span>
+          </div>
+          <div class="name">
+            <h2>{{ order.showingWithMovie.hallId }}</h2>
+            <span>sala nr</span>
+          </div>
+          <div class="seat">
+            <h2>{{ ticket.seat.row }}</h2>
+            <span>Rząd</span>
+          </div>
+          <div class="time">
+            <h2>{{ order.showingWithMovie.timeFrom }}</h2>
+            <span>Godzina</span>
+          </div>
+        </div>
+        <div class="card cardRight">
+          <!-- <div class="eye"></div> -->
+          <div class="eye-wrapper">
+            <mat-icon>remove_red_eye</mat-icon>
+          </div>
+          <div class="number">
+            <h3>{{ ticket.seat.column }}</h3>
+            <span>Miejsce</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </ng-container>
 </ng-container>

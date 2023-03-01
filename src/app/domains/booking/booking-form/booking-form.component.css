@@ -17,8 +17,7 @@
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  background-color:
-  #0C2D48;
+  background-color: #0c2d48;
 }
 
 .movie-details {
@@ -29,12 +28,15 @@
   justify-items: end;
   margin: 1rem 0 0 0;
 }
-.movie-date, .movie-time, .movie-hall {
-   padding: 0.4rem 1rem;
+.movie-date,
+.movie-time,
+.movie-hall {
+  padding: 0.4rem 1rem;
 }
 
-.movie-date, .movie-time{
-    border-right: 1px solid #fff;
+.movie-date,
+.movie-time {
+  border-right: 1px solid #fff;
 }
 
 .movie-time-info,
@@ -46,8 +48,6 @@
   justify-items: flex-end;
   margin: 1rem auto;
 }
-
-
 
 span {
   display: block;
@@ -84,14 +84,14 @@ span {
 }
 
 .checkbox-wrapper {
- display: flex;
- flex-direction: row;
- align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .checkbox {
   width: auto;
-  margin: 0 1rem 0 0 ;
+  margin: 0 1rem 0 0;
   cursor: pointer;
 }
 input {
@@ -114,19 +114,24 @@ label {
   padding: 0.6rem 1rem;
 }
 
-
 .back-link {
-    font-size: 1.2rem;
-    margin: 1rem;
-    padding: 1rem;
+  font-size: 1.2rem;
+  margin: 1rem;
+  padding: 1rem;
 }
 
 .back-link > a {
-    color: #ddd
+  color: #ddd;
 }
 
-.toggle-info-wrapper{
-    color: #000
+.toggle-info-wrapper {
+  color: #000;
 }
 
-input.ng-touched.ng-invalid {border: 1px solid red};
+input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+.back-button:hover {
+  background-color: rgb(245, 233, 233) !important;
+}

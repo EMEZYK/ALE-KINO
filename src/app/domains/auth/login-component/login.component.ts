@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { CustomValidators } from 'src/app/shared/validators';
 import { AuthLoginStateService } from '../auth-login.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
 
   private createForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      // email: ['', Validators.required, Validators.email],
+      email: ['', [Validators.required, CustomValidators.emailValidator]],
       password: ['', Validators.required],
     });
   }

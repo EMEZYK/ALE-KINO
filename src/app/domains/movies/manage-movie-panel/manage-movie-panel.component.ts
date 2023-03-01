@@ -27,9 +27,6 @@ export class ManageMoviePanelComponent {
   private ratingService = inject(MovieRatingStateService);
   private localStorageService = inject(LocalStorageService);
 
-  // watchlistWithMovies$: Observable<WatchlistWithMovies> =
-  //   this.watchlistService.watchlist$.pipe(tap((val) => console.log(val)));
-
   isLoggedInUser =
     this.authService.auth$ &&
     this.localStorageService.getData('role') === 'user';
@@ -41,14 +38,10 @@ export class ManageMoviePanelComponent {
   stars: number[] = Array(10);
 
   getOveralRating(movieId: number): Observable<number> {
-    // console.log(movieId);
-    return this.ratingService
-      .getOverallRatingForMovie(movieId)
-      .pipe(tap((val) => console.log(val)));
+    return this.ratingService.getOverallRatingForMovie(movieId);
   }
 
   getUserRating(movieId: number): Observable<number> {
-    // console.log(movieId);
     return this.ratingService.getUserMovieRating(movieId);
   }
 

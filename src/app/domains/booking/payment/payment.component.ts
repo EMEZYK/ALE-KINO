@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { combineLatest, Observable, map } from 'rxjs';
+import { combineLatest, Observable, map, tap, switchMap } from 'rxjs';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 import { Order } from '../order';
 import { OrderStateService } from '../order/order.service';
 import { SeatTicketsStateService } from '../order';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { NgIf, AsyncPipe, JsonPipe } from '@angular/common';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
 import { DiscountCodesStateService } from '../order/discountCodes/discount-codes.state.service';
@@ -17,7 +17,7 @@ import { DiscountCode } from '../order/discountCodes/discount-codes.interface';
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css'],
   standalone: true,
-  imports: [NgIf, ButtonComponent, AsyncPipe, NumberDirective],
+  imports: [NgIf, ButtonComponent, AsyncPipe, NumberDirective, JsonPipe],
 })
 export class PaymentComponent {
   private router = inject(Router);
@@ -64,6 +64,9 @@ export class PaymentComponent {
 
   approvePayment(chosenMoving: ShowingWithMovie, orderId: number) {
     this.orderService.changeOrderPaidStatus(orderId);
+    this.orderItemService.clearSeatSelection();
+
+    this.discountCodeService.markDiscountCodeAsUsed();
 
     this.router.navigate([
       '/booking/summary',

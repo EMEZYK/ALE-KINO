@@ -34,12 +34,17 @@
           <label> Imię * </label>
           <input
             formControlName="name"
+            appNoWhitespace
+            appAlphabetOnly
             placeholder="Imię"
             class="form-control"
           />
           <ng-container *ngIf="name.errors as errors">
             <ng-container *ngIf="name.touched">
               <p *ngIf="errors?.['required']">Podaj imię</p>
+              <p *ngIf="errors?.['minlength'] as minlength">
+                Minimalna ilość znaków {{ minlength.requiredLength }}
+              </p>
             </ng-container>
           </ng-container>
         </div>
@@ -47,6 +52,8 @@
           <label> Nazwisko * </label>
           <input
             formControlName="surname"
+            appNoWhitespace
+            appAlphabetOnly
             placeholder="Nazwisko"
             class="form-control"
           />
@@ -67,11 +74,8 @@
           />
           <ng-container *ngIf="phone.errors as errors">
             <ng-container *ngIf="phone.touched">
-              <p *ngIf="errors?.['invalidNumber']">
-                Podaj prawidłowy format nr telefonu (tylko cyfry)
-              </p>
               <p *ngIf="errors?.['minlength'] as minlength">
-                Nr tel. powinien zawierać min
+                Nr tel. powinien składać się z
                 {{ minlength.requiredLength }} znaków
               </p>
             </ng-container>
@@ -84,7 +88,6 @@
               formControlName="email"
               placeholder="Adres email"
               type="email"
-              appNoWhitespace
               class="form-control"
             />
             <ng-container *ngIf="email.errors as errors">
@@ -132,6 +135,7 @@
           <label> Kod zniżkowy </label>
           <input
             formControlName="discountCode"
+            appNoWhitespace
             placeholder="Kod zniżkowy"
             class="form-control"
           />
@@ -149,6 +153,7 @@
         <button
           type="submit"
           [disabled]="bookingForm.invalid"
+          mat-raised-button
           class="submit-button"
         >
           Zamawiam!
@@ -156,7 +161,11 @@
       </form>
     </div>
     <div class="back-link">
-      <button (click)="navigateToHall(chosenMovieShowing)">
+      <button
+        mat-raised-button
+        (click)="navigateToHall(chosenMovieShowing)"
+        class="back-button"
+      >
         Wróć do wyboru miejsc
       </button>
     </div>

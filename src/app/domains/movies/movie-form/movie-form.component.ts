@@ -53,7 +53,7 @@ export class MovieFormComponent implements OnInit {
 
   movieForm: FormGroup;
   isPremiere: boolean;
-  errors: any = {}; // zmien na jakis typ!
+  errors: any = {};
 
   ngOnInit(): void {
     this.createForm();

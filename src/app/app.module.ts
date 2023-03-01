@@ -30,6 +30,8 @@ import { MovieEffects } from './domains/movies/store/movie.effects';
 import { MovieReducer } from './domains/movies/store/movie.reducers';
 import { NoWhiteSpaceDirective } from './shared/directives/no-white-space.directive';
 import { SeatTicketsStateService } from './domains/booking/order';
+import { MatButtonModule } from '@angular/material/button';
+import { AlphabetOnlyDirective } from './shared/directives/alphabet-only.directive';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,6 @@ import { SeatTicketsStateService } from './domains/booking/order';
     BookingFormComponent,
     LoginComponent,
     HomeComponent,
-    SummaryComponent,
   ],
   imports: [
     EffectsModule.forRoot([MovieEffects]),
@@ -45,7 +46,9 @@ import { SeatTicketsStateService } from './domains/booking/order';
     BrowserModule,
     OrderDetailsComponent,
     NumberDirective,
+    AlphabetOnlyDirective,
     NoWhiteSpaceDirective,
+    SummaryComponent,
     CancelPaymentComponent,
     PaymentComponent,
     HeaderComponent,
@@ -59,6 +62,7 @@ import { SeatTicketsStateService } from './domains/booking/order';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     QRCodeModule,
+    MatButtonModule,
     RouterModule.forRoot(APP_ROUTES, {
       preloadingStrategy: PreloadAllModules,
     }),

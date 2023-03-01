@@ -20,6 +20,12 @@ export class CustomValidators {
     this.discountCodesService = discountCodesService;
   }
 
+  static emailValidator(control: AbstractControl) {
+    const emailRegex = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const isValid = emailRegex.test(control.value);
+    return isValid ? null : { email: true };
+  }
+
   static emailMatchValidator: ValidatorFn = (
     formGroup: AbstractControl
   ): ValidationErrors | null => {
@@ -32,7 +38,8 @@ export class CustomValidators {
   static phoneNumberValidator: ValidatorFn = (
     AbstractControl: ValidationErrors | null
   ) => {
-    const PHONE_REGEXP = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s./0-9]*$/;
+    const PHONE_REGEXP =
+      /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3}$/;
     return !PHONE_REGEXP.test(AbstractControl.value)
       ? { invalidNumber: true }
       : null;

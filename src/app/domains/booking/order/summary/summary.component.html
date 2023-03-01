@@ -13,9 +13,9 @@
     class="qr-code"
   ></qrcode>
 
-  <div class="download-link">
-    <a [href]="qrCodeDownloadLink" download="qrcode"
-      >Pobierz qr code z biletami</a
+  <div class="download-wrapper">
+    <a [href]="qrCodeDownloadLink" download="qrcode" class="download-link">
+      <mat-icon>keyboard_arrow_down</mat-icon>Pobierz QR kod z biletami</a
     >
   </div>
   <ng-container *ngIf="user$ | async as user; else guest">
@@ -27,7 +27,9 @@
   </ng-container>
   <ng-template #guest>
     <p>Link do Twoich biletów:</p>
-    <a routerLink="/booking/orders/{{ orderId }}">Link</a>
+    <ng-container *ngIf="order$ | async as order">
+      <a routerLink="/booking/orders/{{ order.id }}">Link</a>
+    </ng-container>
   </ng-template>
 </div>
 

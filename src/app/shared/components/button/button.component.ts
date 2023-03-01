@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [NgIf, FontAwesomeModule],
+  imports: [NgIf, FontAwesomeModule, MatButtonModule],
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.css'],
 })

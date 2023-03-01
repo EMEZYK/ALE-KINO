@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, switchMap, tap } from 'rxjs';
 import { DiscountCode } from './discount-codes.interface';
 
 @Injectable({
@@ -27,14 +27,18 @@ export class DiscountCodesStateService {
   }
 
   getDiscountCodes() {
-    return this.http
-      .get<DiscountCode[]>('discountCodes')
-      .pipe(tap((val) => console.log(val)));
+    return this.http.get<DiscountCode[]>('discountCodes');
   }
 
-  markDiscountCodeAsUsed(discounName: string): Observable<void> {
-    return this.http.patch<void>(`discountCodes?name=${discounName}`, {
-      active: false,
-    });
+  markDiscountCodeAsUsed(): void {
+    this.discountCode$
+      .pipe(
+        switchMap((code: DiscountCode) =>
+          this.http.patch<DiscountCode>(`discountCodes/${code.id}`, {
+            active: false,
+          })
+        )
+      )
+      .subscribe();
   }
 }

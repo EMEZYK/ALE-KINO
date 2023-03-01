@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators';
-import { distinctUntilChanged, Observable, switchMap, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
 import { ChoosenMovieShowingStateService } from '../../movies';
@@ -86,12 +86,40 @@ export class BookingFormComponent implements OnInit, OnDestroy {
         },
       });
     }
+
+    // combineLatest([
+    //   this.choosenMovieService.chosenMovieShowing$,
+    //   this.orderItemsService.seatTickets$,
+    //   this.orderItemsService.sumTicketsValues(),
+    // ])
+    //   .pipe(
+    //     tap(([movieShowing, seatTickets, sumOfTickets]) => {
+    //       this.chosenMovieShowing$ = movieShowing;
+    //       this.seatTickets$ = seatTickets;
+    //       this.sumOfTickets = sumOfTickets;
+    //     }),
+    //     finalize(() => {
+    //       this.createForm();
+    //       if (this.isLoggedInUser) {
+    //         this.bookingForm.patchValue({
+    //           name: this.user.firstName,
+    //           surname: this.user.lastName,
+    //           phone: this.user.phoneNumber,
+    //           emailInfo: {
+    //             email: this.user.email,
+    //             confirmEmail: this.user.email,
+    //           },
+    //         });
+    //       }
+    //     })
+    //   )
+    //   .subscribe();
   }
 
   private createForm() {
     this.bookingForm = this.builder.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
+      name: ['', [Validators.minLength(2), Validators.required]],
+      surname: ['', Validators.required, Validators.minLength(2)],
       phone: [''],
       emailInfo: this.builder.group(
         {
@@ -208,10 +236,6 @@ export class BookingFormComponent implements OnInit, OnDestroy {
       )
       .subscribe();
 
-    this.discountCodeService.markDiscountCodeAsUsed(
-      this.bookingForm.value.discountCode
-    );
-
     this.emailService.setEmail(this.bookingForm.value.emailInfo.email);
     this.router.navigate([
       '/booking/payment',
@@ -230,4 +254,17 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.user$.unsubscribe();
   }
+}
+function combineLatest(
+  arg0: (
+    | Observable<ChoosenMovieShowing>
+    | Observable<SeatTicket[]>
+    | Observable<number>
+  )[]
+) {
+  throw new Error('Function not implemented.');
+}
+
+function finalize(arg0: () => void): any {
+  throw new Error('Function not implemented.');
 }

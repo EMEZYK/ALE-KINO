@@ -11,9 +11,6 @@
       *ngIf="discountedPrice$ | async as discountedPrice; else noDiscount"
     >
       <p class="sum">Kwota po zastosowaniu zniżki: {{ discountedPrice }} zł</p>
-      <p>
-        {{ discountCode | json }}
-      </p>
     </ng-container>
     <ng-template #noDiscount>
       <ng-container *ngIf="regularPrice$ | async as regularPrice">

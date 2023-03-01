@@ -3,55 +3,140 @@
   min-height: 80vh;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
-.mat-card {
-  color: #000;
-  width: 50%;
-  height: auto;
-  padding: 20px;
+.cardWrap {
+  margin: 3em auto;
+  color: #fff;
 }
 
-.ticket-info {
-  width: 80%;
-  font-size: 1.6rem;
-  display: flex;
-  margin: 10px;
+.card {
+  background: linear-gradient(
+    to bottom,
+    #e84c3d 0%,
+    #e84c3d 26%,
+    #ecedef 26%,
+    #ecedef 100%
+  );
+  height: 300px;
+  float: left;
+  position: relative;
+  padding: 1em;
+  margin-top: 100px;
 }
 
-mat-card-content {
-  width: 100%;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.cardLeft {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  width: 25em;
 }
 
-mat-card-header {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+.cardRight {
+  width: 6.5em;
+  border-left: 0.18em dashed #fff;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  position: relative;
+}
+
+h1 {
+  margin-top: 0;
+  color: #fff;
+}
+
+span {
+  font-weight: normal;
+  color: #fff;
+}
+
+.title,
+.name,
+.seat,
+.time {
+  text-transform: uppercase;
+  font-weight: normal;
+}
+h2 {
+  font-size: 1em;
+  color: #525252;
   margin: 0;
 }
+span {
+  font-size: 0.9em;
+  color: #a2aeae;
+}
+.title {
+  margin: 2em 0 0 0;
+}
 
-mat-card-title {
+.name,
+.seat {
+  margin: 0.7em 0 0 0;
+}
+
+.time {
+  margin: 0.7em 0 0 1em;
+}
+
+.seat,
+.time {
+  float: left;
+}
+.eye {
+  position: relative;
+  width: 2em;
+  height: 1.5em;
+  background: #fff;
+  margin: 0 auto;
+  border-radius: 1em/0.6em;
+  z-index: 1;
+}
+
+.eye:before,
+.eye:after {
+  content: '';
   display: block;
-  width: 100%;
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-.tickets-sum {
-  margin: 0;
-  text-align: right;
-  font-size: 1.8rem;
-  margin: 20px 0 0 0;
+  position: absolute;
+  border-radius: 50%;
 }
 
-mat-card-subtitle {
+.eye:before {
+  width: 1em;
+  height: 1em;
+  background: #e84c3d;
+  z-index: 2;
+  left: 8px;
+  top: 4px;
+}
+
+.eye:after {
+  width: 0.5em;
+  height: 0.5em;
+  background: #fff;
+  z-index: 3;
+  left: 12px;
+  top: 8px;
+}
+
+.number {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.number h3 {
+  color: #e84c3d;
+  margin: 0.9em 0 0 0;
+  font-size: 2.5em;
+}
+
+.number span {
+  display: block;
+  color: #a2aeae;
+}
+
+.eye-wrapper {
   width: 100%;
   display: flex;
-  font-size: 20px;
-  margin-bottom: 20px;
+  align-items: center;
 }

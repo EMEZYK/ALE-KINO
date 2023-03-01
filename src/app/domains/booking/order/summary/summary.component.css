@@ -23,9 +23,24 @@ a {
   font-size: 1.2rem;
 }
 
-.download-link {
+.download-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  margin: 1rem 0;
+  height: 50px;
+  margin: 0 0 1rem 0;
+}
+.download-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+
+  /* width: 100%;
+  height: 50px;
+  margin: 0 0 1rem 0;
+  background-color: red; */
 }
 
 .back-link {

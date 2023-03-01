@@ -5,9 +5,9 @@ import { SeatTicket, Seat } from '../hall/hall.interface';
 import { HttpClient } from '@angular/common/http';
 import { Order } from './order.interface';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
+@Injectable({
+  providedIn: 'root',
+})
 @Injectable()
 export class SeatTicketsStateService {
   private localStorageService = inject(LocalStorageService);
@@ -139,5 +139,10 @@ export class SeatTicketsStateService {
           .reduce((acc, value) => acc + value, 0)
       )
     );
+  }
+
+  clearSeatSelection() {
+    this.seatTickets$$.next([]);
+    this.localStorageService.saveData('seatTicketPairs', JSON.stringify([]));
   }
 }

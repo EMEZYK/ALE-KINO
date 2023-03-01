@@ -7,13 +7,14 @@ import { OrderStateService } from '../order.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserOrder } from '../order.interface';
 import { JsonPipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.css'],
   standalone: true,
-  imports: [MatCardModule, NgIf, AsyncPipe, NgFor, JsonPipe],
+  imports: [MatCardModule, NgIf, AsyncPipe, NgFor, JsonPipe, MatIconModule],
 })
 export class OrderDetailsComponent implements OnInit {
   private orderService = inject(OrderStateService);

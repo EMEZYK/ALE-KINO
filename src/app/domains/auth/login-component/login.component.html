@@ -11,8 +11,12 @@
       />
       <ng-container *ngIf="email.errors as errors">
         <ng-container *ngIf="email.touched">
-          <p *ngIf="errors?.['required']">Podaj e-mail</p>
-          <p *ngIf="errors?.['email']">Niewłaściwy format adresu email</p>
+          <p *ngIf="errors?.['required']; else emailError">Podaj e-mail</p>
+          <ng-template #emailError>
+            <p *ngIf="loginForm.get('email').hasError('email')">
+              Niewłaściwy format adresu email
+            </p>
+          </ng-template>
         </ng-container>
       </ng-container>
     </div>

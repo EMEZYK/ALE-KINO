@@ -1,10 +1,10 @@
 :host {
   padding: 4rem;
 }
-
+/* 
 ::ng-deep button {
   border: 0;
-}
+} */
 
 ::ng-deep .approve button {
   background-color: rgb(231, 34, 7) !important;

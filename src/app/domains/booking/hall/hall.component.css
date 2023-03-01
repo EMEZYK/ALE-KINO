@@ -17,6 +17,8 @@
   align-items: center;
   justify-content: center;
   width: 80%;
+  perspective: 1000px;
+  margin-bottom: 3px;
 }
 
 .choosen-showing-info {
@@ -75,10 +77,11 @@ span:last-child {
 }
 
 .seat {
-  padding: 1.4rem;
-  font-size: 1rem;
+  padding: 1.6rem;
+  margin: 8px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   cursor: pointer;
-  margin: 0.2rem;
 }
 
 .chosen-tickets-list {
@@ -107,7 +110,7 @@ span:last-child {
 .select-seat-info {
   text-align: center;
 
-  font-size: clamp(1rem, 1.2rem, 2rem);
+  font-size: clamp(1rem, 1.4rem, 1.8rem);
   margin: 2rem 0;
 }
 
@@ -122,4 +125,17 @@ span:last-child {
 
 a {
   color: #ddd;
+}
+
+.screen {
+  background-color: #fff;
+  height: 70px;
+  width: 400px;
+  margin: 15px 0;
+  transform: rotateX(-65deg);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+}
+
+option {
+  font-size: 1rem;
 }

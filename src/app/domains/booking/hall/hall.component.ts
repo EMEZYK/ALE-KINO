@@ -43,10 +43,10 @@ export class HallComponent implements OnInit {
   private ticketsService = inject(TicketsStateService);
   private chosenShowingService = inject(ChoosenMovieShowingStateService);
   private hallService = inject(SeatsApiService);
+
   chosenShowinId: number;
   clickCount = 0;
   maxClickCount = 10;
-
   tickets$: Observable<TicketType[]>;
   rows$: Observable<{ [key: string]: { [key: number]: Seat } }>;
   chosenShowing$: Observable<ChoosenMovieShowing>;
