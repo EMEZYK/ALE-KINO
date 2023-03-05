@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import * as moment from 'moment';
 import { Movie, Showing } from '../movie.interface';
 import { ShowingFormValue } from './add-showing/add-showing-form.component';
 import { ShowingsState } from './store/showing.store';
+import { ToastFacadeService } from 'src/app/shared/facades/toast.facade.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShowingTimeValidationService {
+  private toastService = inject(ToastFacadeService);
+
   canAddShowing(
     res: ShowingFormValue,
     showingSt: ShowingsState,
@@ -31,7 +34,10 @@ export class ShowingTimeValidationService {
             moment.duration(showing.timeFrom).asMinutes() - res.break &&
             timeToInMinutes <= moment.duration(showing.timeTo).asMinutes()))
       ) {
-        console.log('Nie mogę dodać, sala zajęta');
+        this.toastService.showError(
+          'Nie możesz dodać seansu w tym czasie, sala jest już zajęta!',
+          'Błąd'
+        );
         return true;
       }
       return false;

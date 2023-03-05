@@ -14,8 +14,10 @@
 .card {
   background: linear-gradient(
     to bottom,
-    #e84c3d 0%,
-    #e84c3d 26%,
+    #1e2c4b 0,
+    #3a527a 26%,
+
+    /* #e84c3d 0%, */ #e84c3d 26%,
     #ecedef 26%,
     #ecedef 100%
   );
@@ -137,6 +139,7 @@ span {
 
 .eye-wrapper {
   width: 100%;
+  height: 50px;
   display: flex;
   align-items: center;
 }

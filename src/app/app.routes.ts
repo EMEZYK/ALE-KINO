@@ -9,7 +9,6 @@ import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment
 import { HomeComponent } from './domains/home/home.component';
 import * as moment from 'moment';
 import { OrderDetailsComponent } from './domains/booking/order/order-details/order-details.component';
-import { SeatTicketsStateService } from './domains/booking/order';
 
 const date = moment().format('YYYY-MM-DD');
 
@@ -25,7 +24,6 @@ export const APP_ROUTES: Routes = [
       { path: 'summary/:id/:title', component: SummaryComponent },
       { path: 'orders/:id', component: OrderDetailsComponent },
     ],
-    // providers: [SeatTicketsStateService],
   },
   {
     path: 'user',

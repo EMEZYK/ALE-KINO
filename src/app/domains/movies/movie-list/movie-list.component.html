@@ -5,7 +5,7 @@
   ></app-date-picker>
 
   <ul class="movie-wrapper">
-    <li *ngFor="let movie of allMovieShowings | async" class="movie">
+    <li *ngFor="let movie of allMovieShowings$ | async" class="movie">
       <div class="movie-poster">
         <img src="{{ movie.image }}" />
         <ng-container *ngIf="movie.isPremiere === true">

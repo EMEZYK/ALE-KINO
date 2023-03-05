@@ -1,3 +1,7 @@
+<ng-container *ngIf="vm$ | async as vm">
+  {{ vm.v1 }}
+</ng-container>
+
 <ng-container *ngIf="chosenMovieShowing$ | async as chosenMovieShowing">
   <ng-container *ngIf="seatTickets$ | async as orderItems">
     <div class="booking-form-wrapper">
@@ -20,8 +24,9 @@
               <span>Cena: {{ ticket.ticket.price }} zł</span>
             </li>
           </ul>
-          <p class="tickets-sum">Razem: {{ sumOfTickets }} zł</p>
-
+          <ng-container *ngIf="sumOfTickets$ | async as sumOfTickets">
+            <p class="tickets-sum">Razem: {{ sumOfTickets }} zł</p>
+          </ng-container>
           <div></div>
         </div>
       </div>

@@ -86,3 +86,15 @@ app-showings-list {
   align-items: center;
   justify-content: center;
 }
+
+.movie-info {
+  display: flex;
+  flex-wrap: wrap;
+  word-break: break-all;
+  white-space: normal;
+}
+
+p {
+  width: 100%;
+  margin: 10px 0;
+}

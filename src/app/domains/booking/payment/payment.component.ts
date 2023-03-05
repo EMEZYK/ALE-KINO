@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest, Observable, map, tap, switchMap } from 'rxjs';
 import { ChoosenMovieShowingStateService } from '../../movies';
-import { ShowingWithMovie } from '../../movies/movie.interface';
+import { Showing, ShowingWithMovie } from '../../movies/movie.interface';
 import { Order } from '../order';
 import { OrderStateService } from '../order/order.service';
 import { SeatTicketsStateService } from '../order';
@@ -11,13 +11,20 @@ import { ButtonComponent } from 'src/app/shared/components/button/button.compone
 import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
 import { DiscountCodesStateService } from '../order/discountCodes/discount-codes.state.service';
 import { DiscountCode } from '../order/discountCodes/discount-codes.interface';
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.css'],
   standalone: true,
-  imports: [NgIf, ButtonComponent, AsyncPipe, NumberDirective, JsonPipe],
+  imports: [
+    NgIf,
+    ButtonComponent,
+    AsyncPipe,
+    NumberDirective,
+    JsonPipe,
+    RouterModule,
+  ],
 })
 export class PaymentComponent {
   private router = inject(Router);
@@ -74,4 +81,8 @@ export class PaymentComponent {
       chosenMoving.movie.title,
     ]);
   }
+
+  // navigateToForm(showing: Showing) {
+  //   this.router.navigate(`booking/reservation/${showing.id}/${showing.title}`);
+  // }
 }

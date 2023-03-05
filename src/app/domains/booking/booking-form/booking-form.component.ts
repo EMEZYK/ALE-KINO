@@ -1,14 +1,13 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators';
-import { Observable, switchMap, tap } from 'rxjs';
+import { combineLatest, map, Observable, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { SeatTicket } from '../hall/hall.interface';
 import { Order } from '../order/order.interface';
 import { SeatTicketsStateService } from '../order';
-import { ChoosenMovieShowing } from '../../movies/movie.interface';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { Guest, User } from '../../users/user.interface';
@@ -16,7 +15,7 @@ import { GuestApiService } from '../../users/guest/guest-api.service';
 import { OrderStateService } from '../order/order.service';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 import { LocalStorageService } from 'src/app/shared/local-storage';
-import { debounceInput } from 'src/app/shared/facades/debounce-input.facade';
+// import { debounceInput } from 'src/app/shared/facades/debounce-input.facade';
 import { DiscountCodesStateService } from '../order/discountCodes/discount-codes.state.service';
 
 @Component({
@@ -49,29 +48,29 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     this.authService.auth$ &&
     this.localStorageService.getData('role') === 'user';
 
-  chosenMovieShowing$: Observable<ChoosenMovieShowing>;
-  seatTickets$: Observable<SeatTicket[]>;
+  chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
+  seatTickets$ = this.orderItemsService.seatTickets$;
   user: User;
   bookingForm: FormGroup;
   submitted = false;
   order: Order[];
   ticketPrice: number;
-  sumOfTickets = 0;
+  sumOfTickets$: Observable<number>;
   setSeatTicketPairs: SeatTicket[];
+
+  vm$ = combineLatest([this.chosenMovieShowing$, this.seatTickets$]).pipe(
+    map(([v, v2]) => ({
+      v,
+      v2,
+    }))
+  );
 
   ngOnInit(): void {
     this.chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
     this.seatTickets$ = this.orderItemsService.seatTickets$;
     this.order;
 
-    this.orderItemsService
-      .sumTicketsValues()
-      .pipe(
-        tap((value) => {
-          this.sumOfTickets = value;
-        })
-      )
-      .subscribe();
+    this.sumOfTickets$ = this.orderItemsService.sumTicketsValues();
 
     this.createForm();
 
@@ -86,40 +85,12 @@ export class BookingFormComponent implements OnInit, OnDestroy {
         },
       });
     }
-
-    // combineLatest([
-    //   this.choosenMovieService.chosenMovieShowing$,
-    //   this.orderItemsService.seatTickets$,
-    //   this.orderItemsService.sumTicketsValues(),
-    // ])
-    //   .pipe(
-    //     tap(([movieShowing, seatTickets, sumOfTickets]) => {
-    //       this.chosenMovieShowing$ = movieShowing;
-    //       this.seatTickets$ = seatTickets;
-    //       this.sumOfTickets = sumOfTickets;
-    //     }),
-    //     finalize(() => {
-    //       this.createForm();
-    //       if (this.isLoggedInUser) {
-    //         this.bookingForm.patchValue({
-    //           name: this.user.firstName,
-    //           surname: this.user.lastName,
-    //           phone: this.user.phoneNumber,
-    //           emailInfo: {
-    //             email: this.user.email,
-    //             confirmEmail: this.user.email,
-    //           },
-    //         });
-    //       }
-    //     })
-    //   )
-    //   .subscribe();
   }
 
   private createForm() {
     this.bookingForm = this.builder.group({
       name: ['', [Validators.minLength(2), Validators.required]],
-      surname: ['', Validators.required, Validators.minLength(2)],
+      surname: ['', [Validators.required, Validators.minLength(2)]],
       phone: [''],
       emailInfo: this.builder.group(
         {
@@ -254,17 +225,4 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.user$.unsubscribe();
   }
-}
-function combineLatest(
-  arg0: (
-    | Observable<ChoosenMovieShowing>
-    | Observable<SeatTicket[]>
-    | Observable<number>
-  )[]
-) {
-  throw new Error('Function not implemented.');
-}
-
-function finalize(arg0: () => void): any {
-  throw new Error('Function not implemented.');
 }

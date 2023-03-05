@@ -1,7 +1,6 @@
 import { NgFor } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import {
-  FormArray,
   FormGroup,
   FormsModule,
   NonNullableFormBuilder,
@@ -23,6 +22,11 @@ import { NgIf } from '@angular/common';
 import { ErrorHandler } from 'src/app/shared/validators/error-handler';
 import { JsonPipe } from '@angular/common';
 import { ShowingsListComponent } from '../showings/showings-list/showings-list.component';
+import { URL_REGEXP } from 'src/app/shared/validators';
+import { MovieGenresApiService } from '../movie-genres/movie-genres.api.service';
+import { AsyncPipe } from '@angular/common';
+import { AgeRestrictionApiService } from '../age-restrictions/age-restrictions.api.service';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-movie-form',
@@ -30,7 +34,6 @@ import { ShowingsListComponent } from '../showings/showings-list/showings-list.c
   styleUrls: ['./movie-form.component.css'],
   standalone: true,
   imports: [
-    NgFor,
     FormsModule,
     MatDialogModule,
     MatButtonModule,
@@ -44,16 +47,22 @@ import { ShowingsListComponent } from '../showings/showings-list/showings-list.c
     JsonPipe,
     NgIf,
     ShowingsListComponent,
+    AsyncPipe,
+    NgFor,
+    MatSelectModule,
   ],
 })
 export class MovieFormComponent implements OnInit {
   private formBuilder = inject(NonNullableFormBuilder);
   private store = inject(Store);
   private errorHandler = inject(ErrorHandler);
+  movieGenres$ = inject(MovieGenresApiService).getMovieGenres$();
+  ageRestrictions$ = inject(AgeRestrictionApiService).getAgeRestrictions$();
 
   movieForm: FormGroup;
   isPremiere: boolean;
   errors: any = {};
+  URL_PATTERN = URL_REGEXP;
 
   ngOnInit(): void {
     this.createForm();
@@ -87,32 +96,23 @@ export class MovieFormComponent implements OnInit {
           Validators.maxLength(200),
         ],
       ],
-      ageRestrictions: ['', Validators.maxLength(2)],
+      ageRestrictions: this.formBuilder.control('', Validators.required),
       duration: [
         '',
         [Validators.required, Validators.minLength(2), Validators.maxLength(3)],
       ],
-      genres: this.formBuilder.array([
-        this.formBuilder.control('', [
-          Validators.required,
-          Validators.minLength(2),
-        ]),
-      ]),
-      isPremiere: this.formBuilder.control(false, Validators.required),
-      image: ['', Validators.required],
+      genres: this.formBuilder.control([], Validators.required),
+      isPremiere: ['', this.formBuilder.control(false, Validators.required)],
+      image: ['', Validators.required, Validators.pattern],
     });
   }
 
-  get genres() {
-    return this.movieForm.get('genres') as FormArray;
+  onSelectionChange(event) {
+    this.movieForm.get('genres').setValue(event.value);
   }
 
-  addGenre() {
-    this.genres.push(this.formBuilder.control(''));
-  }
-
-  removeGenre(i: number) {
-    this.genres.removeAt(i);
+  onAgeRestrictionsChange(event) {
+    this.movieForm.get('ageRestrictions').setValue(event.value);
   }
 
   submit() {

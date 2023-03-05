@@ -25,15 +25,13 @@
               </div>
               <div class="movie-info">
                 <h4 class="movie-info-title">Plakat</h4>
-                <div class="img-wrapper">
-                  <p class="img-src">{{ selectedValue?.image }}</p>
-                  <img
-                    mat-card-image
-                    src="{{ selectedValue?.image }}"
-                    alt=""
-                    class="movie-img"
-                  />
-                </div>
+                <p>{{ selectedValue?.image }}</p>
+                <img
+                  mat-card-image
+                  src="{{ selectedValue?.image }}"
+                  alt=""
+                  class="movie-img"
+                />
               </div>
               <div class="movie-info">
                 <h4 class="movie-info-title">Krótki opis</h4>
@@ -60,7 +58,7 @@
               <div class="movie-info">
                 <h4 class="movie-info-title">Gatunek</h4>
                 <p>
-                  {{ selectedValue?.genres }}
+                  {{ selectedValue?.genres.join(', ') }}
                 </p>
               </div>
               <div class="movie-info">
@@ -71,9 +69,17 @@
               </div>
               <div class="movie-info">
                 <h4 class="movie-info-title">Ranking</h4>
-                <p>
-                  {{ selectedValue?.rating }}
-                </p>
+                <ng-container
+                  *ngIf="
+                    getOveralRating(selectedValue.id) | async as overalRating;
+                    else noRating
+                  "
+                >
+                  <p>{{ overalRating }}/10</p>
+                </ng-container>
+                <ng-template #noRating>
+                  <p>0/10</p>
+                </ng-template>
               </div>
 
               <h4>Lista seansów:</h4>

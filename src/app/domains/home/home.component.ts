@@ -1,5 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -26,10 +28,13 @@ import { ActivatedRoute } from '@angular/router';
   ],
 })
 export class HomeComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  selectedDate: string;
+  private activeRoute = inject(ActivatedRoute);
+  selectedDate: Moment;
 
   ngOnInit() {
-    this.selectedDate = this.route.snapshot.paramMap.get('date');
+    this.activeRoute.params.subscribe((params) => {
+      const day = params['day'];
+      this.selectedDate = moment(day, 'YYYY-MM-DD');
+    });
   }
 }

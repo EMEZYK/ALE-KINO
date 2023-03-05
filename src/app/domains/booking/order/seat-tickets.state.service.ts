@@ -133,11 +133,11 @@ export class SeatTicketsStateService {
 
   sumTicketsValues() {
     return this.seatTickets$.pipe(
-      map((pair) =>
-        pair
+      map((pair) => {
+        return pair
           .map((pair) => pair.ticket.price)
-          .reduce((acc, value) => acc + value, 0)
-      )
+          .reduce((acc, value) => acc + value, 0);
+      })
     );
   }
 

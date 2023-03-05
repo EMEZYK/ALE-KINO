@@ -20,7 +20,7 @@ import { RouterLinkActive } from '@angular/router';
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.css'],
 })
-export class DatePickerComponent implements OnInit {
+export class DatePickerComponent {
   private router = inject(Router);
 
   @Input() dates: Moment[];
@@ -31,10 +31,6 @@ export class DatePickerComponent implements OnInit {
 
   isActive(date: Moment) {
     return date === this.selectedDate;
-  }
-  ngOnInit(): void {
-    this.chooseDate(this.date);
-    this.selectedDate = this.date;
   }
 
   chooseDate(currentDay: Moment) {

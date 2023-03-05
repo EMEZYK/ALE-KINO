@@ -38,5 +38,17 @@
         >Wykonaj</app-button
       >
     </div>
+
+    <div>
+      <a
+        [routerLink]="[
+          '/booking/reservation',
+          chosenShowing.id,
+          chosenShowing.movie.title
+        ]"
+      >
+        Wróć do formularza
+      </a>
+    </div>
   </div>
 </ng-container>

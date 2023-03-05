@@ -6,5 +6,7 @@
 }
 
 .spinner {
-  margin-top: 1rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
 }

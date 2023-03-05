@@ -32,6 +32,8 @@ import { NoWhiteSpaceDirective } from './shared/directives/no-white-space.direct
 import { SeatTicketsStateService } from './domains/booking/order';
 import { MatButtonModule } from '@angular/material/button';
 import { AlphabetOnlyDirective } from './shared/directives/alphabet-only.directive';
+import { ToastFacadeService } from './shared/facades/toast.facade.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -63,11 +65,14 @@ import { AlphabetOnlyDirective } from './shared/directives/alphabet-only.directi
     BrowserAnimationsModule,
     QRCodeModule,
     MatButtonModule,
+    ToastrModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES, {
       preloadingStrategy: PreloadAllModules,
     }),
   ],
   providers: [
+    ToastFacadeService,
+
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     SeatTicketsStateService,

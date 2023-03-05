@@ -13,21 +13,41 @@
     </mat-form-field>
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Długi opis</mat-label>
-      <input matInput formControlName="longDescription" />
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="3"
+        formControlName="longDescription"
+      ></textarea>
       <mat-error>{{ errors.longDescription }}</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline" floatLabel="always">
-      <mat-label>Ograniczenie wiekowe</mat-label>
-      <span matTextPrefix>+</span>
-      <input
-        matInput
-        appNumbersOnly
-        formControlName="ageRestrictions"
-        minlength="1"
-        maxlength="2"
-      />
-      <mat-error>{{ errors.ageRestrictions }}</mat-error>
-    </mat-form-field>
+
+    <ng-container *ngIf="ageRestrictions$ | async as ageRestrictions">
+      {{ ageResctrictions | json }}
+      <mat-form-field
+        appearance="outline"
+        floatLabel="always"
+        class="age-restrictions"
+      >
+        <mat-label>Ograniczenia wiekowe </mat-label>
+        <span matTextSuffix class="plus">+</span>
+
+        <mat-select
+          formControlName="ageRestrictions"
+          (selectionChange)="onAgeRestrictionsChange($event)"
+        >
+          <mat-option
+            *ngFor="let ageRestriction of ageRestrictions"
+            [value]="ageRestriction.restriction"
+            class="option"
+          >
+            {{ ageRestriction.restriction }}
+          </mat-option>
+        </mat-select>
+        <span matTextSuffix class="age">lat</span>
+      </mat-form-field>
+    </ng-container>
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Czas trwania</mat-label>
       <span matTextSuffix>min</span>
@@ -41,40 +61,28 @@
       <mat-error>{{ errors.duration }}</mat-error>
     </mat-form-field>
 
-    <div formArrayName="genres" class="genres-wrapper">
-      <mat-label class="genre-label">Gatunki filmowe</mat-label>
-      <div
-        *ngFor="let genre of genres.controls; let i = index"
-        class="genre-container"
+    <ng-container *ngIf="movieGenres$ | async as movieGenres">
+      <mat-form-field
+        appearance="outline"
+        floatLabel="always"
+        class="genre-field"
       >
-        {{ i.value }}
-        <mat-form-field
-          class="genre-field"
-          appearance="outline"
-          floatLabel="always"
+        <mat-label>Gatunek filmowy</mat-label>
+        <mat-select
+          (selectionChange)="onSelectionChange($event)"
+          formControlName="genres"
+          multiple
         >
-          <input
-            matInput
-            value="{{ formControlName }}"
-            [formControlName]="i"
-            class="genre-input"
-          />
-          <mat-error>{{ errors?.genres }}</mat-error>
-        </mat-form-field>
-        <button mat-icon-button (click)="removeGenre(i)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </div>
-      <button
-        mat-raised-button
-        type="button"
-        (click)="addGenre()"
-        class="add-genre-btn"
-      >
-        <mat-icon>add</mat-icon> Dodaj gatunek
-      </button>
-    </div>
-
+          <mat-option
+            *ngFor="let movieGenre of movieGenres"
+            [value]="movieGenre.genre"
+            class="option"
+          >
+            {{ movieGenre.genre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
     <div class="premiere-wrapper">
       <mat-label class="premiere-label">Premiera</mat-label>
       <mat-radio-group formControlName="isPremiere">
@@ -85,7 +93,12 @@
     </div>
     <mat-form-field appearance="outline" floatLabel="always">
       <mat-label>Link do plakatu</mat-label>
-      <input matInput formControlName="image" appNoWhitespace />
+      <input
+        matInput
+        formControlName="image"
+        appNoWhitespace
+        [pattern]="URL_PATTERN"
+      />
       <mat-error>{{ errors.image }}</mat-error>
     </mat-form-field>
 

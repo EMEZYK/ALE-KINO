@@ -10,6 +10,9 @@ import { catchError, map, of } from 'rxjs';
 import { DiscountCode } from 'src/app/domains/booking/order/discountCodes/discount-codes.interface';
 import { DiscountCodesStateService } from 'src/app/domains/booking/order/discountCodes/discount-codes.state.service';
 
+export const URL_REGEXP =
+  /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
+
 @Injectable({
   providedIn: 'root',
 })

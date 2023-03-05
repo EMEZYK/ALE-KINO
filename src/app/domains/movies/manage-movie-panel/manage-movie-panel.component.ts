@@ -27,6 +27,9 @@ export class ManageMoviePanelComponent {
   private ratingService = inject(MovieRatingStateService);
   private localStorageService = inject(LocalStorageService);
 
+  watchlistWithMovies$: Observable<WatchlistWithMovies> =
+    this.watchlistService.watchlist$;
+
   isLoggedInUser =
     this.authService.auth$ &&
     this.localStorageService.getData('role') === 'user';

@@ -6,7 +6,9 @@ form {
 
 mat-form-field,
 .premiere-wrapper,
-.genres-wrapper {
+.genres-wrapper,
+.movie-genres,
+.age-restrictions {
   width: 90%;
 }
 
@@ -38,7 +40,8 @@ form {
   justify-content: center;
 }
 
-.genre-field {
+.genre-field,
+.age-restrictions {
   width: 50%;
   padding: 0;
 }
@@ -53,4 +56,8 @@ form {
 
 .genre-label {
   margin-right: 30px;
+}
+
+.age {
+  padding: 20px;
 }

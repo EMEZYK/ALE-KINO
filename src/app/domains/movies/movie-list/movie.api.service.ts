@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Moment } from 'moment';
 import * as moment from 'moment';
 import { Observable, map, switchMap } from 'rxjs';
 import {
@@ -24,10 +25,10 @@ export class MovieApiService {
     return this.http.get<Movie[]>(`movies?id=${movieIds.join('&id=')}`);
   }
 
-  getAllMoviesForDay(date: moment.Moment): Observable<MovieWithShowingTime[]> {
+  getAllMoviesForDay(date: Moment): Observable<MovieWithShowingTime[]> {
     return this.http
       .get<Showing[]>(
-        this.getUrlForShowingsByDate(date.format(this.dateFormat))
+        this.getUrlForShowingsByDate(moment(date).format(this.dateFormat))
       )
       .pipe(
         switchMap((showingsForDay: Showing[]) =>
@@ -48,7 +49,7 @@ export class MovieApiService {
 
   getShowingWithMovieAndHall(
     showingId: number,
-    date: moment.Moment
+    date: Moment
   ): Observable<ChoosenMovieShowing> {
     let url = `showings?`;
     url = `showings?id=${showingId}&date=${date.format(

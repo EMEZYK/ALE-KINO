@@ -1,4 +1,10 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Moment } from 'moment';
 import * as moment from 'moment';
@@ -9,7 +15,7 @@ import {
   Movie,
   MovieWithShowingTime,
 } from '../movie.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DatePickerComponent } from 'src/app/shared/components/date-picker/date-picker.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ManageMoviePanelComponent } from '../manage-movie-panel/manage-movie-panel.component';
@@ -33,18 +39,26 @@ export class MovieListComponent implements OnInit {
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
   private router = inject(Router);
   private seatTicketService = inject(SeatTicketsStateService);
+  private activeRoute = inject(ActivatedRoute);
 
-  @Input() selectedDate;
+  @Input() selectedDate: string;
   date: Moment;
   dates: moment.Moment[] = [];
 
   expandedMovieIdDescriptions: number[] = [];
-  allMovieShowings: Observable<MovieWithShowingTime[]>;
+  allMovieShowings$: Observable<MovieWithShowingTime[]>;
   chosenShowingWithHall$: Observable<ChoosenMovieShowing>;
 
   ngOnInit(): void {
     const startDate = moment().startOf('isoWeek');
     const endDate = startDate.clone().add(6, 'days');
+
+    this.activeRoute.params.subscribe((params) => {
+      const day = params['day'];
+
+      this.date = moment(day, 'YYYY-MM-DD');
+      this.getMovies(day);
+    });
 
     for (
       let m = moment(startDate);
@@ -53,8 +67,6 @@ export class MovieListComponent implements OnInit {
     ) {
       this.dates.push(m.clone());
     }
-
-    this.date = moment();
   }
 
   toggleOpen(movieId: number) {
@@ -95,8 +107,8 @@ export class MovieListComponent implements OnInit {
     this.date = selectedDate;
     this.getMovies(this.date);
   }
+
   getMovies(date: Moment) {
-    this.allMovieShowings = this.movieService.getAllMoviesForDay(date);
-    this.allMovieShowings.subscribe();
+    this.allMovieShowings$ = this.movieService.getAllMoviesForDay(date);
   }
 }

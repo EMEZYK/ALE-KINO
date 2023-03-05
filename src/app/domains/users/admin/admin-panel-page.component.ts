@@ -29,6 +29,7 @@ import {
   ShowingsStore,
 } from '../../movies/showings/store/showing.store';
 import { ShowingTimeValidationService } from '../../movies/showings/showing-time-validation.service';
+import { MovieRatingStateService } from '../../movies/movie-rating/movie-rating.state.service';
 
 @Component({
   selector: 'app-admin-panel-page',
@@ -57,6 +58,7 @@ export class AdminPanelPageComponent implements OnInit {
   public dialog = inject(MatDialog);
   private showingsStore = inject(ShowingsStore);
   private showingTimeValidationService = inject(ShowingTimeValidationService);
+  private ratingService = inject(MovieRatingStateService);
 
   selectedValue: Movie;
   allMovies$: Observable<Movie[]>;
@@ -100,6 +102,10 @@ export class AdminPanelPageComponent implements OnInit {
         return of(filteredShowings);
       })
     );
+  }
+
+  getOveralRating(movieId: number): Observable<number> {
+    return this.ratingService.getOverallRatingForMovie(movieId);
   }
 
   addShowing(res: ShowingFormValue) {
