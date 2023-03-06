@@ -2,13 +2,13 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AsyncPipe, NgIf, NgFor, KeyValuePipe, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { TicketType } from '../tickets';
 import { ChoosenMovieShowing, Showing } from '../../movies/movie.interface';
 import { SeatTicket, Seat } from './hall.interface';
-import { SeatTicketsStateService } from '../order';
+import { Order, SeatTicketsStateService } from '../order';
 import { TicketsStateService } from '../tickets';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { SeatsApiService } from './seats.api.service';
@@ -16,6 +16,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { OrderStateService } from '../order/order.service';
 import { JsonPipe } from '@angular/common';
+import { ToastFacadeService } from 'src/app/shared/facades/toast.facade.service';
+import { UserStateService } from 'src/app/core/user.state.service';
+import { User } from '../../users/user.interface';
 
 @Component({
   selector: 'app-seats-page',
@@ -43,6 +46,7 @@ export class HallComponent implements OnInit {
   private ticketsService = inject(TicketsStateService);
   private chosenShowingService = inject(ChoosenMovieShowingStateService);
   private hallService = inject(SeatsApiService);
+  private toastService = inject(ToastFacadeService);
 
   chosenShowinId: number;
   clickCount = 0;
@@ -54,6 +58,15 @@ export class HallComponent implements OnInit {
   occupiedSeatIds$: Observable<number[]>;
   arrowIcon = faArrowDown;
   trashIcon = faTrash;
+  user: User;
+
+  user$ = inject(UserStateService).user$.subscribe((user) => {
+    if (user) {
+      this.user = user;
+    } else {
+      this.user = null;
+    }
+  });
 
   ngOnInit(): void {
     this.tickets$ = this.ticketsService.ticketTypes$;
@@ -79,25 +92,44 @@ export class HallComponent implements OnInit {
     return this.seatTicketService.checkIfSeatIsAvailable(showingId, seatId);
   }
 
-  clickChosenSeat(seat: Seat, showingId: number) {
+  clickChosenSeat(seat: Seat, showingId: number, orderItems: SeatTicket[]) {
     this.clickCount++;
 
     if (this.clickCount > this.maxClickCount) {
-      alert('za duzo razy');
+      this.toastService.showError('Max możesz wybrać 10 biletów', 'Błąd');
       return;
     }
-    this.orderService
-      .addOrder({
-        orderItems: [
-          {
-            seatId: seat.id,
-          },
-        ],
-        showingId: showingId,
-        status: 'reserved',
-      })
-      .subscribe();
+    if (orderItems.length === 0) {
+      console.log('add');
+      this.orderService
+        .addOrder({
+          orderItems: [
+            {
+              seatId: seat.id,
+            },
+          ],
+          showingId: showingId,
+          status: 'reserved',
+        })
+        .subscribe();
+    } else {
+      console.log('update');
 
+      this.orderService
+        .updateOrder({
+          userId: this.user ? this.user.id : null,
+          orderItems: orderItems.map((orderItem: SeatTicket) => {
+            return {
+              seatId: orderItem.seat.id,
+              ticketId: orderItem.ticket.id,
+            };
+          }),
+          showingId: showingId,
+          status: 'reserved',
+        })
+        .subscribe();
+    }
+    console.log(seat);
     this.seatTicketService.clickChosenSeat(seat, showingId);
   }
 

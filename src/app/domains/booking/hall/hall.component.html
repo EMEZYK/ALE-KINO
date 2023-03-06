@@ -2,7 +2,7 @@
   *ngIf="chosenShowing$ | async as chosenMovieShowing"
   class="hall-page"
 >
-  <ng-container *ngIf="orderItems$ | async as orderItem">
+  <ng-container *ngIf="orderItems$ | async as orderItems">
     <div class="choosen-showing-info">
       <h1 class="movie-title">{{ chosenMovieShowing.movie.title }}</h1>
       <div class="movie-time-info">
@@ -25,7 +25,13 @@
             <span>{{ row.key }}</span>
             <ng-container *ngFor="let column of row.value | keyvalue">
               <button
-                (click)="clickChosenSeat(column.value, chosenMovieShowing.id)"
+                (click)="
+                  clickChosenSeat(
+                    column.value,
+                    chosenMovieShowing.id,
+                    orderItems
+                  )
+                "
                 [ngClass]="checkIfSeatIsChosen(column.value) ? 'selected' : ''"
                 [ngDisabled]="clickCount > maxClickCount"
                 class="seat"
@@ -43,7 +49,7 @@
     <p class="select-seat-info">Wybierz miejsce, aby dodać bilet</p>
     <div class="choosen-seat-info">
       <ul class="chosen-tickets-list">
-        <li *ngFor="let chosenSeat of orderItem" class="chosen-seat">
+        <li *ngFor="let chosenSeat of orderItems" class="chosen-seat">
           <ng-container *ngIf="chosenSeat.showingId === chosenMovieShowing.id">
             <span>Rząd: {{ chosenSeat.seat.row }}</span>
             <span>Miejsce: {{ chosenSeat.seat.column }}</span>
@@ -78,13 +84,13 @@
     </div>
     <div class="redirection-to-form">
       <a
-        *ngIf="orderItem && orderItem.length > 0"
+        *ngIf="orderItems && orderItems.length > 0"
         [routerLink]="[
           '/booking/reservation',
           chosenMovieShowing.id,
           chosenMovieShowing.movie.title
         ]"
-        (click)="saveChosenSeatsAndTicketsInLocalStorage(orderItem)"
+        (click)="saveChosenSeatsAndTicketsInLocalStorage(orderItems)"
       >
         Przejdź do zamówienia
       </a>

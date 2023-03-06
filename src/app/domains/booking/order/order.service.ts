@@ -58,7 +58,7 @@ export class OrderStateService {
       switchMap((order: Order) =>
         this.http
           .put<Order>(`orders/${order.id}`, newOrder)
-          .pipe(tap((order) => this.order$$.next(order)))
+          .pipe(tap((order: Order) => this.order$$.next(order)))
       )
     );
   }
