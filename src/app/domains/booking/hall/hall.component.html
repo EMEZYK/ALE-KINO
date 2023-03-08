@@ -46,42 +46,13 @@
       Możesz wybrać maksymalnie 10 biletów.
     </p>
 
-    <p class="select-seat-info">Wybierz miejsce, aby dodać bilet</p>
-    <div class="choosen-seat-info">
-      <ul class="chosen-tickets-list">
-        <li *ngFor="let chosenSeat of orderItems" class="chosen-seat">
-          <ng-container *ngIf="chosenSeat.showingId === chosenMovieShowing.id">
-            <span>Rząd: {{ chosenSeat.seat.row }}</span>
-            <span>Miejsce: {{ chosenSeat.seat.column }}</span>
+    <app-selected-seats-tickets
+      [orderItems]="orderItems"
+      [chosenMovieShowing]="chosenMovieShowing"
+      [tickets$]="tickets$"
+      (btnClick)="deleteChosenTicket($event)"
+    ></app-selected-seats-tickets>
 
-            <select
-              value="selectedTicket"
-              [(ngModel)]="chosenSeat.ticket"
-              (ngModelChange)="selectTicket(chosenSeat)"
-              class="ticket-type-wrapper"
-            >
-              <option [ngValue]="null" selected disabled>Wybierz bilet</option>
-              <option
-                *ngFor="let ticket of tickets$ | async; let i = index"
-                [ngValue]="ticket"
-                class="ticket-type"
-              >
-                {{ ticket.name }}
-                <fa-icon [icon]="arrowIcon" class="arrow-icon"></fa-icon>
-              </option>
-            </select>
-            <span class="price">Cena: {{ chosenSeat.ticket?.price }}zł </span>
-            <button
-              (click)="deleteChosenTicket(chosenSeat)"
-              type="button"
-              class="delete-ticket-button"
-            >
-              <fa-icon [icon]="trashIcon" class="trash"></fa-icon>
-            </button>
-          </ng-container>
-        </li>
-      </ul>
-    </div>
     <div class="redirection-to-form">
       <a
         *ngIf="orderItems && orderItems.length > 0"

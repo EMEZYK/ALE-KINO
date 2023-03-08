@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
-import { Seat } from './hall.interface';
+import { Seat } from '../hall/hall.interface';
 
 @Injectable({
   providedIn: 'root',

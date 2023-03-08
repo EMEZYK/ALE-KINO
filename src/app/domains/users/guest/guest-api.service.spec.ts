@@ -1,37 +1,30 @@
-import { EnvironmentInjector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { GuestApiService } from './guest-api.service';
 import { Guest } from '../user.interface';
-import { Observable, of } from 'rxjs';
 
 describe('GuestApiService', () => {
-  const guestApiServiceMock = {
-    createGuestAccount(): Observable<Guest> {
-      return of({
-        id: 1,
-        firstName: 'Ania',
-        lastName: 'Wojno',
-        phoneNumber: 444333555,
-        email: 'ania@gmail.com',
-      });
-    },
-  };
+  let service: GuestApiService;
+  let httpMock: HttpTestingController;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      providers: [
-        GuestApiService,
-        { provide: GuestApiService, useValue: guestApiServiceMock },
-      ],
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
+      providers: [GuestApiService],
     });
+    service = TestBed.inject(GuestApiService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it('add guest', (done) => {
-    const service = TestBed.inject(EnvironmentInjector).get(GuestApiService);
+  afterEach(() => {
+    httpMock.verify();
+  });
 
-    const guest: Guest = {
+  it('should create guest account', (done) => {
+    const dummyGuest: Guest = {
       id: 2,
       firstName: 'Ania',
       lastName: 'Wojno',
@@ -39,10 +32,15 @@ describe('GuestApiService', () => {
       email: 'ania@gmail.com',
     };
 
-    service.createGuestAccount(guest).subscribe((result) => {
-      expect(result.firstName).toBe('Ania');
-      expect(result.email).toBe('ania@gmail.com');
+    service.createGuestAccount(dummyGuest).subscribe((data) => {
+      expect(data).toEqual(dummyGuest);
       done();
     });
+
+    const req = httpMock.expectOne('guests');
+    expect(req.request.method).toEqual('POST');
+    expect(req.request.body).toEqual(dummyGuest);
+
+    req.flush(dummyGuest);
   });
 });

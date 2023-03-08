@@ -1,0 +1,36 @@
+.choosen-seat-info {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+}
+
+.chosen-tickets-list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1.2rem;
+}
+
+.chosen-seat {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 1rem 0;
+}
+.selected {
+  background-color: green;
+}
+
+.delete-ticket-button {
+  padding: 0 0.4rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+.select-seat-info {
+  text-align: center;
+
+  font-size: clamp(1rem, 1.4rem, 1.8rem);
+  margin: 2rem 0;
+}

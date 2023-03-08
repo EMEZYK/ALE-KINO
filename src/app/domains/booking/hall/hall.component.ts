@@ -11,7 +11,7 @@ import { SeatTicket, Seat } from './hall.interface';
 import { Order, SeatTicketsStateService } from '../order';
 import { TicketsStateService } from '../tickets';
 import { ChoosenMovieShowingStateService } from '../../movies';
-import { SeatsApiService } from './seats.api.service';
+import { SeatsApiService } from '../order/seats.api.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { OrderStateService } from '../order/order.service';
@@ -19,6 +19,7 @@ import { JsonPipe } from '@angular/common';
 import { ToastFacadeService } from 'src/app/shared/facades/toast.facade.service';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User } from '../../users/user.interface';
+import { SelectedSeatsTicketsComponent } from '../order/selected-seats-tickets/selected-seats-tickets.component';
 
 @Component({
   selector: 'app-seats-page',
@@ -34,6 +35,7 @@ import { User } from '../../users/user.interface';
     FormsModule,
     ReactiveFormsModule,
     JsonPipe,
+    SelectedSeatsTicketsComponent,
   ],
   templateUrl: './hall.component.html',
   styleUrls: ['./hall.component.css'],
@@ -56,8 +58,6 @@ export class HallComponent implements OnInit {
   chosenShowing$: Observable<ChoosenMovieShowing>;
   orderItems$: Observable<SeatTicket[]> = this.seatTicketService.seatTickets$;
   occupiedSeatIds$: Observable<number[]>;
-  arrowIcon = faArrowDown;
-  trashIcon = faTrash;
   user: User;
 
   user$ = inject(UserStateService).user$.subscribe((user) => {
@@ -92,17 +92,19 @@ export class HallComponent implements OnInit {
     return this.seatTicketService.checkIfSeatIsAvailable(showingId, seatId);
   }
 
-  clickChosenSeat(seat: Seat, showingId: number, orderItems: SeatTicket[]) {
+  clickChosenSeat(seat: Seat, showingId: number, seatTickets: SeatTicket[]) {
+    console.log(seatTickets);
     this.clickCount++;
 
     if (this.clickCount > this.maxClickCount) {
       this.toastService.showError('Max możesz wybrać 10 biletów', 'Błąd');
       return;
     }
-    if (orderItems.length === 0) {
-      console.log('add');
+    if (seatTickets.length === 0) {
+      // console.log('add');
       this.orderService
         .addOrder({
+          userId: this.user ? this.user.id : null,
           orderItems: [
             {
               seatId: seat.id,
@@ -113,26 +115,27 @@ export class HallComponent implements OnInit {
         })
         .subscribe();
     } else {
-      console.log('update');
+      // console.log('update');
+
+      const oldItems = seatTickets.map((orderItem: SeatTicket) => {
+        return {
+          seatId: orderItem.seat.id,
+          ticketId: orderItem.ticket.id,
+        };
+      });
+      const newItem = { seatId: seat.id, ticketId: undefined };
 
       this.orderService
         .updateOrder({
           userId: this.user ? this.user.id : null,
-          orderItems: orderItems.map((orderItem: SeatTicket) => {
-            return {
-              seatId: orderItem.seat.id,
-              ticketId: orderItem.ticket.id,
-            };
-          }),
+          orderItems: [...oldItems, newItem],
           showingId: showingId,
           status: 'reserved',
         })
         .subscribe();
     }
-    console.log(seat);
     this.seatTicketService.clickChosenSeat(seat, showingId);
   }
-
   checkIfSeatIsChosen(showingId: Seat) {
     return this.seatTicketService.checkIfSeatIsChosen(showingId);
   }

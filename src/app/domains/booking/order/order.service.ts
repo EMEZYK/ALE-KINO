@@ -16,7 +16,7 @@ import { User } from '../../users/user.interface';
 import { TicketType, TicketsStateService } from '../tickets';
 import { ShowingStateService } from '../../movies/showing.state.service';
 import { Showing } from '../../movies/movie.interface';
-import { SeatsApiService } from '../hall/seats.api.service';
+import { SeatsApiService } from './seats.api.service';
 import { Seat } from '../hall/hall.interface';
 
 @Injectable({
@@ -55,11 +55,30 @@ export class OrderStateService {
   updateOrder(newOrder: Order) {
     return this.order$.pipe(
       take(1),
-      switchMap((order: Order) =>
-        this.http
-          .put<Order>(`orders/${order.id}`, newOrder)
-          .pipe(tap((order: Order) => this.order$$.next(order)))
-      )
+      switchMap((order: Order) => {
+        const itemsMap = new Map();
+
+        newOrder.orderItems.forEach((item) => {
+          const key = item.seatId;
+          const value = itemsMap.get(item.seatId);
+
+          if (!value) {
+            itemsMap.set(key, item);
+            return;
+          }
+
+          if (!value.ticketId) {
+            itemsMap.set(key, item);
+          }
+        });
+
+        order.orderItems = Array.from(itemsMap.values());
+
+        return this.http
+          .put<Order>(`orders/${order.id}`, order)
+          .pipe(tap((order: Order) => this.order$$.next(order)));
+
+      })
     );
   }
 
