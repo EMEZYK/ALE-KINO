@@ -1,0 +1,1613 @@
+{
+  "users": [
+    {
+      "id": 4,
+      "email": "annawojno@gmail.com",
+      "password": "$2a$10$2waedfKP/rPPkjBRSexUmO3.FNHM70XbxRudKV91rXf2RyMs3chpK",
+      "firstName": "Anna",
+      "lastName": "Wojno",
+      "role": "admin",
+      "phoneNumber": "777666555"
+    },
+    {
+      "id": 5,
+      "email": "ewameksyk@gmail.com",
+      "password": "$2a$10$DYPYrMsr5/fS5qpShnmtSuc7Hw5.AFsJEtmGf.d1fz.fzjruxB9rG",
+      "firstName": "Ewa",
+      "lastName": "Meksyk",
+      "role": "user",
+      "phoneNumber": "999444888",
+      "active": true
+    },
+    {
+      "id": 6,
+      "email": "ewa@gmail.com",
+      "password": "$2a$10$hIOkcnAqAlJezaHrxLjVd.kGe0XqFGLK0PODmqAWSD6tRJl83wC7S",
+      "firstName": "Ewa",
+      "lastName": "Budzynska",
+      "role": "admin"
+    }
+  ],
+  "guests": [
+    {
+      "id": 11,
+      "firstName": "ewelka",
+      "lastName": "rewelka",
+      "phoneNumber": "",
+      "email": "rewela@dd"
+    },
+    {
+      "id": 12,
+      "firstName": "aniela",
+      "lastName": "mela",
+      "phoneNumber": "",
+      "email": "aniela@ss"
+    },
+    {
+      "id": 13,
+      "firstName": "Ania",
+      "lastName": "Mania",
+      "phoneNumber": "344353535",
+      "email": "ewa@assa"
+    },
+    {
+      "id": 14,
+      "firstName": "ds",
+      "lastName": "ds",
+      "phoneNumber": "243243434",
+      "email": "ania@sas"
+    },
+    {
+      "id": 15,
+      "firstName": "ania",
+      "lastName": "klon",
+      "phoneNumber": "121212122",
+      "email": "ania@gmail.com"
+    },
+    {
+      "id": 16,
+      "firstName": "Ewa",
+      "lastName": "Meksyk",
+      "phoneNumber": "999444888",
+      "email": "ewameksyk@gmail.com"
+    },
+    {
+      "id": 17,
+      "firstName": "dddd",
+      "lastName": "dddd",
+      "phoneNumber": "444444444",
+      "email": "ewa@ss"
+    }
+  ],
+  "watchlists": [
+    {
+      "userId": 5,
+      "moviesIds": [
+        1,
+        5
+      ],
+      "id": 1
+    }
+  ],
+  "ratings": [
+    {
+      "userId": 5,
+      "movieId": 1,
+      "userRating": 5,
+      "id": 9
+    },
+    {
+      "userId": 5,
+      "movieId": 2,
+      "userRating": 8,
+      "id": 10
+    },
+    {
+      "userId": 5,
+      "movieId": 6,
+      "userRating": 8,
+      "id": 11
+    },
+    {
+      "userId": 5,
+      "movieId": 4,
+      "userRating": 5,
+      "id": 12
+    },
+    {
+      "userId": 5,
+      "movieId": 5,
+      "userRating": 2,
+      "id": 13
+    },
+    {
+      "userId": 5,
+      "movieId": 7,
+      "userRating": 7,
+      "id": 14
+    },
+    {
+      "userId": 5,
+      "movieId": 8,
+      "userRating": 5,
+      "id": 15
+    }
+  ],
+  "movies": [
+    {
+      "id": 1,
+      "title": "Pod osłoną nocy",
+      "duration": 90,
+      "ageRestrictions": 12,
+      "genres": [
+        "Kryminał",
+        "Dramat"
+      ],
+      "shortDescription": "Młoda para wybiera się na odległą wyspę, do ekskluzywnej restauracji. Okazuje się jednak, że nie wszystko jest takie jakim się wydaje a w menu czekają zaskakujące niespodzianki.",
+      "longDescription": "długi opis filmu",
+      "image": "https://images.pexels.com/photos/7670035/pexels-photo-7670035.jpeg",
+      "isPremiere": true
+    },
+    {
+      "id": 2,
+      "title": "Noc Wigilijna",
+      "duration": 120,
+      "ageRestrictions": 12,
+      "genres": [
+        "Komedia"
+      ],
+      "shortDescription": "Nowa wersja kultowej historii o duchach Charlesa Dickensa autorstwa nominowanego do Oscara Stevena Knighta. Mroczny miniserial prezentuje ciemną stronę duszy Ebenezera Scroogea, w którego postać wciela się Guy Pearce (Memento).",
+      "longDescription": "długi opis filmu",
+      "image": "https://img.freepik.com/free-photo/portrait-excited-girl-3d-glasses_171337-11453.jpg?w=900&t=st=1669125913~exp=1669126513~hmac=c45c7db599cd49bba49e67bede37e4e22c9ad88a4625626a9abfe82f6729f747",
+      "isPremiere": false
+    },
+    {
+      "id": 3,
+      "title": "Rolnik szuka żony",
+      "genres": [
+        "Komedia"
+      ],
+      "image": "https://media-cache.cinematerial.com/p/500x/pc6mfc7o/harry-potter-and-the-deathly-hallows-part-ii-movie-poster.jpg?v=1456721312",
+      "shortDescription": "Nowa wersja kultowej historii o duchach Charlesa Dickensa autorstwa nominowanego do Oscara Stevena Knighta. Mroczny miniserial prezentuje ciemną stronę duszy Ebenezera Scroogea, w którego postać wciela się Guy Pearce (Memento). ",
+      "longDescription": "długi opis filmu",
+      "ageRestrictions": 18,
+      "rating": "8/10",
+      "duration": 120,
+      "isPremiere": true
+    },
+    {
+      "title": "Top Gun",
+      "shortDescription": "Głównym bohaterem filmu jest Pete Mitchell, ksywa „Maverick”, amerykański pilot, wysłany na kilkutygodniowe szkolenie do elitarnej szkoły dla lotników",
+      "longDescription": "Film opowiada o dwóch pilotach którzy dzięki ciągłemu udowadnianiu swojej wartości za sterami odrzutowców dostali się do elitarnej szkoły dla asów - Top Gun.",
+      "ageRestrictions": 18,
+      "duration": 180,
+      "genres": [
+        "Akcja"
+      ],
+      "isPremiere": true,
+      "image": "https://media-cache.cinematerial.com/p/500x/ozf6zehh/top-gun-movie-poster.jpg?v=1456555123",
+      "id": 4
+    },
+    {
+      "title": "Harry Potter",
+      "shortDescription": "Fabuła filmu osadzona jest w świecie magii.",
+      "longDescription": "Najważniejszym wątkiem jest walka społeczności czarodziejskiej z czarnoksiężnikiem Lordem Voldemortem.",
+      "ageRestrictions": "16",
+      "duration": "180",
+      "genres": [
+        "Fantasy",
+        "Film przygodowy"
+      ],
+      "isPremiere": true,
+      "image": "https://media-cache.cinematerial.com/p/500x/pc6mfc7o/harry-potter-and-the-deathly-hallows-part-ii-movie-poster.jpg?v=1456721312",
+      "id": 5
+    },
+    {
+      "title": "Avatar",
+      "shortDescription": "Amerykański film science fiction, wyreżyserowany, napisany oraz wyprodukowany przez Jamesa Camerona.",
+      "longDescription": "Avatar\" opowiada historię sparaliżowanego byłego komandosa, który dostaje szansę odzyskania zdrowego ciała. Musi jednak wziąć udział w specjalnym programie militarnym o nazwie Avatar.",
+      "ageRestrictions": "16",
+      "duration": "180",
+      "genres": [
+        "Fantasy",
+        "Akcja"
+      ],
+      "isPremiere": false,
+      "image": "https://media-cache.cinematerial.com/p/500x/ayniyqcx/avatar-the-way-of-water-movie-poster.jpg?v=1667461543",
+      "id": 6
+    },
+    {
+      "title": "Mafia Mamma",
+      "shortDescription": "Dramat opowiada o losach Griseldy Blanco, która zajmowała się handlem kokainą od lat 70. XX wieku.",
+      "longDescription": " Griseldy BlancByła członkinią tzw. Kartelu z Madelin, jednak musiała się w późniejszym okresie przed nimi ukrywać.",
+      "ageRestrictions": "18",
+      "duration": "190",
+      "genres": [
+        "Dramat"
+      ],
+      "isPremiere": true,
+      "image": "https://media-cache.cinematerial.com/p/500x/ezvljf2k/mafia-mamma-movie-poster.jpg?v=1677605118",
+      "id": 7
+    },
+    {
+      "title": "Avengers",
+      "shortDescription": "Grupa superbohaterów, na czele z Thorem, Iron Manem i Hulkiem, łączy siły, by obronić Ziemię przed inwazją kosmitów.",
+      "longDescription": "Amerykański fantastycznonaukowy film akcji z 2012 roku na podstawie serii komiksów o grupie superbohaterów o tej samej nazwie wydawnictwa Marvel Comics. Za reżyserię i scenariusz odpowiadał Joss Whedon.",
+      "ageRestrictions": 12,
+      "duration": "180",
+      "genres": [
+        "Bajka"
+      ],
+      "isPremiere": false,
+      "image": "https://fwcdn.pl/fpo/15/15/371515/7611932.3.jpg",
+      "id": 8
+    },
+    {
+      "title": "Split",
+      "shortDescription": "Mężczyzna o mnogiej osobowości porywa trzy nastolatki.",
+      "longDescription": "Amerykański thriller psychologiczny, którego reżyserem i scenarzystą jest M. Night Shyamalan. W filmie wystąpili m.in. James McAvoy, Anya Taylor-Joy i Betty Buckley.",
+      "ageRestrictions": 16,
+      "duration": "185",
+      "genres": [
+        "Dramat"
+      ],
+      "isPremiere": false,
+      "image": "https://fwcdn.pl/fpo/02/58/750258/7773797.3.jpg",
+      "id": 9
+    }
+  ],
+  "ticketsTypes": [
+    {
+      "id": 1,
+      "name": "bilet normalny",
+      "price": 26,
+      "active": true,
+      "description": "Bilet normalny przysługuje normalnej osobie"
+    },
+    {
+      "id": 2,
+      "name": "bilet ulgowy",
+      "price": 16,
+      "active": true,
+      "description": "Bilet ulgowy przysługuje studenciakowi"
+    },
+    {
+      "id": 3,
+      "name": "bilet rodzinny",
+      "price": 55,
+      "active": true,
+      "description": "Bilet rodzinny przysługuje rodzinie, na zasadach 500+"
+    },
+    {
+      "id": 4,
+      "name": "voucher",
+      "price": 0,
+      "active": true,
+      "code": "aleKino",
+      "description": "Voucher jest jak kod znizkowy"
+    }
+  ],
+  "showings": [
+    {
+      "id": 1,
+      "movieId": 1,
+      "hallId": 1,
+      "date": "2023-03-10",
+      "movieBreak": 15,
+      "timeFrom": "12:30",
+      "timeTo": "14:00"
+    },
+    {
+      "id": 2,
+      "movieId": 1,
+      "hallId": 2,
+      "date": "2023-03-11",
+      "movieBreak": 15,
+      "timeFrom": "16:30",
+      "timeTo": "15:00"
+    },
+    {
+      "id": 3,
+      "movieId": 2,
+      "hallId": 2,
+      "date": "2023-03-10",
+      "movieBreak": 15,
+      "timeFrom": "13:30",
+      "timeTo": "15:00"
+    },
+    {
+      "movieId": 1,
+      "date": "2023-03-12",
+      "timeFrom": "13:30",
+      "timeTo": "15:00",
+      "hallId": 1,
+      "movieBreak": 15,
+      "id": 5
+    },
+    {
+      "movieId": 2,
+      "date": "2023-03-10",
+      "timeFrom": "12:30",
+      "timeTo": "14:30",
+      "hallId": 1,
+      "movieBreak": 15,
+      "id": 6
+    },
+    {
+      "movieId": 4,
+      "date": "2023-03-11",
+      "timeFrom": "03:32",
+      "timeTo": "06:32",
+      "hallId": 2,
+      "movieBreak": 15,
+      "id": 7
+    },
+    {
+      "movieId": 4,
+      "date": "2023-03-13",
+      "timeFrom": "13:30",
+      "timeTo": "16:30",
+      "hallId": 2,
+      "movieBreak": 15,
+      "id": 8
+    },
+    {
+      "movieId": 5,
+      "date": "2023-03-10",
+      "timeFrom": "12:30",
+      "timeTo": "23:00",
+      "hallId": 1,
+      "movieBreak": 15,
+      "id": 9
+    },
+    {
+      "movieId": 6,
+      "date": "2023-03-11",
+      "timeFrom": "16:30",
+      "timeTo": "15:00",
+      "hallId": 2,
+      "movieBreak": 15,
+      "id": 10
+    },
+    {
+      "movieId": 7,
+      "date": "2023-03-13",
+      "timeFrom": "12:30",
+      "timeTo": "23:10",
+      "hallId": 1,
+      "movieBreak": 15,
+      "id": 11
+    },
+    {
+      "movieId": 5,
+      "date": "2023-03-12",
+      "timeFrom": "02:00",
+      "timeTo": "11:00",
+      "hallId": 1,
+      "movieBreak": 15,
+      "id": 12
+    },
+    {
+      "movieId": 5,
+      "date": "2023-03-11",
+      "timeFrom": "18:00",
+      "timeTo": "03:00",
+      "hallId": 2,
+      "movieBreak": 15,
+      "id": 13
+    },
+    {
+      "movieId": 8,
+      "date": "2023-03-10",
+      "timeFrom": "21:00",
+      "timeTo": "03:00",
+      "hallId": 1,
+      "movieBreak": 15,
+      "id": 14
+    },
+    {
+      "movieId": 1,
+      "date": "2023-03-11",
+      "timeFrom": "17:00",
+      "timeTo": "18:30",
+      "hallId": 2,
+      "movieBreak": 15,
+      "id": 15
+    },
+    {
+      "movieId": 8,
+      "date": "2023-03-10",
+      "timeFrom": "12:30",
+      "timeTo": "23:00",
+      "hallId": 1,
+      "movieBreak": 15,
+      "id": 16
+    }
+  ],
+  "seats": [
+    {
+      "id": 1,
+      "row": "A",
+      "column": 1,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 2,
+      "row": "A",
+      "column": 2,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 3,
+      "row": "A",
+      "column": 3,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 4,
+      "row": "A",
+      "column": 4,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 5,
+      "row": "A",
+      "column": 5,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 6,
+      "row": "A",
+      "column": 6,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 7,
+      "row": "A",
+      "column": 7,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 8,
+      "row": "A",
+      "column": 8,
+      "vip": true,
+      "hallId": 1
+    },
+    {
+      "id": 9,
+      "row": "B",
+      "column": 1,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 10,
+      "row": "B",
+      "column": 2,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 11,
+      "row": "B",
+      "column": 3,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 12,
+      "row": "B",
+      "column": 4,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 13,
+      "row": "B",
+      "column": 5,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 14,
+      "row": "B",
+      "column": 6,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 15,
+      "row": "B",
+      "column": 7,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 16,
+      "row": "B",
+      "column": 8,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 17,
+      "row": "C",
+      "column": 1,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 18,
+      "row": "C",
+      "column": 2,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 19,
+      "row": "C",
+      "column": 3,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 20,
+      "row": "C",
+      "column": 4,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 21,
+      "row": "C",
+      "column": 5,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 22,
+      "row": "C",
+      "column": 6,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 23,
+      "row": "C",
+      "column": 7,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 24,
+      "row": "C",
+      "column": 8,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 25,
+      "row": "D",
+      "column": 1,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 26,
+      "row": "D",
+      "column": 2,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 27,
+      "row": "D",
+      "column": 3,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 28,
+      "row": "D",
+      "column": 4,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 29,
+      "row": "D",
+      "column": 5,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 30,
+      "row": "D",
+      "column": 6,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 31,
+      "row": "D",
+      "column": 7,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 32,
+      "row": "D",
+      "column": 8,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 33,
+      "row": "E",
+      "column": 1,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 34,
+      "row": "E",
+      "column": 2,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 35,
+      "row": "E",
+      "column": 3,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 36,
+      "row": "E",
+      "column": 4,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 37,
+      "row": "E",
+      "column": 5,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 38,
+      "row": "E",
+      "column": 6,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 39,
+      "row": "E",
+      "column": 7,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 40,
+      "row": "E",
+      "column": 8,
+      "vip": false,
+      "hallId": 1
+    },
+    {
+      "id": 41,
+      "row": "A",
+      "column": 1,
+      "vip": true,
+      "hallId": 2
+    },
+    {
+      "id": 42,
+      "row": "A",
+      "column": 2,
+      "vip": true,
+      "hallId": 2
+    },
+    {
+      "id": 43,
+      "row": "A",
+      "column": 3,
+      "vip": true,
+      "hallId": 2
+    },
+    {
+      "id": 44,
+      "row": "A",
+      "column": 4,
+      "vip": true,
+      "hallId": 2
+    },
+    {
+      "id": 45,
+      "row": "A",
+      "column": 5,
+      "vip": true,
+      "hallId": 2
+    },
+    {
+      "id": 46,
+      "row": "B",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 47,
+      "row": "B",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 48,
+      "row": "B",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 49,
+      "row": "B",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 50,
+      "row": "B",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 51,
+      "row": "C",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 52,
+      "row": "C",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 53,
+      "row": "C",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 54,
+      "row": "C",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 55,
+      "row": "C",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 56,
+      "row": "D",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 57,
+      "row": "D",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 58,
+      "row": "D",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 59,
+      "row": "D",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 60,
+      "row": "D",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 61,
+      "row": "E",
+      "column": 1,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 62,
+      "row": "E",
+      "column": 2,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 63,
+      "row": "E",
+      "column": 3,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 64,
+      "row": "E",
+      "column": 4,
+      "vip": false,
+      "hallId": 2
+    },
+    {
+      "id": 65,
+      "row": "E",
+      "column": 5,
+      "vip": false,
+      "hallId": 2
+    }
+  ],
+  "orders": [
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 31,
+          "ticketId": 2
+        },
+        {
+          "seatId": 36,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 11
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 29,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 12
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 29,
+          "ticketId": 2
+        },
+        {
+          "seatId": 39,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 1,
+      "status": "paid",
+      "id": 14
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 54,
+          "ticketId": 3
+        }
+      ],
+      "showingId": 2,
+      "status": "paid",
+      "id": 57
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 39,
+          "ticketId": 1
+        },
+        {
+          "seatId": 40,
+          "ticketId": 1
+        },
+        {
+          "seatId": 32,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 71
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 36,
+          "ticketId": 1
+        },
+        {
+          "seatId": 37,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 72
+    },
+    {
+      "orderItems": [
+        {
+          "seatId": 30
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 73
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 24
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 74
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 22
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 75
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 16
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 76
+    },
+    {
+      "orderItems": [
+        {
+          "seatId": 12
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 77
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 8,
+          "ticketId": 1
+        },
+        {
+          "seatId": 14,
+          "ticketId": 3
+        },
+        {
+          "seatId": 19,
+          "ticketId": 1
+        },
+        {
+          "seatId": 11,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 78
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 1,
+          "ticketId": 1
+        },
+        {
+          "seatId": 2,
+          "ticketId": 2
+        },
+        {
+          "seatId": 3,
+          "ticketId": 2
+        },
+        {
+          "seatId": 4,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 79
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 7,
+          "ticketId": 2
+        },
+        {
+          "seatId": 15,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 80
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 13,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 81
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 38,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 95
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 34,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 96
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 21,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 97
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 65,
+          "ticketId": 1
+        },
+        {
+          "seatId": 63,
+          "ticketId": 2
+        },
+        {
+          "seatId": 59,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 7,
+      "status": "reserved",
+      "id": 120
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 49,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 7,
+      "status": "reserved",
+      "id": 123
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 48,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 7,
+      "status": "reserved",
+      "id": 125
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 52,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 7,
+      "status": "reserved",
+      "id": 126
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 43,
+          "ticketId": 3
+        }
+      ],
+      "showingId": 7,
+      "status": "reserved",
+      "id": 127
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 27,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 128
+    },
+    {
+      "orderItems": [
+        {
+          "seatId": 10
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 159
+    },
+    {
+      "orderItems": [
+        {
+          "seatId": 9
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 160
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 50,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 3,
+      "status": "paid",
+      "id": 194
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 23
+        }
+      ],
+      "showingId": 6,
+      "status": "reserved",
+      "id": 195
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 25
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 196
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 60,
+          "ticketId": 3
+        }
+      ],
+      "showingId": 8,
+      "status": "paid",
+      "id": 197
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 45,
+          "ticketId": 3
+        }
+      ],
+      "showingId": 8,
+      "status": "paid",
+      "id": 198
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 5
+        }
+      ],
+      "showingId": 6,
+      "status": "reserved",
+      "id": 199
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 61
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 200
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 59
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 201
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 59
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 202
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 16
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 203
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 13,
+          "ticketId": 2
+        }
+      ],
+      "showingId": 1,
+      "status": "paid",
+      "id": 204
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 19
+        }
+      ],
+      "showingId": 6,
+      "status": "reserved",
+      "id": 205
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 38
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 206
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 35
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 207
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 20
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 208
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 6
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 209
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 1
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 210
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 10
+        }
+      ],
+      "showingId": 6,
+      "status": "reserved",
+      "id": 211
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 22
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 212
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 29
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 213
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 21
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 214
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 13
+        }
+      ],
+      "showingId": 14,
+      "status": "reserved",
+      "id": 215
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 16
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 216
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 48
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 217
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 4,
+          "ticketId": 3
+        }
+      ],
+      "showingId": 1,
+      "status": "paid",
+      "id": 218
+    }
+  ],
+  "halls": [
+    {
+      "id": 1,
+      "name": "Wielka sala",
+      "number": 1,
+      "rows": 10,
+      "columns": 5
+    },
+    {
+      "id": 2,
+      "name": "Mała sala",
+      "number": 2,
+      "rows": 10,
+      "columns": 5
+    }
+  ],
+  "discountCodes": [
+    {
+      "id": 1,
+      "name": "Filmoteka2020",
+      "discount": 10,
+      "active": false
+    },
+    {
+      "id": 2,
+      "name": "SuperFilm",
+      "discount": 20,
+      "active": false
+    },
+    {
+      "id": 3,
+      "name": "AleżKino",
+      "discount": 15,
+      "active": false
+    },
+    {
+      "id": 4,
+      "name": "KinoEwelino",
+      "discount": 20,
+      "active": false
+    }
+  ],
+  "genres": [
+    {
+      "id": 1,
+      "genre": "Komedia"
+    },
+    {
+      "id": 2,
+      "genre": "Dramat"
+    },
+    {
+      "id": 3,
+      "genre": "Bajka"
+    },
+    {
+      "id": 4,
+      "genre": "Film obyczajowy"
+    },
+    {
+      "id": 5,
+      "genre": "Film przygodowy"
+    },
+    {
+      "id": 6,
+      "genre": "Kryminał"
+    }
+  ],
+  "ageRestrictions": [
+    {
+      "id": 1,
+      "restriction": 18
+    },
+    {
+      "id": 2,
+      "restriction": 12
+    },
+    {
+      "id": 3,
+      "restriction": 16
+    },
+    {
+      "id": 4,
+      "restriction": 7
+    },
+    {
+      "id": 5,
+      "restriction": 6
+    }
+  ]
+}
