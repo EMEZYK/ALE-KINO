@@ -1,0 +1,22 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="booking-form-wrapper">
+    <app-chosen-showing-info
+      [chosenShowing]="vm.v1"
+      [seatTickets]="vm.v2"
+      [sumOfTickets]="vm.v3"
+    ></app-chosen-showing-info>
+    <app-booking-form
+      [vm]="vm"
+      (submitBookingForm)="submitForm($event)"
+    ></app-booking-form>
+  </div>
+  <div class="back-link">
+    <button
+      mat-raised-button
+      (click)="navigateToHall(vm.v1)"
+      class="back-button"
+    >
+      Wróć do wyboru miejsc
+    </button>
+  </div>
+</ng-container>

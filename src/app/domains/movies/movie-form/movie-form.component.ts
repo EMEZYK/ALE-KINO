@@ -56,6 +56,7 @@ export class MovieFormComponent implements OnInit {
   private formBuilder = inject(NonNullableFormBuilder);
   private store = inject(Store);
   private errorHandler = inject(ErrorHandler);
+
   movieGenres$ = inject(MovieGenresApiService).getMovieGenres$();
   ageRestrictions$ = inject(AgeRestrictionApiService).getAgeRestrictions$();
 
@@ -103,7 +104,7 @@ export class MovieFormComponent implements OnInit {
       ],
       genres: this.formBuilder.control([], Validators.required),
       isPremiere: ['', this.formBuilder.control(false, Validators.required)],
-      image: ['', Validators.required, Validators.pattern],
+      image: ['', [Validators.required, Validators.pattern]],
     });
   }
 
@@ -130,6 +131,6 @@ export class MovieFormComponent implements OnInit {
 
     this.movieForm.reset();
 
-    window.location.reload();
+    // window.location.reload();
   }
 }

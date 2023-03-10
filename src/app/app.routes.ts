@@ -9,6 +9,7 @@ import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment
 import { HomeComponent } from './domains/home/home.component';
 import * as moment from 'moment';
 import { OrderDetailsComponent } from './domains/booking/order/order-details/order-details.component';
+import { BookingPageComponent } from './domains/booking/booking-page/booking-page.component';
 
 const date = moment().format('YYYY-MM-DD');
 
@@ -18,7 +19,8 @@ export const APP_ROUTES: Routes = [
     path: 'booking',
     children: [
       { path: 'seats/:id/:title', component: HallComponent },
-      { path: 'reservation/:id/:title', component: BookingFormComponent },
+      // { path: 'reservation/:id/:title', component: BookingFormComponent },
+      { path: 'reservation/:id/:title', component: BookingPageComponent },
       { path: 'payment/:id/:title', component: PaymentComponent },
       { path: 'payment/:id/:title/cancel', component: CancelPaymentComponent },
       { path: 'summary/:id/:title', component: SummaryComponent },

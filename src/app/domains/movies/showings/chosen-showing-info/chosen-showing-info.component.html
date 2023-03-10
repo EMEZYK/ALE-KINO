@@ -1,0 +1,19 @@
+<mat-card class="choosen-showing-info">
+  <h1 class="movie-title">{{ chosenShowing.movie.title }}</h1>
+  <div class="movie-details">
+    <div class="movie-time-info">
+      <span class="movie-date">data: {{ chosenShowing.date }}</span>
+      <span class="movie-time">godz. {{ chosenShowing.timeFrom }}</span>
+      <span class="movie-hall">sala nr: {{ chosenShowing.hall.number }}</span>
+    </div>
+    <ul class="tickets-list">
+      <ng-container *ngFor="let ticket of seatTickets">
+        <li class="ticket-info">Rząd: {{ ticket.seat.row }}</li>
+        <li class="ticket-info">Miejsce: {{ ticket.seat.column }}</li>
+        <li class="ticket-info">Cena: {{ ticket.ticket.price }} zł</li>
+      </ng-container>
+    </ul>
+    <p class="tickets-sum">Razem: {{ sumOfTickets }} zł</p>
+    <div></div>
+  </div>
+</mat-card>

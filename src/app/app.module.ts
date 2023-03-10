@@ -34,14 +34,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { AlphabetOnlyDirective } from './shared/directives/alphabet-only.directive';
 import { ToastFacadeService } from './shared/facades/toast.facade.service';
 import { ToastrModule } from 'ngx-toastr';
+import { BookingPageComponent } from './domains/booking/booking-page/booking-page.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BookingFormComponent,
-    LoginComponent,
-    HomeComponent,
-  ],
+  declarations: [AppComponent, LoginComponent, HomeComponent],
   imports: [
     EffectsModule.forRoot([MovieEffects]),
     StoreModule.forRoot({ movies: MovieReducer }),
@@ -65,6 +61,8 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,
     QRCodeModule,
     MatButtonModule,
+    BookingFormComponent,
+    BookingPageComponent,
     ToastrModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES, {
       preloadingStrategy: PreloadAllModules,

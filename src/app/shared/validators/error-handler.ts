@@ -22,9 +22,10 @@ export interface FormErrors {
   providedIn: 'root',
 })
 export class ErrorHandler {
-  private form: FormGroup;
   private errorObject: TypeError;
   private message: string;
+
+  form: FormGroup;
 
   private static hasError(control: AbstractControl): boolean {
     return control.invalid && (control.dirty || control.touched);

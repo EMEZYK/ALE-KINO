@@ -1,7 +1,21 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {
+  FormGroup,
+  FormsModule,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/validators';
-import { combineLatest, map, Observable, switchMap, tap } from 'rxjs';
+import { switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
 import { ChoosenMovieShowingStateService } from '../../movies';
@@ -13,17 +27,54 @@ import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { Guest, User } from '../../users/user.interface';
 import { GuestApiService } from '../../users/guest/guest-api.service';
 import { OrderStateService } from '../order/order.service';
-import { ShowingWithMovie } from '../../movies/movie.interface';
+import {
+  ChoosenMovieShowing,
+  ShowingWithMovie,
+} from '../../movies/movie.interface';
 import { LocalStorageService } from 'src/app/shared/local-storage';
-// import { debounceInput } from 'src/app/shared/facades/debounce-input.facade';
+import { debounceInput } from 'src/app/shared/facades/debounce-input.facade';
 import { DiscountCodesStateService } from '../order/discountCodes/discount-codes.state.service';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { ChosenShowingInfoComponent } from '../../movies/showings/chosen-showing-info/chosen-showing-info.component';
+import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
+
+export interface BookingForm {
+  name: string;
+  surname: string;
+  phone?: string;
+  emailInfo: {
+    email: string;
+    confirmEmail: string;
+  };
+  acceptNewsletter: '';
+  discountCode: '';
+}
+
+export interface VM {
+  v1: ChoosenMovieShowing;
+  v2: SeatTicket[];
+  v3: number;
+}
 
 @Component({
-  selector: 'app-booking-form-page',
+  selector: 'app-booking-form',
   templateUrl: './booking-form.component.html',
   styleUrls: ['./booking-form.component.css'],
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    NgIf,
+    ReactiveFormsModule,
+    FormsModule,
+    ChosenShowingInfoComponent,
+    NumberDirective,
+  ],
 })
-export class BookingFormComponent implements OnInit, OnDestroy {
+export class BookingFormComponent implements OnInit {
+  // export class BookingFormComponent implements OnInit, OnDestroy {
+  @Input() vm;
+  @Output() submitBookingForm = new EventEmitter<BookingForm>();
+
   private authService = inject(AuthLoginStateService);
   private builder = inject(NonNullableFormBuilder);
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
@@ -35,6 +86,11 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   private orderService = inject(OrderStateService);
   private customValidators = inject(CustomValidators);
   private discountCodeService = inject(DiscountCodesStateService);
+  private userService = inject(UserStateService);
+
+  chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
+  seatTickets$ = this.orderItemsService.seatTickets$;
+  sumOfTickets$ = this.orderItemsService.sumTicketsValues();
 
   user$ = inject(UserStateService).user$.subscribe((user) => {
     if (user) {
@@ -48,30 +104,20 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     this.authService.auth$ &&
     this.localStorageService.getData('role') === 'user';
 
-  chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
-  seatTickets$ = this.orderItemsService.seatTickets$;
+  // user$ = this.userService.user$.pipe(
+  //   tap((user) => {
+  //     console.log(user);
+  //     user ? (this.user = user) : (this.user = null);
+  //   })
+  // );
+
   user: User;
   bookingForm: FormGroup;
   submitted = false;
   order: Order[];
   ticketPrice: number;
-  sumOfTickets$: Observable<number>;
-  setSeatTicketPairs: SeatTicket[];
-
-  vm$ = combineLatest([this.chosenMovieShowing$, this.seatTickets$]).pipe(
-    map(([v, v2]) => ({
-      v,
-      v2,
-    }))
-  );
 
   ngOnInit(): void {
-    this.chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
-    this.seatTickets$ = this.orderItemsService.seatTickets$;
-    this.order;
-
-    this.sumOfTickets$ = this.orderItemsService.sumTicketsValues();
-
     this.createForm();
 
     if (this.isLoggedInUser) {
@@ -152,7 +198,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
 
     this.discountCode.valueChanges
       .pipe(
-        // debounceInput(),
+        debounceInput(),
         // distinctUntilChanged(),
         tap((value) => {
           if (value !== '') {
@@ -170,6 +216,8 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(chosenShowing: ShowingWithMovie, orderItems: SeatTicket[]) {
+    this.submitBookingForm.emit(this.bookingForm.value);
+
     this.bookingForm.markAllAsTouched();
 
     this.discountCodeService.setDiscountCode(this.discountCode.value);
@@ -216,13 +264,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
     this.bookingForm.reset();
   }
 
-  navigateToHall(chosenShowing: ShowingWithMovie) {
-    this.router.navigate([
-      `booking/seats/${chosenShowing.movie.id}/${chosenShowing.movie.title}`,
-    ]);
-  }
-
-  ngOnDestroy() {
-    this.user$.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.user$.unsubscribe();
+  // }
 }

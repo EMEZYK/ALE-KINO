@@ -1,0 +1,62 @@
+.movie-detail {
+  border-right: 1px solid #fff;
+  padding: 0 1rem;
+}
+
+.choosen-showing-info {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-size: 1.2rem;
+  background-color: #0c2d48;
+}
+
+.movie-title {
+  width: 100%;
+  text-align: center;
+}
+
+.movie-details {
+  font-size: 1.2rem;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0 0 0;
+  padding: 20px 0;
+}
+
+.movie-date,
+.movie-time,
+.movie-hall {
+  padding: 10px 30px;
+}
+
+.movie-date,
+.movie-time {
+  border-right: 1px solid #fff;
+}
+
+.tickets-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 1rem auto;
+}
+
+.ticket-info {
+  padding: 10px 20px;
+  margin: 10px 0 0 0;
+}
+
+.tickets-sum {
+  margin: 0;
+  text-align: right;
+  margin: 1rem 0 0 0;
+}
+
+.movie-details {
+  font-size: 1.3rem;
+}

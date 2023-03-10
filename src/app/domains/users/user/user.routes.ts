@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { BookingFormComponent } from '../../booking/booking-form';
+import { BookingPageComponent } from '../../booking/booking-page/booking-page.component';
 import { HallComponent } from '../../booking/hall';
 import { SummaryComponent } from '../../booking/order/summary';
 import { UserHomePageComponent } from './user-home-page.component';
@@ -36,7 +36,7 @@ export const USER_ROUTES: Routes = [
         path: 'booking',
         children: [
           { path: 'seats/:id/:title', component: HallComponent },
-          { path: 'reservation/:id/:title', component: BookingFormComponent },
+          { path: 'reservation/:id/:title', component: BookingPageComponent },
           { path: 'summary/:id/:title', component: SummaryComponent },
         ],
       },

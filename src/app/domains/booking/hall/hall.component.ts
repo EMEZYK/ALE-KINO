@@ -2,13 +2,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AsyncPipe, NgIf, NgFor, KeyValuePipe, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { Observable, switchMap, tap } from 'rxjs';
-import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Observable, switchMap } from 'rxjs';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { TicketType } from '../tickets';
 import { ChoosenMovieShowing, Showing } from '../../movies/movie.interface';
 import { SeatTicket, Seat } from './hall.interface';
-import { Order, SeatTicketsStateService } from '../order';
+import { SeatTicketsStateService } from '../order';
 import { TicketsStateService } from '../tickets';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { SeatsApiService } from '../order/seats.api.service';
@@ -73,9 +72,10 @@ export class HallComponent implements OnInit {
     this.chosenShowing$ = this.chosenShowingService.chosenMovieShowing$;
 
     this.occupiedSeatIds$ = this.chosenShowing$.pipe(
-      switchMap((showing: Showing) =>
-        this.seatTicketService.getOccupiedSeats(showing.id)
-      )
+      switchMap((showing: Showing) => {
+        console.log(showing);
+        return this.seatTicketService.getOccupiedSeats(showing.id);
+      })
     );
 
     this.rows$ = this.chosenShowing$.pipe(
@@ -93,7 +93,7 @@ export class HallComponent implements OnInit {
   }
 
   clickChosenSeat(seat: Seat, showingId: number, seatTickets: SeatTicket[]) {
-    console.log(seatTickets);
+    // console.log(seatTickets);
     this.clickCount++;
 
     if (this.clickCount > this.maxClickCount) {
@@ -149,6 +149,7 @@ export class HallComponent implements OnInit {
   }
 
   saveChosenSeatsAndTicketsInLocalStorage(orderItems: SeatTicket[]) {
+    console.log(orderItems);
     this.localStorageService.saveData(
       'seatTicketPairs',
       JSON.stringify(orderItems)
