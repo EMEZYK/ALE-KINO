@@ -70,8 +70,7 @@ export interface VM {
     NumberDirective,
   ],
 })
-export class BookingFormComponent implements OnInit {
-  // export class BookingFormComponent implements OnInit, OnDestroy {
+export class BookingFormComponent implements OnInit, OnDestroy {
   @Input() vm;
   @Output() submitBookingForm = new EventEmitter<BookingForm>();
 
@@ -86,7 +85,6 @@ export class BookingFormComponent implements OnInit {
   private orderService = inject(OrderStateService);
   private customValidators = inject(CustomValidators);
   private discountCodeService = inject(DiscountCodesStateService);
-  private userService = inject(UserStateService);
 
   chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
   seatTickets$ = this.orderItemsService.seatTickets$;
@@ -103,13 +101,6 @@ export class BookingFormComponent implements OnInit {
   isLoggedInUser =
     this.authService.auth$ &&
     this.localStorageService.getData('role') === 'user';
-
-  // user$ = this.userService.user$.pipe(
-  //   tap((user) => {
-  //     console.log(user);
-  //     user ? (this.user = user) : (this.user = null);
-  //   })
-  // );
 
   user: User;
   bookingForm: FormGroup;
@@ -199,7 +190,6 @@ export class BookingFormComponent implements OnInit {
     this.discountCode.valueChanges
       .pipe(
         debounceInput(),
-        // distinctUntilChanged(),
         tap((value) => {
           if (value !== '') {
             this.discountCode.setAsyncValidators(
@@ -264,7 +254,7 @@ export class BookingFormComponent implements OnInit {
     this.bookingForm.reset();
   }
 
-  // ngOnDestroy() {
-  //   this.user$.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.user$.unsubscribe();
+  }
 }

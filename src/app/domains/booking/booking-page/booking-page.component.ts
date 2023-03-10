@@ -35,7 +35,6 @@ export class BookingPageComponent {
 
   user$ = this.userService.user$.pipe(
     tap((user) => {
-      console.log(user);
       user ? (this.user = user) : (this.user = null);
     })
   );
@@ -49,8 +48,7 @@ export class BookingPageComponent {
       v1,
       v2,
       v3,
-    })),
-    tap((val) => console.log(val))
+    }))
   );
 
   isLoggedInUser =

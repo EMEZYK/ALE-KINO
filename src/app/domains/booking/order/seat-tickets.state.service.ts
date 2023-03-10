@@ -63,8 +63,6 @@ export class SeatTicketsStateService {
         ...this.seatTickets$$.value,
         { seat, ticket: null, showingId },
       ]);
-
-      // console.log(this.seatTickets$$.value);
     } else {
       currentOrderItems.splice(indexOfSeat, 1);
       this.deleteChosenSeatAndTicket({ seat, ticket: null, showingId });

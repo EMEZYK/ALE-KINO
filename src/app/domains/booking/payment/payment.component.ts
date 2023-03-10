@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest, Observable, map, tap, switchMap } from 'rxjs';
 import { ChoosenMovieShowingStateService } from '../../movies';
-import { Showing, ShowingWithMovie } from '../../movies/movie.interface';
+import { ShowingWithMovie } from '../../movies/movie.interface';
 import { Order } from '../order';
 import { OrderStateService } from '../order/order.service';
 import { SeatTicketsStateService } from '../order';
@@ -81,8 +81,4 @@ export class PaymentComponent {
       chosenMoving.movie.title,
     ]);
   }
-
-  // navigateToForm(showing: Showing) {
-  //   this.router.navigate(`booking/reservation/${showing.id}/${showing.title}`);
-  // }
 }

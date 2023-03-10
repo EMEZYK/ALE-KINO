@@ -73,7 +73,6 @@ export class HallComponent implements OnInit {
 
     this.occupiedSeatIds$ = this.chosenShowing$.pipe(
       switchMap((showing: Showing) => {
-        console.log(showing);
         return this.seatTicketService.getOccupiedSeats(showing.id);
       })
     );
@@ -93,7 +92,6 @@ export class HallComponent implements OnInit {
   }
 
   clickChosenSeat(seat: Seat, showingId: number, seatTickets: SeatTicket[]) {
-    // console.log(seatTickets);
     this.clickCount++;
 
     if (this.clickCount > this.maxClickCount) {
@@ -101,7 +99,6 @@ export class HallComponent implements OnInit {
       return;
     }
     if (seatTickets.length === 0) {
-      // console.log('add');
       this.orderService
         .addOrder({
           userId: this.user ? this.user.id : null,
@@ -115,8 +112,6 @@ export class HallComponent implements OnInit {
         })
         .subscribe();
     } else {
-      // console.log('update');
-
       const oldItems = seatTickets.map((orderItem: SeatTicket) => {
         return {
           seatId: orderItem.seat.id,
@@ -149,7 +144,6 @@ export class HallComponent implements OnInit {
   }
 
   saveChosenSeatsAndTicketsInLocalStorage(orderItems: SeatTicket[]) {
-    console.log(orderItems);
     this.localStorageService.saveData(
       'seatTicketPairs',
       JSON.stringify(orderItems)

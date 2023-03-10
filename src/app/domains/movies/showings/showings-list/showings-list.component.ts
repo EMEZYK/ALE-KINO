@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { Observable } from 'rxjs';
@@ -13,10 +13,6 @@ import { AsyncPipe } from '@angular/common';
   standalone: true,
   imports: [MatDividerModule, MatListModule, NgFor, AsyncPipe],
 })
-export class ShowingsListComponent implements OnInit {
+export class ShowingsListComponent {
   @Input() showings: Observable<Showing[]>;
-
-  ngOnInit() {
-    this.showings.subscribe((el) => console.log(el));
-  }
 }

@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './domains/auth';
 import { LoginComponent } from './domains/auth/login-component';
-import { BookingFormComponent } from './domains/booking/booking-form';
 import { HallComponent } from './domains/booking/hall';
 import { SummaryComponent } from './domains/booking/order/summary';
 import { PaymentComponent } from './domains/booking/payment';
@@ -19,7 +18,6 @@ export const APP_ROUTES: Routes = [
     path: 'booking',
     children: [
       { path: 'seats/:id/:title', component: HallComponent },
-      // { path: 'reservation/:id/:title', component: BookingFormComponent },
       { path: 'reservation/:id/:title', component: BookingPageComponent },
       { path: 'payment/:id/:title', component: PaymentComponent },
       { path: 'payment/:id/:title/cancel', component: CancelPaymentComponent },

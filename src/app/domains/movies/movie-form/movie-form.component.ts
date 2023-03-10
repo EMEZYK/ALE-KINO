@@ -130,7 +130,5 @@ export class MovieFormComponent implements OnInit {
     );
 
     this.movieForm.reset();
-
-    // window.location.reload();
   }
 }
