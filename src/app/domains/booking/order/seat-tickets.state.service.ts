@@ -4,6 +4,7 @@ import { LocalStorageService } from '../../../shared/local-storage/local-storage
 import { SeatTicket, Seat } from '../hall/hall.interface';
 import { HttpClient } from '@angular/common/http';
 import { Order } from './order.interface';
+import { TicketType } from '../tickets';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +52,7 @@ export class SeatTicketsStateService {
     }
   }
 
-  clickChosenSeat(seat: Seat, showingId: number) {
+  clickChosenSeat(seat: Seat, showingId: number, ticketType: TicketType) {
     const currentOrderItems = this.seatTickets$$.getValue();
 
     const indexOfSeat = currentOrderItems.findIndex(
@@ -61,11 +62,11 @@ export class SeatTicketsStateService {
     if (indexOfSeat === -1) {
       this.seatTickets$$.next([
         ...this.seatTickets$$.value,
-        { seat, ticket: null, showingId },
+        { seat, ticket: ticketType, showingId },
       ]);
     } else {
       currentOrderItems.splice(indexOfSeat, 1);
-      this.deleteChosenSeatAndTicket({ seat, ticket: null, showingId });
+      this.deleteChosenSeatAndTicket({ seat, ticket: ticketType, showingId });
       this.seatTickets$$.next(currentOrderItems);
     }
   }

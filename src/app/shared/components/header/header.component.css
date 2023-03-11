@@ -30,32 +30,6 @@ nav {
   position: relative;
 }
 
-button {
-  padding: 0.8rem 1rem;
-  background-color: #172032;
-  width: fit-content;
-  font-size: 1rem;
-  margin: 0 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-a {
-  color: #fff;
-  text-decoration: none;
-}
-button:hover {
-  background-color: #fff;
-}
-
-button:hover {
-  color: #172032 !important;
-}
-
-a:hover {
-  color: #172032;
-}
-
 .basket-icon {
   margin-right: 5px;
 }

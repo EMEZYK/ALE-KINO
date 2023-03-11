@@ -7,7 +7,7 @@ import {
 import { AsyncPipe, NgIf, NgFor, KeyValuePipe, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { Observable, switchMap, tap } from 'rxjs';
+import { combineLatest, Observable, switchMap, tap } from 'rxjs';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { TicketType } from '../tickets';
 import { ChoosenMovieShowing, Showing } from '../../movies/movie.interface';
@@ -61,7 +61,9 @@ export class HallComponent implements OnInit {
   tickets$: Observable<TicketType[]>;
   rows$: Observable<{ [key: string]: { [key: number]: Seat } }>;
   chosenShowing$: Observable<ChoosenMovieShowing>;
-  orderItems$: Observable<SeatTicket[]> = this.seatTicketService.seatTickets$;
+
+  orderItems$: Observable<SeatTicket[]> =
+    this.seatTicketService.seatTickets$.pipe(tap((val) => console.log(val)));
   occupiedSeatIds$: Observable<number[]>;
   user: User;
 
@@ -74,6 +76,8 @@ export class HallComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.orderService.order$.pipe(tap((val) => console.log(val))).subscribe();
+
     this.tickets$ = this.ticketsService.ticketTypes$;
     this.chosenShowing$ = this.chosenShowingService.chosenMovieShowing$;
 
@@ -106,8 +110,9 @@ export class HallComponent implements OnInit {
     }
 
     if (seatTickets.length === 0) {
-      this.orderService
-        .addOrder({
+      combineLatest([
+        this.tickets$,
+        this.orderService.addOrder({
           userId: this.user ? this.user.id : null,
           orderItems: [
             {
@@ -117,7 +122,20 @@ export class HallComponent implements OnInit {
           ],
           showingId: showingId,
           status: 'reserved',
-        })
+        }),
+      ])
+        .pipe(
+          tap(([tickets, order]) => {
+            const ticketType: TicketType = tickets.find(
+              (e) => e.id == order.orderItems[0].ticketId
+            );
+            return this.seatTicketService.clickChosenSeat(
+              seat,
+              showingId,
+              ticketType
+            );
+          })
+        )
         .subscribe();
     } else {
       const oldItems = seatTickets.map((orderItem: SeatTicket) => {
@@ -127,22 +145,32 @@ export class HallComponent implements OnInit {
         };
       });
       const newItem = { seatId: seat.id, ticketId: 1 };
-      // const newItem = { seatId: seat.id, ticketId: undefined };
 
-      this.orderService
-        .updateOrder({
+      combineLatest([
+        this.tickets$,
+        this.orderService.updateOrder({
           userId: this.user ? this.user.id : null,
           orderItems: [...oldItems, newItem],
           showingId: showingId,
           status: 'reserved',
-        })
+        }),
+      ])
+        .pipe(
+          tap(([tickets]) => {
+            const ticketType: TicketType = tickets.find(
+              (e) => e.id == newItem.ticketId
+            );
+            return this.seatTicketService.clickChosenSeat(
+              seat,
+              showingId,
+              ticketType
+            );
+          })
+        )
         .subscribe();
     }
 
-    this.seatTicketService.clickChosenSeat(seat, showingId);
-
     this.saveChosenSeatsAndTicketsInLocalStorage(seatTickets);
-    //podmienic ticket id ba onbiekt ticketu
   }
   checkIfSeatIsChosen(showingId: Seat) {
     return this.seatTicketService.checkIfSeatIsChosen(showingId);

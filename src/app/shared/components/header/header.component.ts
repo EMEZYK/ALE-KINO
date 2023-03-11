@@ -1,14 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { map, Observable, tap } from 'rxjs';
 import { Location, NgIf, AsyncPipe } from '@angular/common';
-
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User, UserRole } from 'src/app/domains/users/user.interface';
@@ -50,7 +44,6 @@ export class HeaderComponent {
   );
 
   userRole: UserRole;
-
   cinemaName = 'Ale kino!';
   isAuthenticated = false;
   isDropdownVisible = false;
@@ -77,10 +70,6 @@ export class HeaderComponent {
     },
   ];
 
-  ngOnInit(): void {
-    this.user$.pipe(tap((user) => (this.userRole = user.role))).subscribe();
-  }
-
   logout() {
     this.isAuthenticated = false;
     this.isDropdownVisible = false;
@@ -91,14 +80,18 @@ export class HeaderComponent {
 
   date = moment().format('YYYY-MM-DD');
 
-  navigateHome() {
-    if (this.userRole === 'admin') {
+  navigateHome(userRole: UserRole) {
+    if (userRole === 'admin') {
       this.router.navigate([`admin`]);
-    } else if (this.userRole === 'user') {
+    } else if (userRole === 'user') {
       this.router.navigate([`user/home/${this.date}`]);
     } else {
       this.router.navigate([`home/${this.date}`]);
     }
+  }
+
+  navigateLogin() {
+    this.router.navigate(['login']);
   }
 
   toggleDropdown() {

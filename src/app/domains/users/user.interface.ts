@@ -7,12 +7,12 @@ export interface Guest {
 }
 
 export interface User extends Guest {
-  password: string;
-  role: 'user' | 'admin';
+  password?: string;
+  role: 'user' | 'admin' | 'guest';
   orders?: [];
   moviesToWatch?: [];
   ratedMovies?: [];
   active?: boolean;
 }
 
-export type UserRole = 'admin' | 'user';
+export type UserRole = 'admin' | 'user' | 'guest';

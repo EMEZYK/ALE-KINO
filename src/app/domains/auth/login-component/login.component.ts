@@ -4,16 +4,33 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { CustomValidators } from 'src/app/shared/validators';
 import { AuthLoginStateService } from '../auth-login.service';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    ButtonComponent,
+    FontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgIf,
+  ],
 })
 export class LoginComponent implements OnInit {
   private formBuilder = inject(NonNullableFormBuilder);

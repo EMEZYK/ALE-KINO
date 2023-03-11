@@ -1,11 +1,8 @@
-<div class="header">
-  <h1 (click)="navigateHome()">{{ cinemaName }}</h1>
-  <nav>
-    <button *ngIf="!userRole" class="login-btn">
-      <a routerLink="login">Zaloguj</a>
-    </button>
-    <ng-container *ngIf="user$ | async as user">
-      <ng-container *ngIf="user.role === 'user'; else admin">
+<ng-container *ngIf="user$ | async as user; else guest">
+  <div class="header">
+    <h1 (click)="navigateHome(user.role)">{{ cinemaName }}</h1>
+    <nav>
+      <ng-container *ngIf="user.role === 'user'">
         <app-button
           class="btn-icon"
           [text]="order$ | async"
@@ -24,7 +21,8 @@
           ></app-dropdown-menu>
         </div>
       </ng-container>
-      <ng-template #admin>
+
+      <ng-container *ngIf="user.role === 'admin'">
         <div class="dropdown">
           <app-button
             text="Cześć, Admin!"
@@ -36,7 +34,19 @@
             [dropdownOptions]="dropdownAdminOptions"
           ></app-dropdown-menu>
         </div>
-      </ng-template>
-    </ng-container>
-  </nav>
-</div>
+      </ng-container>
+    </nav>
+  </div>
+</ng-container>
+<ng-template #guest>
+  <div class="header">
+    <h1 (click)="navigateHome()">{{ cinemaName }}</h1>
+    <nav>
+      <app-button
+        class="login-btn"
+        (click)="navigateLogin($event)"
+        text="Zaloguj"
+      ></app-button>
+    </nav>
+  </div>
+</ng-template>

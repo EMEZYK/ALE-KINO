@@ -54,9 +54,12 @@ button {
   padding: 0.6rem;
   width: 100%;
   border-radius: 3px;
-  border: 1px solid #0c2d48;
+  border: 2px solid #0c2d48;
   font-size: 1.2rem;
   margin: 1rem 0 0 0;
+  width: 100%;
+  color: #ddd;
+  background-color: #0c2d48;
 }
 
 input.ng-touched.ng-invalid {
