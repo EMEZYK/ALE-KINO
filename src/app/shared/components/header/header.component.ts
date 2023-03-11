@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { map, Observable, tap } from 'rxjs';
@@ -11,6 +16,7 @@ import { SeatTicketsStateService } from 'src/app/domains/booking/order';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 import { ButtonComponent } from '../button/button.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-header',
@@ -25,8 +31,9 @@ import { ButtonComponent } from '../button/button.component';
     ButtonComponent,
     RouterModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   private authService = inject(AuthLoginStateService);
   private userService = inject(UserStateService);
   private router = inject(Router);
@@ -38,7 +45,10 @@ export class HeaderComponent implements OnInit {
     })
   );
 
-  user$: Observable<User>;
+  user$: Observable<User> = this.userService.user$.pipe(
+    tap((val) => console.log(val))
+  );
+
   userRole: UserRole;
 
   cinemaName = 'Ale kino!';
@@ -68,9 +78,7 @@ export class HeaderComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.user$ = this.userService.user$.pipe(
-      tap((user) => (this.userRole = user.role))
-    );
+    this.user$.pipe(tap((user) => (this.userRole = user.role))).subscribe();
   }
 
   logout() {
@@ -81,13 +89,15 @@ export class HeaderComponent implements OnInit {
     window.location.reload();
   }
 
+  date = moment().format('YYYY-MM-DD');
+
   navigateHome() {
     if (this.userRole === 'admin') {
       this.router.navigate([`admin`]);
     } else if (this.userRole === 'user') {
-      this.router.navigate([`user/home/`]);
+      this.router.navigate([`user/home/${this.date}`]);
     } else {
-      this.router.navigate([`home`]);
+      this.router.navigate([`home/${this.date}`]);
     }
   }
 

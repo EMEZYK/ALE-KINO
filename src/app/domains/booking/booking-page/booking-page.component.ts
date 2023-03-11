@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { combineLatest, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ChoosenMovieShowingStateService } from '../../movies';
@@ -20,6 +20,7 @@ import { BookingFormComponent } from '../booking-form';
   styleUrls: ['./booking-page.component.css'],
   standalone: true,
   imports: [AsyncPipe, NgIf, ChosenShowingInfoComponent, BookingFormComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookingPageComponent {
   private authService = inject(AuthLoginStateService);

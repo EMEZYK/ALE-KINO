@@ -5,7 +5,7 @@
       <a routerLink="login">Zaloguj</a>
     </button>
     <ng-container *ngIf="user$ | async as user">
-      <ng-container *ngIf="userRole === 'user'; else admin">
+      <ng-container *ngIf="user.role === 'user'; else admin">
         <app-button
           class="btn-icon"
           [text]="order$ | async"

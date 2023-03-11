@@ -7,7 +7,6 @@ import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthResponse } from './auth.interface';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { SeatTicketsStateService } from '../booking/order';
-import { OrderStateService } from '../booking/order/order.service';
 import { ChoosenMovieShowingStateService } from '../movies/choosen-movie.state.service';
 
 @Injectable({ providedIn: 'root' })
@@ -17,7 +16,6 @@ export class AuthLoginStateService {
   private userStateService = inject(UserStateService);
   private localStorageService = inject(LocalStorageService);
   private seatTicketService = inject(SeatTicketsStateService);
-  private orderItemService = inject(OrderStateService);
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
 
   private auth$$ = new BehaviorSubject<{ hasAuth: boolean }>({
@@ -61,11 +59,6 @@ export class AuthLoginStateService {
             } else if (this.userRole === 'user') {
               this.seatTicketService.setOrderItems([]);
               this.choosenMovieService.setChoosenMovieShowing(null);
-
-              this.localStorageService.saveData(
-                'seatTicketPairs',
-                JSON.stringify([])
-              );
 
               this.router.navigate(['/', 'user/home']);
             }

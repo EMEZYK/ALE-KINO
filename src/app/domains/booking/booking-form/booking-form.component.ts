@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   inject,
@@ -61,6 +62,7 @@ export interface VM {
   templateUrl: './booking-form.component.html',
   styleUrls: ['./booking-form.component.css'],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe,
     NgIf,

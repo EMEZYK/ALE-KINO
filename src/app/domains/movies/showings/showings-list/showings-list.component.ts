@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { Observable } from 'rxjs';
@@ -12,6 +12,7 @@ import { AsyncPipe } from '@angular/common';
   styleUrls: ['./showings-list.component.css'],
   standalone: true,
   imports: [MatDividerModule, MatListModule, NgFor, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShowingsListComponent {
   @Input() showings: Observable<Showing[]>;

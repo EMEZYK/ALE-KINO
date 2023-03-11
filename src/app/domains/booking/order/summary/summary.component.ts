@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { UserStateService } from 'src/app/core/user.state.service';
@@ -17,6 +22,7 @@ import { Order } from '../order.interface';
   styleUrls: ['./summary.component.css'],
   standalone: true,
   imports: [MatIconModule, AsyncPipe, NgIf, QRCodeModule, RouterModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SummaryComponent implements OnInit {
   private emailService = inject(EmailConfirmationService);

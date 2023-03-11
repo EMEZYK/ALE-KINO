@@ -8,7 +8,6 @@ import { Order } from './order.interface';
 @Injectable({
   providedIn: 'root',
 })
-@Injectable()
 export class SeatTicketsStateService {
   private localStorageService = inject(LocalStorageService);
   private http = inject(HttpClient);
@@ -20,6 +19,8 @@ export class SeatTicketsStateService {
   }
 
   constructor() {
+    this.localStorageService.saveData('seatTicketPairs', JSON.stringify([]));
+
     const storedSeatTicketPairs =
       this.localStorageService.getData('seatTicketPairs');
     if (storedSeatTicketPairs !== '') {
@@ -42,11 +43,10 @@ export class SeatTicketsStateService {
 
   setOrderItems(pair: SeatTicket[], shouldStore = true) {
     if (shouldStore) {
-      this,
-        this.localStorageService.saveData(
-          'seatTicketPairs',
-          JSON.stringify(pair)
-        );
+      this.localStorageService.saveData(
+        'seatTicketPairs',
+        JSON.stringify(pair)
+      );
       this.seatTickets$$.next(pair);
     }
   }

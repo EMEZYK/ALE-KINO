@@ -1,8 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  inject,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { AsyncPipe, NgIf, NgFor, KeyValuePipe, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { Observable, switchMap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { TicketType } from '../tickets';
 import { ChoosenMovieShowing, Showing } from '../../movies/movie.interface';
@@ -39,6 +44,7 @@ import { SelectedSeatsTicketsComponent } from '../order/selected-seats-tickets/s
   templateUrl: './hall.component.html',
   styleUrls: ['./hall.component.css'],
   providers: [SeatsApiService],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HallComponent implements OnInit {
   private seatTicketService = inject(SeatTicketsStateService);
@@ -98,6 +104,7 @@ export class HallComponent implements OnInit {
       this.toastService.showError('Max możesz wybrać 10 biletów', 'Błąd');
       return;
     }
+
     if (seatTickets.length === 0) {
       this.orderService
         .addOrder({
@@ -105,6 +112,7 @@ export class HallComponent implements OnInit {
           orderItems: [
             {
               seatId: seat.id,
+              ticketId: 1,
             },
           ],
           showingId: showingId,
@@ -118,7 +126,8 @@ export class HallComponent implements OnInit {
           ticketId: orderItem.ticket.id,
         };
       });
-      const newItem = { seatId: seat.id, ticketId: undefined };
+      const newItem = { seatId: seat.id, ticketId: 1 };
+      // const newItem = { seatId: seat.id, ticketId: undefined };
 
       this.orderService
         .updateOrder({
@@ -129,7 +138,11 @@ export class HallComponent implements OnInit {
         })
         .subscribe();
     }
+
     this.seatTicketService.clickChosenSeat(seat, showingId);
+
+    this.saveChosenSeatsAndTicketsInLocalStorage(seatTickets);
+    //podmienic ticket id ba onbiekt ticketu
   }
   checkIfSeatIsChosen(showingId: Seat) {
     return this.seatTicketService.checkIfSeatIsChosen(showingId);

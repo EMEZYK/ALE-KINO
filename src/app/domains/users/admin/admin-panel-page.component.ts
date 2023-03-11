@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AsyncPipe, NgIf, NgFor } from '@angular/common';
 import { Observable, of, switchMap, take, tap } from 'rxjs';
@@ -52,6 +57,7 @@ import { MovieRatingStateService } from '../../movies/movie-rating/movie-rating.
     ShowingsListComponent,
   ],
   providers: [ShowingsStore],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminPanelPageComponent implements OnInit {
   private store = inject(Store);
@@ -134,8 +140,6 @@ export class AdminPanelPageComponent implements OnInit {
           });
           this.showForm = false;
           window.location.reload();
-        } else {
-          console.log('Nie mogę dodać, sala zajęta');
         }
       });
   }

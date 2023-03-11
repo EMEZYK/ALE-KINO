@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
 import { ChoosenMovieShowing } from 'src/app/domains/movies/movie.interface';
@@ -15,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./order-details.component.css'],
   standalone: true,
   imports: [MatCardModule, NgIf, AsyncPipe, NgFor, JsonPipe, MatIconModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderDetailsComponent implements OnInit {
   private orderService = inject(OrderStateService);

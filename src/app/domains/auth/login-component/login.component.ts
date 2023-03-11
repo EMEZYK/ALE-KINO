@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { CustomValidators } from 'src/app/shared/validators';
@@ -8,6 +13,7 @@ import { AuthLoginStateService } from '../auth-login.service';
   selector: 'app-login-page',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnInit {
   private formBuilder = inject(NonNullableFormBuilder);

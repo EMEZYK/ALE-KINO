@@ -1,5 +1,10 @@
 import { NgFor } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import {
   FormGroup,
   FormsModule,
@@ -51,6 +56,7 @@ import { MatSelectModule } from '@angular/material/select';
     NgFor,
     MatSelectModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieFormComponent implements OnInit {
   private formBuilder = inject(NonNullableFormBuilder);

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import {
@@ -11,7 +18,7 @@ import { SeatTicket } from '../../hall';
 import { NgIf, NgFor } from '@angular/common';
 import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TicketType } from '../../tickets';
-import { Observable, startWith, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChoosenMovieShowing } from 'src/app/domains/movies/movie.interface';
@@ -31,6 +38,7 @@ import { ChoosenMovieShowing } from 'src/app/domains/movies/movie.interface';
     AsyncPipe,
     FontAwesomeModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectedSeatsTicketsComponent implements OnInit {
   @Input() orderItems: SeatTicket[] = [];
@@ -52,7 +60,7 @@ export class SelectedSeatsTicketsComponent implements OnInit {
   selected = new FormControl(null, [Validators.required]);
 
   ngOnInit() {
-    this.tickets$.pipe(startWith([])).subscribe((tickets) => {
+    this.tickets$.pipe().subscribe((tickets) => {
       if (tickets.length > 0) {
         this.selected.setValue(tickets[0]);
       }

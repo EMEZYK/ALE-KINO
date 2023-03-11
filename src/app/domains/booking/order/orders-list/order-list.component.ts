@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs';
@@ -13,6 +19,7 @@ import { OrderDisplay, UserOrder } from '../order.interface';
   styleUrls: ['./order-list.component.css'],
   standalone: true,
   imports: [MatTableModule, MatPaginatorModule, NgFor, NgIf, RouterModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderListComponent implements OnInit {
   private orderService = inject(OrderStateService);

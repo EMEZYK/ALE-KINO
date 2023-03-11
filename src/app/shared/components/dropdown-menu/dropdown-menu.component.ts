@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { DropdownItems } from './dropdown.interface';
 import { RouterModule } from '@angular/router';
 import { NgIf, NgFor } from '@angular/common';
@@ -9,6 +15,7 @@ import { NgIf, NgFor } from '@angular/common';
   imports: [NgFor, NgIf, RouterModule],
   templateUrl: './dropdown-menu.component.html',
   styleUrls: ['./dropdown-menu.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuComponent {
   @Input() isDropdownOpen: boolean;

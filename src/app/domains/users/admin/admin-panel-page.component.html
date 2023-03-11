@@ -17,87 +17,87 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <ng-container *ngIf="selectedValue">
-            <mat-card class="movie-details">
-              <div class="movie-info">
-                <h4 class="movie-info-title">Tytuł</h4>
-                <p>{{ selectedValue?.title }}</p>
-              </div>
-              <div class="movie-info">
-                <h4 class="movie-info-title">Plakat</h4>
-                <p>{{ selectedValue?.image }}</p>
-                <img
-                  mat-card-image
-                  src="{{ selectedValue?.image }}"
-                  alt=""
-                  class="movie-img"
-                />
-              </div>
-              <div class="movie-info">
-                <h4 class="movie-info-title">Krótki opis</h4>
-                <p>
-                  {{ selectedValue?.shortDescription }}
-                </p>
-              </div>
-              <div class="movie-info">
-                <h4 class="movie-info-title">Długi opis</h4>
-                <p>
-                  {{ selectedValue?.longDescription }}
-                </p>
-              </div>
-              <div class="movie-info">
-                <h4 class="movie-info-title">Kategoria wiekowa</h4>
-                <p>{{ selectedValue?.ageRestrictions }}+</p>
-              </div>
-              <div class="movie-info">
-                <h4 class="movie-info-title">Czas trwania</h4>
-                <p>
-                  {{ selectedValue?.duration }}
-                </p>
-              </div>
-              <div class="movie-info">
-                <h4 class="movie-info-title">Gatunek</h4>
-                <p>
-                  {{ selectedValue?.genres.join(', ') }}
-                </p>
-              </div>
-              <div class="movie-info">
-                <h4 class="movie-info-title">Premiera</h4>
-                <p>
-                  {{ selectedValue?.isPremiere ? 'Tak' : 'Nie' }}
-                </p>
-              </div>
-              <div class="movie-info">
-                <h4 class="movie-info-title">Ranking</h4>
-                <ng-container
-                  *ngIf="
-                    getOveralRating(selectedValue.id) | async as overalRating;
-                    else noRating
-                  "
-                >
-                  <p>{{ overalRating }}/10</p>
-                </ng-container>
-                <ng-template #noRating>
-                  <p>0/10</p>
-                </ng-template>
-              </div>
+          <!-- <ng-container *ngIf="selectedValue"> -->
+          <mat-card class="movie-details">
+            <div class="movie-info">
+              <h4 class="movie-info-title">Tytuł</h4>
+              <p>{{ selectedValue?.title }}</p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Plakat</h4>
+              <p>{{ selectedValue?.image }}</p>
+              <img
+                mat-card-image
+                src="{{ selectedValue?.image }}"
+                alt=""
+                class="movie-img"
+              />
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Krótki opis</h4>
+              <p>
+                {{ selectedValue?.shortDescription }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Długi opis</h4>
+              <p>
+                {{ selectedValue?.longDescription }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Kategoria wiekowa</h4>
+              <p>{{ selectedValue?.ageRestrictions }}+</p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Czas trwania</h4>
+              <p>
+                {{ selectedValue?.duration }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Gatunek</h4>
+              <p>
+                {{ selectedValue?.genres.join(', ') }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Premiera</h4>
+              <p>
+                {{ selectedValue?.isPremiere ? 'Tak' : 'Nie' }}
+              </p>
+            </div>
+            <div class="movie-info">
+              <h4 class="movie-info-title">Ranking</h4>
+              <ng-container
+                *ngIf="
+                  getOveralRating(selectedValue.id) | async as overalRating;
+                  else noRating
+                "
+              >
+                <p>{{ overalRating }}/10</p>
+              </ng-container>
+              <ng-template #noRating>
+                <p>0/10</p>
+              </ng-template>
+            </div>
 
-              <h4>Lista seansów:</h4>
-              <div class="btn-wrapper">
-                <button mat-raised-button (click)="showForm = !showForm">
-                  {{ showForm === false ? 'Dodaj seans' : 'Ukryj formularz' }}
-                </button>
-              </div>
-              <app-showings-list
-                [showings]="filterShowings()"
-              ></app-showings-list>
-              <app-add-showing-form
-                *ngIf="showForm"
-                (addShowing)="addShowing($event)"
-              ></app-add-showing-form>
-            </mat-card>
-          </ng-container>
+            <h4>Lista seansów:</h4>
+            <div class="btn-wrapper">
+              <button mat-raised-button (click)="showForm = !showForm">
+                {{ showForm === false ? 'Dodaj seans' : 'Ukryj formularz' }}
+              </button>
+            </div>
+            <app-showings-list
+              [showings]="filterShowings()"
+            ></app-showings-list>
+            <app-add-showing-form
+              *ngIf="showForm"
+              (addShowing)="addShowing($event)"
+            ></app-add-showing-form>
+          </mat-card>
         </ng-container>
+        <!-- </ng-container> -->
       </form>
     </mat-card>
   </ng-container>

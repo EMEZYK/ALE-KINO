@@ -1,9 +1,9 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   inject,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
 import { Moment } from 'moment';
@@ -19,6 +19,7 @@ import { RouterLinkActive } from '@angular/router';
   imports: [NgFor, NgIf, MatButtonModule, RouterLinkActive, NgClass],
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerComponent {
   private router = inject(Router);

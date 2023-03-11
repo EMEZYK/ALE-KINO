@@ -37,7 +37,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { BookingPageComponent } from './domains/booking/booking-page/booking-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent],
+  declarations: [LoginComponent, HomeComponent, AppComponent],
   imports: [
     EffectsModule.forRoot([MovieEffects]),
     StoreModule.forRoot({ movies: MovieReducer }),
@@ -68,6 +68,7 @@ import { BookingPageComponent } from './domains/booking/booking-page/booking-pag
       preloadingStrategy: PreloadAllModules,
     }),
   ],
+  bootstrap: [AppComponent],
   providers: [
     ToastFacadeService,
 
@@ -75,6 +76,5 @@ import { BookingPageComponent } from './domains/booking/booking-page/booking-pag
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     SeatTicketsStateService,
   ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

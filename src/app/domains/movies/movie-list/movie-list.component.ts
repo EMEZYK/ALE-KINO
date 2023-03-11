@@ -1,11 +1,11 @@
 import {
-  ChangeDetectorRef,
+  ChangeDetectionStrategy,
   Component,
   inject,
   Input,
   OnInit,
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Moment } from 'moment';
 import * as moment from 'moment';
 import { MovieApiService } from './movie.api.service';
@@ -33,6 +33,7 @@ import { SeatTicketsStateService } from '../../booking/order';
   ],
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MovieListComponent implements OnInit {
   private movieService = inject(MovieApiService);
@@ -69,6 +70,11 @@ export class MovieListComponent implements OnInit {
     }
   }
 
+  getMovies(dateString: string) {
+    const date = moment(dateString, 'YYYY-MM-DD');
+    this.allMovieShowings$ = this.movieService.getAllMoviesForDay(date);
+  }
+
   toggleOpen(movieId: number) {
     const movieIndex = this.expandedMovieIdDescriptions.indexOf(movieId);
     if (movieIndex !== -1) {
@@ -83,16 +89,14 @@ export class MovieListComponent implements OnInit {
   }
 
   onMovieTimeClick(showingId: number, movie: Movie) {
-    this.chosenShowingWithHall$ = this.movieService.getShowingWithMovieAndHall(
-      showingId,
-      this.date
-    );
-
-    this.chosenShowingWithHall$.subscribe({
-      next: (value: ChoosenMovieShowing) => {
-        this.choosenMovieService.setChoosenMovieShowing(value);
-      },
-    });
+    this.movieService
+      .getShowingWithMovieAndHall(showingId, this.date)
+      .pipe(
+        tap((chosenShowing: ChoosenMovieShowing) => {
+          this.choosenMovieService.setChoosenMovieShowing(chosenShowing);
+        })
+      )
+      .subscribe();
 
     this.seatTicketService.removeUnrelatedReservations(showingId);
 
@@ -104,11 +108,7 @@ export class MovieListComponent implements OnInit {
   }
 
   handleDateSelection(selectedDate: Moment) {
-    this.date = selectedDate;
-    this.getMovies(this.date);
-  }
-
-  getMovies(date: Moment) {
-    this.allMovieShowings$ = this.movieService.getAllMoviesForDay(date);
+    const dateString = selectedDate.format('YYYY-MM-DD');
+    this.getMovies(dateString);
   }
 }

@@ -1,5 +1,5 @@
 import { AsyncPipe, NgFor, NgIf, JsonPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SeatTicket } from 'src/app/domains/booking/hall';
 import { MatCardModule } from '@angular/material/card';
 
@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
   styleUrls: ['./chosen-showing-info.component.css'],
   standalone: true,
   imports: [NgFor, AsyncPipe, NgIf, JsonPipe, MatCardModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChosenShowingInfoComponent {
   @Input() sumOfTickets: number;

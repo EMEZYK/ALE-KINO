@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest, Observable, map, tap, switchMap } from 'rxjs';
 import { ChoosenMovieShowingStateService } from '../../movies';
@@ -25,6 +25,7 @@ import { RouterModule } from '@angular/router';
     JsonPipe,
     RouterModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaymentComponent {
   private router = inject(Router);

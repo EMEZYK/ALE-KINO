@@ -83,8 +83,8 @@
     {
       "userId": 5,
       "moviesIds": [
-        1,
-        5
+        4,
+        6
       ],
       "id": 1
     }
@@ -422,6 +422,33 @@
       "hallId": 1,
       "movieBreak": 15,
       "id": 16
+    },
+    {
+      "movieId": 1,
+      "date": "2023-03-15",
+      "timeFrom": "12:30",
+      "timeTo": "14:00",
+      "hallId": 1,
+      "movieBreak": 15,
+      "id": 17
+    },
+    {
+      "movieId": 8,
+      "date": "2023-03-22",
+      "timeFrom": "15:05",
+      "timeTo": "14:20",
+      "hallId": 1,
+      "movieBreak": 15,
+      "id": 18
+    },
+    {
+      "movieId": 2,
+      "date": "2023-03-22",
+      "timeFrom": "12:45",
+      "timeTo": "14:45",
+      "hallId": 1,
+      "movieBreak": 15,
+      "id": 19
     }
   ],
   "seats": [
@@ -1518,6 +1545,862 @@
       "showingId": 1,
       "status": "paid",
       "id": 218
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 40,
+          "ticketId": 2
+        },
+        {
+          "seatId": 18
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 219
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 19
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 220
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 8
+        }
+      ],
+      "showingId": 6,
+      "status": "reserved",
+      "id": 221
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 23,
+          "ticketId": 3
+        },
+        {
+          "seatId": 37
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 222
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 24
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 223
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 32
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 224
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 40
+        }
+      ],
+      "showingId": 6,
+      "status": "reserved",
+      "id": 225
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 30
+        }
+      ],
+      "showingId": 6,
+      "status": "reserved",
+      "id": 226
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 12
+        }
+      ],
+      "showingId": 6,
+      "status": "reserved",
+      "id": 227
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 39
+        }
+      ],
+      "showingId": 6,
+      "status": "reserved",
+      "id": 228
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 30
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 229
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 64
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 230
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 55
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 231
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 65
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 232
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 63
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 233
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 60
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 234
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 57
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 235
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 58
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 236
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 62
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 237
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 41,
+          "ticketId": 3
+        },
+        {
+          "seatId": 49
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 238
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 45,
+          "ticketId": 3
+        },
+        {
+          "seatId": 53,
+          "ticketId": 2
+        },
+        {
+          "seatId": 52
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 239
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 42,
+          "ticketId": 0
+        }
+      ],
+      "showingId": 3,
+      "status": "reserved",
+      "id": 240
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 1,
+          "ticketId": 2
+        },
+        {
+          "seatId": 39,
+          "ticketId": 3
+        },
+        {
+          "seatId": 28
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 241
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 31,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 242
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 5,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 243
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 34,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 244
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 15,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 245
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 7,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 246
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 19,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 247
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 18,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 248
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 18,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 249
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 18,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 250
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 18,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 251
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 18,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 252
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 18,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 253
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 18,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 254
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 18,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 255
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 18,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 256
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 37,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 257
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 22,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 258
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 24
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 259
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 20
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 260
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 32,
+          "ticketId": 3
+        },
+        {
+          "seatId": 25
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 261
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 40,
+          "ticketId": 1
+        },
+        {
+          "seatId": 17,
+          "ticketId": 4
+        },
+        {
+          "seatId": 8
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 262
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 23,
+          "ticketId": 1
+        },
+        {
+          "seatId": 40
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 263
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 13
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 264
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 38,
+          "ticketId": 2
+        },
+        {
+          "seatId": 35
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 265
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 27,
+          "ticketId": 3
+        },
+        {
+          "seatId": 30
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 266
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 3
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 267
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 14,
+          "ticketId": 3
+        },
+        {
+          "seatId": 33
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 268
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 9
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 269
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 6,
+          "ticketId": 2
+        },
+        {
+          "seatId": 26
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 270
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 12,
+          "ticketId": 2
+        },
+        {
+          "seatId": 36
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 271
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 10,
+          "ticketId": 3
+        },
+        {
+          "seatId": 11
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 272
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 4,
+          "ticketId": 2
+        },
+        {
+          "seatId": 2,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 9,
+      "status": "reserved",
+      "id": 273
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 15,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 16,
+      "status": "reserved",
+      "id": 274
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 14,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 1,
+      "status": "reserved",
+      "id": 275
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 47,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 2,
+      "status": "reserved",
+      "id": 276
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 60,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 7,
+      "status": "reserved",
+      "id": 277
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 50,
+          "ticketId": 2
+        },
+        {
+          "seatId": 58,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 2,
+      "status": "reserved",
+      "id": 278
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 65,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 2,
+      "status": "reserved",
+      "id": 279
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 64,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 15,
+      "status": "reserved",
+      "id": 280
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 54,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 13,
+      "status": "reserved",
+      "id": 281
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 42,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 2,
+      "status": "reserved",
+      "id": 282
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 50,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 7,
+      "status": "reserved",
+      "id": 283
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 55,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 2,
+      "status": "reserved",
+      "id": 284
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 55,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 15,
+      "status": "reserved",
+      "id": 285
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 26,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 5,
+      "status": "reserved",
+      "id": 286
     }
   ],
   "halls": [

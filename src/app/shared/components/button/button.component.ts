@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { NgIf } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [NgIf, FontAwesomeModule, MatButtonModule],
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
   @Input() type: string;

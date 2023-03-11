@@ -1,4 +1,9 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Input,
+} from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { faEye, faStar } from '@fortawesome/free-solid-svg-icons';
 
@@ -18,6 +23,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   styleUrls: ['./manage-movie-panel.component.css'],
   standalone: true,
   imports: [NgIf, ButtonComponent, FontAwesomeModule, NgFor, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ManageMoviePanelComponent {
   @Input() movie: Movie;

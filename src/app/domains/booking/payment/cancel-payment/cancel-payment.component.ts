@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { Location } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./cancel-payment.component.css'],
   standalone: true,
   imports: [FontAwesomeModule, ButtonComponent, RouterModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CancelPaymentComponent {
   private location = inject(Location);

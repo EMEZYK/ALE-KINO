@@ -1,4 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { NgFor, NgIf, AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
@@ -15,6 +20,7 @@ import { MovieRatingStateService } from '../movie-rating/movie-rating.state.serv
   styleUrls: ['./movies-watchlist.component.css'],
   standalone: true,
   imports: [ButtonComponent, NgIf, NgFor, AsyncPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoviesToWatchComponent implements OnInit {
   private watchlistService = inject(MoviesWatchlistStateService);

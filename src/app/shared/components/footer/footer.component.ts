@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   faFacebookSquare,
   faInstagramSquare,
@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css'],
   imports: [FontAwesomeModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
   facebookIcon = faFacebookSquare;
