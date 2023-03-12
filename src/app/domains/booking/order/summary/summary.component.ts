@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { EmailConfirmationService } from 'src/app/domains/users/guest/email-confirmation.service';
 import { User } from 'src/app/domains/users/user.interface';
-import { OrderStateService } from '../order.service';
+import { OrderStateService } from '../order.state.service';
 import { MatIconModule } from '@angular/material/icon';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { QRCodeModule } from 'angularx-qrcode';

@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
-import { LocalStorageService } from '../../../shared/local-storage/local-storage.service';
 import { SeatTicket, Seat } from '../hall/hall.interface';
 import { HttpClient } from '@angular/common/http';
 import { Order } from './order.interface';
@@ -10,46 +9,12 @@ import { TicketType } from '../tickets';
   providedIn: 'root',
 })
 export class SeatTicketsStateService {
-  private localStorageService = inject(LocalStorageService);
   private http = inject(HttpClient);
 
   private seatTickets$$ = new BehaviorSubject<SeatTicket[]>([]);
 
   get seatTickets$() {
     return this.seatTickets$$.asObservable();
-  }
-
-  constructor() {
-    this.localStorageService.saveData('seatTicketPairs', JSON.stringify([]));
-
-    const storedSeatTicketPairs =
-      this.localStorageService.getData('seatTicketPairs');
-    if (storedSeatTicketPairs !== '') {
-      this.setOrderItems(JSON.parse(storedSeatTicketPairs));
-    }
-  }
-
-  removeUnrelatedReservations(showingId: number) {
-    this.seatTickets$
-      .pipe(
-        take(1),
-        tap((res: SeatTicket[]) => {
-          const result = res.filter((el) => el.showingId === showingId);
-          this.seatTickets$$.next(result);
-          return result;
-        })
-      )
-      .subscribe();
-  }
-
-  setOrderItems(pair: SeatTicket[], shouldStore = true) {
-    if (shouldStore) {
-      this.localStorageService.saveData(
-        'seatTicketPairs',
-        JSON.stringify(pair)
-      );
-      this.seatTickets$$.next(pair);
-    }
   }
 
   clickChosenSeat(seat: Seat, showingId: number, ticketType: TicketType) {
@@ -98,12 +63,6 @@ export class SeatTicketsStateService {
     );
   }
 
-  checkIfSeatIsChosen(seat: Seat) {
-    const currentOrderItems = this.seatTickets$$.getValue();
-
-    return currentOrderItems.some((el) => el.seat.id === seat.id);
-  }
-
   selectTicket(seat: SeatTicket) {
     const currentOrderItems = this.seatTickets$$.getValue();
 
@@ -126,10 +85,6 @@ export class SeatTicketsStateService {
     });
 
     this.seatTickets$$.next(currentOrderItems);
-    this.localStorageService.saveData(
-      'seatTicketPairs',
-      JSON.stringify(currentOrderItems)
-    );
   }
 
   sumTicketsValues() {
@@ -142,8 +97,20 @@ export class SeatTicketsStateService {
     );
   }
 
+  removeUnrelatedReservations(showingId: number) {
+    this.seatTickets$
+      .pipe(
+        take(1),
+        tap((res: SeatTicket[]) => {
+          const result = res.filter((el) => el.showingId === showingId);
+          this.seatTickets$$.next(result);
+          return result;
+        })
+      )
+      .subscribe();
+  }
+
   clearSeatSelection() {
     this.seatTickets$$.next([]);
-    this.localStorageService.saveData('seatTicketPairs', JSON.stringify([]));
   }
 }

@@ -7,7 +7,7 @@
       <span class="movie-hall">sala nr: {{ chosenShowing.hall.number }}</span>
     </div>
     <ul class="tickets-list">
-      <ng-container *ngFor="let ticket of seatTickets">
+      <ng-container *ngFor="let ticket of tickets">
         <li class="list-item">
           <span class="ticket-info">Rząd: {{ ticket.seat.row }}</span>
           <span class="ticket-info">Miejsce: {{ ticket.seat.column }}</span>

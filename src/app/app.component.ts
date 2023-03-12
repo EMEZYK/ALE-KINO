@@ -5,9 +5,9 @@ import {
   OnInit,
 } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserStateService } from './core/user.state.service';
+// import { UserStateService } from './core/user.state.service';
 import { LoadingStateService } from './shared/components/loader/loader.state.service';
-import { LocalStorageService } from './shared/local-storage';
+// import { LocalStorageService } from './shared/local-storage';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +17,8 @@ import { LocalStorageService } from './shared/local-storage';
 })
 export class AppComponent implements OnInit {
   private loadingService = inject(LoadingStateService);
-  private userService = inject(UserStateService);
-  private localStorageService = inject(LocalStorageService);
+  // private userService = inject(UserStateService);
+  // private localStorageService = inject(LocalStorageService);
 
   loading$: Observable<boolean>;
 

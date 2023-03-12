@@ -16,6 +16,9 @@ import { BookingFormComponent } from '../booking-form';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { OrderStateService } from '../order/order.state.service';
+import { Seat, SeatsApiService } from '../hall';
+import { TicketsStateService, TicketType } from '../tickets';
 
 @Component({
   selector: 'app-booking-page',
@@ -35,14 +38,42 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 export class BookingPageComponent {
   private authService = inject(AuthLoginStateService);
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
-  private orderItemsService = inject(SeatTicketsStateService);
+  private seatTicketService = inject(SeatTicketsStateService);
+  private orderItemsService = inject(OrderStateService);
+  private seats$ = inject(SeatsApiService).fetchAllSeats();
+  private tickets$ = inject(TicketsStateService).ticketTypes$;
+
   private router = inject(Router);
   private localStorageService = inject(LocalStorageService);
   private userService = inject(UserStateService);
 
   chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
-  seatTickets$ = this.orderItemsService.seatTickets$;
-  sumOfTickets$ = this.orderItemsService.sumTicketsValues();
+
+  isLoggedInUser =
+    this.authService.auth$ &&
+    this.localStorageService.getData('role') === 'user';
+
+  bookingForm: BookingForm | null = null;
+  user: User;
+
+  orderItems$ = combineLatest([
+    this.orderItemsService.order$,
+    this.tickets$,
+    this.seats$,
+  ]).pipe(
+    map(([order, tickets, seats]) => {
+      return order.orderItems.map(({ seatId, ticketId }) => {
+        const seat = seats.find((seat: Seat) => seat.id === seatId);
+        const ticket = tickets.find(
+          (ticket: TicketType) => ticket.id === ticketId
+        );
+        return { seat, ticket };
+      });
+    }),
+    tap((val) => console.log(val))
+  );
+
+  sumOfTickets$ = this.seatTicketService.sumTicketsValues();
   arrowIcon = faArrowLeft;
 
   user$ = this.userService.user$.pipe(
@@ -53,7 +84,7 @@ export class BookingPageComponent {
 
   vm$ = combineLatest([
     this.chosenMovieShowing$,
-    this.seatTickets$,
+    this.orderItems$,
     this.sumOfTickets$,
   ]).pipe(
     map(([v1, v2, v3]) => ({
@@ -62,16 +93,6 @@ export class BookingPageComponent {
       v3,
     }))
   );
-
-  isLoggedInUser =
-    this.authService.auth$ &&
-    this.localStorageService.getData('role') === 'user';
-
-  bookingForm: BookingForm | null = null;
-  user: User;
-  submitted = false;
-  order: Order[];
-  ticketPrice: number;
 
   navigateToHall(chosenShowing: ShowingWithMovie) {
     this.router.navigate([

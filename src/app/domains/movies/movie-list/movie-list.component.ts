@@ -20,6 +20,8 @@ import { DatePickerComponent } from 'src/app/shared/components/date-picker/date-
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { ManageMoviePanelComponent } from '../manage-movie-panel/manage-movie-panel.component';
 import { SeatTicketsStateService } from '../../booking/order';
+import { OrderStateService } from '../../booking/order/order.state.service';
+import { LocalStorageService } from 'src/app/shared/local-storage';
 
 @Component({
   selector: 'app-movie-list',
@@ -40,7 +42,9 @@ export class MovieListComponent implements OnInit {
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
   private router = inject(Router);
   private seatTicketService = inject(SeatTicketsStateService);
+  private orderService = inject(OrderStateService);
   private activeRoute = inject(ActivatedRoute);
+  private localStorage = inject(LocalStorageService);
 
   @Input() selectedDate: string;
   date: Moment;
@@ -97,6 +101,10 @@ export class MovieListComponent implements OnInit {
         })
       )
       .subscribe();
+
+    this.seatTicketService.clearSeatSelection();
+    this.orderService.clearOrder();
+    this.localStorage.removeData('order');
 
     this.seatTicketService.removeUnrelatedReservations(showingId);
 

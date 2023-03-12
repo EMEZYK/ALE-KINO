@@ -17,31 +17,43 @@ import { TicketType, TicketsStateService } from '../tickets';
 import { ShowingStateService } from '../../movies/showing.state.service';
 import { Showing } from '../../movies/movie.interface';
 import { SeatsApiService } from './seats.api.service';
-import { Seat } from '../hall/hall.interface';
+import { Seat, SeatTicket } from '../hall/hall.interface';
+import { LocalStorageService } from 'src/app/shared/local-storage';
+import { OrderItem } from '../hall';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderStateService {
   private http = inject(HttpClient);
-  private userService = inject(UserStateService);
-  private ticketService = inject(TicketsStateService);
-  private showingService = inject(ShowingStateService);
-  private hallService = inject(SeatsApiService);
+  private user$ = inject(UserStateService).user$;
+  private tickets$ = inject(TicketsStateService).ticketTypes$;
+  private showings$ = inject(ShowingStateService).showings$;
+  private seats$ = inject(SeatsApiService).fetchAllSeats();
+  private localStorage = inject(LocalStorageService);
 
-  private order$$ = new BehaviorSubject<Order>(null);
+  private order$$ = new BehaviorSubject<Order>({
+    orderItems: [],
+    status: 'reserved',
+  });
 
-  private tickets$ = this.ticketService.ticketTypes$;
-  private showings$ = this.showingService.showings$;
+  constructor() {
+    if (!this.localStorage.getData('order')) {
+      this.localStorage.saveData(
+        'order',
+        JSON.stringify({ orderItems: [], status: 'reserved' })
+      );
+    }
+
+    const order: Order = JSON.parse(this.localStorage.getData('order'));
+    if (order) {
+      this.updateOrder(order);
+      this.order$$.next(order);
+    }
+  }
 
   get order$() {
     return this.order$$.asObservable();
-  }
-
-  addOrder(order: Order) {
-    return this.http
-      .post<Order>('orders', order)
-      .pipe(tap((order) => this.order$$.next(order)));
   }
 
   changeOrderPaidStatus(orderId: number) {
@@ -52,7 +64,18 @@ export class OrderStateService {
       .subscribe();
   }
 
-  updateOrder(newOrder: Order) {
+  addOrder(order: Order, shouldStore = true) {
+    return this.http.post<Order>('orders', order).pipe(
+      tap((order) => {
+        if (shouldStore) {
+          this.localStorage.saveData('order', JSON.stringify(order));
+        }
+        this.order$$.next(order);
+      })
+    );
+  }
+
+  updateOrder(newOrder: Order, shouldStore = true) {
     return this.order$.pipe(
       take(1),
       switchMap((order: Order) => {
@@ -74,16 +97,16 @@ export class OrderStateService {
 
         order.orderItems = Array.from(itemsMap.values());
 
-        return this.http
-          .put<Order>(`orders/${order.id}`, order)
-          .pipe(tap((order: Order) => this.order$$.next(order)));
-
+        return this.http.put<Order>(`orders/${order.id}`, order).pipe(
+          tap((order: Order) => {
+            if (shouldStore) {
+              this.localStorage.saveData('order', JSON.stringify(order));
+            }
+            this.order$$.next(order);
+          })
+        );
       })
     );
-  }
-
-  getOrdersByShowingId(showingId: number) {
-    return this.http.get<Order[]>(`orders?showingId=${showingId}`);
   }
 
   getOrdersByIds(orderIds: number[]): Observable<UserOrder[]> {
@@ -99,7 +122,7 @@ export class OrderStateService {
           of(order),
           this.tickets$,
           this.showings$,
-          this.hallService.fetchAllSeats(),
+          this.seats$,
         ]);
       }),
       map(([userOrders, tickets, showings, seats]): UserOrder[] => {
@@ -128,7 +151,7 @@ export class OrderStateService {
   }
 
   getUserOrders(): Observable<UserOrder[]> {
-    return this.userService.user$.pipe(
+    return this.user$.pipe(
       switchMap((user: User) =>
         this.http.get<Order[]>(`orders?userId=${user.id}`)
       ),
@@ -136,5 +159,37 @@ export class OrderStateService {
         this.getOrdersByIds(orders.map((order) => order.id))
       )
     );
+  }
+
+  checkIfSeatIsChosen(seat: Seat) {
+    const currentOrderItems = this.order$$.getValue().orderItems;
+
+    return currentOrderItems.some((el) => el.seatId === seat.id);
+  }
+
+  deleteOrderItem(seatTicket: SeatTicket) {
+    console.log(seatTicket);
+    const order: Order = this.order$$.getValue();
+    const currentOrderItems = order.orderItems;
+
+    console.log(order);
+
+    currentOrderItems.forEach((item, index) => {
+      if (item.seatId === seatTicket.seat.id) {
+        currentOrderItems.splice(index, 1);
+      }
+    });
+
+    this.updateOrder(order)
+      .pipe(tap((order: Order) => this.order$$.next(order)))
+      .subscribe();
+    console.log(order);
+  }
+
+  clearOrder() {
+    this.order$$.next({
+      orderItems: [],
+      status: 'reserved',
+    });
   }
 }

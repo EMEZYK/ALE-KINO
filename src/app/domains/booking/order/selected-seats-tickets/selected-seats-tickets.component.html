@@ -2,43 +2,45 @@
 
 <div class="choosen-seat-info">
   <ul class="chosen-tickets-list">
-    <ng-container *ngFor="let chosenSeat of orderItems">
-      <ng-container *ngIf="chosenSeat.showingId === chosenMovieShowing.id">
-        <li class="chosen-seat">
-          <span>Rząd: {{ chosenSeat.seat.row }}</span>
-          <span>Miejsce: {{ chosenSeat.seat.column }}</span>
+    <ng-container *ngIf="items$ | async as orderItems">
+      <ng-container *ngFor="let orderItem of orderItems">
+        <ng-container *ngIf="orderItem.showingId === chosenMovieShowing.id">
+          <li class="chosen-seat">
+            <span>Rząd: {{ orderItem.seat.row }}</span>
+            <span>Miejsce: {{ orderItem.seat.column }}</span>
 
-          <mat-form-field appearance="fill">
-            <mat-label>Wybierz bilet</mat-label>
-            <mat-select
-              [formControl]="selected"
-              class="ticket-type-wrapper"
-              (selectionChange)="selectTicket(chosenSeat, $event.value)"
-            >
-              <mat-option
-                *ngFor="let ticket of tickets$ | async"
-                [value]="ticket"
-                class="ticket-type"
+            <mat-form-field appearance="fill">
+              <mat-label>Wybierz bilet</mat-label>
+              <mat-select
+                [formControl]="selected"
+                class="ticket-type-wrapper"
+                (selectionChange)="selectTicket(orderItem, $event.value)"
               >
-                {{ ticket.name }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="selected.invalid"
-              >Musisz dokonać wyboru</mat-error
-            >
-          </mat-form-field>
+                <mat-option
+                  *ngFor="let ticket of tickets$ | async"
+                  [value]="ticket"
+                  class="ticket-type"
+                >
+                  {{ ticket.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="selected.invalid"
+                >Musisz dokonać wyboru</mat-error
+              >
+            </mat-form-field>
 
-          <span class="price" *ngIf="chosenSeat.ticket"
-            >Cena: {{ chosenSeat.ticket.price }}zł
-          </span>
-          <button
-            (click)="deleteChosenTicket(chosenSeat)"
-            type="button"
-            class="delete-ticket-button"
-          >
-            <fa-icon [icon]="trashIcon" class="trash"></fa-icon>
-          </button>
-        </li>
+            <span class="price" *ngIf="orderItem.ticket"
+              >Cena: {{ orderItem.ticket.price }}zł
+            </span>
+            <button
+              (click)="deleteChosenTicket(orderItem)"
+              type="button"
+              class="delete-ticket-button"
+            >
+              <fa-icon [icon]="trashIcon" class="trash"></fa-icon>
+            </button>
+          </li>
+        </ng-container>
       </ng-container>
     </ng-container>
   </ul>

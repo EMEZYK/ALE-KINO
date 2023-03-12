@@ -27,7 +27,7 @@ import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { Guest, User } from '../../users/user.interface';
 import { GuestApiService } from '../../users/guest/guest-api.service';
-import { OrderStateService } from '../order/order.service';
+import { OrderStateService } from '../order/order.state.service';
 import {
   ChoosenMovieShowing,
   ShowingWithMovie,
@@ -81,7 +81,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   private authService = inject(AuthLoginStateService);
   private builder = inject(NonNullableFormBuilder);
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
-  private orderItemsService = inject(SeatTicketsStateService);
+  private seatTicketsService = inject(SeatTicketsStateService);
   private emailService = inject(EmailConfirmationService);
   private router = inject(Router);
   private localStorageService = inject(LocalStorageService);
@@ -91,8 +91,8 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   private discountCodeService = inject(DiscountCodesStateService);
 
   chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
-  seatTickets$ = this.orderItemsService.seatTickets$;
-  sumOfTickets$ = this.orderItemsService.sumTicketsValues();
+  // seatTickets$ = this.orderItemsService.seatTickets$;
+  sumOfTickets$ = this.seatTicketsService.sumTicketsValues();
 
   user$ = inject(UserStateService).user$.subscribe((user) => {
     if (user) {

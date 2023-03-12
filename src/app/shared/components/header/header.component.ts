@@ -11,6 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 import { ButtonComponent } from '../button/button.component';
 import * as moment from 'moment';
+import { OrderStateService } from 'src/app/domains/booking/order/order.state.service';
 
 @Component({
   selector: 'app-header',
@@ -30,19 +31,17 @@ import * as moment from 'moment';
 export class HeaderComponent {
   private authService = inject(AuthLoginStateService);
   private userService = inject(UserStateService);
+  private orderService = inject(OrderStateService);
   private router = inject(Router);
   private location = inject(Location);
 
-  order$ = inject(SeatTicketsStateService).seatTickets$.pipe(
-    map((orderItems) => {
-      return orderItems ? orderItems.length : 0;
+  order$ = this.orderService.order$.pipe(
+    map((order) => {
+      return order.orderItems ? order.orderItems.length : 0;
     })
   );
 
-  user$: Observable<User> = this.userService.user$.pipe(
-    tap((val) => console.log(val))
-  );
-
+  user$: Observable<User> = this.userService.user$;
   userRole: UserRole;
   cinemaName = 'Ale kino!';
   isAuthenticated = false;

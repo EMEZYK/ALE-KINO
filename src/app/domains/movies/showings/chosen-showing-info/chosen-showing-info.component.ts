@@ -2,6 +2,7 @@ import { AsyncPipe, NgFor, NgIf, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SeatTicket } from 'src/app/domains/booking/hall';
 import { MatCardModule } from '@angular/material/card';
+import { TicketType } from 'src/app/domains/booking/tickets';
 
 @Component({
   selector: 'app-chosen-showing-info',
@@ -14,5 +15,5 @@ import { MatCardModule } from '@angular/material/card';
 export class ChosenShowingInfoComponent {
   @Input() sumOfTickets: number;
   @Input() chosenShowing;
-  @Input() seatTickets: SeatTicket[];
+  @Input() tickets: TicketType[];
 }

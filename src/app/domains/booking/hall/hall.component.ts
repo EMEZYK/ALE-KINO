@@ -6,25 +6,28 @@ import {
 } from '@angular/core';
 import { AsyncPipe, NgIf, NgFor, KeyValuePipe, NgClass } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
 import { combineLatest, Observable, switchMap, tap } from 'rxjs';
-import { LocalStorageService } from 'src/app/shared/local-storage';
 import { TicketType } from '../tickets';
 import { ChoosenMovieShowing, Showing } from '../../movies/movie.interface';
 import { SeatTicket, Seat } from './hall.interface';
-import { SeatTicketsStateService } from '../order';
+import { Order, SeatTicketsStateService } from '../order';
 import { TicketsStateService } from '../tickets';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { SeatsApiService } from '../order/seats.api.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { OrderStateService } from '../order/order.service';
+import { OrderStateService } from '../order/order.state.service';
 import { JsonPipe } from '@angular/common';
 import { ToastFacadeService } from 'src/app/shared/facades/toast.facade.service';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User } from '../../users/user.interface';
 import { SelectedSeatsTicketsComponent } from '../order/selected-seats-tickets/selected-seats-tickets.component';
+import { LocalStorageService } from 'src/app/shared/local-storage';
 
+export interface OrderItem {
+  seatId: number;
+  ticketId?: number;
+}
 @Component({
   selector: 'app-seats-page',
   standalone: true,
@@ -49,21 +52,21 @@ import { SelectedSeatsTicketsComponent } from '../order/selected-seats-tickets/s
 export class HallComponent implements OnInit {
   private seatTicketService = inject(SeatTicketsStateService);
   private orderService = inject(OrderStateService);
-  private localStorageService = inject(LocalStorageService);
-  private ticketsService = inject(TicketsStateService);
+  private tickets$ = inject(TicketsStateService).ticketTypes$;
   private chosenShowingService = inject(ChoosenMovieShowingStateService);
   private hallService = inject(SeatsApiService);
   private toastService = inject(ToastFacadeService);
+  private localStorageService = inject(LocalStorageService);
 
-  chosenShowinId: number;
   clickCount = 0;
   maxClickCount = 10;
-  tickets$: Observable<TicketType[]>;
   rows$: Observable<{ [key: string]: { [key: number]: Seat } }>;
-  chosenShowing$: Observable<ChoosenMovieShowing>;
 
-  orderItems$: Observable<SeatTicket[]> =
-    this.seatTicketService.seatTickets$.pipe(tap((val) => console.log(val)));
+  seatTickets$: Observable<SeatTicket[]> = this.seatTicketService.seatTickets$;
+  order$: Observable<Order> = this.orderService.order$;
+  chosenShowing$: Observable<ChoosenMovieShowing> =
+    this.chosenShowingService.chosenMovieShowing$;
+
   occupiedSeatIds$: Observable<number[]>;
   user: User;
 
@@ -76,11 +79,6 @@ export class HallComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.orderService.order$.pipe(tap((val) => console.log(val))).subscribe();
-
-    this.tickets$ = this.ticketsService.ticketTypes$;
-    this.chosenShowing$ = this.chosenShowingService.chosenMovieShowing$;
-
     this.occupiedSeatIds$ = this.chosenShowing$.pipe(
       switchMap((showing: Showing) => {
         return this.seatTicketService.getOccupiedSeats(showing.id);
@@ -101,15 +99,21 @@ export class HallComponent implements OnInit {
     return this.seatTicketService.checkIfSeatIsAvailable(showingId, seatId);
   }
 
-  clickChosenSeat(seat: Seat, showingId: number, seatTickets: SeatTicket[]) {
+  clickChosenSeat(seat: Seat, showingId: number, orderItems: OrderItem[]) {
+    console.log(orderItems);
     this.clickCount++;
+
+    if (orderItems.find((e) => e.seatId === seat.id)) {
+      this.deleteChosenTicket({ seat: seat, ticket: null, showingId: null });
+      return;
+    }
 
     if (this.clickCount > this.maxClickCount) {
       this.toastService.showError('Max możesz wybrać 10 biletów', 'Błąd');
       return;
     }
 
-    if (seatTickets.length === 0) {
+    if (orderItems.length === 0) {
       combineLatest([
         this.tickets$,
         this.orderService.addOrder({
@@ -138,10 +142,10 @@ export class HallComponent implements OnInit {
         )
         .subscribe();
     } else {
-      const oldItems = seatTickets.map((orderItem: SeatTicket) => {
+      const oldItems = orderItems.map((orderItem: OrderItem) => {
         return {
-          seatId: orderItem.seat.id,
-          ticketId: orderItem.ticket.id,
+          seatId: orderItem.seatId,
+          ticketId: orderItem.ticketId,
         };
       });
       const newItem = { seatId: seat.id, ticketId: 1 };
@@ -157,7 +161,6 @@ export class HallComponent implements OnInit {
       ])
         .pipe(
           tap(([tickets]) => {
-            console.log(tickets);
             const ticketType: TicketType = tickets.find(
               (e) => e.id == newItem.ticketId
             );
@@ -171,10 +174,10 @@ export class HallComponent implements OnInit {
         .subscribe();
     }
 
-    this.saveChosenSeatsAndTicketsInLocalStorage(seatTickets);
+    this.saveChosenSeatsAndTicketsInLocalStorage(orderItems);
   }
-  checkIfSeatIsChosen(showingId: Seat) {
-    return this.seatTicketService.checkIfSeatIsChosen(showingId);
+  checkIfSeatIsChosen(seat: Seat) {
+    return this.orderService.checkIfSeatIsChosen(seat);
   }
 
   selectTicket(orderItem: SeatTicket): void {
@@ -182,13 +185,10 @@ export class HallComponent implements OnInit {
   }
 
   deleteChosenTicket(chosenItem: SeatTicket) {
-    this.seatTicketService.deleteChosenSeatAndTicket(chosenItem);
+    this.orderService.deleteOrderItem(chosenItem);
   }
 
-  saveChosenSeatsAndTicketsInLocalStorage(orderItems: SeatTicket[]) {
-    this.localStorageService.saveData(
-      'seatTicketPairs',
-      JSON.stringify(orderItems)
-    );
+  saveChosenSeatsAndTicketsInLocalStorage(orderItems: OrderItem[]) {
+    this.localStorageService.saveData('order', JSON.stringify(orderItems));
   }
 }

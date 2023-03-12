@@ -2,19 +2,18 @@
   *ngIf="chosenShowing$ | async as chosenMovieShowing"
   class="hall-page"
 >
-  <ng-container *ngIf="orderItems$ | async as orderItems">
-    <div class="choosen-showing-info">
-      <h1 class="movie-title">{{ chosenMovieShowing.movie.title }}</h1>
-      <div class="movie-time-info">
-        <span class="movie-detail">data: {{ chosenMovieShowing.date }}</span>
-        <span class="movie-detail">
-          godz. {{ chosenMovieShowing.timeFrom }}
-        </span>
-        <span>sala nr: {{ chosenMovieShowing.hall.number }}</span>
-      </div>
+  <div class="choosen-showing-info">
+    <h1 class="movie-title">{{ chosenMovieShowing.movie.title }}</h1>
+    <div class="movie-time-info">
+      <span class="movie-detail">data: {{ chosenMovieShowing.date }}</span>
+      <span class="movie-detail">
+        godz. {{ chosenMovieShowing.timeFrom }}
+      </span>
+      <span>sala nr: {{ chosenMovieShowing.hall.number }}</span>
     </div>
-    <br />
-
+  </div>
+  <br />
+  <ng-container *ngIf="order$ | async as order">
     <ng-container *ngIf="occupiedSeatIds$ | async as occupiedSeatIds">
       <div class="seats-wrapper">
         <div class="screen"></div>
@@ -27,7 +26,7 @@
                   clickChosenSeat(
                     column.value,
                     chosenMovieShowing.id,
-                    orderItems
+                    order.orderItems
                   )
                 "
                 [ngClass]="checkIfSeatIsChosen(column.value) ? 'selected' : ''"
@@ -43,9 +42,9 @@
     <p *ngIf="clickCount > maxClickCount">
       Możesz wybrać maksymalnie 10 biletów.
     </p>
-
+    <!-- <ng-container *ngIf="seatTickets$ | async as orderItems"> -->
     <app-selected-seats-tickets
-      [orderItems]="orderItems"
+      [order$]="order$"
       [chosenMovieShowing]="chosenMovieShowing"
       [tickets$]="tickets$"
       (btnClick)="deleteChosenTicket($event)"
@@ -59,10 +58,10 @@
           chosenMovieShowing.id,
           chosenMovieShowing.movie.title
         ]"
-        (click)="saveChosenSeatsAndTicketsInLocalStorage(orderItems)"
       >
         Przejdź do zamówienia
       </a>
     </div>
+    <!-- </ng-container> -->
   </ng-container>
 </ng-container>

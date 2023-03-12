@@ -4,7 +4,7 @@ import { combineLatest, Observable, map, tap, switchMap } from 'rxjs';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 import { Order } from '../order';
-import { OrderStateService } from '../order/order.service';
+import { OrderStateService } from '../order/order.state.service';
 import { SeatTicketsStateService } from '../order';
 import { NgIf, AsyncPipe, JsonPipe } from '@angular/common';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
@@ -72,9 +72,9 @@ export class PaymentComponent {
 
   approvePayment(chosenMoving: ShowingWithMovie, orderId: number) {
     this.orderService.changeOrderPaidStatus(orderId);
-    this.orderItemService.clearSeatSelection();
 
     this.discountCodeService.markDiscountCodeAsUsed();
+    this.orderItemService.clearSeatSelection();
 
     this.router.navigate([
       '/booking/summary',

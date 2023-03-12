@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthResponse } from './auth.interface';
 import { LocalStorageService } from 'src/app/shared/local-storage';
-import { SeatTicketsStateService } from '../booking/order';
 import { ChoosenMovieShowingStateService } from '../movies/choosen-movie.state.service';
+import { SeatTicketsStateService } from '../booking/order';
 
 @Injectable({ providedIn: 'root' })
 export class AuthLoginStateService {
@@ -15,8 +15,8 @@ export class AuthLoginStateService {
   private router = inject(Router);
   private userStateService = inject(UserStateService);
   private localStorageService = inject(LocalStorageService);
-  private seatTicketService = inject(SeatTicketsStateService);
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
+  private seatTicketService = inject(SeatTicketsStateService);
 
   private auth$$ = new BehaviorSubject<{ hasAuth: boolean }>({
     hasAuth: false,
@@ -57,8 +57,8 @@ export class AuthLoginStateService {
             if (this.userRole === 'admin') {
               this.router.navigate(['/', 'admin']);
             } else if (this.userRole === 'user') {
-              this.seatTicketService.setOrderItems([]);
               this.choosenMovieService.setChoosenMovieShowing(null);
+              this.seatTicketService.clearSeatSelection();
 
               this.router.navigate(['/', 'user/home']);
             }
@@ -71,9 +71,9 @@ export class AuthLoginStateService {
     localStorage.removeItem('user');
     this.localStorageService.removeData('token');
     this.localStorageService.removeData('role');
-    this.seatTicketService.setOrderItems([]);
-    this.choosenMovieService.setChoosenMovieShowing(null);
 
+    this.choosenMovieService.setChoosenMovieShowing(null);
+    this.seatTicketService.clearSeatSelection();
     this.auth$$.next({
       ...this.auth$$.value,
       hasAuth: false,

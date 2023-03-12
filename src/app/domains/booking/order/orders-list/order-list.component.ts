@@ -10,7 +10,7 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { OrderStateService } from '../order.service';
+import { OrderStateService } from '../order.state.service';
 import { OrderDisplay, UserOrder } from '../order.interface';
 
 @Component({
