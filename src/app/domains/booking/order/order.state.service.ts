@@ -168,11 +168,8 @@ export class OrderStateService {
   }
 
   deleteOrderItem(seatTicket: SeatTicket) {
-    console.log(seatTicket);
     const order: Order = this.order$$.getValue();
     const currentOrderItems = order.orderItems;
-
-    console.log(order);
 
     currentOrderItems.forEach((item, index) => {
       if (item.seatId === seatTicket.seat.id) {
@@ -183,7 +180,6 @@ export class OrderStateService {
     this.updateOrder(order)
       .pipe(tap((order: Order) => this.order$$.next(order)))
       .subscribe();
-    console.log(order);
   }
 
   clearOrder() {

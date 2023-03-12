@@ -7,7 +7,7 @@ import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthResponse } from './auth.interface';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { ChoosenMovieShowingStateService } from '../movies/choosen-movie.state.service';
-import { SeatTicketsStateService } from '../booking/order';
+import { OrderStateService } from '../booking/order/order.state.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthLoginStateService {
@@ -16,7 +16,7 @@ export class AuthLoginStateService {
   private userStateService = inject(UserStateService);
   private localStorageService = inject(LocalStorageService);
   private choosenMovieService = inject(ChoosenMovieShowingStateService);
-  private seatTicketService = inject(SeatTicketsStateService);
+  private orderService = inject(OrderStateService);
 
   private auth$$ = new BehaviorSubject<{ hasAuth: boolean }>({
     hasAuth: false,
@@ -53,13 +53,13 @@ export class AuthLoginStateService {
             this.localStorageService.saveData('role', response.user.role);
 
             this.userRole = response.user.role;
+            this.localStorageService.removeData('order');
 
             if (this.userRole === 'admin') {
               this.router.navigate(['/', 'admin']);
             } else if (this.userRole === 'user') {
               this.choosenMovieService.setChoosenMovieShowing(null);
-              this.seatTicketService.clearSeatSelection();
-
+              this.orderService.clearOrder();
               this.router.navigate(['/', 'user/home']);
             }
           },
@@ -73,7 +73,8 @@ export class AuthLoginStateService {
     this.localStorageService.removeData('role');
 
     this.choosenMovieService.setChoosenMovieShowing(null);
-    this.seatTicketService.clearSeatSelection();
+    this.orderService.clearOrder();
+    this.localStorageService.removeData('order');
     this.auth$$.next({
       ...this.auth$$.value,
       hasAuth: false,

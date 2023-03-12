@@ -102,11 +102,8 @@ export class MovieListComponent implements OnInit {
       )
       .subscribe();
 
-    this.seatTicketService.clearSeatSelection();
     this.orderService.clearOrder();
     this.localStorage.removeData('order');
-
-    this.seatTicketService.removeUnrelatedReservations(showingId);
 
     this.navigateToHall(movie);
   }

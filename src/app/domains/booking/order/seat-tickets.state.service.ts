@@ -97,19 +97,6 @@ export class SeatTicketsStateService {
     );
   }
 
-  removeUnrelatedReservations(showingId: number) {
-    this.seatTickets$
-      .pipe(
-        take(1),
-        tap((res: SeatTicket[]) => {
-          const result = res.filter((el) => el.showingId === showingId);
-          this.seatTickets$$.next(result);
-          return result;
-        })
-      )
-      .subscribe();
-  }
-
   clearSeatSelection() {
     this.seatTickets$$.next([]);
   }

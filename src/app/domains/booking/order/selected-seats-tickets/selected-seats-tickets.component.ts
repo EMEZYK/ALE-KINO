@@ -75,7 +75,6 @@ export class SelectedSeatsTicketsComponent implements OnInit {
 
     this.items$ = combineLatest([this.order$, this.tickets$, this.seats$]).pipe(
       map(([order, tickets, seats]) => {
-        console.log(order, tickets, seats);
         return order.orderItems.map(({ seatId, ticketId }) => {
           const seat = seats.find((seat: Seat) => seat.id === seatId);
           const ticket = tickets.find(
@@ -83,8 +82,7 @@ export class SelectedSeatsTicketsComponent implements OnInit {
           );
           return { seat: seat, ticket: ticket, showingId: order.showingId };
         });
-      }),
-      tap((val) => console.log(val))
+      })
     );
   }
 }

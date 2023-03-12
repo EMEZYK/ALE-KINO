@@ -100,7 +100,6 @@ export class HallComponent implements OnInit {
   }
 
   clickChosenSeat(seat: Seat, showingId: number, orderItems: OrderItem[]) {
-    console.log(orderItems);
     this.clickCount++;
 
     if (orderItems.find((e) => e.seatId === seat.id)) {

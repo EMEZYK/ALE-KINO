@@ -42,7 +42,6 @@
     <p *ngIf="clickCount > maxClickCount">
       Możesz wybrać maksymalnie 10 biletów.
     </p>
-    <!-- <ng-container *ngIf="seatTickets$ | async as orderItems"> -->
     <app-selected-seats-tickets
       [order$]="order$"
       [chosenMovieShowing]="chosenMovieShowing"
@@ -52,7 +51,7 @@
 
     <div class="redirection-to-form">
       <a
-        *ngIf="orderItems && orderItems.length > 0"
+        *ngIf="order && order.orderItems.length > 0"
         [routerLink]="[
           '/booking/reservation',
           chosenMovieShowing.id,
@@ -62,6 +61,5 @@
         Przejdź do zamówienia
       </a>
     </div>
-    <!-- </ng-container> -->
   </ng-container>
 </ng-container>

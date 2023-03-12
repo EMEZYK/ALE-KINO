@@ -69,8 +69,7 @@ export class BookingPageComponent {
         );
         return { seat, ticket };
       });
-    }),
-    tap((val) => console.log(val))
+    })
   );
 
   sumOfTickets$ = this.seatTicketService.sumTicketsValues();
