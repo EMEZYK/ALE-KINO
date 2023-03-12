@@ -118,13 +118,13 @@
       </ng-container>
     </ng-container>
   </div>
-  <button
+  <app-button
     type="submit"
-    [disabled]="bookingForm.invalid"
+    [isDisabled]="bookingForm.invalid"
+    text="Zamawiam"
     mat-raised-button
-    class="submit-button"
+    class="submit-btn"
   >
-    Zamawiam!
-  </button>
+  </app-button>
 </form>
 <!-- </ng-container> -->

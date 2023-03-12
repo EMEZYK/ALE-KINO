@@ -10,13 +10,12 @@
       (submitBookingForm)="submitForm($event)"
     ></app-booking-form>
   </div>
-  <div class="back-link">
-    <button
-      mat-raised-button
-      (click)="navigateToHall(vm.v1)"
-      class="back-button"
-    >
-      Wróć do wyboru miejsc
-    </button>
-  </div>
+  <app-button
+    mat-raised-button
+    [icon]="arrowIcon"
+    (click)="navigateToHall(vm.v1)"
+    class="back-btn"
+    text="Wróć do wyboru miejsc"
+  >
+  </app-button>
 </ng-container>

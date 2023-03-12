@@ -157,6 +157,7 @@ export class HallComponent implements OnInit {
       ])
         .pipe(
           tap(([tickets]) => {
+            console.log(tickets);
             const ticketType: TicketType = tickets.find(
               (e) => e.id == newItem.ticketId
             );

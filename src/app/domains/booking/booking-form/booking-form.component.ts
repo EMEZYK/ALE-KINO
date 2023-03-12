@@ -38,6 +38,7 @@ import { DiscountCodesStateService } from '../order/discountCodes/discount-codes
 import { AsyncPipe, NgIf } from '@angular/common';
 import { ChosenShowingInfoComponent } from '../../movies/showings/chosen-showing-info/chosen-showing-info.component';
 import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 
 export interface BookingForm {
   name: string;
@@ -70,6 +71,7 @@ export interface VM {
     FormsModule,
     ChosenShowingInfoComponent,
     NumberDirective,
+    ButtonComponent,
   ],
 })
 export class BookingFormComponent implements OnInit, OnDestroy {

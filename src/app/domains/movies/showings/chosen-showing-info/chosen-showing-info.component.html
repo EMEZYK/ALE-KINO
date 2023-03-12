@@ -8,9 +8,11 @@
     </div>
     <ul class="tickets-list">
       <ng-container *ngFor="let ticket of seatTickets">
-        <li class="ticket-info">Rząd: {{ ticket.seat.row }}</li>
-        <li class="ticket-info">Miejsce: {{ ticket.seat.column }}</li>
-        <li class="ticket-info">Cena: {{ ticket.ticket.price }} zł</li>
+        <li class="list-item">
+          <span class="ticket-info">Rząd: {{ ticket.seat.row }}</span>
+          <span class="ticket-info">Miejsce: {{ ticket.seat.column }}</span>
+          <span class="ticket-info">Cena: {{ ticket.ticket.price }} zł</span>
+        </li>
       </ng-container>
     </ul>
     <p class="tickets-sum">Razem: {{ sumOfTickets }} zł</p>

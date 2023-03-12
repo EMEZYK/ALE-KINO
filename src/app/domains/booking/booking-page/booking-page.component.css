@@ -11,3 +11,8 @@
   border-radius: 3px;
   margin: 2rem 0;
 }
+
+::ng-deep .back-btn > button {
+  width: 200px;
+  margin: 20px;
+}

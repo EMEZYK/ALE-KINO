@@ -13,13 +13,23 @@ import { ShowingWithMovie } from '../../movies/movie.interface';
 import { User } from '../../users/user.interface';
 import { BookingForm } from '../booking-form';
 import { BookingFormComponent } from '../booking-form';
+import { ButtonComponent } from 'src/app/shared/components/button/button.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-booking-page',
   templateUrl: './booking-page.component.html',
   styleUrls: ['./booking-page.component.css'],
   standalone: true,
-  imports: [AsyncPipe, NgIf, ChosenShowingInfoComponent, BookingFormComponent],
+  imports: [
+    AsyncPipe,
+    NgIf,
+    ChosenShowingInfoComponent,
+    BookingFormComponent,
+    ButtonComponent,
+    FontAwesomeModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookingPageComponent {
@@ -33,6 +43,7 @@ export class BookingPageComponent {
   chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
   seatTickets$ = this.orderItemsService.seatTickets$;
   sumOfTickets$ = this.orderItemsService.sumTicketsValues();
+  arrowIcon = faArrowLeft;
 
   user$ = this.userService.user$.pipe(
     tap((user) => {
