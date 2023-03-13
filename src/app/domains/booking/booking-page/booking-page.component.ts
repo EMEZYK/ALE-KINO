@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { combineLatest, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ChoosenMovieShowingStateService } from '../../movies';
-import { Order } from '../order/order.interface';
 import { SeatTicketsStateService } from '../order';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';

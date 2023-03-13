@@ -77,6 +77,27 @@
       "lastName": "Meksyk",
       "phoneNumber": "999444888",
       "email": "ewameksyk@gmail.com"
+    },
+    {
+      "id": 24,
+      "firstName": "Halina",
+      "lastName": "Malina",
+      "phoneNumber": "434343434",
+      "email": "hala@gmail.com"
+    },
+    {
+      "id": 25,
+      "firstName": "Ewa",
+      "lastName": "Meksyk",
+      "phoneNumber": "999444888",
+      "email": "ewameksyk@gmail.com"
+    },
+    {
+      "id": 26,
+      "firstName": "Alona",
+      "lastName": "Mieszko",
+      "phoneNumber": "343534534",
+      "email": "alona@gmail.com"
     }
   ],
   "watchlists": [
@@ -2653,6 +2674,42 @@
       "showingId": 11,
       "status": "paid",
       "id": 337
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 24,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 11,
+      "status": "paid",
+      "id": 338
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 50,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 15,
+      "status": "paid",
+      "id": 339
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 18,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 11,
+      "status": "paid",
+      "id": 340
     }
   ],
   "halls": [

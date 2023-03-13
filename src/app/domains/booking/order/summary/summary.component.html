@@ -27,9 +27,9 @@
   </ng-container>
   <ng-template #guest>
     <p>Link do Twoich biletów:</p>
-    <ng-container *ngIf="order$ | async as order">
-      <a routerLink="/booking/orders/{{ order.id }}">Link</a>
-    </ng-container>
+    <!-- <ng-container *ngIf="order$ | async as order"> -->
+    <a routerLink="/booking/orders/{{ this.orderId }}">Link</a>
+    <!-- </ng-container> -->
   </ng-template>
 </div>
 

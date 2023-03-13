@@ -9,14 +9,15 @@ import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
+  FormsModule,
 } from '@angular/forms';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgIf } from '@angular/common';
+
 import { CustomValidators } from 'src/app/shared/validators';
 import { AuthLoginStateService } from '../auth-login.service';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login-page',

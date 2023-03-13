@@ -6,15 +6,16 @@ import {
 } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
+import { RouterModule, ActivatedRoute } from '@angular/router';
+import { QRCodeModule } from 'angularx-qrcode';
+import { AsyncPipe, NgIf } from '@angular/common';
+
 import { UserStateService } from 'src/app/core/user.state.service';
 import { EmailConfirmationService } from 'src/app/domains/users/guest/email-confirmation.service';
 import { User } from 'src/app/domains/users/user.interface';
 import { OrderStateService } from '../order.state.service';
 import { MatIconModule } from '@angular/material/icon';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { QRCodeModule } from 'angularx-qrcode';
-import { RouterModule } from '@angular/router';
-import { Order } from '../order.interface';
+import { Order, UserOrder } from '../order.interface';
 
 @Component({
   selector: 'app-summary-page',
@@ -28,6 +29,7 @@ export class SummaryComponent implements OnInit {
   private emailService = inject(EmailConfirmationService);
   private orderService = inject(OrderStateService);
   private userService = inject(UserStateService);
+  private route = inject(ActivatedRoute);
 
   userEmail$: Observable<string>;
   user$: Observable<User> = this.userService.user$;
@@ -36,11 +38,15 @@ export class SummaryComponent implements OnInit {
   public orderQrCode: string;
   public qrCodeDownloadLink: SafeUrl = '';
   orderId: number;
+  userOrder$: Observable<UserOrder[]>;
 
   ngOnInit() {
     this.userEmail$ = this.emailService.email$;
 
     this.orderQrCode = `http://localhost:4200/user/orders/${this.orderId}`;
+
+    this.orderId = +this.route.snapshot.paramMap.get('id');
+    this.userOrder$ = this.orderService.getOrdersByIds([this.orderId]);
   }
 
   onChangeUrl(url: SafeUrl) {

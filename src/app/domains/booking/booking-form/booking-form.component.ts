@@ -15,9 +15,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CustomValidators } from 'src/app/shared/validators';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
+
+import { CustomValidators } from 'src/app/shared/validators';
 import { EmailConfirmationService } from '../../users/guest/email-confirmation.service';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { SeatTicket } from '../hall/hall.interface';
@@ -35,7 +37,6 @@ import {
 import { LocalStorageService } from 'src/app/shared/local-storage';
 import { debounceInput } from 'src/app/shared/facades/debounce-input.facade';
 import { DiscountCodesStateService } from '../order/discountCodes/discount-codes.state.service';
-import { AsyncPipe, NgIf } from '@angular/common';
 import { ChosenShowingInfoComponent } from '../../movies/showings/chosen-showing-info/chosen-showing-info.component';
 import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
