@@ -91,8 +91,7 @@ export class BookingFormComponent implements OnInit, OnDestroy {
   private discountCodeService = inject(DiscountCodesStateService);
 
   chosenMovieShowing$ = this.choosenMovieService.chosenMovieShowing$;
-  // seatTickets$ = this.orderItemsService.seatTickets$;
-  sumOfTickets$ = this.seatTicketsService.sumTicketsValues();
+  sumOfTickets$ = this.orderService.sumTicketsValues();
 
   user$ = inject(UserStateService).user$.subscribe((user) => {
     if (user) {

@@ -72,7 +72,8 @@ export class BookingPageComponent {
     })
   );
 
-  sumOfTickets$ = this.seatTicketService.sumTicketsValues();
+  sumOfTickets$ = this.orderItemsService.sumTicketsValues();
+
   arrowIcon = faArrowLeft;
 
   user$ = this.userService.user$.pipe(

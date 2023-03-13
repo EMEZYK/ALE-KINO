@@ -64,6 +64,25 @@ export class OrderStateService {
       .subscribe();
   }
 
+  sumTicketsValues() {
+    return this.order$.pipe(
+      switchMap((order) => {
+        return this.tickets$.pipe(
+          map((tickets) => {
+            return order.orderItems.reduce((acc, orderItem) => {
+              const ticket = tickets.find((t) => t.id === orderItem.ticketId);
+              if (ticket) {
+                return acc + ticket.price;
+              } else {
+                return acc;
+              }
+            }, 0);
+          })
+        );
+      })
+    );
+  }
+
   addOrder(order: Order, shouldStore = true) {
     return this.http.post<Order>('orders', order).pipe(
       tap((order) => {

@@ -1,6 +1,5 @@
 import { AsyncPipe, NgFor, NgIf, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { SeatTicket } from 'src/app/domains/booking/hall';
 import { MatCardModule } from '@angular/material/card';
 import { TicketType } from 'src/app/domains/booking/tickets';
 

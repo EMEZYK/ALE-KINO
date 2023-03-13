@@ -32,7 +32,6 @@ export class PaymentComponent {
   private orderService = inject(OrderStateService);
   chosenMovieShowing$ = inject(ChoosenMovieShowingStateService)
     .chosenMovieShowing$;
-  private orderItemService = inject(SeatTicketsStateService);
   private discountCodeService = inject(DiscountCodesStateService);
 
   order$: Observable<Order> = this.orderService.order$;
@@ -43,12 +42,12 @@ export class PaymentComponent {
     this.discountCodeService.discountCode$;
 
   constructor() {
-    this.regularPrice$ = this.orderItemService
+    this.regularPrice$ = this.orderService
       .sumTicketsValues()
       .pipe(map((price) => price.toFixed(2)));
 
     this.discountedPrice$ = combineLatest([
-      this.orderItemService.sumTicketsValues(),
+      this.orderService.sumTicketsValues(),
       this.discountCodeService.discountCode$,
     ]).pipe(
       map(([regularPrice, discountCode]) => {
@@ -74,7 +73,7 @@ export class PaymentComponent {
     this.orderService.changeOrderPaidStatus(orderId);
 
     this.discountCodeService.markDiscountCodeAsUsed();
-    this.orderItemService.clearSeatSelection();
+    this.orderService.clearOrder();
 
     this.router.navigate([
       '/booking/summary',
