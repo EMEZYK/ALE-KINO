@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
 import { TicketType } from './ticket.interface';
 import { TicketsApiService } from './tickets.api.service';
 

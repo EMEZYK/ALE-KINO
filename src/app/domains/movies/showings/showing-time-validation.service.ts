@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import * as moment from 'moment';
+
 import { Movie, Showing } from '../movie.interface';
 import { ShowingFormValue } from './add-showing/add-showing-form.component';
 import { ShowingsState } from './store/showing.store';

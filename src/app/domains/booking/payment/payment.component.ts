@@ -1,17 +1,17 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { combineLatest, Observable, map, tap, switchMap } from 'rxjs';
+import { Router, RouterModule } from '@angular/router';
+import { combineLatest, Observable, map } from 'rxjs';
+import { NgIf, AsyncPipe, JsonPipe } from '@angular/common';
+
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 import { Order } from '../order';
 import { OrderStateService } from '../order/order.state.service';
-import { SeatTicketsStateService } from '../order';
-import { NgIf, AsyncPipe, JsonPipe } from '@angular/common';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
 import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
 import { DiscountCodesStateService } from '../order/discountCodes/discount-codes.state.service';
 import { DiscountCode } from '../order/discountCodes/discount-codes.interface';
-import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',

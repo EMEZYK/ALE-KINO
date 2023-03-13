@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Location, NgIf, AsyncPipe } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import * as moment from 'moment';
+
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User, UserRole } from 'src/app/domains/users/user.interface';
-import { SeatTicketsStateService } from 'src/app/domains/booking/order';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DropdownMenuComponent } from '../dropdown-menu/dropdown-menu.component';
 import { ButtonComponent } from '../button/button.component';
-import * as moment from 'moment';
 import { OrderStateService } from 'src/app/domains/booking/order/order.state.service';
 
 @Component({

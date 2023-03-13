@@ -4,9 +4,19 @@ import {
   inject,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { AsyncPipe, NgIf, NgFor, KeyValuePipe, NgClass } from '@angular/common';
+import {
+  AsyncPipe,
+  NgIf,
+  NgFor,
+  KeyValuePipe,
+  NgClass,
+  JsonPipe,
+} from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { combineLatest, Observable, switchMap, tap } from 'rxjs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 import { TicketType } from '../tickets';
 import { ChoosenMovieShowing, Showing } from '../../movies/movie.interface';
 import { SeatTicket, Seat } from './hall.interface';
@@ -14,10 +24,7 @@ import { Order, SeatTicketsStateService } from '../order';
 import { TicketsStateService } from '../tickets';
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { SeatsApiService } from '../order/seats.api.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { OrderStateService } from '../order/order.state.service';
-import { JsonPipe } from '@angular/common';
 import { ToastFacadeService } from 'src/app/shared/facades/toast.facade.service';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User } from '../../users/user.interface';

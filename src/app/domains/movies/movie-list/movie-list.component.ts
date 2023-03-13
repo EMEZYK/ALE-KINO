@@ -8,20 +8,22 @@ import {
 import { Observable, tap } from 'rxjs';
 import { Moment } from 'moment';
 import * as moment from 'moment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+
+import { ManageMoviePanelComponent } from '../manage-movie-panel/manage-movie-panel.component';
+import { SeatTicketsStateService } from '../../booking/order';
+import { OrderStateService } from '../../booking/order/order.state.service';
+import { LocalStorageService } from 'src/app/shared/local-storage';
 import { MovieApiService } from './movie.api.service';
 import { ChoosenMovieShowingStateService } from '../choosen-movie.state.service';
+import { DatePickerComponent } from 'src/app/shared/components/date-picker/date-picker.component';
+
 import {
   ChoosenMovieShowing,
   Movie,
   MovieWithShowingTime,
 } from '../movie.interface';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DatePickerComponent } from 'src/app/shared/components/date-picker/date-picker.component';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { ManageMoviePanelComponent } from '../manage-movie-panel/manage-movie-panel.component';
-import { SeatTicketsStateService } from '../../booking/order';
-import { OrderStateService } from '../../booking/order/order.state.service';
-import { LocalStorageService } from 'src/app/shared/local-storage';
 
 @Component({
   selector: 'app-movie-list',

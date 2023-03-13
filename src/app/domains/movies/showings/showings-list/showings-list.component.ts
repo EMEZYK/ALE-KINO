@@ -1,10 +1,10 @@
-import { NgFor } from '@angular/common';
+import { NgFor, AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { Observable } from 'rxjs';
+
 import { Showing } from '../../movie.interface';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-showings-list',

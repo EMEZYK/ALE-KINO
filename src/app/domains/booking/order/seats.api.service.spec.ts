@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { EnvironmentInjector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import { SeatsApiService } from './seats.api.service';
 
 describe('SeatsApiService', () => {

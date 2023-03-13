@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { NgFor, JsonPipe, AsyncPipe, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,21 +17,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
+import { Store } from '@ngrx/store';
+import { MatSelectModule } from '@angular/material/select';
 
 import { NoWhiteSpaceDirective } from 'src/app/shared/directives/no-white-space.directive';
 import { NumberDirective } from 'src/app/shared/directives/numbers-only.directive';
-import { Store } from '@ngrx/store';
 import { MovieActions } from '../store/movie.actions';
-import { MatIconModule } from '@angular/material/icon';
-import { NgIf } from '@angular/common';
 import { ErrorHandler } from 'src/app/shared/validators/error-handler';
-import { JsonPipe } from '@angular/common';
 import { ShowingsListComponent } from '../showings/showings-list/showings-list.component';
 import { URL_REGEXP } from 'src/app/shared/validators';
 import { MovieGenresApiService } from '../movie-genres/movie-genres.api.service';
-import { AsyncPipe } from '@angular/common';
 import { AgeRestrictionApiService } from '../age-restrictions/age-restrictions.api.service';
-import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-movie-form',

@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import * as moment from 'moment';
+
 import { AuthGuard } from './domains/auth/auth.guard';
 import { LoginComponent } from './domains/auth/login-component';
 import { HallComponent } from './domains/booking/hall';
@@ -6,10 +8,8 @@ import { SummaryComponent } from './domains/booking/order/summary';
 import { PaymentComponent } from './domains/booking/payment';
 import { CancelPaymentComponent } from './domains/booking/payment/cancel-payment/cancel-payment.component';
 import { HomeComponent } from './domains/home/home.component';
-import * as moment from 'moment';
 import { OrderDetailsComponent } from './domains/booking/order/order-details/order-details.component';
 import { BookingPageComponent } from './domains/booking/booking-page/booking-page.component';
-// import { GuestGuard } from './domains/users/guest/guest.guard';
 
 const date = moment().format('YYYY-MM-DD');
 
@@ -17,8 +17,6 @@ export const APP_ROUTES: Routes = [
   {
     path: 'home/:day',
     component: HomeComponent,
-    // data: { role: 'guest' },
-    // canActivate: [GuestGuard],
   },
   {
     path: 'booking',
@@ -30,8 +28,6 @@ export const APP_ROUTES: Routes = [
       { path: 'summary/:id/:title', component: SummaryComponent },
       { path: 'orders/:id', component: OrderDetailsComponent },
     ],
-    // data: { role: 'guest' },
-    // canActivate: [GuestGuard],
   },
   {
     path: 'user',

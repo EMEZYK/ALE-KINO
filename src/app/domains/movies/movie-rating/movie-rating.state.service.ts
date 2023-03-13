@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, concatMap, map, Observable } from 'rxjs';
+
 import { MovieRating } from './movie-rating.interface';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User } from '../../users/user.interface';

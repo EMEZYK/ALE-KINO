@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EnvironmentInjector } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+
 import { TicketsStateService } from './tickets.state.service';
 
 describe('TicketStateService', () => {

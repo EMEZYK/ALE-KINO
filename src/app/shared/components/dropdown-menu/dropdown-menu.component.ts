@@ -5,9 +5,10 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { DropdownItems } from './dropdown.interface';
 import { RouterModule } from '@angular/router';
 import { NgIf, NgFor } from '@angular/common';
+
+import { DropdownItems } from './dropdown.interface';
 
 @Component({
   selector: 'app-dropdown-menu',

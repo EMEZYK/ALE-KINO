@@ -18,11 +18,11 @@ import {
 } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import * as moment from 'moment';
+import { FormsModule } from '@angular/forms';
 
 import { Movie, Showing } from '../../movies/movie.interface';
 import { MovieActions } from '../../movies/store/movie.actions';
 import * as movieSelectors from '../../movies/store/movie.selectors';
-import { FormsModule } from '@angular/forms';
 import { MovieFormComponent } from '../../movies/movie-form/movie-form.component';
 import {
   AddShowingFormComponent,

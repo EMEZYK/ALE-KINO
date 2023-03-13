@@ -1,20 +1,21 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { combineLatest, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { ChoosenMovieShowingStateService } from '../../movies';
 import { SeatTicketsStateService } from '../order';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { LocalStorageService } from 'src/app/shared/local-storage';
-import { AsyncPipe, NgIf } from '@angular/common';
 import { ChosenShowingInfoComponent } from '../../movies/showings/chosen-showing-info/chosen-showing-info.component';
 import { ShowingWithMovie } from '../../movies/movie.interface';
 import { User } from '../../users/user.interface';
 import { BookingForm } from '../booking-form';
 import { BookingFormComponent } from '../booking-form';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { OrderStateService } from '../order/order.state.service';
 import { Seat, SeatsApiService } from '../hall';
 import { TicketsStateService, TicketType } from '../tickets';

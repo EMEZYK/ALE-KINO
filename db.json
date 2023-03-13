@@ -119,6 +119,27 @@
       "lastName": "Jakas",
       "phoneNumber": "434343434",
       "email": "alona@gmaill.com"
+    },
+    {
+      "id": 30,
+      "firstName": "Ewa",
+      "lastName": "Meksyk",
+      "phoneNumber": "999444888",
+      "email": "ewameksyk@gmail.com"
+    },
+    {
+      "id": 31,
+      "firstName": "Alina",
+      "lastName": "Mina",
+      "phoneNumber": "343434343",
+      "email": "al@sasa"
+    },
+    {
+      "id": 32,
+      "firstName": "Ewa",
+      "lastName": "Meksyk",
+      "phoneNumber": "999444888",
+      "email": "ewameksyk@gmail.com"
     }
   ],
   "watchlists": [
@@ -126,7 +147,8 @@
       "userId": 5,
       "moviesIds": [
         4,
-        6
+        6,
+        1
       ],
       "id": 1
     }
@@ -2767,6 +2789,42 @@
       "showingId": 10,
       "status": "paid",
       "id": 343
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 35,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 11,
+      "status": "paid",
+      "id": 344
+    },
+    {
+      "userId": null,
+      "orderItems": [
+        {
+          "seatId": 40,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 19,
+      "status": "paid",
+      "id": 345
+    },
+    {
+      "userId": 5,
+      "orderItems": [
+        {
+          "seatId": 61,
+          "ticketId": 1
+        }
+      ],
+      "showingId": 8,
+      "status": "paid",
+      "id": 346
     }
   ],
   "halls": [

@@ -1,5 +1,3 @@
-import { Seat } from '../booking/hall/hall.interface';
-
 export interface Movie {
   id: number;
   title: string;

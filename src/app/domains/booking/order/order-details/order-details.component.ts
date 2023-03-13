@@ -6,13 +6,13 @@ import {
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
-import { ChoosenMovieShowing } from 'src/app/domains/movies/movie.interface';
-import { AsyncPipe, NgIf, NgFor } from '@angular/common';
-import { OrderStateService } from '../order.state.service';
-import { ActivatedRoute } from '@angular/router';
-import { UserOrder } from '../order.interface';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, AsyncPipe, NgIf, NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { ActivatedRoute } from '@angular/router';
+
+import { ChoosenMovieShowing } from 'src/app/domains/movies/movie.interface';
+import { OrderStateService } from '../order.state.service';
+import { UserOrder } from '../order.interface';
 
 @Component({
   selector: 'app-order-details',

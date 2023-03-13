@@ -10,6 +10,7 @@ import {
   of,
   take,
 } from 'rxjs';
+
 import { Order, UserOrder } from './order.interface';
 import { UserStateService } from 'src/app/core/user.state.service';
 import { User } from '../../users/user.interface';
@@ -19,7 +20,6 @@ import { Showing } from '../../movies/movie.interface';
 import { SeatsApiService } from './seats.api.service';
 import { Seat, SeatTicket } from '../hall/hall.interface';
 import { LocalStorageService } from 'src/app/shared/local-storage';
-import { OrderItem } from '../hall';
 
 @Injectable({
   providedIn: 'root',

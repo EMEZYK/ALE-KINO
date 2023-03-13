@@ -15,15 +15,14 @@ import {
   Validators,
   FormsModule,
 } from '@angular/forms';
-import { OrderItem, Seat, SeatsApiService, SeatTicket } from '../../hall';
-import { NgIf, NgFor, CommonModule } from '@angular/common';
-import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { TicketsStateService, TicketType } from '../../tickets';
-import { combineLatest, map, Observable, of, tap } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { NgIf, NgFor, CommonModule, AsyncPipe } from '@angular/common';
+import { combineLatest, map, Observable } from 'rxjs';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { Seat, SeatsApiService, SeatTicket } from '../../hall';
+import { faArrowDown, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { TicketType } from '../../tickets';
 import { ChoosenMovieShowing } from 'src/app/domains/movies/movie.interface';
-import { TicketsApiService } from '../../tickets/tickets.api.service';
 import { Order } from '../order.interface';
 
 @Component({

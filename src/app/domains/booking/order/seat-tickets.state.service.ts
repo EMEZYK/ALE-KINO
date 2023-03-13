@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
-import { SeatTicket, Seat } from '../hall/hall.interface';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+
+import { SeatTicket, Seat } from '../hall/hall.interface';
 import { Order } from './order.interface';
 import { TicketType } from '../tickets';
 

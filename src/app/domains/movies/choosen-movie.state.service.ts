@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
 import { ChoosenMovieShowing } from './movie.interface';
 import { LocalStorageService } from 'src/app/shared/local-storage';
 

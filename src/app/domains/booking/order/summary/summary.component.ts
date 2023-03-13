@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { SafeUrl } from '@angular/platform-browser';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { QRCodeModule } from 'angularx-qrcode';
 import { AsyncPipe, NgIf } from '@angular/common';

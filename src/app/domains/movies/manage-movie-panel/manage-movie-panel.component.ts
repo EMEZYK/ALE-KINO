@@ -4,8 +4,10 @@ import {
   inject,
   Input,
 } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { faEye, faStar } from '@fortawesome/free-solid-svg-icons';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AuthLoginStateService } from 'src/app/domains/auth/auth-login.service';
 import { MoviesWatchlistStateService } from '../movie-watchlist/movies-watchlist.service';
@@ -13,9 +15,7 @@ import { Movie } from 'src/app/domains/movies/movie.interface';
 import { WatchlistWithMovies } from '../movie-watchlist/watchlist.interface';
 import { MovieRatingStateService } from '../movie-rating/movie-rating.state.service';
 import { LocalStorageService } from 'src/app/shared/local-storage';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 import { ButtonComponent } from 'src/app/shared/components/button/button.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-manage-movie-panel[movie]',

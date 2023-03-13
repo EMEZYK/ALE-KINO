@@ -14,26 +14,29 @@ import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
+  FormsModule,
 } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
 import {
   MAT_DATE_LOCALE,
   MAT_DATE_FORMATS,
   DateAdapter,
+  MatNativeDateModule,
 } from '@angular/material/core';
-import { DatePipe } from '@angular/common';
+import {
+  DatePipe,
+  CommonModule,
+  AsyncPipe,
+  NgFor,
+  NgIf,
+} from '@angular/common';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-
-import { NgFor, NgIf } from '@angular/common';
-import { HallStore } from 'src/app/domains/booking/hall/store/hall.store';
-import { AsyncPipe } from '@angular/common';
-import { ErrorHandler } from 'src/app/shared/validators/error-handler';
 import { MatIconModule } from '@angular/material/icon';
+
+import { HallStore } from 'src/app/domains/booking/hall/store/hall.store';
+import { ErrorHandler } from 'src/app/shared/validators/error-handler';
 import { Hall } from 'src/app/domains/booking/hall';
-import { CommonModule } from '@angular/common';
 
 export interface ShowingFormValue {
   date: string;
