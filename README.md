@@ -26,9 +26,9 @@ This project was executed using the following technologies:
 ### Setup
 
 1. To run this project locally, clone repository: https://github.com/EMEZYK/ALE-KINO.git
-2. Install dependencies: npm install
+2. Install dependencies: `npm install`
 3. To run the mock API, run `npm run server`
-4. Start local server: npm start.
+4. Start local server: `npm start`.
 5. Navigate to `http://localhost:4200`. The application will automatically reload if you change any of the source files
 
 
