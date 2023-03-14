@@ -32,6 +32,13 @@ This project was executed using the following technologies:
 5. Navigate to `http://localhost:4200`. The application will automatically reload if you change any of the source files
 
 
+#### Logging for user and admin accounts:
+`User`: 
+Login: ewameksyk@gmail.com   Password: Ewa123!
+
+`Admin`:
+Login: ewa@gmail.com   Password: ewelina
+
 ### Running unit tests
 
 Run `npm run test`
